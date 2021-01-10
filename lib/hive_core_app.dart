@@ -4,37 +4,37 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:provider/provider.dart';
 
+import 'code/ui/pages/settings_qr_code_screen/settings_qr_code_srceen.dart';
 import 'generated/l10n.dart';
-import 'src/controllers/blocs/advertising_bloc/advertising_bloc.dart';
-import 'src/controllers/blocs/authentication_bloc/authentication_bloc.dart';
-import 'src/controllers/blocs/call_screen_bloc/call_sreen_bloc.dart';
-import 'src/controllers/blocs/notifications_bloc/notifications_bloc.dart';
-import 'src/controllers/blocs/preferences_bloc/preferences_bloc.dart';
-import 'src/repositories/authentication_repository/authentication_repository.dart';
-import 'src/repositories/chat_message_repository/chat_message_repository.dart';
-import 'src/repositories/device_repository/device_repository.dart';
-import 'src/repositories/preferences_repository/preferences_repository.dart';
-import 'src/repositories/storage_repository/storage_repository.dart';
-import 'src/repositories/tutorial_repository/tutorial_repository.dart';
-import 'src/repositories/user_repository/user_repository.dart';
-import 'src/ui/pages/assistant_screen/assistant_screen.dart';
-import 'src/ui/pages/call_screen/pickup/pickup_layout.dart';
-import 'src/ui/pages/chat_listing_screen/chat_listing_screen.dart';
-import 'src/ui/pages/chat_search_screen/chat_search_screen.dart';
-import 'src/ui/pages/login_form_screen/login_form_screen.dart';
-import 'src/ui/pages/notifications_screen/notifications_screen.dart';
-import 'src/ui/pages/profile_form_screen/profile_form_screen.dart';
-import 'src/ui/pages/registration_form_screen/registration_form_screen.dart';
-import 'src/ui/pages/restore_password_form_sreen/restore_password_form_sreen.dart';
-import 'src/ui/pages/settings_account_connected_accounts/connet_account_screen.dart';
-import 'src/ui/pages/settings_account_device_list_screen/device_list_screen.dart';
-import 'src/ui/pages/settings_account_update_password_form/restore_password_form_sreen.dart';
-import 'src/ui/pages/settings_application_chat_screen/settings_chat_screen.dart';
-import 'src/ui/pages/settings_help_info_screen/info_screen.dart';
-import 'src/ui/pages/settings_qr_code_screen/settings_qr_code_srceen.dart';
-import 'src/ui/pages/settings_screen/settings_screen.dart';
-import 'src/utils/constants/const_strings.dart';
-import 'src/utils/constants/const_theme.dart';
+import 'code/controllers/blocs/advertising_bloc/advertising_bloc.dart';
+import 'code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
+import 'code/controllers/blocs/call_screen_bloc/call_sreen_bloc.dart';
+import 'code/controllers/blocs/notifications_bloc/notifications_bloc.dart';
+import 'code/controllers/blocs/preferences_bloc/preferences_bloc.dart';
+import 'code/repositories/authentication_repository/authentication_repository.dart';
+import 'code/repositories/chat_message_repository/chat_message_repository.dart';
+import 'code/repositories/device_repository/device_repository.dart';
+import 'code/repositories/preferences_repository/preferences_repository.dart';
+import 'code/repositories/storage_repository/storage_repository.dart';
+import 'code/repositories/tutorial_repository/tutorial_repository.dart';
+import 'code/repositories/user_repository/user_repository.dart';
+import 'code/ui/pages/assistant_screen/assistant_screen.dart';
+import 'code/ui/pages/call_screen/pickup/pickup_layout.dart';
+import 'code/ui/pages/chat_listing_screen/chat_listing_screen.dart';
+import 'code/ui/pages/chat_search_screen/chat_search_screen.dart';
+import 'code/ui/pages/login_form_screen/login_form_screen.dart';
+import 'code/ui/pages/notifications_screen/notifications_screen.dart';
+import 'code/ui/pages/profile_form_screen/profile_form_screen.dart';
+import 'code/ui/pages/registration_form_screen/registration_form_screen.dart';
+import 'code/ui/pages/restore_password_form_sreen/restore_password_form_sreen.dart';
+import 'code/ui/pages/settings_account_connected_accounts/connet_account_screen.dart';
+import 'code/ui/pages/settings_account_device_list_screen/device_list_screen.dart';
+import 'code/ui/pages/settings_account_update_password_form/restore_password_form_sreen.dart';
+import 'code/ui/pages/settings_application_chat_screen/settings_chat_screen.dart';
+import 'code/ui/pages/settings_help_info_screen/info_screen.dart';
+import 'code/ui/pages/settings_screen/settings_screen.dart';
+import 'code/utils/constants/const_strings.dart';
+import 'code/utils/constants/const_theme.dart';
 
 class HiveCoreApp extends StatelessWidget {
   final String title;
@@ -204,7 +204,7 @@ class HiveCoreApp extends StatelessWidget {
         RestorePasswordFormScreen(),
     HiveCoreConstString.route_user_registration_form_screen: (context) =>
         RegistrationFormSrceen(),
-    HiveCoreConstString.user_profile_form_srceen: (context) =>
+    HiveCoreConstString.user_profile_form_codeeen: (context) =>
         ProfileFormScreen(),
     HiveCoreConstString.route_notifications_screen: (context) =>
         NotificationsScreen(),
