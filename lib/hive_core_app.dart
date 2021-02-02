@@ -40,7 +40,7 @@ class HiveCoreApp extends StatelessWidget {
   final String title;
   final bool debugShowCheckedModeBanner;
   final ThemeData theme;
-  final AppLocalizationDelegate appLocalizationDelegate;
+  final List<LocalizationsDelegate> appLocalizationDelegate;
   final List<Locale> supportedLocales;
   final Locale locale;
   final String initialRoute;
@@ -260,8 +260,7 @@ class HiveCoreApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
             HiveCoreString.delegate,
             LocaleNamesLocalizationsDelegate(),
-            appLocalizationDelegate,
-          ],
+          ]..addAll(appLocalizationDelegate),
           supportedLocales:
               supportedLocales ?? HiveCoreString.delegate.supportedLocales,
           locale: blocPreferencesState is PreferencesLoaded
