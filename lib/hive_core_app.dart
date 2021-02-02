@@ -41,7 +41,7 @@ class HiveCoreApp extends StatelessWidget {
   final bool debugShowCheckedModeBanner;
   final ThemeData theme;
   final AppLocalizationDelegate appLocalizationDelegate;
-  final supportedLocales;
+  final List<Locale> supportedLocales;
   final Locale locale;
   final String initialRoute;
   final Widget home;
@@ -262,7 +262,8 @@ class HiveCoreApp extends StatelessWidget {
             LocaleNamesLocalizationsDelegate(),
             appLocalizationDelegate,
           ],
-          supportedLocales: HiveCoreString.delegate.supportedLocales,
+          supportedLocales:
+              supportedLocales ?? HiveCoreString.delegate.supportedLocales,
           locale: blocPreferencesState is PreferencesLoaded
               ? blocPreferencesState.locale
               : null,
