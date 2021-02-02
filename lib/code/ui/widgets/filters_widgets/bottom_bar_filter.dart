@@ -35,7 +35,7 @@ class BottomBarFilter extends StatelessWidget {
       child: CupertinoButton(
         onPressed: onSubmit,
         color: Theme.of(context).accentColor,
-        child: Text(btnSubmitText ?? S.of(context).filter),
+        child: Text(btnSubmitText ?? HiveCoreString.of(context).filter),
       ),
     );
   }

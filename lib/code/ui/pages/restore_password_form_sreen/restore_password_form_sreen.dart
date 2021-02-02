@@ -115,7 +115,8 @@ class RestorePasswordFormScreen extends StatelessWidget {
               textFieldBloc: formBloc.email,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                labelText: '${S.of(context).social_form_holder_email}',
+                labelText:
+                    '${HiveCoreString.of(context).social_form_holder_email}',
                 prefixIcon: Icon(Icons.email), isDense: true, // Added this
                 contentPadding: EdgeInsets.all(8),
               ),

@@ -45,23 +45,24 @@ class ChatAppsBar extends StatelessWidget implements PreferredSizeWidget {
         barrierDismissible: true,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Vaciar chat'), // S.of(context).user_signout),
+            title: Text(
+                'Vaciar chat'), // HiveCoreString.of(context).user_signout),
             content: new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
                   Text(
-                      '¿Estas seguro de que deseas vaciar el chat?, Se eliminara permanentemente el historial de la combersacion'), // S.of(context).user_settings_close_confirmation_seasion),
+                      '¿Estas seguro de que deseas vaciar el chat?, Se eliminara permanentemente el historial de la combersacion'), // HiveCoreString.of(context).user_settings_close_confirmation_seasion),
                 ],
               ),
             ),
             actions: <Widget>[
               FlatButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(S.of(context).cancel),
+                child: Text(HiveCoreString.of(context).cancel),
               ),
               FlatButton(
                 onPressed: _onEmptyChatRoon,
-                child: Text(S.of(context).yes),
+                child: Text(HiveCoreString.of(context).yes),
               ),
             ],
           );

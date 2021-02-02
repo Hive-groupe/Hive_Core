@@ -25,10 +25,10 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
 
     _tabs = [
       new Tab(
-        text: 'Mi código', //S.of(context).monitor,
+        text: 'Mi código', //HiveCoreString.of(context).monitor,
       ),
       new Tab(
-        text: 'Escanear código', //S.of(context).record,
+        text: 'Escanear código', //HiveCoreString.of(context).record,
       ),
     ];
 
@@ -64,7 +64,7 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
               CupertinoActionSheetAction(
                 onPressed: () => _onCreateData(),
                 child: Text('Restablecer código QR'
-                    //S.of(context).aaaaaa
+                    //HiveCoreString.of(context).aaaaaa
                     ),
               ),
             ],
@@ -98,7 +98,8 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
 
   Widget _build() {
     return Scaffold(
-      appBar: _appBar(title: 'Código QR' //S.of(context).bill_list_title,
+      appBar: _appBar(
+          title: 'Código QR' //HiveCoreString.of(context).bill_list_title,
           ),
       body: TabBarView(controller: _tabController, children: <Widget>[
         _myCodeBuild(),

@@ -85,7 +85,7 @@ class _DeviceListScreenState extends State<DeviceListScreen>
   Widget _buildLoading() {
     return ScreenBuildersWidget.loadingScreenBuilder(
       appBar: DeviceAppsBar(),
-      text: S.of(context).settings_devices_list_loading,
+      text: HiveCoreString.of(context).settings_devices_list_loading,
     );
   }
 

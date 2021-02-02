@@ -23,7 +23,7 @@ class _SettingsLocateScreenState extends State<SettingsLocateScreen> {
     return CustomAppBar(
       centerTitle: true,
       title: Text(
-        S.of(context).settings_application_locale,
+        HiveCoreString.of(context).settings_application_locale,
         style: TextStyle(
             fontSize: 16,
             color: Theme.of(context).textTheme.bodyText1.color,

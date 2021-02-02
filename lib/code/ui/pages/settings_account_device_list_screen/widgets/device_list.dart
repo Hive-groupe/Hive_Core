@@ -56,9 +56,9 @@ class _DeviceListState extends State<DeviceList> {
     return ListBuildersWidget.emptyListBuilder(
       context: context,
       onTap: () {},
-      imageUrl: S.of(context).settings_devices_assets_images_empty,
+      imageUrl: HiveCoreString.of(context).settings_devices_assets_images_empty,
       title: null,
-      text: S.of(context).settings_devices_list_empty,
+      text: HiveCoreString.of(context).settings_devices_list_empty,
     );
   }
 

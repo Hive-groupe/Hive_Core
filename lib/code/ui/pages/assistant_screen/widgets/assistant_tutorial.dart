@@ -139,7 +139,7 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
         children: [
           Container(
             child: Text(
-              S.of(context).km_list_title,
+              HiveCoreString.of(context).km_list_title,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -151,7 +151,7 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
           ),
           Container(
             child: Text(
-              S.of(context).km_tutorial_description,
+              HiveCoreString.of(context).km_tutorial_description,
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color: Colors.white,
@@ -182,7 +182,7 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
       child: OutlineButton(
           onPressed: _finishTutorial,
           child: Text(
-            S.of(context).skip_tutorial,
+            HiveCoreString.of(context).skip_tutorial,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

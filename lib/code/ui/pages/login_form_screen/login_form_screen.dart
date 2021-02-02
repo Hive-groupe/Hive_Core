@@ -63,7 +63,7 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(S.of(context).login_form_error),
+          Text(HiveCoreString.of(context).login_form_error),
           Icon(Icons.error)
         ],
       ),
@@ -75,7 +75,7 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(S.of(context).login_form_loading),
+          Text(HiveCoreString.of(context).login_form_loading),
           CircularProgressIndicator()
         ],
       ),
@@ -215,7 +215,7 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
       child: SizedBox.fromSize(
           size: Size.fromHeight(30),
           child: new Text(
-            S.of(context).login_form_title,
+            HiveCoreString.of(context).login_form_title,
             style: TextStyle(fontSize: 25),
             textAlign: TextAlign.left,
           )),
@@ -227,7 +227,7 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
       textFieldBloc: _loginFormBloc.email,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        labelText: '${S.of(context).social_form_holder_email}',
+        labelText: '${HiveCoreString.of(context).social_form_holder_email}',
         prefixIcon: Icon(Icons.mail),
         isDense: true, // Added this
         contentPadding: EdgeInsets.all(8),
@@ -241,7 +241,8 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
       keyboardType: TextInputType.emailAddress,
       suffixButton: SuffixButton.obscureText,
       decoration: InputDecoration(
-        labelText: '${S.of(context).login_form_password_holder_hint}',
+        labelText:
+            '${HiveCoreString.of(context).login_form_password_holder_hint}',
         prefixIcon: Icon(Icons.lock),
         isDense: true, // Added this
         contentPadding: EdgeInsets.all(8),
@@ -253,7 +254,8 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
     return Container(
       child: FlatButton(
         onPressed: _goRecoverPassword,
-        child: Text(S.of(context).login_form_recover_password_button),
+        child:
+            Text(HiveCoreString.of(context).login_form_recover_password_button),
         color: Colors.transparent,
       ),
     );
@@ -263,7 +265,7 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
     return Container(
       child: FlatButton(
         onPressed: _goRegisterScreen,
-        child: Text(S.of(context).login_form_register_button),
+        child: Text(HiveCoreString.of(context).login_form_register_button),
         color: Colors.transparent,
       ),
     );
@@ -275,7 +277,7 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
       onPressed: _onAuthenticationWithMail,
       //icon: Icon(Icons.send),
       label: Text(
-        S.of(context).login_form_login_button,
+        HiveCoreString.of(context).login_form_login_button,
       ),
     );
   }

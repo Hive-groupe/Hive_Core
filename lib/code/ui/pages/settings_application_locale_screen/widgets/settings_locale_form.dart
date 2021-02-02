@@ -15,7 +15,7 @@ class _SettingsLocaleFormState extends State<SettingsLocaleForm> {
 
   String _localizeLocale(BuildContext context, Locale locale) {
     if (locale == null) {
-      return S.of(context).systemLanguage;
+      return HiveCoreString.of(context).systemLanguage;
     } else {
       final localeString = LocaleNames.of(context).nameOf(locale.toString());
       return localeString[0].toUpperCase() + localeString.substring(1);
@@ -41,12 +41,12 @@ class _SettingsLocaleFormState extends State<SettingsLocaleForm> {
 
   Widget _LenguageHolder(PreferencesLoaded state) {
     return ExpansionListCard<Locale>(
-      title: S.of(context).language,
+      title: HiveCoreString.of(context).language,
       subTitle: _localizeLocale(context, state.locale),
       leading: Icon(Icons.language, size: 48),
       items: [
         null,
-        ...S.delegate.supportedLocales,
+        ...HiveCoreString.delegate.supportedLocales,
       ],
       itemBuilder: (locale) {
         return ExpansionCardItem(

@@ -50,7 +50,7 @@ class _AssistantAppsBarState extends State<AssistantAppsBar> {
         ),
       ),
       largeTitle: Text(
-        'Assistant', //  S.of(context).project_list_title,
+        'Assistant', //  HiveCoreString.of(context).project_list_title,
       ),
       trailing: Material(
         color: Colors.transparent,

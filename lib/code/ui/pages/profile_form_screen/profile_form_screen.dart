@@ -156,7 +156,7 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
     return CustomAppBar(
       centerTitle: true,
       title: Text(
-        S.of(context).profile_form_title,
+        HiveCoreString.of(context).profile_form_title,
         style: TextStyle(
             fontSize: 16,
             color: Theme.of(context).textTheme.bodyText1.color,
@@ -207,7 +207,8 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
               }
             },
             decoration: InputDecoration(
-              labelText: '${S.of(context).profile_form_gender_holder} *',
+              labelText:
+                  '${HiveCoreString.of(context).profile_form_gender_holder} *',
               prefixIcon: SizedBox(), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),
@@ -215,7 +216,8 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
           TextFieldBlocBuilder(
             textFieldBloc: formBloc.nickname,
             decoration: InputDecoration(
-              labelText: '${S.of(context).profile_form_nickname_holder_hint}',
+              labelText:
+                  '${HiveCoreString.of(context).profile_form_nickname_holder_hint}',
               prefixIcon: Icon(Icons.person), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),
@@ -223,7 +225,8 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
           TextFieldBlocBuilder(
             textFieldBloc: formBloc.name,
             decoration: InputDecoration(
-              labelText: '${S.of(context).profile_form_name_holder_hint} *',
+              labelText:
+                  '${HiveCoreString.of(context).profile_form_name_holder_hint} *',
               prefixIcon: Icon(Icons.person), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),
@@ -232,14 +235,15 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
             textFieldBloc: formBloc.firstname,
             decoration: InputDecoration(
               labelText:
-                  '${S.of(context).profile_form_firstname_holder_hint} *',
+                  '${HiveCoreString.of(context).profile_form_firstname_holder_hint} *',
               prefixIcon: Icon(Icons.person),
             ),
           ),
           TextFieldBlocBuilder(
             textFieldBloc: formBloc.secondname,
             decoration: InputDecoration(
-              labelText: '${S.of(context).profile_form_secondname_holder_hint}',
+              labelText:
+                  '${HiveCoreString.of(context).profile_form_secondname_holder_hint}',
               prefixIcon: Icon(Icons.person), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),

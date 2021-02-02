@@ -72,7 +72,7 @@ class _AppBarFiltersWidgetState extends State<AppBarFiltersWidget> {
       onPressed: widget.onClear,
       textColor: Theme.of(context).accentColor,
       child: Text(
-        widget.btnClearText ?? S.of(context).delete,
+        widget.btnClearText ?? HiveCoreString.of(context).delete,
         style: TextStyle(),
       ),
     );

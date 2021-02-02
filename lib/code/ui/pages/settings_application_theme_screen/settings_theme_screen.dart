@@ -22,7 +22,7 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
     return CustomAppBar(
       centerTitle: true,
       title: Text(
-        'Appearance', // S.of(context).settings_application_theme,
+        'Appearance', // HiveCoreString.of(context).settings_application_theme,
         style: TextStyle(
             fontSize: 16,
             color: Theme.of(context).textTheme.bodyText1.color,

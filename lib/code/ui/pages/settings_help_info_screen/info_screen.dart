@@ -4,7 +4,7 @@ import 'package:hive_core/generated/l10n.dart';
 import 'package:package_info/package_info.dart';
 
 class InfoScreen extends StatefulWidget {
-  // final String title = S.of(context).user_profile_title;
+  // final String title = HiveCoreString.of(context).user_profile_title;
 
   @override
   State<StatefulWidget> createState() => _InfoScreenState();
@@ -60,7 +60,7 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget _title() {
     return Container(
       child: Text(
-        S.of(context).app_title,
+        HiveCoreString.of(context).app_title,
         style: TextStyle(fontSize: 25),
       ),
     );

@@ -140,7 +140,7 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
         children: [
           Container(
             child: Text(
-              '', //  S.of(context).notifications_list_title,
+              '', //  HiveCoreString.of(context).notifications_list_title,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -152,7 +152,7 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
           ),
           Container(
             child: Text(
-              '', //   S.of(context).notifications_tutorial_description,
+              '', //   HiveCoreString.of(context).notifications_tutorial_description,
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color: Colors.white,
@@ -183,7 +183,7 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
       child: OutlineButton(
           onPressed: _finishTutorial,
           child: Text(
-            S.of(context).skip_tutorial,
+            HiveCoreString.of(context).skip_tutorial,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

@@ -14,7 +14,7 @@ abstract class SnackBarForm {
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(text ?? S.of(context).unknown_error),
+              Text(text ?? HiveCoreString.of(context).unknown_error),
               Icon(icon ?? Icons.error)
             ],
           ),

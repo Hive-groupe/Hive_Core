@@ -60,7 +60,7 @@ class _ItemAttribute extends State<StatisticPage> {
         padding: EdgeInsets.only(right: 5, left: 5),
         child: StatisticLateralItem(
           data: widget.minimum.toStringAsFixed(2).toString(),
-          title: S.of(context).minimum,
+          title: HiveCoreString.of(context).minimum,
           unity: widget.unity,
         ));
   }
@@ -70,7 +70,7 @@ class _ItemAttribute extends State<StatisticPage> {
         padding: EdgeInsets.only(right: 5, left: 5),
         child: StatisticCentralItem(
           data: widget.average.toStringAsFixed(2).toString(),
-          title: S.of(context).average,
+          title: HiveCoreString.of(context).average,
           unity: widget.unity,
         ));
   }
@@ -80,7 +80,7 @@ class _ItemAttribute extends State<StatisticPage> {
         padding: EdgeInsets.only(right: 5, left: 5),
         child: StatisticLateralItem(
           data: widget.maximum.toStringAsFixed(2).toString(),
-          title: S.of(context).maximum,
+          title: HiveCoreString.of(context).maximum,
           unity: widget.unity,
         ));
   }

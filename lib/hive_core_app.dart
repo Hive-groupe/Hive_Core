@@ -258,10 +258,10 @@ class HiveCoreApp extends StatelessWidget {
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
-            S.delegate,
+            HiveCoreString.delegate,
             LocaleNamesLocalizationsDelegate(),
           ],
-          supportedLocales: S.delegate.supportedLocales,
+          supportedLocales: HiveCoreString.delegate.supportedLocales,
           locale: blocPreferencesState is PreferencesLoaded
               ? blocPreferencesState.locale
               : null,

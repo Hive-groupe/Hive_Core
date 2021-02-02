@@ -23,7 +23,7 @@ class _SettingsChatScreenState extends State<SettingsChatScreen> {
     return CustomAppBar(
       centerTitle: true,
       title: Text(
-        S.of(context).settings_application_chat,
+        HiveCoreString.of(context).settings_application_chat,
         style: TextStyle(
             fontSize: 16,
             color: Theme.of(context).textTheme.bodyText1.color,

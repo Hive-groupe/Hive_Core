@@ -23,7 +23,8 @@ abstract class MonitorBuildersWidget {
               ),
               Container(
                 child: SvgPicture.asset(
-                  imageUrl ?? S.of(context).km_assets_images_list_loading,
+                  imageUrl ??
+                      HiveCoreString.of(context).km_assets_images_list_loading,
                   // color: Colors.red,
                   height: 150,
                   width: 150,
@@ -75,10 +76,10 @@ abstract class MonitorBuildersWidget {
               height: 200,
             ),
             Text(
-              S.of(context).default_error,
+              HiveCoreString.of(context).default_error,
             ),
             Text(
-              S.of(context).unknown_error,
+              HiveCoreString.of(context).unknown_error,
             ),
           ],
         ),

@@ -49,7 +49,7 @@ class _ConnetAccountAppsBarState extends State<ConnetAccountAppsBar> {
             actions: <Widget>[
               CupertinoActionSheetAction(
                 onPressed: _onShowTutorial,
-                child: Text(S.of(context).tutorial),
+                child: Text(HiveCoreString.of(context).tutorial),
               ),
             ],
           );
@@ -100,7 +100,7 @@ class _ConnetAccountAppsBarState extends State<ConnetAccountAppsBar> {
         ),
       ),
       largeTitle: Text(
-        S.of(context).settings_connected_accounts,
+        HiveCoreString.of(context).settings_connected_accounts,
       ),
       /*  trailing: Material(
         color: Colors.transparent,

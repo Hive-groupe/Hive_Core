@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_core/generated/l10n.dart';
 
 class SplashScreen extends StatefulWidget {
-  // final String title = S.of(context).user_profile_title;
+  // final String title = HiveCoreString.of(context).user_profile_title;
 
   @override
   State<StatefulWidget> createState() => _SplashScreenState();
@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget _iconHolder() {
     return Container(
         child: Image.asset(
-      S.of(context).image_icon_hive,
+      HiveCoreString.of(context).image_icon_hive,
       height: 300,
       width: 300,
     ));
@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
       child: SizedBox.fromSize(
           size: Size.fromHeight(30),
           child: new Text(
-            S.of(context).app_title,
+            HiveCoreString.of(context).app_title,
             style: TextStyle(fontSize: 25),
             textAlign: TextAlign.left,
           )),

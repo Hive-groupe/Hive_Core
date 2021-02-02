@@ -39,23 +39,23 @@ class _SettingsThemeFormState extends State<SettingsThemeForm> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-                'Resetear las preferencias de apariencia'), // S.of(context).user_signout),
+                'Resetear las preferencias de apariencia'), // HiveCoreString.of(context).user_signout),
             content: new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
                   Text(
-                      '¿Estas seguro de que deseas eliminar la configuración actual?'), // S.of(context).user_settings_close_confirmation_seasion),
+                      '¿Estas seguro de que deseas eliminar la configuración actual?'), // HiveCoreString.of(context).user_settings_close_confirmation_seasion),
                 ],
               ),
             ),
             actions: <Widget>[
               FlatButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(S.of(context).cancel),
+                child: Text(HiveCoreString.of(context).cancel),
               ),
               FlatButton(
                 onPressed: () {}, // _onResetNotificationsferences,
-                child: Text(S.of(context).yes),
+                child: Text(HiveCoreString.of(context).yes),
               ),
             ],
           );
@@ -93,7 +93,7 @@ class _SettingsThemeFormState extends State<SettingsThemeForm> {
 
   _themeGroup(PreferencesLoaded state) {
     return SettingsGroup(
-      title: S.of(context).settings_application_theme,
+      title: HiveCoreString.of(context).settings_application_theme,
       elements: [_themeSelectorHolder(state)],
     );
   }
@@ -102,7 +102,7 @@ class _SettingsThemeFormState extends State<SettingsThemeForm> {
     _currentThemeItem = state.themeName;
     return ListTile(
         /*title: Container(
-          child: Text(S.of(context).settings_application_theme),
+          child: Text(HiveCoreString.of(context).settings_application_theme),
         ),*/
         subtitle: Container(
       child: DropdownButton<String>(

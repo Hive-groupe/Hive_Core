@@ -57,10 +57,10 @@ class _ConnetAccountListState extends State<ConnetAccountList> {
     return ListBuildersWidget.emptyListBuilder(
       context: context,
       onTap: () {},
-      imageUrl: S.of(context).km_assets_images_list_empty,
+      imageUrl: HiveCoreString.of(context).km_assets_images_list_empty,
       title: null,
       text:
-          'No se encontraron cuentas conectadas', // S.of(context).bill_list_empty,
+          'No se encontraron cuentas conectadas', // HiveCoreString.of(context).bill_list_empty,
     );
   }
 

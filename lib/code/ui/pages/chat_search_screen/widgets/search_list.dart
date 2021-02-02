@@ -113,7 +113,7 @@ class _SearchChatsState extends State<SearchChats> {
               height: 15,
             ),
             Text(
-              'No hay resultados', //S.of(context).DataList_list_empty,
+              'No hay resultados', //HiveCoreString.of(context).DataList_list_empty,
               textAlign: TextAlign.center,
               /* style: TextStyle(
                 fontSize: 25,
@@ -138,10 +138,10 @@ class _SearchChatsState extends State<SearchChats> {
               height: 200,
             ),
             Text(
-              S.of(context).default_error,
+              HiveCoreString.of(context).default_error,
             ),
             Text(
-              S.of(context).unknown_error,
+              HiveCoreString.of(context).unknown_error,
             ),
           ],
         ),

@@ -88,7 +88,7 @@ class _ChatListAppsBarState extends State<ChatListAppsBar> {
         ),
       ),
       largeTitle: Text(
-        'Chats', //  S.of(context).hours_list_title,
+        'Chats', //  HiveCoreString.of(context).hours_list_title,
       ),
       /*    trailing: Material(
         color: Colors.transparent,
@@ -108,7 +108,7 @@ class _ChatListAppsBarState extends State<ChatListAppsBar> {
       backgroundColor: Colors.transparent,
       centerTitle: true,
       title: Text(
-        'Chats', // S.of(context).bill_list_title,
+        'Chats', // HiveCoreString.of(context).bill_list_title,
         style: TextStyle(
             fontSize: 16,
             color: Theme.of(context).textTheme.bodyText1.color,

@@ -74,16 +74,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _getTitleCategory(String category) {
     switch (category) {
       case 'Account':
-        return S.of(context).settings_account_title;
+        return HiveCoreString.of(context).settings_account_title;
         break;
       case 'Application':
-        return S.of(context).settings_application_title;
+        return HiveCoreString.of(context).settings_application_title;
         break;
       case 'Help':
-        return S.of(context).settings_help_title;
+        return HiveCoreString.of(context).settings_help_title;
         break;
       default:
-        return S.of(context).user_settings_title;
+        return HiveCoreString.of(context).user_settings_title;
     }
   }
 
@@ -133,22 +133,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
         barrierDismissible: true,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(S.of(context).user_signout),
+            title: Text(HiveCoreString.of(context).user_signout),
             content: new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
-                  Text(S.of(context).user_settings_close_confirmation_seasion),
+                  Text(HiveCoreString.of(context)
+                      .user_settings_close_confirmation_seasion),
                 ],
               ),
             ),
             actions: <Widget>[
               FlatButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(S.of(context).cancel),
+                child: Text(HiveCoreString.of(context).cancel),
               ),
               FlatButton(
                 onPressed: _onCloseSeasion,
-                child: Text(S.of(context).yes),
+                child: Text(HiveCoreString.of(context).yes),
               ),
             ],
           );
@@ -176,7 +177,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   String _localizeLocale(BuildContext context, Locale locale) {
     if (locale == null) {
-      return S.of(context).systemLanguage;
+      return HiveCoreString.of(context).systemLanguage;
     } else {
       final localeString = LocaleNames.of(context).nameOf(locale.toString());
       return localeString[0].toUpperCase() + localeString.substring(1);
@@ -312,7 +313,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ),
-      largeTitle: Text(S.of(context).user_settings_title),
+      largeTitle: Text(HiveCoreString.of(context).user_settings_title),
       trailing: Material(
         color: Colors.transparent,
         child: IconButton(
@@ -438,7 +439,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Icon(Icons.verified_user),
       ),
       title: Container(
-        child: Text(S.of(context).settings_account_title),
+        child: Text(HiveCoreString.of(context).settings_account_title),
       ),
       subtitle: Container(
         child: Text('Privacidad, Cambio de contraseña'),
@@ -453,7 +454,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Icon(CupertinoIcons.lab_flask),
       ),
       title: Container(
-        child: Text(S.of(context).settings_application_title),
+        child: Text(HiveCoreString.of(context).settings_application_title),
       ),
       subtitle: Container(
         child: Text('Tema, Idioma, Notificaciones'),
@@ -468,7 +469,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Icon(Icons.help_outline),
       ),
       title: Container(
-        child: Text(S.of(context).settings_help_title),
+        child: Text(HiveCoreString.of(context).settings_help_title),
       ),
       subtitle: Container(
         child: Text('Preguntas frecuentes, Contáctenos, politicas'),
@@ -526,37 +527,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   SettingsItem _changePassword() => SettingsItem(
         icon: Icons.lock_outline,
-        title: S.of(context).settings_update_password,
+        title: HiveCoreString.of(context).settings_update_password,
         onTap: _goUpdatePasswordForm,
       );
 
   SettingsItem _connectedAccounts() => SettingsItem(
         icon: Icons.cloud_queue,
-        title: S.of(context).settings_connected_accounts,
+        title: HiveCoreString.of(context).settings_connected_accounts,
         onTap: _goConnetAccountScreen,
       );
 
   SettingsItem _devices() => SettingsItem(
         icon: Icons.computer,
-        title: S.of(context).settings_devices,
+        title: HiveCoreString.of(context).settings_devices,
         onTap: _goDeviceListScreen,
       );
 
   SettingsItem _paymentMethods() => SettingsItem(
         icon: Icons.payment,
-        title: S.of(context).settings_payment_methods,
+        title: HiveCoreString.of(context).settings_payment_methods,
         onTap: () {},
       );
 
   SettingsItem _signOfft() => SettingsItem(
         icon: Icons.exit_to_app,
-        title: S.of(context).user_signout,
+        title: HiveCoreString.of(context).user_signout,
         onTap: _confirmDialogBox,
       );
 
   SettingsItem _deleteAccount() => SettingsItem(
         icon: CupertinoIcons.delete_simple,
-        title: S.of(context).settings_delete_account,
+        title: HiveCoreString.of(context).settings_delete_account,
         onTap: () {},
       );
 
@@ -576,42 +577,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   SettingsItem _theme(PreferencesLoaded state) => SettingsItem(
         icon: Icons.format_paint,
-        title: S.of(context).settings_application_theme,
+        title: HiveCoreString.of(context).settings_application_theme,
         description: state.themeName,
         onTap: _goThemeSettingsScreen,
       );
 
   SettingsItem _locale(PreferencesLoaded state) => SettingsItem(
         icon: Icons.language,
-        title: S.of(context).settings_application_locale,
+        title: HiveCoreString.of(context).settings_application_locale,
         description: _localizeLocale(context, state.locale),
         onTap: _goLocateSettingsScreen,
       );
 
   SettingsItem _notification() => SettingsItem(
         icon: Icons.notifications_none,
-        title: S.of(context).settings_application_notifications,
+        title: HiveCoreString.of(context).settings_application_notifications,
         description: 'Tonos de mensajes, llamadas',
         onTap: _goNotificatiosSettingsScreen,
       );
 
   SettingsItem _chats() => SettingsItem(
         icon: Icons.chat_bubble_outline,
-        title: S.of(context).settings_application_chat,
+        title: HiveCoreString.of(context).settings_application_chat,
         description: 'Fondos de pantalla, historial de chat',
         onTap: _goChatSettingsScreen,
       );
 
   SettingsItem _downloads() => SettingsItem(
         icon: Icons.file_download,
-        title: S.of(context).settings_application_downloads,
+        title: HiveCoreString.of(context).settings_application_downloads,
         description: 'Uso de red, descargas automaticas',
         onTap: () {},
       );
 
   SettingsItem _reproduction() => SettingsItem(
         icon: Icons.play_circle_outline,
-        title: S.of(context).settings_application_reproduction,
+        title: HiveCoreString.of(context).settings_application_reproduction,
         onTap: () {},
       );
 
@@ -629,26 +630,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   SettingsItem _frequentQuestions() => SettingsItem(
         icon: Icons.help_outline,
-        title: S.of(context).settings_help_frequent_questions,
+        title: HiveCoreString.of(context).settings_help_frequent_questions,
         onTap: () {},
       );
 
   SettingsItem _contactUs() => SettingsItem(
         icon: Icons.group,
-        title: S.of(context).settings_help_contact,
+        title: HiveCoreString.of(context).settings_help_contact,
         description: '¿Preguntas? ¿Necesitas?',
         onTap: () {},
       );
 
   SettingsItem _onditionsAndPrivacy() => SettingsItem(
         icon: Icons.description,
-        title: S.of(context).settings_help_conditions,
+        title: HiveCoreString.of(context).settings_help_conditions,
         onTap: () {},
       );
 
   SettingsItem _info() => SettingsItem(
         icon: Icons.info_outline,
-        title: S.of(context).settings_help_info,
+        title: HiveCoreString.of(context).settings_help_info,
         onTap: _goInfoApp,
       );
 }

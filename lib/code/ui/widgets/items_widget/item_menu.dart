@@ -73,11 +73,11 @@ class _ItemMenuState extends State<ItemMenu> {
             actions: <Widget>[
               FlatButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(S.of(context).cancel),
+                child: Text(HiveCoreString.of(context).cancel),
               ),
               FlatButton(
                 onPressed: widget.onDelete,
-                child: Text(S.of(context).yes),
+                child: Text(HiveCoreString.of(context).yes),
               ),
             ],
           );

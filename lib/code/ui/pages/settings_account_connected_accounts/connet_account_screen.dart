@@ -84,7 +84,7 @@ class _ConnetAccountScreenState extends State<ConnetAccountScreen>
   Widget _buildLoading() {
     return ScreenBuildersWidget.loadingScreenBuilder(
       appBar: ConnetAccountAppsBar(),
-      text: 'Cargando cuentas', // S.of(context).bill_list_loading,
+      text: 'Cargando cuentas', // HiveCoreString.of(context).bill_list_loading,
     );
   }
 

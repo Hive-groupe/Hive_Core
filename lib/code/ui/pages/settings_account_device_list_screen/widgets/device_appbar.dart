@@ -48,7 +48,7 @@ class _DeviceAppsBarState extends State<DeviceAppsBar> {
             actions: <Widget>[
               CupertinoActionSheetAction(
                 onPressed: _onShowTutorial,
-                child: Text(S.of(context).tutorial),
+                child: Text(HiveCoreString.of(context).tutorial),
               ),
             ],
           );
@@ -99,7 +99,7 @@ class _DeviceAppsBarState extends State<DeviceAppsBar> {
         ),
       ),
       largeTitle: Text(
-        S.of(context).settings_devices,
+        HiveCoreString.of(context).settings_devices,
       ),
       /*  trailing: Material(
         color: Colors.transparent,

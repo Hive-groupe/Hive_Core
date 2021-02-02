@@ -127,7 +127,7 @@ class _ChatListingScreenState extends State<ChatListingScreen>
         tabs: _tabs,
         tabController: _tabController,
       ),
-      text: 'Cargando chats', // S.of(context).bill_list_loading,
+      text: 'Cargando chats', // HiveCoreString.of(context).bill_list_loading,
     );
   }
 

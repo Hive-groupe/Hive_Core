@@ -2,7 +2,7 @@ name: hive_core
 description: A new flutter plugin project.
 version: 0.0.1
 author:
-homepage:
+# homepage:
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -124,4 +124,4 @@ flutter_intl:
   # Optional
   # Default: S
   # Suggested alternative name: AppLocalizations
-  class_name: S
+  class_name: HiveCoreString

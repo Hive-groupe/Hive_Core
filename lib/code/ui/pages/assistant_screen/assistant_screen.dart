@@ -85,10 +85,10 @@ class _AssistantScreenState extends State<AssistantScreen>
                         height: 250,
                       ),
                       Text(
-                        S.of(context).default_error,
+                        HiveCoreString.of(context).default_error,
                       ),
                       Text(
-                        S.of(context).unknown_error,
+                        HiveCoreString.of(context).unknown_error,
                       ),
                     ],
                   ),
@@ -118,7 +118,7 @@ class _AssistantScreenState extends State<AssistantScreen>
                       height: 10,
                     ),
                     /*Text(
-                      S.of(context).assistant_loading,
+                      HiveCoreString.of(context).assistant_loading,
                       style: TextStyle(color: Colors.black),
                     )*/
                   ],

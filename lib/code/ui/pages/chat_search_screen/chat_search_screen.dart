@@ -105,10 +105,10 @@ class _ChatSearchScreenState extends State<ChatSearchScreen>
               height: 200,
             ),
             Text(
-              S.of(context).default_error,
+              HiveCoreString.of(context).default_error,
             ),
             Text(
-              S.of(context).unknown_error,
+              HiveCoreString.of(context).unknown_error,
             ),
           ],
         ),

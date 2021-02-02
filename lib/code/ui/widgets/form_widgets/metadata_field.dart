@@ -32,7 +32,7 @@ class MetadataField extends StatelessWidget {
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               labelText: labelName ??
-                  'title *', //'${S.of(context).bill_form_holder_concept} *',
+                  'title *', //'${HiveCoreString.of(context).bill_form_holder_concept} *',
               prefixIcon: Icon(Icons.text_fields), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),
@@ -44,7 +44,7 @@ class MetadataField extends StatelessWidget {
             maxLines: 5, // when user presses enter it will adapt to it
             decoration: InputDecoration(
               labelText: labelDescription ??
-                  'Observations', //'${S.of(context).bill_form_holder_concept}',
+                  'Observations', //'${HiveCoreString.of(context).bill_form_holder_concept}',
               prefixIcon: Icon(HiveCoreConstIconData.text),
               isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),

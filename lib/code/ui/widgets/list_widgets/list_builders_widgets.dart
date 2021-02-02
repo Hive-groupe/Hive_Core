@@ -24,7 +24,9 @@ abstract class ListBuildersWidget {
               ),
               Container(
                 child: SvgPicture.asset(
-                  imageUrl ?? S.of(context).notifications_assets_images_empty,
+                  imageUrl ??
+                      HiveCoreString.of(context)
+                          .notifications_assets_images_empty,
                   // color: Colors.red,
                   height: 150,
                   width: 150,
@@ -78,7 +80,8 @@ abstract class ListBuildersWidget {
             Container(
               padding: const EdgeInsets.only(left: 50, right: 50),
               child: SvgPicture.asset(
-                imageUrl ?? S.of(context).km_assets_images_list_error,
+                imageUrl ??
+                    HiveCoreString.of(context).km_assets_images_list_error,
                 height: 150,
                 width: 150,
                 placeholderBuilder: (BuildContext context) => Container(
@@ -90,14 +93,14 @@ abstract class ListBuildersWidget {
               height: 25,
             ),
             Text(
-              title ?? S.of(context).default_error,
+              title ?? HiveCoreString.of(context).default_error,
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.grey.shade400,
               ),
             ),
             Text(
-              text ?? S.of(context).unknown_error,
+              text ?? HiveCoreString.of(context).unknown_error,
               style: TextStyle(
                 color: Colors.grey.shade400,
               ),

@@ -82,7 +82,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
   Widget _buildLoading() {
     return ScreenBuildersWidget.loadingScreenBuilder(
       appBar: NotificationsAppsBar(),
-      text: null, // S.of(context).bill_list_loading,
+      text: null, // HiveCoreString.of(context).bill_list_loading,
     );
   }
 

@@ -121,7 +121,7 @@ class UpdatePasswordFormScreen extends StatelessWidget {
               suffixButton: SuffixButton.obscureText,
               decoration: InputDecoration(
                 labelText:
-                    'Nueva contraseña', //'${S.of(context).login_form_password_holder_hint}',
+                    'Nueva contraseña', //'${HiveCoreString.of(context).login_form_password_holder_hint}',
                 prefixIcon: Icon(Icons.lock), isDense: true, // Added this
                 contentPadding: EdgeInsets.all(8),
               ),
@@ -132,7 +132,7 @@ class UpdatePasswordFormScreen extends StatelessWidget {
               suffixButton: SuffixButton.obscureText,
               decoration: InputDecoration(
                 labelText:
-                    'Repetir nueva contraseña', //'${S.of(context).login_form_password_holder_hint}',
+                    'Repetir nueva contraseña', //'${HiveCoreString.of(context).login_form_password_holder_hint}',
                 prefixIcon: Icon(Icons.lock), isDense: true, // Added this
                 contentPadding: EdgeInsets.all(8),
               ),
@@ -146,7 +146,7 @@ class UpdatePasswordFormScreen extends StatelessWidget {
               suffixButton: SuffixButton.obscureText,
               decoration: InputDecoration(
                 labelText:
-                    '${S.of(context).login_form_password_holder_hint} actual',
+                    '${HiveCoreString.of(context).login_form_password_holder_hint} actual',
                 prefixIcon: Icon(Icons.lock), isDense: true, // Added this
                 contentPadding: EdgeInsets.all(8),
               ),
@@ -166,7 +166,7 @@ class UpdatePasswordFormScreen extends StatelessWidget {
       onTap: () => _goRestorePassword(context),
       child: Container(
         child: Text(
-          S.of(context).login_form_recover_password_button,
+          HiveCoreString.of(context).login_form_recover_password_button,
           style: TextStyle(color: Colors.grey),
         ),
       ),

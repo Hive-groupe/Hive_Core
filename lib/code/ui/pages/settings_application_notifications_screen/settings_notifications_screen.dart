@@ -26,7 +26,7 @@ class _SettingsNotificationsScreenState
       backgroundColor: Colors.transparent,
       centerTitle: true,
       title: Text(
-        S.of(context).settings_application_notifications,
+        HiveCoreString.of(context).settings_application_notifications,
         style: TextStyle(
             fontSize: 16,
             color: Theme.of(context).textTheme.bodyText1.color,

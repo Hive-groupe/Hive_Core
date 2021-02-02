@@ -172,7 +172,7 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
     return CustomAppBar(
       centerTitle: true,
       title: Text(
-        S.of(context).login_form_register_button,
+        HiveCoreString.of(context).login_form_register_button,
         style: TextStyle(
             fontSize: 16,
             color: Theme.of(context).textTheme.bodyText1.color,
@@ -208,7 +208,8 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
             textFieldBloc: formBloc.email,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              labelText: '${S.of(context).social_form_holder_email}',
+              labelText:
+                  '${HiveCoreString.of(context).social_form_holder_email}',
               prefixIcon: Icon(CupertinoIcons.mail),
               isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
@@ -219,7 +220,8 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
             keyboardType: TextInputType.emailAddress,
             suffixButton: SuffixButton.obscureText,
             decoration: InputDecoration(
-              labelText: '${S.of(context).login_form_password_holder_hint}',
+              labelText:
+                  '${HiveCoreString.of(context).login_form_password_holder_hint}',
               prefixIcon: Icon(Icons.lock),
               isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
@@ -231,7 +233,7 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
             suffixButton: SuffixButton.obscureText,
             decoration: InputDecoration(
               labelText:
-                  'Confirmar contraseña', //'${S.of(context).login_form_password_holder_hint}',
+                  'Confirmar contraseña', //'${HiveCoreString.of(context).login_form_password_holder_hint}',
               prefixIcon: Icon(Icons.lock),
               isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
@@ -266,7 +268,8 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
               }
             },
             decoration: InputDecoration(
-              labelText: '${S.of(context).profile_form_gender_holder} *',
+              labelText:
+                  '${HiveCoreString.of(context).profile_form_gender_holder} *',
               prefixIcon: SizedBox(), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),
@@ -274,7 +277,8 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
           TextFieldBlocBuilder(
             textFieldBloc: formBloc.nickname,
             decoration: InputDecoration(
-              labelText: '${S.of(context).profile_form_nickname_holder_hint}',
+              labelText:
+                  '${HiveCoreString.of(context).profile_form_nickname_holder_hint}',
               prefixIcon: Icon(Icons.email), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),
@@ -282,7 +286,8 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
           TextFieldBlocBuilder(
             textFieldBloc: formBloc.name,
             decoration: InputDecoration(
-              labelText: '${S.of(context).profile_form_name_holder_hint} *',
+              labelText:
+                  '${HiveCoreString.of(context).profile_form_name_holder_hint} *',
               prefixIcon: Icon(Icons.email), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),
@@ -291,7 +296,7 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
             textFieldBloc: formBloc.firstname,
             decoration: InputDecoration(
               labelText:
-                  '${S.of(context).profile_form_firstname_holder_hint} *',
+                  '${HiveCoreString.of(context).profile_form_firstname_holder_hint} *',
               prefixIcon: Icon(Icons.email), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),
@@ -299,7 +304,8 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
           TextFieldBlocBuilder(
             textFieldBloc: formBloc.secondname,
             decoration: InputDecoration(
-              labelText: '${S.of(context).profile_form_secondname_holder_hint}',
+              labelText:
+                  '${HiveCoreString.of(context).profile_form_secondname_holder_hint}',
               prefixIcon: Icon(Icons.email), isDense: true, // Added this
               contentPadding: EdgeInsets.all(8),
             ),

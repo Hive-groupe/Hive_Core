@@ -55,7 +55,7 @@ class _RecentChatsState extends State<RecentChats> {
       imageUrl: null,
       title: null,
       text:
-          "${"This is where all the contacts are listed"}\n${"Search for your friends and family to start calling or chatting with them"}", //S.of(context).payroll_list_empty,
+          "${"This is where all the contacts are listed"}\n${"Search for your friends and family to start calling or chatting with them"}", //HiveCoreString.of(context).payroll_list_empty,
     );
   }
 

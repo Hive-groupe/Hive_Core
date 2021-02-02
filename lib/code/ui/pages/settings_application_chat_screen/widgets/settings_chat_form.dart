@@ -38,23 +38,23 @@ class _SettingsChatFormState extends State<SettingsChatForm> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-                'Resetear las preferencias para chats'), // S.of(context).user_signout),
+                'Resetear las preferencias para chats'), // HiveCoreString.of(context).user_signout),
             content: new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
                   Text(
-                      '¿Estas seguro de que deseas eliminar la configuración actual?'), // S.of(context).user_settings_close_confirmation_seasion),
+                      '¿Estas seguro de que deseas eliminar la configuración actual?'), // HiveCoreString.of(context).user_settings_close_confirmation_seasion),
                 ],
               ),
             ),
             actions: <Widget>[
               FlatButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(S.of(context).cancel),
+                child: Text(HiveCoreString.of(context).cancel),
               ),
               FlatButton(
                 onPressed: _onResetChatPreferences,
-                child: Text(S.of(context).yes),
+                child: Text(HiveCoreString.of(context).yes),
               ),
             ],
           );

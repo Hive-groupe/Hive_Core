@@ -52,7 +52,7 @@ class _NotificationsAppsBarState extends State<NotificationsAppsBar> {
         ),
       ),
       largeTitle: Text(
-        S.of(context).notifications_title,
+        HiveCoreString.of(context).notifications_title,
       ),
       trailing: Material(
         color: Colors.transparent,

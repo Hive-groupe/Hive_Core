@@ -41,7 +41,7 @@ class _GeneralTutorialScreenState extends State<GeneralTutorialScreen> {
         children: [
           Container(
             child: Text(
-              S.of(context).monitor,
+              HiveCoreString.of(context).monitor,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class _GeneralTutorialScreenState extends State<GeneralTutorialScreen> {
           ),
           Container(
             child: Text(
-              S.of(context).general_tutorial_monitor,
+              HiveCoreString.of(context).general_tutorial_monitor,
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color: Colors.white,
@@ -72,7 +72,7 @@ class _GeneralTutorialScreenState extends State<GeneralTutorialScreen> {
         children: [
           Container(
             child: Text(
-              S.of(context).record,
+              HiveCoreString.of(context).record,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -84,7 +84,7 @@ class _GeneralTutorialScreenState extends State<GeneralTutorialScreen> {
           ),
           Container(
             child: Text(
-              S.of(context).general_tutorial_record,
+              HiveCoreString.of(context).general_tutorial_record,
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color: Colors.white,
@@ -103,7 +103,7 @@ class _GeneralTutorialScreenState extends State<GeneralTutorialScreen> {
         children: [
           Container(
             child: Text(
-              'Filtros', // S.of(context).filter,
+              'Filtros', // HiveCoreString.of(context).filter,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class _GeneralTutorialScreenState extends State<GeneralTutorialScreen> {
           ),
           Container(
             child: Text(
-              S.of(context).general_tutorial_filter,
+              HiveCoreString.of(context).general_tutorial_filter,
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color: Colors.white,

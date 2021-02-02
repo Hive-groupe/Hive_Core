@@ -40,23 +40,24 @@ class _DeviceItemState extends State<DeviceItem> {
         barrierDismissible: true,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Eliminar Dispositivo'), // S.of(context).user_signout),
+            title: Text(
+                'Eliminar Dispositivo'), // HiveCoreString.of(context).user_signout),
             content: new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
                   Text(
-                      '¿Estas seguro de que deseas eliminar el dispositivo?'), // S.of(context).user_settings_close_confirmation_seasion),
+                      '¿Estas seguro de que deseas eliminar el dispositivo?'), // HiveCoreString.of(context).user_settings_close_confirmation_seasion),
                 ],
               ),
             ),
             actions: <Widget>[
               FlatButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(S.of(context).cancel),
+                child: Text(HiveCoreString.of(context).cancel),
               ),
               FlatButton(
                 onPressed: _onDeleteData,
-                child: Text(S.of(context).yes),
+                child: Text(HiveCoreString.of(context).yes),
               ),
             ],
           );

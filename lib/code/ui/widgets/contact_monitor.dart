@@ -115,7 +115,7 @@ class _ContactMonitorState extends State<ContactMonitor> {
   Widget _titleHolder() {
     return Container(
       child: Text(
-        S.of(context).social_form_title,
+        HiveCoreString.of(context).social_form_title,
         style: HiveCoreConstTextStyle.form_title,
         textAlign: TextAlign.left,
       ),

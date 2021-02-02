@@ -48,16 +48,16 @@ class _NotificationsListState extends State<NotificationsList> {
     return ListBuildersWidget.emptyListBuilder(
       context: context,
       onTap: null,
-      imageUrl: S.of(context).notifications_assets_images_empty,
+      imageUrl: HiveCoreString.of(context).notifications_assets_images_empty,
       title: null,
-      text: S.of(context).notifications_list_empty,
+      text: HiveCoreString.of(context).notifications_list_empty,
     );
   }
 
   Widget _buildListError() {
     return ListBuildersWidget.errorListBuilder(
       context: context,
-      title: S.of(context).notifications_list_error,
+      title: HiveCoreString.of(context).notifications_list_error,
     );
   }
 
@@ -65,9 +65,9 @@ class _NotificationsListState extends State<NotificationsList> {
     return ListBuildersWidget.loadingListBuilder(
       context: context,
       onTap: null,
-      imageUrl: S.of(context).notifications_assets_images_loading,
+      imageUrl: HiveCoreString.of(context).notifications_assets_images_loading,
       title: null,
-      text: S.of(context).notifications_list_loading,
+      text: HiveCoreString.of(context).notifications_list_loading,
     );
   }
 
