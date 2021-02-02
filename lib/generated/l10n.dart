@@ -1404,6 +1404,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<HiveCoreString> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'es', countryCode: 'ES'),
+      Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'es'),
     ];
   }
 
