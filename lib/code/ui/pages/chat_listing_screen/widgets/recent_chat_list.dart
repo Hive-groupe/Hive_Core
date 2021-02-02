@@ -43,15 +43,9 @@ class _RecentChatsState extends State<RecentChats> {
           } else if (snapshot.hasError) {
             return widget.showStatus ? _buildListError() : Container();
           } else {
-            return widget.showStatus ? _buildListError() : Container();
+            return widget.showStatus ? _buildListLoading() : Container();
           }
         });
-  }
-
-  Widget _buildListError() {
-    return ListBuildersWidget.errorListBuilder(
-      context: context,
-    );
   }
 
   Widget _buildListEmpty() {
@@ -62,6 +56,22 @@ class _RecentChatsState extends State<RecentChats> {
       title: null,
       text:
           "${"This is where all the contacts are listed"}\n${"Search for your friends and family to start calling or chatting with them"}", //S.of(context).payroll_list_empty,
+    );
+  }
+
+  Widget _buildListError() {
+    return ListBuildersWidget.errorListBuilder(
+      context: context,
+    );
+  }
+
+  Widget _buildListLoading() {
+    return ListBuildersWidget.loadingListBuilder(
+      context: context,
+      onTap: null,
+      imageUrl: null,
+      title: null,
+      text: null,
     );
   }
 

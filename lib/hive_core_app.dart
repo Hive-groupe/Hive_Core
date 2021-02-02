@@ -5,6 +5,8 @@ import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:provider/provider.dart';
 
 import 'code/ui/pages/settings_qr_code_screen/settings_qr_code_srceen.dart';
+import 'code/utils/constants/hive_const_strings.dart';
+import 'code/utils/constants/hive_const_theme.dart';
 import 'generated/l10n.dart';
 import 'code/controllers/blocs/advertising_bloc/advertising_bloc.dart';
 import 'code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
@@ -33,8 +35,6 @@ import 'code/ui/pages/settings_account_update_password_form/restore_password_for
 import 'code/ui/pages/settings_application_chat_screen/settings_chat_screen.dart';
 import 'code/ui/pages/settings_help_info_screen/info_screen.dart';
 import 'code/ui/pages/settings_screen/settings_screen.dart';
-import 'code/utils/constants/const_strings.dart';
-import 'code/utils/constants/const_theme.dart';
 
 class HiveCoreApp extends StatelessWidget {
   final String title;
@@ -204,7 +204,7 @@ class HiveCoreApp extends StatelessWidget {
         RestorePasswordFormScreen(),
     HiveCoreConstString.route_user_registration_form_screen: (context) =>
         RegistrationFormSrceen(),
-    HiveCoreConstString.user_profile_form_codeeen: (context) =>
+    HiveCoreConstString.user_profile_form_srceen: (context) =>
         ProfileFormScreen(),
     HiveCoreConstString.route_notifications_screen: (context) =>
         NotificationsScreen(),
@@ -279,4 +279,4 @@ class HiveCoreApp extends StatelessWidget {
   }
 }
 
-bool isPremiumAcount = true;
+bool isPremiumAcount = false;

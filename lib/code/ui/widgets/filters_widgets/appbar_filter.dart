@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/ui/widgets/appbar.dart';
+
+import '../appbar.dart';
 
 class AppBarFiltersWidget extends StatefulWidget
     implements PreferredSizeWidget {

@@ -6,7 +6,7 @@ import 'package:hive_core/code/controllers/blocs/call_screen_bloc/call_sreen_blo
 import 'package:hive_core/code/models/call.dart';
 import 'package:hive_core/code/repositories/call_repository/call_repository.dart';
 import 'package:hive_core/code/ui/pages/login_form_screen/login_form_screen.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 import 'pickup_screen.dart';
 

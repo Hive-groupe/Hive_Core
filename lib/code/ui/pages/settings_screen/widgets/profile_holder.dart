@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_core/code/controllers/blocs/authentication_bloc/userDataInfo.dart';
 import 'package:hive_core/code/models/profile.dart';
 import 'package:hive_core/code/models/user.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class PofileHolder extends StatefulWidget {
   const PofileHolder({Key key}) : super(key: key);
@@ -20,7 +20,7 @@ class _PofileHolderState extends State<PofileHolder> {
   }
 
   void _goEditProfile() => Navigator.pushNamed(
-      context, HiveCoreConstString.user_profile_form_codeeen);
+      context, HiveCoreConstString.user_profile_form_srceen);
 
   void _goQrScreen() => Navigator.pushNamed(
       context, HiveCoreConstString.route_user_qr_code_settings_screen);

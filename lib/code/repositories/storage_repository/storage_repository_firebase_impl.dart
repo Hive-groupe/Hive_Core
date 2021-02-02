@@ -10,9 +10,26 @@ class StorageRepositoryFirebaseImpl extends StorageRepository {
     ref = _db.ref().child(path); // .child('$USERS_COLLECTION/$userId/$path');
   }
 
+  /**
+   * ***************************************************************************
+   *                                                                           *
+   *                                  FILE                                     *
+   *                                                                           *
+   * ***************************************************************************
+   */
+
   @override
-  Future<bool> removeFile(String id) {
-    return ref.child(id).delete();
+  Future<bool> removeFile(String id) async {
+    try {
+      ref
+          .child(id)
+          .delete()
+          .then((_) => print('Successfully deleted $path storage item'));
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 
   @override
@@ -37,4 +54,15 @@ class StorageRepositoryFirebaseImpl extends StorageRepository {
       return null;
     }
   }
+
+  /**
+   * ***************************************************************************
+   *                                                                           *
+   *                                  FOLDER                                   *
+   *                                                                           *
+   * ***************************************************************************
+   */
+
+  @override
+  void removeFolder({String path}) {}
 }

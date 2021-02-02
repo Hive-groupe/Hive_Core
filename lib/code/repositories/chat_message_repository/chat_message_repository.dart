@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_core/code/models/_organizar/chat_contact.dart';
 import 'package:hive_core/code/models/chat_message.dart';
 import 'package:hive_core/code/models/enum/chat_message_type.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'chat_message_repository_firebase_impl.dart';

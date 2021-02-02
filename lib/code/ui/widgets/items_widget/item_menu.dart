@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_core/code/utils/constants/hivre_const_icons.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/utils/constants/const_icons.dart';
 
 class ItemMenu extends StatefulWidget {
   final Function onDouble;
@@ -111,7 +111,7 @@ class _ItemMenuState extends State<ItemMenu> {
                 ),
                 CupertinoContextMenuAction(
                   onPressed: widget.onShare,
-                  trailingIcon: ConstIconData.share,
+                  trailingIcon: HiveCoreConstIconData.share,
                   child: Text(
                     widget.shareText ?? 'share',
                     style: TextStyle(

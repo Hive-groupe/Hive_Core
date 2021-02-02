@@ -1,8 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:hive_core/code/models/enum/chat_message_type.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
-
-import 'enum/chat_message_type.dart';
 
 part 'chat_message.g.dart';
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/assistant_bloc/assistant_bloc.dart';
+import 'package:hive_core/code/ui/widgets/banner_size.dart';
 import 'package:hive_core/code/utils/othes/animation_controller.dart';
 
 import 'widgets/assistant_appbar.dart';
@@ -18,10 +19,6 @@ class AssistantScreen extends StatefulWidget {
 
 class _AssistantScreenState extends State<AssistantScreen>
     with TickerProviderStateMixin {
-  // Repositorys
-  // AuthenticationRepository _authenticationRepository;
-  // TutorialRepository _tutorialRepository;
-
   // Controllers
   TextEditingController _searchController;
   HiveAnimationController _hiveAnimationController;
@@ -31,10 +28,6 @@ class _AssistantScreenState extends State<AssistantScreen>
 
   @override
   void initState() {
-    // Repositorys
-    // _authenticationRepository = context.repository<AuthenticationRepository>();
-    // _tutorialRepository = context.repository<TutorialRepository>();
-
     //Controllers
     _hiveAnimationController = HiveAnimationController(tickerProvider: this);
     _searchController = TextEditingController();
@@ -58,18 +51,19 @@ class _AssistantScreenState extends State<AssistantScreen>
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
+    return BannerSize(
+        body: MultiBlocProvider(
+            providers: [
           BlocProvider<AssistantBloc>(
             create: (BuildContext context) => _assistantBloc,
           ),
         ],
-        child: BlocConsumer(
-            cubit: _assistantBloc,
-            listener: (BuildContext context, AssistantState state) {},
-            builder: (BuildContext context, AssistantState state) {
-              return _buildLoaded();
-            }));
+            child: BlocConsumer(
+                cubit: _assistantBloc,
+                listener: (BuildContext context, AssistantState state) {},
+                builder: (BuildContext context, AssistantState state) {
+                  return _buildLoaded();
+                })));
   }
 
 /*

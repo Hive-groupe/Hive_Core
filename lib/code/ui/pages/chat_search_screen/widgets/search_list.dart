@@ -5,7 +5,7 @@ import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/cached_image.dart';
 import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/custom_tile.dart';
 import 'package:hive_core/code/ui/pages/chat_roon_screen/chat_roon_screen.dart';
-import 'package:hive_core/code/utils/constants/const_colors.dart';
+import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 
 //https://www.youtube.com/watch?v=h-igXZCCrrc
 //https://github.com/MarcusNg/flutter_chat_ui

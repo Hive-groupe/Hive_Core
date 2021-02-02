@@ -7,7 +7,7 @@ import 'package:hive_core/code/models/chat_preferences.dart';
 import 'package:hive_core/code/models/notifications_preferences.dart';
 import 'package:hive_core/code/models/preferences.dart';
 import 'package:hive_core/code/repositories/preferences_repository/preferences_repository.dart';
-import 'package:hive_core/code/utils/constants/const_theme.dart';
+import 'package:hive_core/code/utils/constants/hive_const_theme.dart';
 
 part 'preferences_event.dart';
 part 'preferences_state.dart';

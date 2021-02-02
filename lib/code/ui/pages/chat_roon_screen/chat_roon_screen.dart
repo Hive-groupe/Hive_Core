@@ -6,6 +6,7 @@ import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/repositories/chat_message_repository/chat_message_repository.dart';
 import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
+import 'package:hive_core/code/ui/widgets/banner_size.dart';
 
 import 'widgets/apps_bar.dart';
 import 'widgets/control_bar.dart';
@@ -93,25 +94,26 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
+    return BannerSize(
+        body: MultiBlocProvider(
+            providers: [
           BlocProvider<ChatRoomBloc>(
             create: (BuildContext context) => _chatBloc,
           ),
         ],
-        child: BlocConsumer(
-          cubit: _chatBloc,
-          listener: (context, state) {},
-          builder: (context, state) {
-            if (state is ChatInitial) {
-              return Container();
-            } else if (state is ChatLoaded) {
-              return _build(state);
-            } else {
-              return Container();
-            }
-          },
-        ));
+            child: BlocConsumer(
+              cubit: _chatBloc,
+              listener: (context, state) {},
+              builder: (context, state) {
+                if (state is ChatInitial) {
+                  return Container();
+                } else if (state is ChatLoaded) {
+                  return _build(state);
+                } else {
+                  return Container();
+                }
+              },
+            )));
   }
 
   Widget _build(ChatLoaded state) {

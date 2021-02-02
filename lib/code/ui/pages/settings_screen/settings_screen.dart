@@ -9,8 +9,8 @@ import 'package:hive_core/code/controllers/blocs/settings_screen_bloc/settings_i
 import 'package:hive_core/code/controllers/blocs/settings_screen_bloc/settings_screen_bloc.dart';
 import 'package:hive_core/code/ui/pages/settings_application_theme_screen/settings_theme_screen.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
-import 'package:hive_core/code/utils/constants/const_colors.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 import '../settings_application_locale_screen/settings_locale_screen.dart';
 import '../settings_application_notifications_screen/settings_notifications_screen.dart';

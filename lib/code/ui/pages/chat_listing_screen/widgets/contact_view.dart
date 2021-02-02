@@ -3,7 +3,7 @@ import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/repositories/chat_message_repository/chat_message_repository.dart';
 import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
 import 'package:hive_core/code/ui/pages/chat_roon_screen/chat_roon_screen.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 import '../../../../models/_organizar/chat_contact.dart';
 import '_ordenar_/cached_image.dart';

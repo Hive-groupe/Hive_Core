@@ -4,7 +4,7 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/authentication_bloc/userDataInfo.dart';
 import 'package:hive_core/code/models/user.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class SearchBar extends StatefulWidget {
   SearchBar({Key key}) : super(key: key);

@@ -1,8 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:hive_core/code/models/metadata.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
-
-import 'metadata.dart';
 
 part 'device.g.dart';
 

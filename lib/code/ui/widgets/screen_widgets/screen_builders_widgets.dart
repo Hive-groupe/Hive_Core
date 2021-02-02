@@ -30,7 +30,7 @@ abstract class ScreenBuildersWidget {
                       Container(
                         padding: const EdgeInsets.only(left: 50, right: 50),
                         child: SvgPicture.asset(
-                          imageUrl ?? S.of(context).km_assets_images_error,
+                          imageUrl ?? S.of(context).km_assets_images_list_error,
                           height: 250,
                           width: 150,
                           placeholderBuilder: (BuildContext context) =>

@@ -4,7 +4,7 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/controllers/blocs/chat_search_screen_bloc/chat_search_bloc.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
-import 'package:hive_core/code/utils/constants/const_colors.dart';
+import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 
 import 'widgets/search_list.dart';
 

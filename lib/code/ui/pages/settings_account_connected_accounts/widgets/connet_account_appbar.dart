@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:hive_core/code/utils/constants/hivre_const_icons.dart';
 import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/controllers/blocs/settings_device_list_bloc/device_list_bloc.dart';
-import 'package:hive_core/code/utils/constants/const_icons.dart';
 
 class ConnetAccountAppsBar extends StatefulWidget
     implements PreferredSizeWidget {
@@ -96,7 +96,7 @@ class _ConnetAccountAppsBarState extends State<ConnetAccountAppsBar> {
         color: Colors.transparent,
         child: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: ConstIcons.btnBack,
+          icon: HiveCoreConstIcons.btnBack,
         ),
       ),
       largeTitle: Text(

@@ -4,7 +4,7 @@ import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/controllers/blocs/update_password_form_bloc/update_password_form_bloc.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class UpdatePasswordFormScreen extends StatelessWidget {
   UpdatePasswordFormBloc formBloc;

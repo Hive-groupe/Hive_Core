@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/notifications_bloc/notifications_bloc.dart';
+import 'package:hive_core/code/ui/widgets/banner_size.dart';
 import 'package:hive_core/code/utils/othes/animation_controller.dart';
 import 'package:hive_core/code/ui/widgets/screen_widgets/screen_builders_widgets.dart';
 
@@ -20,10 +21,6 @@ class NotificationsScreen extends StatefulWidget {
 
 class _NotificationsScreenState extends State<NotificationsScreen>
     with TickerProviderStateMixin {
-  // Repositorys
-  // AuthenticationRepository _authenticationRepository;
-  // TutorialRepository _tutorialRepository;
-
   // Controllers
   HiveAnimationController _hiveAnimationController;
 
@@ -32,10 +29,6 @@ class _NotificationsScreenState extends State<NotificationsScreen>
 
   @override
   void initState() {
-    // Repositorys
-    // _authenticationRepository = context.repository<AuthenticationRepository>();
-    // _tutorialRepository = context.repository<TutorialRepository>();
-
     //Controllers
     _hiveAnimationController = HiveAnimationController(tickerProvider: this);
 
@@ -56,29 +49,27 @@ class _NotificationsScreenState extends State<NotificationsScreen>
 
   @override
   Widget build(BuildContext context) {
-    return /*MultiBlocProvider(
-        providers: [
-          BlocProvider<AssistantBloc>(
-            create: (BuildContext context) => _assistantBloc,
+    return BannerSize(
+        body: MultiBlocProvider(
+            providers: [
+          BlocProvider<NotificationsBloc>(
+            create: (BuildContext context) => _notificationsBloc,
           ),
         ],
-        child:*/
-        BlocConsumer(
-            cubit: _notificationsBloc,
-            listener: (BuildContext context, NotificationsState state) {},
-            builder: (BuildContext context, NotificationsState state) {
-              if (state is NotificationsLoading) {
-                return _buildLoading();
-              } else if (state is NotificationsError) {
-                return _buildError();
-              } else if (state is NotificationsLoaded) {
-                return _buildLoaded(state);
-              } else {
-                return _buildError();
-              }
-            })
-        // )
-        ;
+            child: BlocConsumer(
+                cubit: _notificationsBloc,
+                listener: (BuildContext context, NotificationsState state) {},
+                builder: (BuildContext context, NotificationsState state) {
+                  if (state is NotificationsLoading) {
+                    return _buildLoading();
+                  } else if (state is NotificationsError) {
+                    return _buildError();
+                  } else if (state is NotificationsLoaded) {
+                    return _buildLoaded(state);
+                  } else {
+                    return _buildError();
+                  }
+                })));
   }
 
   Widget _buildError() {

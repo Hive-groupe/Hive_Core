@@ -10,7 +10,8 @@ import 'package:hive_core/code/models/enum/gender.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
-import 'package:hive_core/code/ui/widgets/contact_form/contact_form.dart';
+import 'package:hive_core/code/ui/widgets/banner_size.dart';
+import 'package:hive_core/code/ui/widgets/form_widgets/contact_form/contact_form.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RegistrationFormSrceen extends StatefulWidget {
@@ -128,7 +129,8 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BannerSize(
+        body: BlocProvider(
       create: (context) => _registrationFormBloc,
       child: Builder(
         builder: (context) {
@@ -163,7 +165,7 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
           );
         },
       ),
-    );
+    ));
   }
 
   CustomAppBar _appBar() {

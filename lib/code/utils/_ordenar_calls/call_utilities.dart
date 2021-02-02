@@ -7,7 +7,7 @@ import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/repositories/call_log_repository/repository/log_repository.dart';
 import 'package:hive_core/code/repositories/call_repository/call_repository.dart';
 import 'package:hive_core/code/ui/pages/call_screen/call_screen.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class CallUtils {
   static final CallRepository _callRepository =

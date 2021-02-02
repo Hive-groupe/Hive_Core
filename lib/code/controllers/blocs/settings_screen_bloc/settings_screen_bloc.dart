@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/models/profile.dart';
+import 'package:hive_core/code/models/_index.dart';
 import 'package:meta/meta.dart';
 
 part 'settings_screen_event.dart';

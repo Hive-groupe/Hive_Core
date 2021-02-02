@@ -6,7 +6,7 @@ import 'package:hive_core/code/models/chat_message.dart';
 import 'package:hive_core/code/models/enum/chat_message_type.dart';
 import 'package:hive_core/code/ui/pages/chat_image_detail_screen/chat_image_detail_screen.dart';
 import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/cached_image.dart';
-import 'package:hive_core/code/utils/constants/const_colors.dart';
+import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 
 class ChatMessageItem extends StatefulWidget {
   final String currentUserId;

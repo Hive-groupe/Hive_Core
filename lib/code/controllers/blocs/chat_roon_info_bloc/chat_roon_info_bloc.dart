@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/models/chat_message.dart';
 import 'package:hive_core/code/models/enum/chat_message_type.dart';
 import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/repositories/chat_message_repository/chat_message_repository.dart';
 import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
+import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 

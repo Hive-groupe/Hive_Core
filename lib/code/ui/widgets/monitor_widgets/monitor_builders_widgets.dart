@@ -5,28 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 abstract class MonitorBuildersWidget {
   const MonitorBuildersWidget();
 
-  static Widget errorMonitorBuilder({
-    @required BuildContext context,
-  }) {
-    return Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 200,
-            ),
-            Text(
-              S.of(context).default_error,
-            ),
-            Text(
-              S.of(context).unknown_error,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   static Widget emptyMonitorBuilder(
       {@required BuildContext context,
       @required Function onTap,
@@ -45,7 +23,7 @@ abstract class MonitorBuildersWidget {
               ),
               Container(
                 child: SvgPicture.asset(
-                  imageUrl ?? S.of(context).hours_assets_images_loading,
+                  imageUrl ?? S.of(context).hours_assets_images_list_loading,
                   // color: Colors.red,
                   height: 150,
                   width: 150,
@@ -80,6 +58,55 @@ abstract class MonitorBuildersWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  static Widget errorMonitorBuilder({
+    @required BuildContext context,
+    String imageUrl,
+  }) {
+    return Container(
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 200,
+            ),
+            Text(
+              S.of(context).default_error,
+            ),
+            Text(
+              S.of(context).unknown_error,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Widget loadingMonitorBuilder({
+    @required BuildContext context,
+    String imageUrl,
+    String text,
+  }) {
+    return Container(
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 250,
+            ),
+            CircularProgressIndicator(),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              text ?? '',
+              style: TextStyle(color: Colors.black),
+            )
+          ],
         ),
       ),
     );

@@ -39,16 +39,9 @@ class _NotificationsListState extends State<NotificationsList> {
           } else if (snapshot.hasError) {
             return widget.showStatus ? _buildListError() : Container();
           } else {
-            return widget.showStatus ? _buildListError() : Container();
+            return widget.showStatus ? _buildListLoading() : Container();
           }
         });
-  }
-
-  Widget _buildListError() {
-    return ListBuildersWidget.errorListBuilder(
-      context: context,
-      title: S.of(context).notifications_list_error,
-    );
   }
 
   Widget _buildListEmpty() {
@@ -58,6 +51,23 @@ class _NotificationsListState extends State<NotificationsList> {
       imageUrl: S.of(context).notifications_assets_images_empty,
       title: null,
       text: S.of(context).notifications_list_empty,
+    );
+  }
+
+  Widget _buildListError() {
+    return ListBuildersWidget.errorListBuilder(
+      context: context,
+      title: S.of(context).notifications_list_error,
+    );
+  }
+
+  Widget _buildListLoading() {
+    return ListBuildersWidget.loadingListBuilder(
+      context: context,
+      onTap: null,
+      imageUrl: S.of(context).notifications_assets_images_loading,
+      title: null,
+      text: S.of(context).notifications_list_loading,
     );
   }
 

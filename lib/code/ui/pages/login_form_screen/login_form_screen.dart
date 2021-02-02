@@ -7,7 +7,7 @@ import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/login_form_bloc/login_form_bloc.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class LoginFormSrceen extends StatefulWidget {
   @override
@@ -344,13 +344,4 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
       ),
     );
   }
-
-  /*Widget _btnshowErrorsHolder() {
-    return FloatingActionButton.extended(
-      heroTag: null,
-      onPressed: formBloc.addErrors,
-      icon: Icon(Icons.error_outline),
-      label: Text('ADD ERRORS'),
-    );
-  }*/
 }

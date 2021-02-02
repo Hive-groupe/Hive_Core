@@ -1,11 +1,11 @@
-import 'package:hive_core/code/models/metadata.dart';
+import 'package:hive_core/code/models/_index.dart';
 
 class MetadataTools {
-  Metadata initMetadata(String userId, Metadata model) {
+  Metadata initMetadata(String userId, Metadata metadata) {
     Metadata _metadata;
 
-    _metadata = model != null
-        ? model.rebuild((b) => b
+    _metadata = metadata != null
+        ? metadata.rebuild((b) => b
           ..creation.update((b) => b
             ..userId = userId
             ..date = DateTime.now().toString())
@@ -29,8 +29,8 @@ class MetadataTools {
     return _metadata;
   }
 
-  Metadata updateMetadata(String userId, Metadata model) =>
-      model.rebuild((b) => b
+  Metadata updateMetadata(String userId, Metadata metadata) =>
+      metadata.rebuild((b) => b
         ..modification.update((b) => b
           ..userId = userId
           ..date = DateTime.now().toString())
@@ -38,8 +38,9 @@ class MetadataTools {
           ..userId = userId
           ..date = DateTime.now().toString()));
 
-  Metadata readMetadata(String userId, Metadata model) => model.rebuild((b) => b
-    ..lastRead.update((b) => b
-      ..userId = userId
-      ..date = DateTime.now().toString()));
+  Metadata readMetadata(String userId, Metadata metadata) =>
+      metadata.rebuild((b) => b
+        ..lastRead.update((b) => b
+          ..userId = userId
+          ..date = DateTime.now().toString()));
 }

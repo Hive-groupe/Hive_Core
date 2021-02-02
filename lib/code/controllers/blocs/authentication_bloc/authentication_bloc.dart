@@ -3,13 +3,12 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_core/code/controllers/blocs/authentication_bloc/userDataInfo.dart';
 import 'package:hive_core/code/models/enum/userStateus.dart';
 import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
 import 'package:meta/meta.dart';
-
-import 'userDataInfo.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

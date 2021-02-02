@@ -7,7 +7,7 @@ import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/ca
 import 'package:hive_core/code/ui/pages/chat_roon_info_screen/chat_roon_info_screen.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
 import 'package:hive_core/code/utils/_ordenar_calls/call_utilities.dart';
-import 'package:hive_core/code/utils/constants/const_colors.dart';
+import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 import 'package:hive_core/code/utils/othes/permissions_tools.dart';
 
 class ChatAppsBar extends StatelessWidget implements PreferredSizeWidget {

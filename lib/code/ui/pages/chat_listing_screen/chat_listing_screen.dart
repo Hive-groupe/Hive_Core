@@ -6,8 +6,9 @@ import 'package:hive_core/code/repositories/authentication_repository/authentica
 import 'package:hive_core/code/repositories/chat_message_repository/chat_message_repository.dart';
 import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
 import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/chat_list_appbar.dart';
+import 'package:hive_core/code/ui/widgets/banner_size.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 import 'package:hive_core/code/ui/widgets/screen_widgets/screen_builders_widgets.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
 
 import 'widgets/call_log_list.dart';
 import 'widgets/recent_chat_list.dart';
@@ -81,7 +82,8 @@ class _ChatListingScreenState extends State<ChatListingScreen>
   @override
   Widget build(BuildContext context) {
     _initTabBar();
-    return MultiBlocProvider(
+    return BannerSize(
+        body: MultiBlocProvider(
       providers: [
         BlocProvider<ChatListingBloc>(
           create: (BuildContext context) => _chatListingBloc,
@@ -104,7 +106,7 @@ class _ChatListingScreenState extends State<ChatListingScreen>
           }
         },
       ),
-    );
+    ));
   }
 
   Widget _buildError() {

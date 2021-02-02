@@ -1,9 +1,9 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:hive_core/code/models/chat_message.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
 
-import 'chat_message.dart';
 import 'metadata.dart';
 
 part 'chat_room.g.dart';

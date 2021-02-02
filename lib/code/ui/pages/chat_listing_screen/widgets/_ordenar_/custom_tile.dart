@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/utils/constants/const_colors.dart';
+import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 
 class CustomTile extends StatelessWidget {
   final Widget leading;

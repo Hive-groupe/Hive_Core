@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/models/enum/list_view_type.dart';
-import 'package:hive_core/code/ui/widgets/settings_group.dart';
+
+import '../settings_group.dart';
 
 class ListTypeViewWidget extends StatefulWidget {
   final SelectFieldBloc listViewType;

@@ -9,7 +9,7 @@ import 'package:hive_core/code/models/call.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/repositories/call_repository/call_repository.dart';
 import 'package:hive_core/code/utils/configs/agora_configs.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class CallScreen extends StatefulWidget {
   final Call call;

@@ -4,7 +4,7 @@ import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/cached_image.dart';
 import 'package:hive_core/code/ui/pages/chat_roon_screen/chat_roon_screen.dart';
-import 'package:hive_core/code/utils/constants/const_colors.dart';
+import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 
 import '_ordenar_/custom_tile.dart';
 

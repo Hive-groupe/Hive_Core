@@ -1,9 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:hive_core/code/models/profile.dart';
+import 'package:hive_core/code/models/_index.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
-
-import 'enum/userStateus.dart';
 
 part 'user.g.dart';
 

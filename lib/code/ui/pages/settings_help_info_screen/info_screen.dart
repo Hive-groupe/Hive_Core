@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
 import 'package:package_info/package_info.dart';
 
 class InfoScreen extends StatefulWidget {
@@ -51,7 +51,7 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget _iconHolder() {
     return Container(
         child: Image.asset(
-      ConstString.image_icon_hive,
+      HiveCoreConstString.image_icon_hive,
       height: 300,
       width: 300,
     ));

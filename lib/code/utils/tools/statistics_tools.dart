@@ -1,4 +1,4 @@
-import 'package:hive_core/code/models/basic_statistics.dart';
+import 'package:hive_core/code/models/_index.dart';
 
 class StatisticsTools {
   double getMinimum(List<dynamic> list) =>

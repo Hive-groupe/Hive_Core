@@ -58,21 +58,22 @@ class LoginFormBloc extends FormBloc<String, String> {
     try {
       emitLoaded();
       // await _authenticationRepository.signInWithGoogle();
-      // _isSignedIn();
+
+      _isSignedIn();
     } catch (_) {
       emitFailure();
     }
   }
 
   void loginWithFacebook() async {
-    /* try {
-      emitLoaded();
+    try {
+      /*  emitLoaded();
       await _authenticationRepository.signInWithFacebook();
 
-      _isSignedIn();
+      _isSignedIn();*/
     } catch (_) {
       emitFailure();
-    }*/
+    }
   }
 
   _isSignedIn() async {

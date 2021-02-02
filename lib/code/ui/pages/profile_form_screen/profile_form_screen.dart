@@ -4,13 +4,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:hive_core/code/ui/widgets/form_widgets/contact_form/contact_form.dart';
 import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/controllers/blocs/profile_form_bloc/profile_form_bloc.dart';
 import 'package:hive_core/code/models/enum/gender.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
-import 'package:hive_core/code/ui/widgets/contact_form/contact_form.dart';
+import 'package:hive_core/code/ui/widgets/banner_size.dart';
 import 'package:hive_core/code/ui/widgets/loading_form_dialog.dart';
 import 'package:hive_core/code/utils/tools/file_tools.dart';
 import 'package:image_picker/image_picker.dart';
@@ -103,7 +104,8 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return BannerSize(
+        body: MultiBlocProvider(
       providers: [
         BlocProvider<ProfileFormBloc>(
           create: (BuildContext context) => _profileFormBloc,
@@ -116,7 +118,7 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
           return _build();
         },
       ),
-    );
+    ));
   }
 
   Widget _build() {

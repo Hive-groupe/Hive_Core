@@ -3,7 +3,7 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/repositories/call_log_repository/repository/log_repository.dart';
 import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/cached_image.dart';
 import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/custom_tile.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 import '../../../../models/_organizar/log.dart';
 import '../../_organizar/quiet_box.dart';
@@ -64,7 +64,6 @@ class _CallLogListState extends State<CallLogList> {
 
           if (logList.isNotEmpty) {
             return Container(
-              margin: EdgeInsets.only(left: 25, right: 25),
               child: ListView.builder(
                 itemCount: logList.length,
                 itemBuilder: (context, i) {
@@ -72,6 +71,7 @@ class _CallLogListState extends State<CallLogList> {
                   bool hasDialled = _log.callStatus == CALL_STATUS_DIALLED;
 
                   return CustomTile(
+                    margin: EdgeInsets.only(left: 25, right: 25),
                     leading: CachedImage(
                       hasDialled ? _log.receiverPic : _log.callerPic,
                       isRound: true,

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/settings_qr_code_bloc/settings_qr_code_bloc.dart';
-import 'package:hive_core/code/utils/constants/const_icons.dart';
+import 'package:hive_core/code/utils/constants/hivre_const_icons.dart';
 
 import 'widgets/my_qr_code.dart';
 import 'widgets/qr_recognition.dart';
@@ -121,7 +121,7 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
       ),
       leading: IconButton(
         onPressed: _goBack,
-        icon: ConstIcons.btnBack,
+        icon: HiveCoreConstIcons.btnBack,
       ),
       actions: <Widget>[_btnShare(), _btnOptions()],
       bottom: TabBar(
@@ -159,7 +159,7 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
       child: IconButton(
         onPressed: () {},
         icon: Icon(
-          ConstIconData.share,
+          HiveCoreConstIconData.share,
           color: Colors.grey,
         ),
       ),
@@ -168,7 +168,8 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
 
   Widget _btnOptions() {
     return Container(
-      child: IconButton(onPressed: _onShowMenu, icon: ConstIcons.btnSettings),
+      child: IconButton(
+          onPressed: _onShowMenu, icon: HiveCoreConstIcons.btnSettings),
     );
   }
 }

@@ -555,30 +555,30 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
+  /// `assets/images/hive_job_control/hours/hours_list_empty.svg`
   String get notifications_assets_images_loading {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
+      'assets/images/hive_job_control/hours/hours_list_empty.svg',
       name: 'notifications_assets_images_loading',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/no_data.svg`
+  /// `assets/images/hive_job_control/no_data.svg`
   String get notifications_assets_images_empty {
     return Intl.message(
-      'assets/images/hive_core/no_data.svg',
+      'assets/images/hive_job_control/no_data.svg',
       name: 'notifications_assets_images_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
+  /// `assets/images/hive_job_control/error.svg`
   String get notifications_assets_images_error {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
+      'assets/images/hive_job_control/error.svg',
       name: 'notifications_assets_images_error',
       desc: '',
       args: [],
@@ -1095,31 +1095,111 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get bill_assets_images_loading {
+  /// `assets/images/hive_job_control/bill/bill_list_empty.svg`
+  String get bill_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'bill_assets_images_loading',
+      'assets/images/hive_job_control/bill/bill_list_empty.svg',
+      name: 'bill_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/no_data.svg`
-  String get bill_assets_images_empty {
+  /// `assets/images/hive_job_control/bill/bill_list_error.svg`
+  String get bill_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/no_data.svg',
-      name: 'bill_assets_images_empty',
+      'assets/images/hive_job_control/bill/bill_list_error.svg',
+      name: 'bill_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
-  String get bill_assets_images_error {
+  /// `assets/images/hive_job_control/bill/bill_list_loading.svg`
+  String get bill_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
-      name: 'bill_assets_images_error',
+      'assets/images/hive_job_control/bill/bill_list_loading.svg',
+      name: 'bill_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/bill/bill_monitor.svg`
+  String get bill_assets_images_monitor {
+    return Intl.message(
+      'assets/images/hive_job_control/bill/bill_monitor.svg',
+      name: 'bill_assets_images_monitor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/bill/bill_monitor_error.svg`
+  String get bill_assets_images_monitor_error {
+    return Intl.message(
+      'assets/images/hive_job_control/bill/bill_monitor_error.svg',
+      name: 'bill_assets_images_monitor_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/bill/bill_monitor_loading.svg`
+  String get bill_assets_images_monitor_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/bill/bill_monitor_loading.svg',
+      name: 'bill_assets_images_monitor_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/bill/bill_screen_error.svg`
+  String get bill_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/bill/bill_screen_error.svg',
+      name: 'bill_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/bill/bill_screen_loading.svg`
+  String get bill_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/bill/bill_screen_loading.svg',
+      name: 'bill_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/bill/bill_table_empty.svg`
+  String get bill_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/bill/bill_table_empty.svg',
+      name: 'bill_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/bill/bill_table_error.svg`
+  String get bill_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/bill/bill_table_error.svg',
+      name: 'bill_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/bill/bill_table_loading.svg`
+  String get bill_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/bill/bill_table_loading.svg',
+      name: 'bill_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -1347,31 +1427,81 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get business_assets_images_loading {
+  /// `assets/images/hive_job_control/business/business_list_empty.svg`
+  String get business_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'business_assets_images_loading',
+      'assets/images/hive_job_control/business/business_list_empty.svg',
+      name: 'business_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/km/km_empty.svg`
-  String get business_assets_images_empty {
+  /// `assets/images/hive_job_control/business/business_list_error.svg`
+  String get business_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/km/km_empty.svg',
-      name: 'business_assets_images_empty',
+      'assets/images/hive_job_control/business/business_list_error.svg',
+      name: 'business_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get business_assets_images_error {
+  /// `assets/images/hive_job_control/business/business_list_loading.svg`
+  String get business_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'business_assets_images_error',
+      'assets/images/hive_job_control/business/business_list_loading.svg',
+      name: 'business_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/business/business_screen_error.svg`
+  String get business_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/business/business_screen_error.svg',
+      name: 'business_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/business/business_screen_loading.svg`
+  String get business_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/business/business_screen_loading.svg',
+      name: 'business_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/business/business_table_empty.svg`
+  String get business_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/business/business_table_empty.svg',
+      name: 'business_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/business/business_table_error.svg`
+  String get business_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/business/business_table_error.svg',
+      name: 'business_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/business/business_table_loading.svg`
+  String get business_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/business/business_table_loading.svg',
+      name: 'business_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -1427,10 +1557,10 @@ class S {
     );
   }
 
-  /// `Filtrando factura`
+  /// `Filtrando empresas`
   String get business_filter_loading {
     return Intl.message(
-      'Filtrando factura',
+      'Filtrando empresas',
       name: 'business_filter_loading',
       desc: '',
       args: [],
@@ -1689,31 +1819,81 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get contract_assets_images_loading {
+  /// `assets/images/hive_job_control/contract/contract_list_empty.svg`
+  String get contract_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'contract_assets_images_loading',
+      'assets/images/hive_job_control/contract/contract_list_empty.svg',
+      name: 'contract_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/contract/contract_empty.svg`
-  String get contract_assets_images_empty {
+  /// `assets/images/hive_job_control/contract/contract_list_error.svg`
+  String get contract_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/contract/contract_empty.svg',
-      name: 'contract_assets_images_empty',
+      'assets/images/hive_job_control/contract/contract_list_error.svg',
+      name: 'contract_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get contract_assets_images_error {
+  /// `assets/images/hive_job_control/contract/contract_list_loading.svg`
+  String get contract_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'contract_assets_images_error',
+      'assets/images/hive_job_control/contract/contract_list_loading.svg',
+      name: 'contract_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/contract/contract_screen_error.svg`
+  String get contract_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/contract/contract_screen_error.svg',
+      name: 'contract_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/contract/contract_screen_loading.svg`
+  String get contract_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/contract/contract_screen_loading.svg',
+      name: 'contract_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/contract/contract_table_empty.svg`
+  String get contract_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/contract/contract_table_empty.svg',
+      name: 'contract_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/contract/contract_table_error.svg`
+  String get contract_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/contract/contract_table_error.svg',
+      name: 'contract_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/contract/contract_table_loading.svg`
+  String get contract_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/contract/contract_table_loading.svg',
+      name: 'contract_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -1951,50 +2131,150 @@ class S {
     );
   }
 
-  /// `Dietas`
+  /// `Diario`
+  String get daily_title {
+    return Intl.message(
+      'Diario',
+      name: 'daily_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Este mes`
+  String get daily_this_month_title {
+    return Intl.message(
+      'Este mes',
+      name: 'daily_this_month_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pluses y dietas`
   String get diet_title {
     return Intl.message(
-      'Dietas',
+      'Pluses y dietas',
       name: 'diet_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get plus_assets_images_loading {
+  /// `assets/images/hive_job_control/plus/plus_list_empty.svg`
+  String get plus_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'plus_assets_images_loading',
+      'assets/images/hive_job_control/plus/plus_list_empty.svg',
+      name: 'plus_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/km/km_empty.svg`
-  String get plus_assets_images_empty {
+  /// `assets/images/hive_job_control/plus/plus_list_error.svg`
+  String get plus_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/km/km_empty.svg',
-      name: 'plus_assets_images_empty',
+      'assets/images/hive_job_control/plus/plus_list_error.svg',
+      name: 'plus_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
-  String get plus_assets_images_error {
+  /// `assets/images/hive_job_control/plus/plus_list_loading.svg`
+  String get plus_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
-      name: 'plus_assets_images_error',
+      'assets/images/hive_job_control/plus/plus_list_loading.svg',
+      name: 'plus_assets_images_list_loading',
       desc: '',
       args: [],
     );
   }
 
-  /// `Encuentra tu dieta`
+  /// `assets/images/hive_job_control/plus/plus_monitor.svg`
+  String get plus_assets_images_monitor {
+    return Intl.message(
+      'assets/images/hive_job_control/plus/plus_monitor.svg',
+      name: 'plus_assets_images_monitor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/plus/plus_monitor_error.svg`
+  String get plus_assets_images_monitor_error {
+    return Intl.message(
+      'assets/images/hive_job_control/plus/plus_monitor_error.svg',
+      name: 'plus_assets_images_monitor_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/plus/plus_monitor_loading.svg`
+  String get plus_assets_images_monitor_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/plus/plus_monitor_loading.svg',
+      name: 'plus_assets_images_monitor_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/plus/plus_screen_error.svg`
+  String get plus_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/plus/plus_screen_error.svg',
+      name: 'plus_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/plus/plus_screen_loading.svg`
+  String get plus_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/plus/plus_screen_loading.svg',
+      name: 'plus_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/plus/plus_table_empty.svg`
+  String get plus_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/plus/plus_table_empty.svg',
+      name: 'plus_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/plus/plus_table_error.svg`
+  String get plus_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/plus/plus_table_error.svg',
+      name: 'plus_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/plus/plus_table_loading.svg`
+  String get plus_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/plus/plus_table_loading.svg',
+      name: 'plus_assets_images_table_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Encuentra tu pluses`
   String get diet_filter_title {
     return Intl.message(
-      'Encuentra tu dieta',
+      'Encuentra tu pluses',
       name: 'diet_filter_title',
       desc: '',
       args: [],
@@ -2031,10 +2311,10 @@ class S {
     );
   }
 
-  /// `Estadisiticas de Dietas`
+  /// `Estadisiticas de pluese`
   String get diet_statistics_title {
     return Intl.message(
-      'Estadisiticas de Dietas',
+      'Estadisiticas de pluese',
       name: 'diet_statistics_title',
       desc: '',
       args: [],
@@ -2073,20 +2353,20 @@ class S {
     );
   }
 
-  /// `Dietas`
+  /// `Pluses y dietas`
   String get diet_list_title {
     return Intl.message(
-      'Dietas',
+      'Pluses y dietas',
       name: 'diet_list_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cargando dietas`
+  /// `Cargando pluses`
   String get diet_list_loading {
     return Intl.message(
-      'Cargando dietas',
+      'Cargando pluses',
       name: 'diet_list_loading',
       desc: '',
       args: [],
@@ -2103,10 +2383,10 @@ class S {
     );
   }
 
-  /// `Nueva dieta`
+  /// `Nueva plus`
   String get diet_form_title {
     return Intl.message(
-      'Nueva dieta',
+      'Nueva plus',
       name: 'diet_form_title',
       desc: '',
       args: [],
@@ -2133,30 +2413,30 @@ class S {
     );
   }
 
-  /// `Editar dieta`
+  /// `Editar plus`
   String get diet_item_settings_edit {
     return Intl.message(
-      'Editar dieta',
+      'Editar plus',
       name: 'diet_item_settings_edit',
       desc: '',
       args: [],
     );
   }
 
-  /// `Duplicar dieta`
+  /// `Duplicar plus`
   String get diet_item_settings_double {
     return Intl.message(
-      'Duplicar dieta',
+      'Duplicar plus',
       name: 'diet_item_settings_double',
       desc: '',
       args: [],
     );
   }
 
-  /// `Eliminar dieta`
+  /// `Eliminar plus`
   String get diet_item_settings_delete {
     return Intl.message(
-      'Eliminar dieta',
+      'Eliminar plus',
       name: 'diet_item_settings_delete',
       desc: '',
       args: [],
@@ -2193,31 +2473,111 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get hours_assets_images_loading {
+  /// `assets/images/hive_job_control/hours/hours_list_empty.svg`
+  String get hours_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'hours_assets_images_loading',
+      'assets/images/hive_job_control/hours/hours_list_empty.svg',
+      name: 'hours_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/km/km_empty.svg`
-  String get hours_assets_images_empty {
+  /// `assets/images/hive_job_control/hours/hours_list_error.svg`
+  String get hours_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/km/km_empty.svg',
-      name: 'hours_assets_images_empty',
+      'assets/images/hive_job_control/hours/hours_list_error.svg',
+      name: 'hours_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
-  String get hours_assets_images_error {
+  /// `assets/images/hive_job_control/hours/hours_list_loading.svg`
+  String get hours_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
-      name: 'hours_assets_images_error',
+      'assets/images/hive_job_control/hours/hours_list_loading.svg',
+      name: 'hours_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/hours/hours_monitor.svg`
+  String get hours_assets_images_monitor {
+    return Intl.message(
+      'assets/images/hive_job_control/hours/hours_monitor.svg',
+      name: 'hours_assets_images_monitor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/hours/hours_monitor_error.svg`
+  String get hours_assets_images_monitor_error {
+    return Intl.message(
+      'assets/images/hive_job_control/hours/hours_monitor_error.svg',
+      name: 'hours_assets_images_monitor_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/hours/hours_monitor_loading.svg`
+  String get hours_assets_images_monitor_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/hours/hours_monitor_loading.svg',
+      name: 'hours_assets_images_monitor_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/hours/hours_screen_error.svg`
+  String get hours_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/hours/hours_screen_error.svg',
+      name: 'hours_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/hours/hours_screen_loading.svg`
+  String get hours_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/hours/hours_screen_loading.svg',
+      name: 'hours_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/hours/hours_table_empty.svg`
+  String get hours_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/hours/hours_table_empty.svg',
+      name: 'hours_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/hours/hours_table_error.svg`
+  String get hours_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/hours/hours_table_error.svg',
+      name: 'hours_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/hours/hours_table_loading.svg`
+  String get hours_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/hours/hours_table_loading.svg',
+      name: 'hours_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -2445,31 +2805,111 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/km/km_loading.svg`
-  String get km_assets_images_loading {
+  /// `assets/images/hive_job_control/km/km_list_empty.svg`
+  String get km_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/km/km_loading.svg',
-      name: 'km_assets_images_loading',
+      'assets/images/hive_job_control/km/km_list_empty.svg',
+      name: 'km_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/km/km_empty.svg`
-  String get km_assets_images_empty {
+  /// `assets/images/hive_job_control/km/km_list_error.svg`
+  String get km_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/km/km_empty.svg',
-      name: 'km_assets_images_empty',
+      'assets/images/hive_job_control/km/km_list_error.svg',
+      name: 'km_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
-  String get km_assets_images_error {
+  /// `assets/images/hive_job_control/km/km_list_loading.svg`
+  String get km_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
-      name: 'km_assets_images_error',
+      'assets/images/hive_job_control/km/km_list_loading.svg',
+      name: 'km_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/km/km_monitor.svg`
+  String get km_assets_images_monitor {
+    return Intl.message(
+      'assets/images/hive_job_control/km/km_monitor.svg',
+      name: 'km_assets_images_monitor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/km/km_monitor_error.svg`
+  String get km_assets_images_monitor_error {
+    return Intl.message(
+      'assets/images/hive_job_control/km/km_monitor_error.svg',
+      name: 'km_assets_images_monitor_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/km/km_monitor_loading.svg`
+  String get km_assets_images_monitor_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/km/km_monitor_loading.svg',
+      name: 'km_assets_images_monitor_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/km/km_screen_error.svg`
+  String get km_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/km/km_screen_error.svg',
+      name: 'km_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/km/km_screen_loading.svg`
+  String get km_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/km/km_screen_loading.svg',
+      name: 'km_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/km/km_table_empty.svg`
+  String get km_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/km/km_table_empty.svg',
+      name: 'km_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/km/km_table_error.svg`
+  String get km_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/km/km_table_error.svg',
+      name: 'km_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/km/km_table_loading.svg`
+  String get km_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/km/km_table_loading.svg',
+      name: 'km_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -2677,31 +3117,111 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get payroll_assets_images_loading {
+  /// `assets/images/hive_job_control/payroll/payroll_list_empty.svg`
+  String get payroll_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'payroll_assets_images_loading',
+      'assets/images/hive_job_control/payroll/payroll_list_empty.svg',
+      name: 'payroll_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/km/km_empty.svg`
-  String get payroll_assets_images_empty {
+  /// `assets/images/hive_job_control/payroll/payroll_list_error.svg`
+  String get payroll_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/km/km_empty.svg',
-      name: 'payroll_assets_images_empty',
+      'assets/images/hive_job_control/payroll/payroll_list_error.svg',
+      name: 'payroll_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
-  String get payroll_assets_images_error {
+  /// `assets/images/hive_job_control/payroll/payroll_list_loading.svg`
+  String get payroll_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
-      name: 'payroll_assets_images_error',
+      'assets/images/hive_job_control/payroll/payroll_list_loading.svg',
+      name: 'payroll_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/payroll/payroll_monitor.svg`
+  String get payroll_assets_images_monitor {
+    return Intl.message(
+      'assets/images/hive_job_control/payroll/payroll_monitor.svg',
+      name: 'payroll_assets_images_monitor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/payroll/payroll_monitor_error.svg`
+  String get payroll_assets_images_monitor_error {
+    return Intl.message(
+      'assets/images/hive_job_control/payroll/payroll_monitor_error.svg',
+      name: 'payroll_assets_images_monitor_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/payroll/payroll_monitor_loading.svg`
+  String get payroll_assets_images_monitor_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/payroll/payroll_monitor_loading.svg',
+      name: 'payroll_assets_images_monitor_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/payroll/payroll_screen_error.svg`
+  String get payroll_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/payroll/payroll_screen_error.svg',
+      name: 'payroll_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/payroll/payroll_screen_loading.svg`
+  String get payroll_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/payroll/payroll_screen_loading.svg',
+      name: 'payroll_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/payroll/payroll_table_empty.svg`
+  String get payroll_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/payroll/payroll_table_empty.svg',
+      name: 'payroll_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/payroll/payroll_table_error.svg`
+  String get payroll_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/payroll/payroll_table_error.svg',
+      name: 'payroll_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/payroll/payroll_table_loading.svg`
+  String get payroll_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/payroll/payroll_table_loading.svg',
+      name: 'payroll_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -2939,31 +3459,81 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get project_assets_images_loading {
+  /// `assets/images/hive_job_control/project/project_list_empty.svg`
+  String get project_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'project_assets_images_loading',
+      'assets/images/hive_job_control/project/project_list_empty.svg',
+      name: 'project_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/project/project_empty.svg`
-  String get project_assets_images_empty {
+  /// `assets/images/hive_job_control/project/project_list_error.svg`
+  String get project_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/project/project_empty.svg',
-      name: 'project_assets_images_empty',
+      'assets/images/hive_job_control/project/project_list_error.svg',
+      name: 'project_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
-  String get project_assets_images_error {
+  /// `assets/images/hive_job_control/project/project_list_loading.svg`
+  String get project_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
-      name: 'project_assets_images_error',
+      'assets/images/hive_job_control/project/project_list_loading.svg',
+      name: 'project_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/project/project_screen_error.svg`
+  String get project_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/project/project_screen_error.svg',
+      name: 'project_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/project/project_screen_loading.svg`
+  String get project_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/project/project_screen_loading.svg',
+      name: 'project_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/project/project_table_empty.svg`
+  String get project_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/project/project_table_empty.svg',
+      name: 'project_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/project/project_table_error.svg`
+  String get project_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/project/project_table_error.svg',
+      name: 'project_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/project/project_table_loading.svg`
+  String get project_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/project/project_table_loading.svg',
+      name: 'project_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -3171,6 +3741,398 @@ class S {
     );
   }
 
+  /// `Cronografo`
+  String get stopwatch_title {
+    return Intl.message(
+      'Cronografo',
+      name: 'stopwatch_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/stopwatch/stopwatch_list_empty.svg`
+  String get stopwatch_assets_images_list_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/stopwatch/stopwatch_list_empty.svg',
+      name: 'stopwatch_assets_images_list_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/stopwatch/stopwatch_list_error.svg`
+  String get stopwatch_assets_images_list_error {
+    return Intl.message(
+      'assets/images/hive_job_control/stopwatch/stopwatch_list_error.svg',
+      name: 'stopwatch_assets_images_list_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/stopwatch/stopwatch_list_loading.svg`
+  String get stopwatch_assets_images_list_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/stopwatch/stopwatch_list_loading.svg',
+      name: 'stopwatch_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/stopwatch/stopwatch_screen_error.svg`
+  String get stopwatch_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/stopwatch/stopwatch_screen_error.svg',
+      name: 'stopwatch_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/stopwatch/stopwatch_screen_loading.svg`
+  String get stopwatch_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/stopwatch/stopwatch_screen_loading.svg',
+      name: 'stopwatch_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/stopwatch/stopwatch_table_empty.svg`
+  String get stopwatch_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/stopwatch/stopwatch_table_empty.svg',
+      name: 'stopwatch_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/stopwatch/stopwatch_table_error.svg`
+  String get stopwatch_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/stopwatch/stopwatch_table_error.svg',
+      name: 'stopwatch_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/stopwatch/stopwatch_table_loading.svg`
+  String get stopwatch_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/stopwatch/stopwatch_table_loading.svg',
+      name: 'stopwatch_assets_images_table_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cronografos`
+  String get stopwatch_list_title {
+    return Intl.message(
+      'Cronografos',
+      name: 'stopwatch_list_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cargando ronografos`
+  String get stopwatch_list_loading {
+    return Intl.message(
+      'Cargando ronografos',
+      name: 'stopwatch_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¡Vaya no se encontrarón ronografos! \n\n😢`
+  String get stopwatch_list_empty {
+    return Intl.message(
+      '¡Vaya no se encontrarón ronografos! \n\n😢',
+      name: 'stopwatch_list_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Encuentra tu cronografo`
+  String get stopwatch_filter_title {
+    return Intl.message(
+      'Encuentra tu cronografo',
+      name: 'stopwatch_filter_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ocurrio un error in esperado`
+  String get stopwatch_filter_error {
+    return Intl.message(
+      'Ocurrio un error in esperado',
+      name: 'stopwatch_filter_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filtrando factura`
+  String get stopwatch_filter_loading {
+    return Intl.message(
+      'Filtrando factura',
+      name: 'stopwatch_filter_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buscar: Nombre, CID...`
+  String get stopwatch_filter_holder_search {
+    return Intl.message(
+      'Buscar: Nombre, CID...',
+      name: 'stopwatch_filter_holder_search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{howMany, plural,  one{1 cronografo} other{{howMany} cronografos}}`
+  String stopwatch_statistics_length(num howMany) {
+    return Intl.plural(
+      howMany,
+      one: '1 cronografo',
+      other: '$howMany cronografos',
+      name: 'stopwatch_statistics_length',
+      desc: '',
+      args: [howMany],
+    );
+  }
+
+  /// `Nueva cronografo`
+  String get stopwatch_form_title_new {
+    return Intl.message(
+      'Nueva cronografo',
+      name: 'stopwatch_form_title_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Editar cronografo`
+  String get stopwatch_form_title_edit {
+    return Intl.message(
+      'Editar cronografo',
+      name: 'stopwatch_form_title_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Datos generales`
+  String get stopwatch_form_title_steep_1 {
+    return Intl.message(
+      'Datos generales',
+      name: 'stopwatch_form_title_steep_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Información de contacto`
+  String get stopwatch_form_title_steep_2 {
+    return Intl.message(
+      'Información de contacto',
+      name: 'stopwatch_form_title_steep_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ocurrio un error in esperado`
+  String get stopwatch_form_error {
+    return Intl.message(
+      'Ocurrio un error in esperado',
+      name: 'stopwatch_form_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Salvando cronografo`
+  String get stopwatch_form_loading {
+    return Intl.message(
+      'Salvando cronografo',
+      name: 'stopwatch_form_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `URL del logotipo de la cronografo`
+  String get stopwatch_form_holder_url_logo {
+    return Intl.message(
+      'URL del logotipo de la cronografo',
+      name: 'stopwatch_form_holder_url_logo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nombre de la cronografo`
+  String get stopwatch_form_holder_name {
+    return Intl.message(
+      'Nombre de la cronografo',
+      name: 'stopwatch_form_holder_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Descripción`
+  String get stopwatch_form_holder_description {
+    return Intl.message(
+      'Descripción',
+      name: 'stopwatch_form_holder_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CID`
+  String get stopwatch_form_holder_cid {
+    return Intl.message(
+      'CID',
+      name: 'stopwatch_form_holder_cid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dirección de la pagina web`
+  String get stopwatch_form_holder_webUrl {
+    return Intl.message(
+      'Dirección de la pagina web',
+      name: 'stopwatch_form_holder_webUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `URL invalida`
+  String get stopwatch_form_error_holder_url_logo {
+    return Intl.message(
+      'URL invalida',
+      name: 'stopwatch_form_error_holder_url_logo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nombre invalido`
+  String get stopwatch_form_error_holder_name {
+    return Intl.message(
+      'Nombre invalido',
+      name: 'stopwatch_form_error_holder_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Descripción invalida`
+  String get stopwatch_form_error_holder_description {
+    return Intl.message(
+      'Descripción invalida',
+      name: 'stopwatch_form_error_holder_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CID invalido`
+  String get stopwatch_form_error_holder_cid {
+    return Intl.message(
+      'CID invalido',
+      name: 'stopwatch_form_error_holder_cid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dirección de la pagina web invalida`
+  String get stopwatch_form_error_holder_webUrl {
+    return Intl.message(
+      'Dirección de la pagina web invalida',
+      name: 'stopwatch_form_error_holder_webUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Editar cronografo`
+  String get stopwatch_menu_item_edit {
+    return Intl.message(
+      'Editar cronografo',
+      name: 'stopwatch_menu_item_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duplicar cronografo`
+  String get stopwatch_menu_item_double {
+    return Intl.message(
+      'Duplicar cronografo',
+      name: 'stopwatch_menu_item_double',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Eliminar cronografo`
+  String get stopwatch_menu_item_delete {
+    return Intl.message(
+      'Eliminar cronografo',
+      name: 'stopwatch_menu_item_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Estas seguro de que deseas eliminar la cronografo?`
+  String get stopwatch_menu_item_delete_confirm {
+    return Intl.message(
+      '¿Estas seguro de que deseas eliminar la cronografo?',
+      name: 'stopwatch_menu_item_delete_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CID Copied to Clipboard`
+  String get stopwatch_item_copy_cid {
+    return Intl.message(
+      'CID Copied to Clipboard',
+      name: 'stopwatch_item_copy_cid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registra las ronografos con las que tienes una relación laboral, para tener siempre a mano sus datos de contacto (Teléfonos, correos electrónicos, CID...). Al tener guardadas tus ronografos puedes imputar tus facturas, nominas, horas, km.. Lo que te permite establecer una relación entre la empresa y las actividades relacionadas con dicha entidad.`
+  String get stopwatch_tutorial_description {
+    return Intl.message(
+      'Registra las ronografos con las que tienes una relación laboral, para tener siempre a mano sus datos de contacto (Teléfonos, correos electrónicos, CID...). Al tener guardadas tus ronografos puedes imputar tus facturas, nominas, horas, km.. Lo que te permite establecer una relación entre la empresa y las actividades relacionadas con dicha entidad.',
+      name: 'stopwatch_tutorial_description',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Calendario laboral`
   String get work_calendar_title {
     return Intl.message(
@@ -3181,31 +4143,81 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get work_calendar_assets_images_loading {
+  /// `assets/images/hive_job_control/work_calendar/work_calendar_list_empty.svg`
+  String get work_calendar_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'work_calendar_assets_images_loading',
+      'assets/images/hive_job_control/work_calendar/work_calendar_list_empty.svg',
+      name: 'work_calendar_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/work_calendar/work_calendar_empty.svg`
-  String get work_calendar_assets_images_empty {
+  /// `assets/images/hive_job_control/work_calendar/work_calendar_list_error.svg`
+  String get work_calendar_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/work_calendar/work_calendar_empty.svg',
-      name: 'work_calendar_assets_images_empty',
+      'assets/images/hive_job_control/work_calendar/work_calendar_list_error.svg',
+      name: 'work_calendar_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
-  String get work_calendar_assets_images_error {
+  /// `assets/images/hive_job_control/work_calendar/work_calendar_list_loading.svg`
+  String get work_calendar_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
-      name: 'work_calendar_assets_images_error',
+      'assets/images/hive_job_control/work_calendar/work_calendar_list_loading.svg',
+      name: 'work_calendar_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_calendar/work_calendar_screen_error.svg`
+  String get work_calendar_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/work_calendar/work_calendar_screen_error.svg',
+      name: 'work_calendar_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_calendar/work_calendar_screen_loading.svg`
+  String get work_calendar_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/work_calendar/work_calendar_screen_loading.svg',
+      name: 'work_calendar_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_calendar/work_calendar_table_empty.svg`
+  String get work_calendar_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/work_calendar/work_calendar_table_empty.svg',
+      name: 'work_calendar_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_calendar/work_calendar_table_error.svg`
+  String get work_calendar_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/work_calendar/work_calendar_table_error.svg',
+      name: 'work_calendar_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_calendar/work_calendar_list_loading.svg`
+  String get work_calendar_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/work_calendar/work_calendar_list_loading.svg',
+      name: 'work_calendar_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -3433,31 +4445,81 @@ class S {
     );
   }
 
-  /// `assets/images/hive_core/hours/hours_empty.svg`
-  String get work_shift_assets_images_loading {
+  /// `assets/images/hive_job_control/work_shift/work_shift_list_empty.svg`
+  String get work_shift_assets_images_list_empty {
     return Intl.message(
-      'assets/images/hive_core/hours/hours_empty.svg',
-      name: 'work_shift_assets_images_loading',
+      'assets/images/hive_job_control/work_shift/work_shift_list_empty.svg',
+      name: 'work_shift_assets_images_list_empty',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/km/km_empty.svg`
-  String get work_shift_assets_images_empty {
+  /// `assets/images/hive_job_control/work_shift/work_shift_list_error.svg`
+  String get work_shift_assets_images_list_error {
     return Intl.message(
-      'assets/images/hive_core/km/km_empty.svg',
-      name: 'work_shift_assets_images_empty',
+      'assets/images/hive_job_control/work_shift/work_shift_list_error.svg',
+      name: 'work_shift_assets_images_list_error',
       desc: '',
       args: [],
     );
   }
 
-  /// `assets/images/hive_core/error.svg`
-  String get work_shift_assets_images_error {
+  /// `assets/images/hive_job_control/work_shift/work_shift_list_loading.svg`
+  String get work_shift_assets_images_list_loading {
     return Intl.message(
-      'assets/images/hive_core/error.svg',
-      name: 'work_shift_assets_images_error',
+      'assets/images/hive_job_control/work_shift/work_shift_list_loading.svg',
+      name: 'work_shift_assets_images_list_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_shift/work_shift_screen_error.svg`
+  String get work_shift_assets_images_screen_error {
+    return Intl.message(
+      'assets/images/hive_job_control/work_shift/work_shift_screen_error.svg',
+      name: 'work_shift_assets_images_screen_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_shift/work_shift_screen_loading.svg`
+  String get work_shift_assets_images_screen_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/work_shift/work_shift_screen_loading.svg',
+      name: 'work_shift_assets_images_screen_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_shift/work_shift_table_empty.svg`
+  String get work_shift_assets_images_table_empty {
+    return Intl.message(
+      'assets/images/hive_job_control/work_shift/work_shift_table_empty.svg',
+      name: 'work_shift_assets_images_table_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_shift/work_shift_table_error.svg`
+  String get work_shift_assets_images_table_error {
+    return Intl.message(
+      'assets/images/hive_job_control/work_shift/work_shift_table_error.svg',
+      name: 'work_shift_assets_images_table_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `assets/images/hive_job_control/work_shift/work_shift_list_loading.svg`
+  String get work_shift_assets_images_table_loading {
+    return Intl.message(
+      'assets/images/hive_job_control/work_shift/work_shift_list_loading.svg',
+      name: 'work_shift_assets_images_table_loading',
       desc: '',
       args: [],
     );
@@ -3640,16 +4702,6 @@ class S {
     return Intl.message(
       '',
       name: 'work_shift_tutorial_description',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Proveedores`
-  String get providers_title {
-    return Intl.message(
-      'Proveedores',
-      name: 'providers_title',
       desc: '',
       args: [],
     );

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/chat_roon_info_bloc/chat_roon_info_bloc.dart';
 import 'package:hive_core/code/models/user.dart';
-import 'package:hive_core/code/utils/constants/const_colors.dart';
-import 'package:hive_core/code/utils/constants/const_strings.dart';
+import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
+import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 import 'widgets/chat_message_images_list.dart';
 

@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:hive_core/code/models/device.dart';
-import 'package:hive_core/code/models/metadata.dart';
-import 'package:hive_core/code/models/notifications_preferences.dart';
+import 'package:hive_core/code/models/_index.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/repositories/device_repository/device_repository.dart';
 import 'package:hive_core/code/utils/tools/metadata_tools.dart';
