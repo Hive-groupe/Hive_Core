@@ -139,7 +139,7 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
         children: [
           Container(
             child: Text(
-              S.of(context).project_list_title,
+              S.of(context).km_list_title,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -151,7 +151,7 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
           ),
           Container(
             child: Text(
-              S.of(context).project_tutorial_description,
+              S.of(context).km_tutorial_description,
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color: Colors.white,
