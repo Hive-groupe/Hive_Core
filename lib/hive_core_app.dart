@@ -247,35 +247,27 @@ class HiveCoreApp extends StatelessWidget {
 
   Widget _buildApp(AuthenticationState blocAuthenticationState,
       PreferencesState blocPreferencesState) {
-    return Column(
-      children: [
-        Expanded(
-            child: MaterialApp(
-          title: title,
-          debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-          theme: _getTheme(blocPreferencesState),
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            HiveCoreString.delegate,
-            LocaleNamesLocalizationsDelegate(),
-          ]..addAll(appLocalizationDelegate),
-          supportedLocales:
-              supportedLocales ?? HiveCoreString.delegate.supportedLocales,
-          locale: blocPreferencesState is PreferencesLoaded
-              ? blocPreferencesState.locale
-              : null,
-          /*initialRoute: blocAuthenticationState is Authenticated
+    return MaterialApp(
+      title: title,
+      debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+      theme: _getTheme(blocPreferencesState),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        HiveCoreString.delegate,
+        LocaleNamesLocalizationsDelegate(),
+      ]..addAll(appLocalizationDelegate),
+      supportedLocales:
+          supportedLocales ?? HiveCoreString.delegate.supportedLocales,
+      locale: blocPreferencesState is PreferencesLoaded
+          ? blocPreferencesState.locale
+          : null,
+      /*initialRoute: blocAuthenticationState is Authenticated
           ? ConstString.route_daily_screen
           : HiveCoreConstString.route_user_login_form_screen,*/
-          home: PickupLayout(scaffold: home),
-          routes: _getRoutes(),
-        )),
-        Container(
-          height: isPremiumAcount ? 0 : 50,
-        )
-      ],
+      home: PickupLayout(scaffold: home),
+      routes: _getRoutes(),
     );
   }
 }
