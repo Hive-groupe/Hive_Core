@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'const_colors.dart';
+import 'hive_const_colors.dart';
 
 var themes = {
   "Light": HiveCoreConstTheme.light,
