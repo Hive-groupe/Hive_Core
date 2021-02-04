@@ -52,7 +52,7 @@ class AdvertisingBloc extends Bloc<AdvertisingEvent, AdvertisingState> {
   BannerAd createBannerAd() {
     return BannerAd(
       adUnitId: 'ca-app-pub-3714274271110810/1958153813',
-      size: AdSize.fullBanner,
+      size: AdSize.banner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
         print("BannerAd event $event");
