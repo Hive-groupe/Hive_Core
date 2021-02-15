@@ -2,6 +2,47 @@
 
 A new flutter plugin project.
 
+
+## Installation
+
+First, add:
+
+```yaml
+hive_core:
+    git:
+      url: https://github.com/Hive-groupe/Hive_Core
+      ref: master
+``` 
+as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+
+Import
+
+```dart
+import 'package:hive_core/...';
+```
+
+### iOS
+
+No configuration required - the plugin should work out of the box.
+
+Add this function to Your StateFull Widget Check the [Example](https://github.com/zeeshux7860/Image_editor_pro_package/blob/master/example/lib/main.dart)
+
+```dart
+```
+```
+
+### Android
+
+No configuration required - the plugin should work out of the box.
+
+Add this function to Your StateFull Widget Check the [Example](https://github.com/zeeshux7860/Image_editor_pro_package/blob/master/example/lib/main.dart)
+
+```dart
+```
+
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter
