@@ -29,7 +29,6 @@ Add this function to Your StateFull Widget Check the [Example](https://github.co
 
 ```dart
 ```
-```
 
 ### Android
 
