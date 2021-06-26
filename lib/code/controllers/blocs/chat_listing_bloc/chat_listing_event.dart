@@ -48,7 +48,7 @@ class ResetChatSearch extends ChatListingEvent {
 class SearchingChats extends ChatListingEvent {
   final String value;
 
-  SearchingChats({this.value});
+  SearchingChats({required this.value});
 
   @override
   String toString() => '''

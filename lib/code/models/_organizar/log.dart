@@ -1,34 +1,21 @@
 class Log {
-  int logId;
-  String callerName;
-  String callerPic;
-  String receiverName;
-  String receiverPic;
-  String callStatus;
-  String timestamp;
+  late int? logId;
+  late String callerName;
+  late String callerPic;
+  late String receiverName;
+  late String receiverPic;
+  late String callStatus;
+  late String timestamp;
 
   Log({
     this.logId,
-    this.callerName,
-    this.callerPic,
-    this.receiverName,
-    this.receiverPic,
-    this.callStatus,
-    this.timestamp,
+    required this.callerName,
+    required this.callerPic,
+    required this.receiverName,
+    required this.receiverPic,
+    required this.callStatus,
+    required this.timestamp,
   });
-
-  // to map
-  Map<String, dynamic> toMap(Log log) {
-    Map<String, dynamic> logMap = Map();
-    logMap["log_id"] = log.logId;
-    logMap["caller_name"] = log.callerName;
-    logMap["caller_pic"] = log.callerPic;
-    logMap["receiver_name"] = log.receiverName;
-    logMap["receiver_pic"] = log.receiverPic;
-    logMap["call_status"] = log.callStatus;
-    logMap["timestamp"] = log.timestamp;
-    return logMap;
-  }
 
   Log.fromMap(Map logMap) {
     this.logId = logMap["log_id"];
@@ -40,15 +27,29 @@ class Log {
     this.timestamp = logMap["timestamp"];
   }
 
+  // to map
+  Map<String, dynamic> toMap(Log log) {
+    Map<String, dynamic> logMap = Map();
+    logMap["log_id"] = log.logId;
+    logMap["caller_name"] = log.callerName;
+    logMap["caller_pic"] = log.callerPic;
+    logMap["receiver_name"] = log.receiverName;
+    logMap["receiver_pic"] = log.receiverPic;
+    logMap["call_status"] = log.callStatus;
+    logMap["timestamp"] = log.timestamp;
+
+    return logMap;
+  }
+
   @override
   String toString() => '''
   $runtimeType  {
-  - logId: ${logId}
-  - callerName :${callerName}
-  - callerPic: ${callerPic}
-  - receiverName: ${receiverName}
-  - receiverPic: ${receiverPic}
-  - callStatus: ${callStatus}
-  - timestamp: ${timestamp}
+  - logId: $logId
+  - callerName: $callerName
+  - callerPic: $callerPic
+  - receiverName: $receiverName
+  - receiverPic: $receiverPic
+  - callStatus: $callStatus
+  - timestamp: $timestamp
   }''';
 }

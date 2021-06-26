@@ -18,11 +18,11 @@ class ConnetAccountAppsBar extends StatefulWidget
 
 class _ConnetAccountAppsBarState extends State<ConnetAccountAppsBar> {
   // Blocs
-  DeviceListBloc _deviceListBloc;
+  late DeviceListBloc _deviceListBloc;
 
   @override
   void initState() {
-    _deviceListBloc = context.bloc<DeviceListBloc>();
+    _deviceListBloc = BlocProvider.of<DeviceListBloc>(context);
     super.initState();
   }
 
@@ -59,14 +59,14 @@ class _ConnetAccountAppsBarState extends State<ConnetAccountAppsBar> {
 
   void _onShowTutorial() {
     Navigator.pop(context);
-    // _deviceListBloc.add(ResetTutorialDevice());
+    // _deviceListBloc.add(ResetTutorialDevice(),);
   }
 */
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _deviceListBloc,
+        bloc: _deviceListBloc,
         listener: (BuildContext context, DeviceListState state) {
           if (state is DeviceListInitial) {
           } else if (state is DeviceListError) {

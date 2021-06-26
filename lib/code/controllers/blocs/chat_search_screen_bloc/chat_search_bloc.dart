@@ -19,10 +19,10 @@ class ChatSearchBloc extends Bloc<ChatSearchEvent, ChatSearchState> {
   final BuildContext context;
 
   // Repositorys
-  AuthenticationRepository _authenticationRepository;
-  UserRepository _userRepository;
+  late AuthenticationRepository _authenticationRepository;
+  late UserRepository _userRepository;
 
-  String currentUserId;
+  late String? currentUserId;
 
   final _searchList = BehaviorSubject<BuiltList<User>>();
   final _chatRoomsListController =
@@ -31,22 +31,24 @@ class ChatSearchBloc extends Bloc<ChatSearchEvent, ChatSearchState> {
       BehaviorSubject<BuiltList<ChatRoom>>();
 
   ChatSearchBloc({
-    @required this.context,
-  })  : assert(context != null),
-        super(ChatSearchInitial()) {
+    required this.context,
+  }) : super(
+          ChatSearchInitial(),
+        ) {
     initState();
   }
 
   initState() {
-    _authenticationRepository = context.repository<AuthenticationRepository>();
-    _userRepository = context.repository<UserRepository>();
+    _authenticationRepository =
+        RepositoryProvider.of<AuthenticationRepository>(context);
+    _userRepository = RepositoryProvider.of<UserRepository>(context);
   }
 
   @override
   Future<void> close() {
-    _searchList?.close();
-    _chatRoomsListController?.close();
-    _favoriteChatRoomsListController?.close();
+    _searchList.close();
+    _chatRoomsListController.close();
+    _favoriteChatRoomsListController.close();
 
     return super.close();
   }
@@ -70,8 +72,12 @@ class ChatSearchBloc extends Bloc<ChatSearchEvent, ChatSearchState> {
       yield ChatSearchLoading();
       currentUserId =
           currentUserId ?? await _authenticationRepository.getCurrentUserId();
-      _searchList.sink.add(BuiltList<User>());
-      yield ChatSearching(userList: _searchList.stream);
+      _searchList.sink.add(
+        BuiltList<User>(),
+      );
+      yield ChatSearching(
+        userList: _searchList.stream,
+      );
     } catch (_) {
       yield ChatSearchError();
     }
@@ -82,8 +88,12 @@ class ChatSearchBloc extends Bloc<ChatSearchEvent, ChatSearchState> {
       yield ChatSearchLoading();
       currentUserId =
           currentUserId ?? await _authenticationRepository.getCurrentUserId();
-      _searchList.sink.add(BuiltList<User>());
-      yield ChatSearching(userList: _searchList.stream);
+      _searchList.sink.add(
+        BuiltList<User>(),
+      );
+      yield ChatSearching(
+        userList: _searchList.stream,
+      );
     } catch (_) {
       yield ChatSearchError();
     }
@@ -97,33 +107,37 @@ class ChatSearchBloc extends Bloc<ChatSearchEvent, ChatSearchState> {
           currentUserId ?? await _authenticationRepository.getCurrentUserId();
       _query = event.value.toLowerCase();
 
-      _userRepository.fetchAllUsers(currentUserId: currentUserId).listen(
-          (event) => _searchList.sink.add(BuiltList<User>().rebuild((b) => b
-            ..replace(event)
-            ..where((User user) {
-              if (_query != '') {
-                String _getUsername = user.username.toLowerCase();
-                String _getName = user.profile.name.toLowerCase();
-                String _getFirstname = user.profile.firstname.toLowerCase();
-                String _getSecondname = user.profile.secondname != null
-                    ? user.profile.secondname.toLowerCase()
-                    : null;
+      _userRepository.fetchAllUsers(currentUserId: currentUserId ?? '').listen(
+            (event) => _searchList.sink.add(BuiltList<User>().rebuild(
+              (b) => b
+                ..replace(event)
+                ..where((User user) {
+                  if (_query != '') {
+                    String _getUsername = user.username.toLowerCase();
+                    String _getName = user.profile!.name.toLowerCase();
+                    String _getFirstname =
+                        user.profile!.firstname.toLowerCase();
+                    String? _getSecondname = user.profile!.secondname != null
+                        ? user.profile!.secondname!.toLowerCase()
+                        : null;
 
-                bool _matchesUsername = _getUsername.contains(_query);
-                bool _matchesName = _getName.contains(_query);
-                bool _matchesFirstname = _getFirstname.contains(_query);
-                bool _matchesSecondname = _getSecondname != null
-                    ? _getSecondname.contains(_query)
-                    : false;
+                    bool _matchesUsername = _getUsername.contains(_query);
+                    bool _matchesName = _getName.contains(_query);
+                    bool _matchesFirstname = _getFirstname.contains(_query);
+                    bool _matchesSecondname = _getSecondname != null
+                        ? _getSecondname.contains(_query)
+                        : false;
 
-                return (_matchesUsername ||
-                    _matchesName ||
-                    _matchesFirstname ||
-                    _matchesSecondname);
-              } else {
-                return false;
-              }
-            }))));
+                    return (_matchesUsername ||
+                        _matchesName ||
+                        _matchesFirstname ||
+                        _matchesSecondname);
+                  } else {
+                    return false;
+                  }
+                }),
+            )),
+          );
 
       yield ChatSearching(userList: _searchList);
     } catch (_) {

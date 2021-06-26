@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:hive_core/code/models/_organizar/chat_contact.dart';
 import 'package:hive_core/code/models/chat_message.dart';
 import 'package:hive_core/code/models/enum/chat_message_type.dart';
@@ -10,14 +11,14 @@ import 'package:rxdart/rxdart.dart';
 part 'chat_message_repository_firebase_impl.dart';
 
 abstract class ChatMessageRepository<model> {
-  BehaviorSubject<BuiltList<ChatMessage>> chatRoomsListController;
-  BehaviorSubject<BuiltList<ChatContact>> contactListController;
+  late BehaviorSubject<BuiltList<ChatMessage>> chatRoomsListController;
+  late BehaviorSubject<BuiltList<ChatContact>> contactListController;
 
   Future addChatMessage(ChatMessage data);
 
   Future addChatImageMessage(String url, String receiverId, String senderId);
 
-  Future<model> getChatMessageById(String id);
+  Future<model?> getChatMessageById(String id);
 
   Future updateChatMessage(Map data, String id);
 
@@ -25,13 +26,18 @@ abstract class ChatMessageRepository<model> {
 
   Future<List<model>> fetchChatMessages();
 
-  Stream<BuiltList<ChatMessage>> fetchChatMessagesAsStream(
-      {String senderId, String receiverId});
+  Stream<BuiltList<ChatMessage>> fetchChatMessagesAsStream({
+    required String senderId,
+    required String receiverId,
+  });
 
-  Future<bool> emptyChat(
-      {@required String senderId, @required String receiverId});
+  Future<bool> emptyChat({
+    required String senderId,
+    required String receiverId,
+  });
 
-/**================================================================================
+/*
+ *================================================================================
  * 
  * 
  * 
@@ -65,12 +71,17 @@ abstract class ChatMessageRepository<model> {
     String receiverId,
     currentTime,
   );
-  DocumentReference getContactsDocument({String of, String forContact});
+  DocumentReference getContactsDocument({
+    required String of,
+    required String forContact,
+  });
 
-  Stream<BuiltList<ChatContact>> findContactStream({String userId});
+  Stream<BuiltList<ChatContact>> findContactStream({
+    required String userId,
+  });
 
   Stream<QuerySnapshot> fetchLastMessageBetween({
-    @required String senderId,
-    @required String receiverId,
+    required String senderId,
+    required String receiverId,
   });
 }

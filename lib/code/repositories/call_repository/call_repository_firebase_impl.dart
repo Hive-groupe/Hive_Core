@@ -1,12 +1,12 @@
 part of 'call_repository.dart';
 
 class CallRepositoryFirebaseImpl implements CallRepository<Call> {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
-  final String path;
-  CollectionReference ref;
+  late final FirebaseFirestore _db = FirebaseFirestore.instance;
+  late final String path;
+  late CollectionReference ref;
 
   @override
-  BehaviorSubject<BuiltList<Call>> callListController;
+  late BehaviorSubject<BuiltList<Call>> callListController;
 
   CallRepositoryFirebaseImpl(this.path) {
     ref = _db.collection(path);
@@ -14,20 +14,25 @@ class CallRepositoryFirebaseImpl implements CallRepository<Call> {
   }
 
   @override
-  Stream<DocumentSnapshot> callStream({String uid}) => ref.doc(uid).snapshots();
+  Stream<DocumentSnapshot> callStream({
+    required String uid,
+  }) =>
+      ref.doc(uid).snapshots();
   /*Stream<Call> callStream({String uid}) {
     BehaviorSubject<Call> _callController = BehaviorSubject<Call>();
 
     ref
         .document(uid)
         .snapshots()
-        .listen((event) => _callController.sink.add(Call.fromJson(event.data)));
+        .listen((event) => _callController.sink.add(Call.fromJson(event.data),));
 
     return _callController.stream;
   }*/
 
   @override
-  Future<bool> makeCall({Call call}) async {
+  Future<bool> makeCall({
+    required Call call,
+  }) async {
     try {
       call = call.rebuild((b) => b..hasDialled = true);
 
@@ -46,7 +51,9 @@ class CallRepositoryFirebaseImpl implements CallRepository<Call> {
   }
 
   @override
-  Future<bool> endCall({Call call}) async {
+  Future<bool> endCall({
+    required Call call,
+  }) async {
     try {
       await ref.doc(call.callerId).delete();
       await ref.doc(call.receiverId).delete();

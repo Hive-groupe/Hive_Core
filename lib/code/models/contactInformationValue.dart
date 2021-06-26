@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
@@ -8,9 +10,10 @@ part 'contactInformationValue.g.dart';
 
 abstract class ContactInformationValue
     implements Built<ContactInformationValue, ContactInformationValueBuilder> {
-  @nullable
-  Metadata get metadata;
+  Metadata? get metadata;
+
   String get value;
+
   String get label;
 
   ContactInformationValue._();
@@ -19,10 +22,14 @@ abstract class ContactInformationValue
       _$ContactInformationValue;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(ContactInformationValue.serializer, this);
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(ContactInformationValue.serializer, this),
+      ),
+    );
   }
 
-  static ContactInformationValue fromJson(Map<String, dynamic> json) {
+  static ContactInformationValue? fromJson(Map<String, dynamic> json) {
     return serializers.deserializeWith(
         ContactInformationValue.serializer, json);
   }

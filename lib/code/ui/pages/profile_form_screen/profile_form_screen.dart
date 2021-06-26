@@ -22,30 +22,32 @@ class ProfileFormScreen extends StatefulWidget {
 }
 
 class _ProfileFormScreenState extends State<ProfileFormScreen> {
-  AuthenticationRepository _authenticationRepository;
-  UserRepository _userRepository;
+  late AuthenticationRepository _authenticationRepository;
+  late UserRepository _userRepository;
 
-  ProfileFormBloc _profileFormBloc;
+  late ProfileFormBloc _profileFormBloc;
 
   var _type = StepperType.vertical;
-  File avatarFile;
+  late File avatarFile;
 
   @override
   void initState() {
-    _authenticationRepository = context.repository<AuthenticationRepository>();
-    _userRepository = context.repository<UserRepository>();
+    _authenticationRepository =
+        RepositoryProvider.of<AuthenticationRepository>(context);
+    _userRepository = RepositoryProvider.of<UserRepository>(context);
 
     _profileFormBloc = ProfileFormBloc.formUser(
-        authenticationRepository: _authenticationRepository,
-        userRepository: _userRepository,
-        user: null);
+      authenticationRepository: _authenticationRepository,
+      userRepository: _userRepository,
+      user: null,
+    );
 
     super.initState();
   }
 
   @override
   void dispose() {
-    _profileFormBloc?.close();
+    _profileFormBloc.close();
     super.dispose();
   }
 
@@ -61,12 +63,14 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
     });
   }
 
-  void pickImage({@required ImageSource source}) async {
+  void pickImage({
+    required ImageSource source,
+  }) async {
     Navigator.pop(context);
     File selectedImage = await FileTools.pickImage(source: source);
 
     setState(() {
-      return avatarFile = selectedImage;
+      avatarFile = selectedImage;
     });
   }
 
@@ -105,20 +109,21 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
   @override
   Widget build(BuildContext context) {
     return BannerSize(
-        body: MultiBlocProvider(
-      providers: [
-        BlocProvider<ProfileFormBloc>(
-          create: (BuildContext context) => _profileFormBloc,
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<ProfileFormBloc>(
+            create: (BuildContext context) => _profileFormBloc,
+          ),
+        ],
+        child: BlocConsumer(
+          bloc: _profileFormBloc,
+          listener: (context, state) {},
+          builder: (context, state) {
+            return _build();
+          },
         ),
-      ],
-      child: BlocConsumer(
-        cubit: _profileFormBloc,
-        listener: (context, state) {},
-        builder: (context, state) {
-          return _build();
-        },
       ),
-    ));
+    );
   }
 
   Widget _build() {
@@ -142,7 +147,7 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
             physics: ClampingScrollPhysics(),
             stepsBuilder: (formBloc) {
               return [
-                _currentStatus(formBloc),
+                _currentStatus(formBloc!),
                 _datos(formBloc),
               ];
             },
@@ -159,7 +164,7 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
         HiveCoreString.of(context).profile_form_title,
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       leading: IconButton(
@@ -270,15 +275,16 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
     return GestureDetector(
         onTap: _optionsDialogBox,
         child: Hero(
-            tag: 'avatar',
-            child: avatarFile != null
-                // Si estamos cargando la imagen desde el dispositivo
-                ? _buildAvatarLocalFile()
-                : formBloc.avatar.value == null || formBloc.avatar.value == ''
-                    ? //Si no hay imagen
-                    _buildAvatarNoFile()
-                    : //Si cargamos la imagen desde internet
-                    _buildAvatarNetwork(formBloc)));
+          tag: 'avatar',
+          child: avatarFile != null
+              // Si estamos cargando la imagen desde el dispositivo
+              ? _buildAvatarLocalFile()
+              : formBloc.avatar.value == null || formBloc.avatar.value == ''
+                  ? //Si no hay imagen
+                  _buildAvatarNoFile()
+                  : //Si cargamos la imagen desde internet
+                  _buildAvatarNetwork(formBloc),
+        ));
   }
 
   Widget _buildAvatarLocalFile() {
@@ -303,7 +309,7 @@ class _ProfileFormScreenState extends State<ProfileFormScreen> {
           height: 150.0,
           width: 150.0,
           fit: BoxFit.cover,
-          imageUrl: formBloc.avatar.value,
+          imageUrl: formBloc.avatar.value ?? '',
           placeholder: (context, url) => CircularProgressIndicator(),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),

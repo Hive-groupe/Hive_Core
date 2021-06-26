@@ -4,12 +4,12 @@ import '_index.dart';
 
 class Preferences {
   String themeName;
-  Locale locale;
+  Locale? locale;
 
-  NotificationsPreferences notificationsPreferences;
+  NotificationsPreferences? notificationsPreferences;
   ChatPreferences chatPreferences;
 
-/**
+/*
  * ELIMINAR
  */
   bool notifications;
@@ -17,12 +17,12 @@ class Preferences {
   bool vibration;
 
   Preferences({
-    this.themeName,
+    required this.themeName,
     this.locale,
     this.notificationsPreferences,
-    this.chatPreferences,
-    this.notifications,
-    this.soundEffects,
-    this.vibration,
+    required this.chatPreferences,
+    required this.notifications,
+    required this.soundEffects,
+    required this.vibration,
   });
 }

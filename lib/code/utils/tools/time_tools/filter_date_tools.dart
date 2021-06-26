@@ -1,7 +1,7 @@
 part of 'time_tools.dart';
 
 abstract class FilterDateTools {
-  static final num numYears = 10;
+  static final int numYears = 10;
 
   static final selected = TextStyle(
     fontSize: 20.0,
@@ -14,54 +14,62 @@ abstract class FilterDateTools {
     color: Colors.grey.withOpacity(0.3),
   );
 
-  static String getDateFormat({@required DateType dateType}) {
+  static String getDateFormat({
+    required DateType dateType,
+  }) {
     switch (dateType) {
       case DateType.DAY:
         return 'dd MMMM yyyy';
-        break;
       case DateType.WEEKS:
         return '';
-        break;
       case DateType.MONTHS:
         return 'MMMM yyyy';
-        break;
       case DateType.QUARTERS:
         return '';
-        break;
       case DateType.YEARS:
         return 'yyyy';
-        break;
       case DateType.ALL:
         return '';
-        break;
       default:
         return 'MMMM yyyy';
     }
   }
 
-  static DateTime getNextDateTimeItem(
-      {@required DateType currentDateType, @required num nextPage}) {
+  static DateTime getNextDateTimeItem({
+    required DateType currentDateType,
+    required int nextPage,
+  }) {
     switch (currentDateType) {
       case DateType.YEARS:
-        return DateTime(DateTime.now().year + nextPage - numYears,
-            DateTime.now().month, DateTime.now().day);
-        break;
+        return DateTime(
+          DateTime.now().year + nextPage - numYears,
+          DateTime.now().month,
+          DateTime.now().day,
+        );
+
       case DateType.MONTHS:
-        return DateTime(DateTime.now().year, nextPage + 1, DateTime.now().day);
-        break;
+        return DateTime(
+          DateTime.now().year,
+          nextPage + 1,
+          DateTime.now().day,
+        );
+
       case DateType.DAY:
         return DateTime(
-            DateTime.now().year, DateTime.now().month, nextPage + 1);
-        break;
+          DateTime.now().year,
+          DateTime.now().month,
+          nextPage + 1,
+        );
+
       default:
         return DateTime.now();
     }
   }
 
   static TextStyle getItemTextStyle(
-      {@required DateType currentDateType,
-      @required DateTime dateTime,
-      @required int itemIndex}) {
+      {required DateType currentDateType,
+      required DateTime dateTime,
+      required int itemIndex}) {
     bool _condition = false;
     switch (currentDateType) {
       case DateType.YEARS:
@@ -87,9 +95,9 @@ abstract class FilterDateTools {
   }
 
   static Alignment getItemAlignment(
-      {@required DateType currentDateType,
-      @required DateTime dateTime,
-      @required int itemIndex}) {
+      {required DateType currentDateType,
+      required DateTime dateTime,
+      required int itemIndex}) {
     switch (currentDateType) {
       case DateType.YEARS:
         if (DateTime.now().year + itemIndex - numYears == dateTime.year) {
@@ -99,7 +107,7 @@ abstract class FilterDateTools {
         } else {
           return Alignment.bottomLeft;
         }
-        break;
+
       case DateType.QUARTERS:
         if (itemIndex == dateTime.month - 1) {
           return Alignment.bottomCenter;
@@ -108,7 +116,7 @@ abstract class FilterDateTools {
         } else {
           return Alignment.bottomLeft;
         }
-        break;
+
       case DateType.MONTHS:
         if (itemIndex == dateTime.month - 1) {
           return Alignment.bottomCenter;
@@ -117,7 +125,7 @@ abstract class FilterDateTools {
         } else {
           return Alignment.bottomLeft;
         }
-        break;
+
       case DateType.WEEKS:
         if (itemIndex == dateTime.day - 1) {
           return Alignment.bottomCenter;
@@ -126,7 +134,7 @@ abstract class FilterDateTools {
         } else {
           return Alignment.bottomLeft;
         }
-        break;
+
       case DateType.DAY:
         if (itemIndex == dateTime.day - 1) {
           return Alignment.bottomCenter;
@@ -135,7 +143,7 @@ abstract class FilterDateTools {
         } else {
           return Alignment.bottomLeft;
         }
-        break;
+
       default:
         return Alignment.bottomLeft;
     }

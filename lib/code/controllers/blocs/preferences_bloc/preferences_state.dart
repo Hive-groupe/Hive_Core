@@ -9,7 +9,7 @@ class PreferencesNotLoaded extends PreferencesState {
 
 class PreferencesLoaded extends PreferencesState {
   final String themeName;
-  final Locale locale;
+  final Locale? locale;
   final ChatPreferences chatPreferences;
 
   final bool notifications;
@@ -17,22 +17,21 @@ class PreferencesLoaded extends PreferencesState {
   final bool vibration;
 
   PreferencesLoaded({
-    @required this.themeName,
-    @required this.locale,
-    @required this.chatPreferences,
-    @required this.notifications,
-    @required this.soundEffects,
-    @required this.vibration,
+    required this.themeName,
+    this.locale,
+    required this.chatPreferences,
+    required this.notifications,
+    required this.soundEffects,
+    required this.vibration,
   });
 
   @override
   List<Object> get props => [
         themeName,
-        locale,
         chatPreferences,
         notifications,
         soundEffects,
-        vibration
+        vibration,
       ];
 
   @override

@@ -15,9 +15,9 @@ class _$CallSerializer implements StructuredSerializer<Call> {
   final String wireName = 'Call';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Call object,
+  Iterable<Object?> serialize(Serializers serializers, Call object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'caller_id',
       serializers.serialize(object.callerId,
           specifiedType: const FullType(String)),
@@ -34,29 +34,33 @@ class _$CallSerializer implements StructuredSerializer<Call> {
       serializers.serialize(object.channelId,
           specifiedType: const FullType(String)),
     ];
-    if (object.callerPic != null) {
+    Object? value;
+    value = object.callerPic;
+    if (value != null) {
       result
         ..add('caller_pic')
-        ..add(serializers.serialize(object.callerPic,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.receiverPic != null) {
+    value = object.receiverPic;
+    if (value != null) {
       result
         ..add('receiver_pic')
-        ..add(serializers.serialize(object.receiverPic,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.hasDialled != null) {
+    value = object.hasDialled;
+    if (value != null) {
       result
         ..add('has_dialled')
-        ..add(serializers.serialize(object.hasDialled,
-            specifiedType: const FullType(bool)));
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     return result;
   }
 
   @override
-  Call deserialize(Serializers serializers, Iterable<Object> serialized,
+  Call deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CallBuilder();
 
@@ -64,7 +68,7 @@ class _$CallSerializer implements StructuredSerializer<Call> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'caller_id':
           result.callerId = serializers.deserialize(value,
@@ -76,7 +80,7 @@ class _$CallSerializer implements StructuredSerializer<Call> {
           break;
         case 'caller_pic':
           result.callerPic = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'receiver_id':
           result.receiverId = serializers.deserialize(value,
@@ -88,7 +92,7 @@ class _$CallSerializer implements StructuredSerializer<Call> {
           break;
         case 'receiver_pic':
           result.receiverPic = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'channel_id':
           result.channelId = serializers.deserialize(value,
@@ -96,7 +100,7 @@ class _$CallSerializer implements StructuredSerializer<Call> {
           break;
         case 'has_dialled':
           result.hasDialled = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
       }
     }
@@ -111,46 +115,36 @@ class _$Call extends Call {
   @override
   final String callerName;
   @override
-  final String callerPic;
+  final String? callerPic;
   @override
   final String receiverId;
   @override
   final String receiverName;
   @override
-  final String receiverPic;
+  final String? receiverPic;
   @override
   final String channelId;
   @override
-  final bool hasDialled;
+  final bool? hasDialled;
 
-  factory _$Call([void Function(CallBuilder) updates]) =>
+  factory _$Call([void Function(CallBuilder)? updates]) =>
       (new CallBuilder()..update(updates)).build();
 
   _$Call._(
-      {this.callerId,
-      this.callerName,
+      {required this.callerId,
+      required this.callerName,
       this.callerPic,
-      this.receiverId,
-      this.receiverName,
+      required this.receiverId,
+      required this.receiverName,
       this.receiverPic,
-      this.channelId,
+      required this.channelId,
       this.hasDialled})
       : super._() {
-    if (callerId == null) {
-      throw new BuiltValueNullFieldError('Call', 'callerId');
-    }
-    if (callerName == null) {
-      throw new BuiltValueNullFieldError('Call', 'callerName');
-    }
-    if (receiverId == null) {
-      throw new BuiltValueNullFieldError('Call', 'receiverId');
-    }
-    if (receiverName == null) {
-      throw new BuiltValueNullFieldError('Call', 'receiverName');
-    }
-    if (channelId == null) {
-      throw new BuiltValueNullFieldError('Call', 'channelId');
-    }
+    BuiltValueNullFieldError.checkNotNull(callerId, 'Call', 'callerId');
+    BuiltValueNullFieldError.checkNotNull(callerName, 'Call', 'callerName');
+    BuiltValueNullFieldError.checkNotNull(receiverId, 'Call', 'receiverId');
+    BuiltValueNullFieldError.checkNotNull(receiverName, 'Call', 'receiverName');
+    BuiltValueNullFieldError.checkNotNull(channelId, 'Call', 'channelId');
   }
 
   @override
@@ -206,52 +200,53 @@ class _$Call extends Call {
 }
 
 class CallBuilder implements Builder<Call, CallBuilder> {
-  _$Call _$v;
+  _$Call? _$v;
 
-  String _callerId;
-  String get callerId => _$this._callerId;
-  set callerId(String callerId) => _$this._callerId = callerId;
+  String? _callerId;
+  String? get callerId => _$this._callerId;
+  set callerId(String? callerId) => _$this._callerId = callerId;
 
-  String _callerName;
-  String get callerName => _$this._callerName;
-  set callerName(String callerName) => _$this._callerName = callerName;
+  String? _callerName;
+  String? get callerName => _$this._callerName;
+  set callerName(String? callerName) => _$this._callerName = callerName;
 
-  String _callerPic;
-  String get callerPic => _$this._callerPic;
-  set callerPic(String callerPic) => _$this._callerPic = callerPic;
+  String? _callerPic;
+  String? get callerPic => _$this._callerPic;
+  set callerPic(String? callerPic) => _$this._callerPic = callerPic;
 
-  String _receiverId;
-  String get receiverId => _$this._receiverId;
-  set receiverId(String receiverId) => _$this._receiverId = receiverId;
+  String? _receiverId;
+  String? get receiverId => _$this._receiverId;
+  set receiverId(String? receiverId) => _$this._receiverId = receiverId;
 
-  String _receiverName;
-  String get receiverName => _$this._receiverName;
-  set receiverName(String receiverName) => _$this._receiverName = receiverName;
+  String? _receiverName;
+  String? get receiverName => _$this._receiverName;
+  set receiverName(String? receiverName) => _$this._receiverName = receiverName;
 
-  String _receiverPic;
-  String get receiverPic => _$this._receiverPic;
-  set receiverPic(String receiverPic) => _$this._receiverPic = receiverPic;
+  String? _receiverPic;
+  String? get receiverPic => _$this._receiverPic;
+  set receiverPic(String? receiverPic) => _$this._receiverPic = receiverPic;
 
-  String _channelId;
-  String get channelId => _$this._channelId;
-  set channelId(String channelId) => _$this._channelId = channelId;
+  String? _channelId;
+  String? get channelId => _$this._channelId;
+  set channelId(String? channelId) => _$this._channelId = channelId;
 
-  bool _hasDialled;
-  bool get hasDialled => _$this._hasDialled;
-  set hasDialled(bool hasDialled) => _$this._hasDialled = hasDialled;
+  bool? _hasDialled;
+  bool? get hasDialled => _$this._hasDialled;
+  set hasDialled(bool? hasDialled) => _$this._hasDialled = hasDialled;
 
   CallBuilder();
 
   CallBuilder get _$this {
-    if (_$v != null) {
-      _callerId = _$v.callerId;
-      _callerName = _$v.callerName;
-      _callerPic = _$v.callerPic;
-      _receiverId = _$v.receiverId;
-      _receiverName = _$v.receiverName;
-      _receiverPic = _$v.receiverPic;
-      _channelId = _$v.channelId;
-      _hasDialled = _$v.hasDialled;
+    final $v = _$v;
+    if ($v != null) {
+      _callerId = $v.callerId;
+      _callerName = $v.callerName;
+      _callerPic = $v.callerPic;
+      _receiverId = $v.receiverId;
+      _receiverName = $v.receiverName;
+      _receiverPic = $v.receiverPic;
+      _channelId = $v.channelId;
+      _hasDialled = $v.hasDialled;
       _$v = null;
     }
     return this;
@@ -259,14 +254,12 @@ class CallBuilder implements Builder<Call, CallBuilder> {
 
   @override
   void replace(Call other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Call;
   }
 
   @override
-  void update(void Function(CallBuilder) updates) {
+  void update(void Function(CallBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -274,13 +267,18 @@ class CallBuilder implements Builder<Call, CallBuilder> {
   _$Call build() {
     final _$result = _$v ??
         new _$Call._(
-            callerId: callerId,
-            callerName: callerName,
+            callerId: BuiltValueNullFieldError.checkNotNull(
+                callerId, 'Call', 'callerId'),
+            callerName: BuiltValueNullFieldError.checkNotNull(
+                callerName, 'Call', 'callerName'),
             callerPic: callerPic,
-            receiverId: receiverId,
-            receiverName: receiverName,
+            receiverId: BuiltValueNullFieldError.checkNotNull(
+                receiverId, 'Call', 'receiverId'),
+            receiverName: BuiltValueNullFieldError.checkNotNull(
+                receiverName, 'Call', 'receiverName'),
             receiverPic: receiverPic,
-            channelId: channelId,
+            channelId: BuiltValueNullFieldError.checkNotNull(
+                channelId, 'Call', 'channelId'),
             hasDialled: hasDialled);
     replace(_$result);
     return _$result;

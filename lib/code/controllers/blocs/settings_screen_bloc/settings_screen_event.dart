@@ -24,7 +24,7 @@ class ResetPreferencesSearch extends SettingsScreenEvent {
 class SearchingPreferencess extends SettingsScreenEvent {
   final String value;
 
-  SearchingPreferencess({this.value});
+  SearchingPreferencess({required this.value});
 
   @override
   String toString() => '''

@@ -10,5 +10,5 @@ class SettingsScreenSearching extends SettingsScreenState {}
 class SettingsScreenShowCategory extends SettingsScreenState {
   final String category;
 
-  SettingsScreenShowCategory({@required this.category});
+  SettingsScreenShowCategory({required this.category});
 }

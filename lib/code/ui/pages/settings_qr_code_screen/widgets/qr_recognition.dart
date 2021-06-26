@@ -11,7 +11,9 @@ import 'package:image_picker/image_picker.dart';
 //   https://github.com/manudevcode/flutter-text-recognition
 //   https://www.youtube.com/watch?v=DjvGID2jNSY
 class QrRecognition extends StatefulWidget {
-  QrRecognition({Key key}) : super(key: key);
+  QrRecognition({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _QrRecognitionState createState() => _QrRecognitionState();
@@ -20,8 +22,8 @@ class QrRecognition extends StatefulWidget {
 class _QrRecognitionState extends State<QrRecognition> {
   CameraLensDirection _direction = CameraLensDirection.back;
 
-  CameraController _camera;
-  File imageFile;
+  late CameraController _camera;
+  late File imageFile;
 
   @override
   void initState() {
@@ -31,7 +33,7 @@ class _QrRecognitionState extends State<QrRecognition> {
 
   @override
   void dispose() {
-    _camera?.dispose();
+    _camera.dispose();
     super.dispose();
   }
 
@@ -50,11 +52,11 @@ class _QrRecognitionState extends State<QrRecognition> {
     print('inited CAMERA');
   }
 
-  void pickImage({@required ImageSource source}) async {
+  void pickImage({required ImageSource source}) async {
     File selectedImage = await FileTools.pickImage(source: source);
 
     setState(() {
-      return imageFile = selectedImage;
+      imageFile = selectedImage;
     });
   }
 
@@ -79,7 +81,8 @@ class _QrRecognitionState extends State<QrRecognition> {
           )
         : Container(
             height: MediaQuery.of(context).size.height,
-            child: CameraPreview(_camera));
+            child: CameraPreview(_camera),
+          );
   }
 
   Widget _imagefileScreen() {
@@ -107,7 +110,7 @@ class _QrRecognitionState extends State<QrRecognition> {
             width: 350,
             height: 350,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey[400]),
+              border: Border.all(color: Colors.grey[400]!),
               borderRadius: BorderRadius.circular(15.0),
               // gradient: new LinearGradient(colors: Colors),
             ),
@@ -119,33 +122,34 @@ class _QrRecognitionState extends State<QrRecognition> {
 
   Widget _btnGallery() {
     return Positioned(
-        bottom: 50,
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              // _text ==  '' ?
-              GestureDetector(
-                child: Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: IconButton(
-                    onPressed: () => pickImage(source: ImageSource.gallery),
-                    icon: Icon(
-                      CupertinoIcons.photo,
-                      color: Colors.white,
-                    ),
+      bottom: 50,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            // _text ==  '' ?
+            GestureDetector(
+              child: Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: IconButton(
+                  onPressed: () => pickImage(source: ImageSource.gallery),
+                  icon: Icon(
+                    CupertinoIcons.photo,
+                    color: Colors.white,
                   ),
                 ),
-              )
-            ],
-          ),
-        ));
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -13,22 +13,28 @@ class CallUtils {
   static final CallRepository _callRepository =
       CallRepositoryFirebaseImpl(CALL_COLLECTION);
 
-  static dial({User from, User to, context}) async {
-    Call call = Call((b) => b
-      ..callerId = from.id
-      ..callerName = from.profile.name
-      ..callerPic = from.profile.avatar
-      ..receiverId = to.id
-      ..receiverName = to.profile.name
-      ..receiverPic = to.profile.avatar
-      ..channelId = Random().nextInt(1000).toString());
+  static dial({
+    required User from,
+    required User to,
+    context,
+  }) async {
+    Call call = Call(
+      (b) => b
+        ..callerId = from.id
+        ..callerName = from.profile!.name
+        ..callerPic = from.profile!.avatar
+        ..receiverId = to.id
+        ..receiverName = to.profile!.name
+        ..receiverPic = to.profile!.avatar
+        ..channelId = Random().nextInt(1000).toString(),
+    );
 
     Log log = Log(
-      callerName: from.profile.name,
-      callerPic: from.profile.avatar,
+      callerName: from.profile!.name,
+      callerPic: from.profile!.avatar ?? '',
       callStatus: CALL_STATUS_DIALLED,
-      receiverName: to.profile.name,
-      receiverPic: to.profile.avatar,
+      receiverName: to.profile!.name,
+      receiverPic: to.profile!.avatar ?? '',
       timestamp: DateTime.now().toString(),
     );
 

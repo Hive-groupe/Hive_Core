@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_admob/firebase_admob.dart';
-import 'package:flutter/material.dart';
 
 part 'advertising_event.dart';
 part 'advertising_state.dart';
@@ -11,15 +10,16 @@ part 'advertising_state.dart';
 class AdvertisingBloc extends Bloc<AdvertisingEvent, AdvertisingState> {
   bool _isPremiumAcount;
   String _admobApplicationId;
-  BannerAd _bannerAd;
+  late BannerAd _bannerAd;
 
   AdvertisingBloc({
-    bool isPremiumAcount,
-    @required String admobApplicationId,
-  })  : assert(admobApplicationId != null),
-        _isPremiumAcount = isPremiumAcount ?? false,
+    required bool isPremiumAcount,
+    required String admobApplicationId,
+  })  : _isPremiumAcount = isPremiumAcount,
         _admobApplicationId = admobApplicationId,
-        super(AdvertisingInitial());
+        super(
+          AdvertisingInitial(),
+        );
 
   initState() {
     FirebaseAdMob.instance.initialize(appId: _admobApplicationId);
@@ -44,8 +44,7 @@ class AdvertisingBloc extends Bloc<AdvertisingEvent, AdvertisingState> {
       _bannerAd = createBannerAd()..load();
       _bannerAd.show(); // Inicializacion de banner
     } else {
-      _bannerAd?.dispose();
-      _bannerAd = null;
+      _bannerAd.dispose();
     }
   }
 

@@ -6,12 +6,12 @@ class ModalTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
-  final Function onTap;
+  final Function? onTap;
 
   const ModalTile({
-    @required this.title,
-    @required this.subtitle,
-    @required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
     this.onTap,
   });
 
@@ -21,7 +21,7 @@ class ModalTile extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: CustomTile(
         mini: false,
-        onTap: onTap,
+        onTap: () => onTap,
         leading: Container(
           margin: EdgeInsets.only(right: 10),
           decoration: BoxDecoration(
@@ -46,7 +46,7 @@ class ModalTile extends StatelessWidget {
           title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontSize: 18,
           ),
         ),

@@ -50,11 +50,12 @@ class _InfoScreenState extends State<InfoScreen> {
 
   Widget _iconHolder() {
     return Container(
-        child: Image.asset(
-      HiveCoreConstString.image_icon_hive,
-      height: 300,
-      width: 300,
-    ));
+      child: Image.asset(
+        HiveCoreConstString.image_icon_hive,
+        height: 300,
+        width: 300,
+      ),
+    );
   }
 
   Widget _title() {
@@ -68,9 +69,10 @@ class _InfoScreenState extends State<InfoScreen> {
 
   Widget _version() {
     return Container(
-        child: Text(
-      'Version: ${_packageInfo.version}',
-      style: TextStyle(color: Colors.grey),
-    ));
+      child: Text(
+        'Version: ${_packageInfo.version}',
+        style: TextStyle(color: Colors.grey),
+      ),
+    );
   }
 }

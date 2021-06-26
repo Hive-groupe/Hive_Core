@@ -5,16 +5,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 abstract class ListBuildersWidget {
   const ListBuildersWidget();
 
-  static Widget emptyListBuilder(
-      {@required BuildContext context,
-      @required Function onTap,
-      @required String imageUrl,
-      @required String title,
-      @required String text}) {
+  static Widget emptyListBuilder({
+    required BuildContext context,
+    required Function onTap,
+    String? imageUrl,
+    String? title,
+    String? text,
+  }) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => onTap(),
       child: Container(
-        padding: const EdgeInsets.only(left: 50, right: 50),
+        padding: const EdgeInsets.only(
+          left: 50,
+          right: 50,
+        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -31,8 +35,9 @@ abstract class ListBuildersWidget {
                   height: 150,
                   width: 150,
                   placeholderBuilder: (BuildContext context) => Container(
-                      padding: const EdgeInsets.all(30.0),
-                      child: const CircularProgressIndicator()),
+                    padding: const EdgeInsets.all(30.0),
+                    child: const CircularProgressIndicator(),
+                  ),
                 ),
               ),
               SizedBox(
@@ -64,12 +69,13 @@ abstract class ListBuildersWidget {
     );
   }
 
-  static Widget errorListBuilder(
-      {@required BuildContext context,
-      Function onTap,
-      String imageUrl,
-      String title,
-      String text}) {
+  static Widget errorListBuilder({
+    required BuildContext context,
+    Function? onTap,
+    String? imageUrl,
+    String? title,
+    String? text,
+  }) {
     return Container(
       child: Center(
         child: Column(
@@ -85,8 +91,9 @@ abstract class ListBuildersWidget {
                 height: 150,
                 width: 150,
                 placeholderBuilder: (BuildContext context) => Container(
-                    padding: const EdgeInsets.all(30.0),
-                    child: const CircularProgressIndicator()),
+                  padding: const EdgeInsets.all(30.0),
+                  child: const CircularProgressIndicator(),
+                ),
               ),
             ),
             SizedBox(
@@ -111,12 +118,13 @@ abstract class ListBuildersWidget {
     );
   }
 
-  static Widget loadingListBuilder(
-      {@required BuildContext context,
-      @required Function onTap,
-      @required String imageUrl,
-      @required String text,
-      @required String title}) {
+  static Widget loadingListBuilder({
+    required BuildContext context,
+    Function? onTap,
+    String? imageUrl,
+    String? text,
+    String? title,
+  }) {
     return Center(
       child: Column(
         children: <Widget>[

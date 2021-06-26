@@ -9,8 +9,13 @@ class StatisticPage extends StatefulWidget {
   final double minimum, average, maximum;
   final String unity;
 
-  StatisticPage(
-      {this.length, this.minimum, this.average, this.maximum, this.unity});
+  StatisticPage({
+    required this.length,
+    required this.minimum,
+    required this.average,
+    required this.maximum,
+    required this.unity,
+  });
 
   @override
   _ItemAttribute createState() => _ItemAttribute();
@@ -27,19 +32,24 @@ class _ItemAttribute extends State<StatisticPage> {
       child: Column(
         children: <Widget>[
           Container(
-              margin: EdgeInsets.only(top: 20, right: 20, left: 20),
-              child: IntrinsicHeight(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    widget.length > 1 ? _minValue() : Container(),
-                    widget.length > 1 ? _divider() : Container(),
-                    _averageValue(),
-                    widget.length > 1 ? _divider() : Container(),
-                    widget.length > 1 ? _maxValue() : Container(),
-                  ],
-                ),
-              )),
+            margin: EdgeInsets.only(
+              top: 20,
+              right: 20,
+              left: 20,
+            ),
+            child: IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  widget.length > 1 ? _minValue() : Container(),
+                  widget.length > 1 ? _divider() : Container(),
+                  _averageValue(),
+                  widget.length > 1 ? _divider() : Container(),
+                  widget.length > 1 ? _maxValue() : Container(),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -47,7 +57,10 @@ class _ItemAttribute extends State<StatisticPage> {
 
   Widget _divider() {
     return Container(
-      padding: EdgeInsets.only(left: 10, right: 10),
+      padding: EdgeInsets.only(
+        left: 10,
+        right: 10,
+      ),
       height: 30,
       child: VerticalDivider(
         color: Colors.grey,
@@ -57,31 +70,43 @@ class _ItemAttribute extends State<StatisticPage> {
 
   Widget _minValue() {
     return Container(
-        padding: EdgeInsets.only(right: 5, left: 5),
-        child: StatisticLateralItem(
-          data: widget.minimum.toStringAsFixed(2).toString(),
-          title: HiveCoreString.of(context).minimum,
-          unity: widget.unity,
-        ));
+      padding: EdgeInsets.only(
+        right: 5,
+        left: 5,
+      ),
+      child: StatisticLateralItem(
+        data: widget.minimum.toStringAsFixed(2).toString(),
+        title: HiveCoreString.of(context).minimum,
+        unity: widget.unity,
+      ),
+    );
   }
 
   Widget _averageValue() {
     return Container(
-        padding: EdgeInsets.only(right: 5, left: 5),
-        child: StatisticCentralItem(
-          data: widget.average.toStringAsFixed(2).toString(),
-          title: HiveCoreString.of(context).average,
-          unity: widget.unity,
-        ));
+      padding: EdgeInsets.only(
+        right: 5,
+        left: 5,
+      ),
+      child: StatisticCentralItem(
+        data: widget.average.toStringAsFixed(2).toString(),
+        title: HiveCoreString.of(context).average,
+        unity: widget.unity,
+      ),
+    );
   }
 
   Widget _maxValue() {
     return Container(
-        padding: EdgeInsets.only(right: 5, left: 5),
-        child: StatisticLateralItem(
-          data: widget.maximum.toStringAsFixed(2).toString(),
-          title: HiveCoreString.of(context).maximum,
-          unity: widget.unity,
-        ));
+      padding: EdgeInsets.only(
+        right: 5,
+        left: 5,
+      ),
+      child: StatisticLateralItem(
+        data: widget.maximum.toStringAsFixed(2).toString(),
+        title: HiveCoreString.of(context).maximum,
+        unity: widget.unity,
+      ),
+    );
   }
 }

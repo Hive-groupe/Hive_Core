@@ -5,7 +5,11 @@ class QuietBox extends StatelessWidget {
   final String heading;
   final String subtitle;
 
-  const QuietBox({Key key, this.heading, this.subtitle}) : super(key: key);
+  const QuietBox({
+    Key? key,
+    required this.heading,
+    required this.subtitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +42,9 @@ class QuietBox extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25),
-              FlatButton(
+              TextButton(
                 onPressed: () {},
-                color: Colors.amber,
+                // color: Colors.amber,
                 child: Text("START SEARCHING"),
               ),
             ],

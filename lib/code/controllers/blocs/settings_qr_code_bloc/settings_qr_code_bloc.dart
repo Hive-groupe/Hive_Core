@@ -8,7 +8,10 @@ part 'settings_qr_code_state.dart';
 
 class SettingsQrCodeBloc
     extends Bloc<SettingsQrCodeEvent, SettingsQrCodeState> {
-  SettingsQrCodeBloc() : super(SettingsQrCodeInitial());
+  SettingsQrCodeBloc()
+      : super(
+          SettingsQrCodeInitial(),
+        );
 
   @override
   Stream<SettingsQrCodeState> mapEventToState(

@@ -17,11 +17,11 @@ part 'chat_listing_state.dart';
 
 // https://github.com/Ronak99/Skype-Clone
 class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
-  final AuthenticationRepository _authenticationRepository;
-  final UserRepository _userRepository;
-  final ChatMessageRepository _chatMessageRepository;
+  late final AuthenticationRepository _authenticationRepository;
+  late final UserRepository _userRepository;
+  late final ChatMessageRepository _chatMessageRepository;
 
-  String currentUserId;
+  late String? currentUserId;
 
   final _searchList = BehaviorSubject<BuiltList<User>>();
   final _chatRoomsListController =
@@ -29,23 +29,22 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
   final _favoriteChatRoomsListController =
       BehaviorSubject<BuiltList<ChatRoom>>();
 
-  ChatListingBloc(
-      {@required AuthenticationRepository authenticationRepository,
-      @required UserRepository userRepository,
-      @required ChatMessageRepository chatMessageRepository})
-      : assert(authenticationRepository != null),
-        assert(userRepository != null),
-        assert(chatMessageRepository != null),
-        _authenticationRepository = authenticationRepository,
+  ChatListingBloc({
+    required AuthenticationRepository authenticationRepository,
+    required UserRepository userRepository,
+    required ChatMessageRepository chatMessageRepository,
+  })  : _authenticationRepository = authenticationRepository,
         _userRepository = userRepository,
         _chatMessageRepository = chatMessageRepository,
-        super(ChatListingInitial());
+        super(
+          ChatListingInitial(),
+        );
 
   @override
   Future<void> close() {
-    _searchList?.close();
-    _chatRoomsListController?.close();
-    _favoriteChatRoomsListController?.close();
+    _searchList.close();
+    _chatRoomsListController.close();
+    _favoriteChatRoomsListController.close();
 
     return super.close();
   }
@@ -73,7 +72,9 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
     }
   }
 
-  Stream<ChatListingState> _mapGetAllChatToState(GetAllChat event) async* {
+  Stream<ChatListingState> _mapGetAllChatToState(
+    GetAllChat event,
+  ) async* {
     try {
       yield ChatListingLoading();
 
@@ -82,14 +83,16 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
 
       _chatMessageRepository
           .findContactStream(
-            userId: currentUserId,
+            userId: currentUserId ?? '',
           )
-          .listen((event) => _chatRoomsListController.sink.add(event));
+          .listen(
+            (event) => _chatRoomsListController.sink.add(event),
+          );
 
       yield ChatListingLoaded(
         chatRoomsList: _chatRoomsListController,
         favoriteChatRoomsList: _favoriteChatRoomsListController.stream,
-        senderId: currentUserId,
+        senderId: currentUserId ?? '',
       );
     } catch (_) {
       yield ChatListingError();
@@ -97,7 +100,8 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
   }
 
   Stream<ChatListingState> _mapGetOnlyOnlineToState(
-      GetOnlyOnline event) async* {
+    GetOnlyOnline event,
+  ) async* {
     try {
       yield ChatListingLoading();
       // yield ChatListingLoaded(chats: _chats, favorites: _faborites);
@@ -107,7 +111,8 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
   }
 
   Stream<ChatListingState> _mapGetOnlyGroupsToState(
-      GetOnlyGroups event) async* {
+    GetOnlyGroups event,
+  ) async* {
     try {
       yield ChatListingLoading();
       // yield ChatListingLoaded(chats: _chats, favorites: _faborites);
@@ -117,7 +122,8 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
   }
 
   Stream<ChatListingState> _mapGetOnlyRequestToState(
-      GetOnlyRequest event) async* {
+    GetOnlyRequest event,
+  ) async* {
     try {
       yield ChatListingLoading();
       // yield ChatListingLoaded(chats: _chats, favorites: _faborites);
@@ -127,27 +133,35 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
   }
 
   Stream<ChatListingState> _mapStartSearchingToState(
-      StartChatSearching event) async* {
+    StartChatSearching event,
+  ) async* {
     try {
       yield ChatListingLoading();
       currentUserId =
           currentUserId ?? await _authenticationRepository.getCurrentUserId();
-      _searchList.sink.add(BuiltList<User>());
-      yield ChatSearching(userList: _searchList.stream);
+      _searchList.sink.add(
+        BuiltList<User>(),
+      );
+      yield ChatSearching(
+        userList: _searchList.stream,
+      );
     } catch (_) {
       yield ChatListingError();
     }
   }
 
   Stream<ChatListingState> _mapCancelSearchToState(
-      CancelChatSearch event) async* {
+    CancelChatSearch event,
+  ) async* {
     try {
       yield ChatListingLoading();
-      _searchList.sink.add(BuiltList<User>());
+      _searchList.sink.add(
+        BuiltList<User>(),
+      );
       yield ChatListingLoaded(
         chatRoomsList: _chatRoomsListController.stream,
         favoriteChatRoomsList: _favoriteChatRoomsListController.stream,
-        senderId: currentUserId,
+        senderId: currentUserId ?? '',
       );
     } catch (_) {
       yield ChatListingError();
@@ -155,19 +169,26 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
   }
 
   Stream<ChatListingState> _mapResetSearchToState(
-      ResetChatSearch event) async* {
+    ResetChatSearch event,
+  ) async* {
     try {
       yield ChatListingLoading();
       currentUserId =
           currentUserId ?? await _authenticationRepository.getCurrentUserId();
-      _searchList.sink.add(BuiltList<User>());
-      yield ChatSearching(userList: _searchList.stream);
+      _searchList.sink.add(
+        BuiltList<User>(),
+      );
+      yield ChatSearching(
+        userList: _searchList.stream,
+      );
     } catch (_) {
       yield ChatListingError();
     }
   }
 
-  Stream<ChatListingState> _mapSearchingToState(SearchingChats event) async* {
+  Stream<ChatListingState> _mapSearchingToState(
+    SearchingChats event,
+  ) async* {
     try {
       String _query;
 
@@ -175,50 +196,69 @@ class ChatListingBloc extends Bloc<ChatListingEvent, ChatListingState> {
           currentUserId ?? await _authenticationRepository.getCurrentUserId();
       _query = event.value.toLowerCase();
 
-      _userRepository.fetchAllUsers(currentUserId: currentUserId).listen(
-          (event) => _searchList.sink.add(BuiltList<User>().rebuild((b) => b
-            ..replace(event)
-            ..where((User user) {
-              if (_query != '') {
-                String _getId = user.id;
-                String _getUsername = user.username.toLowerCase();
-                String _getName = user.profile.name.toLowerCase();
-                String _getFirstname = user.profile.firstname.toLowerCase();
-                String _getSecondname = user.profile.secondname != null
-                    ? user.profile.secondname.toLowerCase()
-                    : null;
+      _userRepository.fetchAllUsers(currentUserId: currentUserId ?? '').listen(
+            (event) => _searchList.sink.add(
+              BuiltList<User>().rebuild(
+                (b) => b
+                  ..replace(event)
+                  ..where(
+                    (User user) {
+                      if (_query != '') {
+                        String? _getId = user.id;
+                        String? _getUsername = user.username.toLowerCase();
+                        String? _getName = user.profile!.name.toLowerCase();
+                        String? _getFirstname =
+                            user.profile!.firstname.toLowerCase();
+                        String? _getSecondname =
+                            user.profile!.secondname != null
+                                ? user.profile!.secondname!.toLowerCase()
+                                : null;
 
-                bool _matchesId = isUserInContacts(_getId);
-                bool _matchesUsername = _getUsername.contains(_query);
-                bool _matchesName = _getName.contains(_query);
-                bool _matchesFirstname = _getFirstname.contains(_query);
-                bool _matchesSecondname = _getSecondname != null
-                    ? _getSecondname.contains(_query)
-                    : false;
-                print(_matchesId);
-                return (_matchesId &&
-                    (_matchesUsername ||
-                        _matchesName ||
-                        _matchesFirstname ||
-                        _matchesSecondname));
-              }
-            }))));
+                        bool _matchesId = isUserInContacts(_getId ?? '');
+                        bool _matchesUsername = _getUsername.contains(_query);
+                        bool _matchesName = _getName.contains(_query);
+                        bool _matchesFirstname = _getFirstname.contains(_query);
+                        bool _matchesSecondname = _getSecondname != null
+                            ? _getSecondname.contains(_query)
+                            : false;
 
-      yield ChatSearching(userList: _searchList);
+                        print(_matchesId);
+
+                        return (_matchesId &&
+                            (_matchesUsername ||
+                                _matchesName ||
+                                _matchesFirstname ||
+                                _matchesSecondname));
+                      } else {
+                        return false;
+                      }
+                    },
+                  ),
+              ),
+            ),
+          );
+
+      yield ChatSearching(
+        userList: _searchList,
+      );
     } catch (_) {
       yield ChatListingError();
     }
   }
 
-  bool isUserInContacts(String getId) {
+  bool isUserInContacts(
+    String getId,
+  ) {
     bool _isUserInContacts = false;
     _chatMessageRepository
-        .findContactStream(userId: currentUserId)
-        .listen((event) => event.forEach((contact) {
-              if (!_isUserInContacts) {
-                _isUserInContacts = getId == contact.uid;
-              }
-            }));
+        .findContactStream(userId: currentUserId ?? '')
+        .listen(
+          (event) => event.forEach((contact) {
+            if (!_isUserInContacts) {
+              _isUserInContacts = getId == contact.uid;
+            }
+          }),
+        );
     return _isUserInContacts;
   }
 }

@@ -5,70 +5,103 @@ author:
 # homepage:
 
 environment:
-  sdk: ">=2.10.5 <3.0.0"
-  flutter: ">=1.22.6"
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.2.1"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^0.5.3
-  firebase_auth: ^0.18.4+1
-  firebase_auth_web: ^0.3.2+3
-  firebase_storage: ^5.2.0
-  firebase_messaging: ^7.0.3
-  firebase_admob: ^0.10.3
+  #
+  # I/O, Cache & Databases
+  #
+  path_provider: ^2.0.2
+  shared_preferences: ^2.0.6
+  hive: ^2.0.4 # local storage
+  sqflite: ^2.0.0+3 # local storage
+
+  #
+  # Firebase packages
+  #
+  firebase_core: ^1.3.0
+  firebase_auth: ^1.4.1
+  # firebase_auth_web: ^1.3.1
+  firebase_storage: ^8.1.3
+  firebase_messaging: ^10.0.2
+  firebase_admob: ^0.11.2
   # firebase_analyticss: ^6.2.0
   # firebase_crashlytics: ^0.2.3
   # firebase_ml_vision: ^0.9.8
-  cloud_firestore: ^0.14.4
-  google_sign_in: ^4.5.6
+  cloud_firestore: ^2.2.2
 
-  agora_rtc_engine: ^1.0.13
-  permission_handler: ^5.0.1+1
+  #
+  # Login & App Store packages
+  #
+  google_sign_in: ^5.0.4
+  flutter_facebook_login: ^3.0.0
+  sign_in_with_apple: ^3.0.0
 
-  path_provider: ^1.6.27
-  json_annotation: # Para la serializacion de objetos
+  #
+  # State managers
+  #
+  flutter_form_bloc: ^0.20.5
 
-  flutter_form_bloc: ^0.19.0
-  shared_preferences: ^0.5.12+4
-  flutter_localized_locales:
-
-  cupertino_icons: ^1.0.0
-  font_awesome_flutter: ^8.11.0
-  emoji_picker: ^0.1.0 # Emojies
-  charts_flutter: ^0.9.0 # Para dibujar graficos
-  smooth_page_indicator: ^0.2.0 # Indicadores de PageView
-
-  package_info: ^0.4.3+2
-  # device_info: ^0.4.2+4                                # Para obtener información del dispositivo
-
-  url_launcher: ^5.7.10
-  cached_network_image: ^2.5.0
-  flutter_svg: ^0.19.1
-  image_picker: ^0.6.7+21
-  camera: ^0.6.4+5
+  #
+  # Code structure, connectivity & internal services
+  #
+  flutter_localized_locales: ^2.0.2 #!!!!! ELIMINAR !!!!!!
+  json_annotation: ^4.0.1 # Para la serializacion de objetos
+  freezed_annotation: ^0.14.2
+  url_launcher: ^6.0.7
+  camera: ^0.8.1+3
+  image_picker: ^0.8.1+1
   # multi_image_picker: ^4.6.1
   # file_picker: ^1.6.3+2
+  agora_rtc_engine: ^4.0.2
+  package_info: ^2.0.2
+  # device_info: ^0.4.2+4 # Para obtener información del dispositivo
+  permission_handler: ^8.1.1
+  excel: ^2.0.0-null-safety-3
 
-  # local storage
-  hive: ^1.4.4+1
-  sqflite: ^1.3.2+1
+  #
+  # Informing User / Loading
+  #
 
-  flutter_colorpicker: ^0.3.5
-  flutter_map: ^0.10.1+1
-  table_calendar: ^2.3.3
-  excel: ^1.1.5
+  #
+  # UI related packages
+  #
+  cupertino_icons: ^1.0.3
+  font_awesome_flutter: ^9.1.0
+  flutter_svg: ^0.22.0
+  cached_network_image: ^3.0.0
+  charts_flutter: ^0.10.0
+  table_calendar: ^3.0.0
+  smooth_page_indicator: ^0.2.3
+  flutter_map: ^0.13.1
+  flutter_colorpicker: ^0.5.0
+  emoji_picker_flutter: ^1.0.6 # Emojies
+
+  #
+  # Social share packages
+  #
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # Para la serializacion de objetos
+  build_runner: ^2.0.5
+  built_value_generator: ^8.1.0
+  injectable_generator: ^1.4.1
+  freezed: ^0.14.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
+  # generate: true
+
   # This section identifies this Flutter project as a plugin project.
   # The 'pluginClass' and Android 'package' identifiers should not ordinarily
   # be modified. They are used by the tooling to maintain consistency when

@@ -25,9 +25,8 @@ import 'twitter_form_card.dart';
 class ContactForm extends StatelessWidget {
   final ContactFormBloc contactFormBloc;
 
-  const ContactForm({Key key, @required this.contactFormBloc})
-      : assert(contactFormBloc != null),
-        super(key: key);
+  const ContactForm({Key? key, required this.contactFormBloc})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +41,21 @@ class ContactForm extends StatelessWidget {
             onSuccess: (context, state) {
               LoadingDialog.hide(context);
 
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content:
-                    SingleChildScrollView(child: Text(state.successResponse)),
-                duration: Duration(milliseconds: 1500),
-              ));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: SingleChildScrollView(
+                    child: Text(state.successResponse ?? ''),
+                  ),
+                  duration: Duration(milliseconds: 1500),
+                ),
+              );
             },
             onFailure: (context, state) {
               LoadingDialog.hide(context);
 
-              Scaffold.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.failureResponse)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.failureResponse ?? ''),
+              ));
             },
             child: _contactInformationFormBuildHolder(),
           );
@@ -114,33 +117,34 @@ class ContactForm extends StatelessWidget {
             alignment: Alignment.centerLeft,
           ),
           Container(
-              child: Column(
-            children: <Widget>[
-              BlocBuilder<ListFieldBloc<AddressFieldBloc>,
-                  ListFieldBlocState<AddressFieldBloc>>(
-                cubit: contactFormBloc.address,
-                builder: (context, state) {
-                  if (state.fieldBlocs.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.fieldBlocs.length,
-                      itemBuilder: (context, i) {
-                        return AddressCard(
-                          addressIndex: i,
-                          addressField: state.fieldBlocs[i],
-                          onRemoveAddress: () =>
-                              contactFormBloc.removeAddress(i),
-                        );
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-              _btnAddAddress(),
-            ],
-          ))
+            child: Column(
+              children: <Widget>[
+                BlocBuilder<ListFieldBloc<AddressFieldBloc>,
+                    ListFieldBlocState<AddressFieldBloc>>(
+                  bloc: contactFormBloc.address,
+                  builder: (context, state) {
+                    if (state.fieldBlocs.isNotEmpty) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.fieldBlocs.length,
+                        itemBuilder: (context, i) {
+                          return AddressCard(
+                            addressIndex: i,
+                            addressField: state.fieldBlocs[i],
+                            onRemoveAddress: () =>
+                                contactFormBloc.removeAddress(i),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                _btnAddAddress(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -157,32 +161,33 @@ class ContactForm extends StatelessWidget {
             alignment: Alignment.centerLeft,
           ),
           Container(
-              child: Column(
-            children: <Widget>[
-              BlocBuilder<ListFieldBloc<PhoneFieldBloc>,
-                  ListFieldBlocState<PhoneFieldBloc>>(
-                cubit: contactFormBloc.phones,
-                builder: (context, state) {
-                  if (state.fieldBlocs.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.fieldBlocs.length,
-                      itemBuilder: (context, i) {
-                        return PhoneFormCard(
-                          phoneIndex: i,
-                          phoneFieldBloc: state.fieldBlocs[i],
-                          onRemovePhone: () => contactFormBloc.removePhone(i),
-                        );
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-              _btnAddPhone(),
-            ],
-          ))
+            child: Column(
+              children: <Widget>[
+                BlocBuilder<ListFieldBloc<PhoneFieldBloc>,
+                    ListFieldBlocState<PhoneFieldBloc>>(
+                  bloc: contactFormBloc.phones,
+                  builder: (context, state) {
+                    if (state.fieldBlocs.isNotEmpty) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.fieldBlocs.length,
+                        itemBuilder: (context, i) {
+                          return PhoneFormCard(
+                            phoneIndex: i,
+                            phoneFieldBloc: state.fieldBlocs[i],
+                            onRemovePhone: () => contactFormBloc.removePhone(i),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                _btnAddPhone(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -199,32 +204,33 @@ class ContactForm extends StatelessWidget {
             alignment: Alignment.centerLeft,
           ),
           Container(
-              child: Column(
-            children: <Widget>[
-              BlocBuilder<ListFieldBloc<MailFieldBloc>,
-                  ListFieldBlocState<MailFieldBloc>>(
-                cubit: contactFormBloc.mails,
-                builder: (context, state) {
-                  if (state.fieldBlocs.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.fieldBlocs.length,
-                      itemBuilder: (context, i) {
-                        return MailFormCard(
-                          mailIndex: i,
-                          mailFieldBloc: state.fieldBlocs[i],
-                          onRemoveMail: () => contactFormBloc.removeMail(i),
-                        );
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-              _btnAddMail(),
-            ],
-          ))
+            child: Column(
+              children: <Widget>[
+                BlocBuilder<ListFieldBloc<MailFieldBloc>,
+                    ListFieldBlocState<MailFieldBloc>>(
+                  bloc: contactFormBloc.mails,
+                  builder: (context, state) {
+                    if (state.fieldBlocs.isNotEmpty) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.fieldBlocs.length,
+                        itemBuilder: (context, i) {
+                          return MailFormCard(
+                            mailIndex: i,
+                            mailFieldBloc: state.fieldBlocs[i],
+                            onRemoveMail: () => contactFormBloc.removeMail(i),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                _btnAddMail(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -241,33 +247,34 @@ class ContactForm extends StatelessWidget {
             alignment: Alignment.centerLeft,
           ),
           Container(
-              child: Column(
-            children: <Widget>[
-              BlocBuilder<ListFieldBloc<FacebookFieldBloc>,
-                  ListFieldBlocState<FacebookFieldBloc>>(
-                cubit: contactFormBloc.facebooks,
-                builder: (context, state) {
-                  if (state.fieldBlocs.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.fieldBlocs.length,
-                      itemBuilder: (context, i) {
-                        return FacebookFormCard(
-                          facebookIndex: i,
-                          facebookFieldBloc: state.fieldBlocs[i],
-                          onRemoveFacebook: () =>
-                              contactFormBloc.removeFacebook(i),
-                        );
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-              _btnAddFacebook(),
-            ],
-          ))
+            child: Column(
+              children: <Widget>[
+                BlocBuilder<ListFieldBloc<FacebookFieldBloc>,
+                    ListFieldBlocState<FacebookFieldBloc>>(
+                  bloc: contactFormBloc.facebooks,
+                  builder: (context, state) {
+                    if (state.fieldBlocs.isNotEmpty) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.fieldBlocs.length,
+                        itemBuilder: (context, i) {
+                          return FacebookFormCard(
+                            facebookIndex: i,
+                            facebookFieldBloc: state.fieldBlocs[i],
+                            onRemoveFacebook: () =>
+                                contactFormBloc.removeFacebook(i),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                _btnAddFacebook(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -284,33 +291,34 @@ class ContactForm extends StatelessWidget {
             alignment: Alignment.centerLeft,
           ),
           Container(
-              child: Column(
-            children: <Widget>[
-              BlocBuilder<ListFieldBloc<InstagramFieldBloc>,
-                  ListFieldBlocState<InstagramFieldBloc>>(
-                cubit: contactFormBloc.instagrams,
-                builder: (context, state) {
-                  if (state.fieldBlocs.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.fieldBlocs.length,
-                      itemBuilder: (context, i) {
-                        return InstagramFormCard(
-                          instagramIndex: i,
-                          instagramFieldBloc: state.fieldBlocs[i],
-                          onRemoveInstagram: () =>
-                              contactFormBloc.removeInstagram(i),
-                        );
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-              _btnAddInstagram(),
-            ],
-          ))
+            child: Column(
+              children: <Widget>[
+                BlocBuilder<ListFieldBloc<InstagramFieldBloc>,
+                    ListFieldBlocState<InstagramFieldBloc>>(
+                  bloc: contactFormBloc.instagrams,
+                  builder: (context, state) {
+                    if (state.fieldBlocs.isNotEmpty) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.fieldBlocs.length,
+                        itemBuilder: (context, i) {
+                          return InstagramFormCard(
+                            instagramIndex: i,
+                            instagramFieldBloc: state.fieldBlocs[i],
+                            onRemoveInstagram: () =>
+                                contactFormBloc.removeInstagram(i),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                _btnAddInstagram(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -327,33 +335,34 @@ class ContactForm extends StatelessWidget {
             alignment: Alignment.centerLeft,
           ),
           Container(
-              child: Column(
-            children: <Widget>[
-              BlocBuilder<ListFieldBloc<TwitterFieldBloc>,
-                  ListFieldBlocState<TwitterFieldBloc>>(
-                cubit: contactFormBloc.twitters,
-                builder: (context, state) {
-                  if (state.fieldBlocs.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.fieldBlocs.length,
-                      itemBuilder: (context, i) {
-                        return TwitterFormCard(
-                          twitterIndex: i,
-                          twitterFieldBloc: state.fieldBlocs[i],
-                          onRemoveTwitter: () =>
-                              contactFormBloc.removeTwitter(i),
-                        );
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-              _btnAddTwitter(),
-            ],
-          ))
+            child: Column(
+              children: <Widget>[
+                BlocBuilder<ListFieldBloc<TwitterFieldBloc>,
+                    ListFieldBlocState<TwitterFieldBloc>>(
+                  bloc: contactFormBloc.twitters,
+                  builder: (context, state) {
+                    if (state.fieldBlocs.isNotEmpty) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.fieldBlocs.length,
+                        itemBuilder: (context, i) {
+                          return TwitterFormCard(
+                            twitterIndex: i,
+                            twitterFieldBloc: state.fieldBlocs[i],
+                            onRemoveTwitter: () =>
+                                contactFormBloc.removeTwitter(i),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                _btnAddTwitter(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -370,32 +379,34 @@ class ContactForm extends StatelessWidget {
             alignment: Alignment.centerLeft,
           ),
           Container(
-              child: Column(
-            children: <Widget>[
-              BlocBuilder<ListFieldBloc<GithubFieldBloc>,
-                  ListFieldBlocState<GithubFieldBloc>>(
-                cubit: contactFormBloc.githubs,
-                builder: (context, state) {
-                  if (state.fieldBlocs.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.fieldBlocs.length,
-                      itemBuilder: (context, i) {
-                        return GithubFormCard(
-                          githubIndex: i,
-                          githubFieldBloc: state.fieldBlocs[i],
-                          onRemoveGithub: () => contactFormBloc.removeGithub(i),
-                        );
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-              _btnAddGithub(),
-            ],
-          ))
+            child: Column(
+              children: <Widget>[
+                BlocBuilder<ListFieldBloc<GithubFieldBloc>,
+                    ListFieldBlocState<GithubFieldBloc>>(
+                  bloc: contactFormBloc.githubs,
+                  builder: (context, state) {
+                    if (state.fieldBlocs.isNotEmpty) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.fieldBlocs.length,
+                        itemBuilder: (context, i) {
+                          return GithubFormCard(
+                            githubIndex: i,
+                            githubFieldBloc: state.fieldBlocs[i],
+                            onRemoveGithub: () =>
+                                contactFormBloc.removeGithub(i),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                _btnAddGithub(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -412,33 +423,34 @@ class ContactForm extends StatelessWidget {
             alignment: Alignment.centerLeft,
           ),
           Container(
-              child: Column(
-            children: <Widget>[
-              BlocBuilder<ListFieldBloc<LinkedinFieldBloc>,
-                  ListFieldBlocState<LinkedinFieldBloc>>(
-                cubit: contactFormBloc.linkedins,
-                builder: (context, state) {
-                  if (state.fieldBlocs.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.fieldBlocs.length,
-                      itemBuilder: (context, i) {
-                        return LinkedinFormCard(
-                          linkedinIndex: i,
-                          linkedinFieldBloc: state.fieldBlocs[i],
-                          onRemoveLinkedin: () =>
-                              contactFormBloc.removeLinkedin(i),
-                        );
-                      },
-                    );
-                  }
-                  return Container();
-                },
-              ),
-              _btnAddLinkedin(),
-            ],
-          ))
+            child: Column(
+              children: <Widget>[
+                BlocBuilder<ListFieldBloc<LinkedinFieldBloc>,
+                    ListFieldBlocState<LinkedinFieldBloc>>(
+                  bloc: contactFormBloc.linkedins,
+                  builder: (context, state) {
+                    if (state.fieldBlocs.isNotEmpty) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.fieldBlocs.length,
+                        itemBuilder: (context, i) {
+                          return LinkedinFormCard(
+                            linkedinIndex: i,
+                            linkedinFieldBloc: state.fieldBlocs[i],
+                            onRemoveLinkedin: () =>
+                                contactFormBloc.removeLinkedin(i),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                _btnAddLinkedin(),
+              ],
+            ),
+          )
         ],
       ),
     );

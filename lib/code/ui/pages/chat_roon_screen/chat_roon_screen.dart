@@ -14,37 +14,41 @@ import 'widgets/emijiPiker.dart';
 import 'widgets/messages_list.dart';
 
 class ChatRoonScreen extends StatefulWidget {
-  final User receiver;
+  final User? receiver;
 
-  ChatRoonScreen({@required this.receiver});
+  ChatRoonScreen({
+    required this.receiver,
+  });
 
   @override
   _ChatRoonScreenState createState() => _ChatRoonScreenState();
 }
 
 class _ChatRoonScreenState extends State<ChatRoonScreen> {
-  AuthenticationRepository _authenticationRepository;
-  UserRepository _userRepository;
-  ChatMessageRepository _chatMessageRepository;
+  late AuthenticationRepository _authenticationRepository;
+  late UserRepository _userRepository;
+  late ChatMessageRepository _chatMessageRepository;
 
   // Providers
   // ImageUploadProvider _imageUploadProvider;
 
-  ChatRoomBloc _chatBloc;
+  late ChatRoomBloc _chatBloc;
 
-  TextEditingController _sendController;
-  TextEditingController _searchController;
-  FocusNode _textFieldFocus;
-  ScrollController _listScrollController;
+  late TextEditingController _sendController;
+  late TextEditingController _searchController;
+  late FocusNode _textFieldFocus;
+  late ScrollController _listScrollController;
 
   bool isShowMessageOptions = false;
   bool _isScrollDown = true;
 
   @override
   void initState() {
-    _authenticationRepository = context.repository<AuthenticationRepository>();
-    _userRepository = context.repository<UserRepository>();
-    _chatMessageRepository = context.repository<ChatMessageRepository>();
+    _authenticationRepository =
+        RepositoryProvider.of<AuthenticationRepository>(context);
+    _userRepository = RepositoryProvider.of<UserRepository>(context);
+    _chatMessageRepository =
+        RepositoryProvider.of<ChatMessageRepository>(context);
 
     // Providers
     // _imageUploadProvider = Provider.of<ImageUploadProvider>(context);
@@ -62,18 +66,20 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
       userRepository: _userRepository,
       chatMessageRepository: _chatMessageRepository,
       // imageUploadProvider: _imageUploadProvider
-    )..add(LoadChat(receiverId: widget.receiver.id));
+    )..add(
+        LoadChat(receiverId: widget.receiver!.id ?? ''),
+      );
 
     super.initState();
   }
 
   @override
   void dispose() {
-    _chatBloc?.close();
-    _sendController?.dispose();
-    _searchController?.dispose();
-    _textFieldFocus?.dispose();
-    _listScrollController?.dispose();
+    _chatBloc.close();
+    _sendController.dispose();
+    _searchController.dispose();
+    _textFieldFocus.dispose();
+    _listScrollController.dispose();
     super.dispose();
   }
 
@@ -90,30 +96,33 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
     });
   }
 
-  _moveScrollToDown() => _chatBloc.add(MoveScrollToDown());
+  _moveScrollToDown() => _chatBloc.add(
+        MoveScrollToDown(),
+      );
 
   @override
   Widget build(BuildContext context) {
     return BannerSize(
         body: MultiBlocProvider(
-            providers: [
-          BlocProvider<ChatRoomBloc>(
-            create: (BuildContext context) => _chatBloc,
-          ),
-        ],
-            child: BlocConsumer(
-              cubit: _chatBloc,
-              listener: (context, state) {},
-              builder: (context, state) {
-                if (state is ChatInitial) {
-                  return Container();
-                } else if (state is ChatLoaded) {
-                  return _build(state);
-                } else {
-                  return Container();
-                }
-              },
-            )));
+      providers: [
+        BlocProvider<ChatRoomBloc>(
+          create: (BuildContext context) => _chatBloc,
+        ),
+      ],
+      child: BlocConsumer(
+        bloc: _chatBloc,
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is ChatInitial) {
+            return Container();
+          } else if (state is ChatLoaded) {
+            return _build(state);
+          } else {
+            return Container();
+          }
+        },
+      ),
+    ));
   }
 
   Widget _build(ChatLoaded state) {
@@ -123,7 +132,7 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
       appBar: ChatAppsBar(
         chatRoomBloc: _chatBloc,
         context: context,
-        receiver: widget.receiver,
+        receiver: widget.receiver!,
       ),
 
       body: GestureDetector(
@@ -134,7 +143,7 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
               child: Stack(
                 children: [
                   MessageList(
-                    currentUserId: state.sender.id,
+                    currentUserId: state.sender.id ?? '',
                     chatMessageList: state.chatMessageList,
                     scrollController: _listScrollController,
                   ),
@@ -143,10 +152,12 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
               ),
             ),
             ChatControlsBar(
-              receiver: widget.receiver,
+              receiver: widget.receiver!,
             ),
             _chatBloc.state.showEmojiPicker
-                ? Container(child: EmojiPiker())
+                ? Container(
+                    child: EmojiPiker(),
+                  )
                 : Container(),
           ],
         ),
@@ -161,10 +172,11 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
         width: 30,
         margin: EdgeInsets.only(bottom: 12, right: 12),
         child: FloatingActionButton(
-            onPressed: _moveScrollToDown,
-            backgroundColor: Colors.grey,
-            child: Icon(Icons.keyboard_arrow_down,
-                color: Theme.of(context).hintColor)),
+          onPressed: _moveScrollToDown,
+          backgroundColor: Colors.grey,
+          child: Icon(Icons.keyboard_arrow_down,
+              color: Theme.of(context).hintColor),
+        ),
       ),
     );
   }

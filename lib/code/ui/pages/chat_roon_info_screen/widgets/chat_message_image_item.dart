@@ -10,8 +10,11 @@ class ChatMessageImageItem extends StatefulWidget {
 
   final ChatMessage message;
 
-  ChatMessageImageItem({Key key, @required this.list, @required this.index})
-      : message = list[index],
+  ChatMessageImageItem({
+    Key? key,
+    required this.list,
+    required this.index,
+  })  : message = list[index],
         super(key: key);
 
   @override
@@ -20,21 +23,24 @@ class ChatMessageImageItem extends StatefulWidget {
 
 class _ChatMessageImageItemState extends State<ChatMessageImageItem> {
   _goImageDetail() => Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ImageDetailScreen(
-            list: widget.list,
-            messageId: widget.list[widget.index].messageId,
-          )));
+        builder: (context) => ImageDetailScreen(
+          list: widget.list,
+          messageId: widget.list[widget.index].messageId ?? '',
+        ),
+      ));
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: _goImageDetail,
+      onTap: _goImageDetail,
+      child: Container(
+        margin: EdgeInsets.all(0.5),
         child: Container(
-          margin: EdgeInsets.all(0.5),
-          child: Container(
-              child: CachedImage(
-            widget.message.photoUrl,
-          )),
-        ));
+          child: CachedImage(
+            widget.message.photoUrl ?? '',
+          ),
+        ),
+      ),
+    );
   }
 }

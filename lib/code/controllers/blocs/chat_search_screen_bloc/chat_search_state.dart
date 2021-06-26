@@ -22,9 +22,9 @@ class ChatSearchLoading extends ChatSearchState {
 }
 
 class ChatSearching extends ChatSearchState {
-  final BehaviorSubject<BuiltList<User>> userList;
+  final Stream<BuiltList<User>> userList;
 
-  ChatSearching({this.userList});
+  ChatSearching({required this.userList});
 
   @override
   String toString() => '''

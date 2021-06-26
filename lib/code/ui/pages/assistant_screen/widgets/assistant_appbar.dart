@@ -13,11 +13,11 @@ class AssistantAppsBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _AssistantAppsBarState extends State<AssistantAppsBar> {
   // Blocs
-  AssistantBloc _assistantBloc;
+  late AssistantBloc _assistantBloc;
 
   @override
   void initState() {
-    _assistantBloc = context.bloc<AssistantBloc>();
+    _assistantBloc = BlocProvider.of<AssistantBloc>(context);
     super.initState();
   }
 
@@ -29,7 +29,7 @@ class _AssistantAppsBarState extends State<AssistantAppsBar> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _assistantBloc,
+        bloc: _assistantBloc,
         listener: (BuildContext context, AssistantState state) {},
         builder: (BuildContext context, AssistantState state) {
           return _cupertinaoAppBar();

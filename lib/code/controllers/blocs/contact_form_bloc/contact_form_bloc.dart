@@ -1,5 +1,4 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/contact_form_bloc/mails_field_bloc.dart';
 import 'package:hive_core/code/models/address.dart';
@@ -19,8 +18,8 @@ class ContactFormBloc extends FormBloc<String, String> {
   // Repositorys
   final AuthenticationRepository _authenticationRepository;
 
-  String userId;
-  ContactInformation _contactInformation;
+  late String? userId;
+  late ContactInformation _contactInformation;
 
   final address = ListFieldBloc<AddressFieldBloc>(name: 'address');
   final phones = ListFieldBloc<PhoneFieldBloc>(name: 'phones');
@@ -32,17 +31,16 @@ class ContactFormBloc extends FormBloc<String, String> {
   final linkedins = ListFieldBloc<LinkedinFieldBloc>(name: 'linkedins');
 
   ContactFormBloc({
-    @required AuthenticationRepository authenticationRepository,
+    required AuthenticationRepository authenticationRepository,
   }) : _authenticationRepository = authenticationRepository {
     initState();
   }
 
   ContactFormBloc.fromContactInformation({
-    @required AuthenticationRepository authenticationRepository,
+    required AuthenticationRepository authenticationRepository,
     // Models
-    @required ContactInformation contactInformation,
-  })  : assert(contactInformation != null),
-        _authenticationRepository = authenticationRepository,
+    required ContactInformation contactInformation,
+  })  : _authenticationRepository = authenticationRepository,
         // Models
         _contactInformation = contactInformation {
     initState();
@@ -66,15 +64,16 @@ class ContactFormBloc extends FormBloc<String, String> {
 
   @override
   Future<void> close() {
-    address?.close();
-    phones?.close();
-    mails?.close();
-    address?.close();
-    facebooks?.close();
-    instagrams?.close();
-    twitters?.close();
-    githubs?.close();
-    linkedins?.close();
+    address.close();
+    phones.close();
+    mails.close();
+    address.close();
+    facebooks.close();
+    instagrams.close();
+    twitters.close();
+    githubs.close();
+    linkedins.close();
+
     return super.close();
   }
 
@@ -95,13 +94,15 @@ class ContactFormBloc extends FormBloc<String, String> {
     if (_contactInformation.addresses != null) {
       _contactInformation.addresses.forEach((element) {
         AddressFieldBloc _addressFieldBloc = _getAddressFildBloc();
-        _addressFieldBloc.label.updateValue(element.label);
-        _addressFieldBloc.street.updateValue(element.street);
-        _addressFieldBloc.number.updateValue(element.number.toString());
-        _addressFieldBloc.postalCode.updateValue(element.postalCode);
-        _addressFieldBloc.country.updateValue(element.country);
-        _addressFieldBloc.province.updateValue(element.province);
-        _addressFieldBloc.city.updateValue(element.city);
+        _addressFieldBloc.label.updateValue(element.label ?? '');
+        _addressFieldBloc.street.updateValue(element.street ?? '');
+        _addressFieldBloc.number.updateValue(
+          element.number.toString(),
+        );
+        _addressFieldBloc.postalCode.updateValue(element.postalCode ?? '');
+        _addressFieldBloc.country.updateValue(element.country ?? '');
+        _addressFieldBloc.province.updateValue(element.province ?? '');
+        _addressFieldBloc.city.updateValue(element.city ?? '');
         address.addFieldBloc(_addressFieldBloc);
       });
     }
@@ -191,75 +192,93 @@ class ContactFormBloc extends FormBloc<String, String> {
     _addressList = BuiltList<Address>();
     address.value.forEach((element) {
       _addressList = _addressList.rebuild((b) => b
-        ..add(Address((b) => b
-          ..label = element.label.value
-          ..street = element.street.value
-          ..number = element.number.valueToInt
-          ..postalCode = element.postalCode.value
-          ..country = element.country.value
-          ..province = element.province.value
-          ..city = element.city.value)));
+        ..add(
+          Address((b) => b
+            ..label = element.label.value
+            ..street = element.street.value
+            ..number = element.number.valueToInt
+            ..postalCode = element.postalCode.value
+            ..country = element.country.value
+            ..province = element.province.value
+            ..city = element.city.value),
+        ));
     });
 
     _phonesList = BuiltList<ContactInformationValue>();
     phones.value.forEach((element) {
       _phonesList = _phonesList.rebuild((b) => b
-        ..add(ContactInformationValue((b) => b
-          ..label = element.label.value
-          ..value = element.value.value)));
+        ..add(
+          ContactInformationValue((b) => b
+            ..label = element.label.value
+            ..value = element.value.value),
+        ));
     });
     _mailsList = BuiltList<ContactInformationValue>();
     mails.value.forEach((element) {
       _mailsList = _mailsList.rebuild((b) => b
-        ..add(ContactInformationValue((b) => b
-          ..label = element.label.value
-          ..value = element.value.value)));
+        ..add(
+          ContactInformationValue((b) => b
+            ..label = element.label.value
+            ..value = element.value.value),
+        ));
     });
     _facebooksList = BuiltList<ContactInformationValue>();
     facebooks.value.forEach((element) {
       _facebooksList = _facebooksList.rebuild((b) => b
-        ..add(ContactInformationValue((b) => b
-          ..label = element.label.value
-          ..value = element.value.value)));
+        ..add(
+          ContactInformationValue((b) => b
+            ..label = element.label.value
+            ..value = element.value.value),
+        ));
     });
     _instagramsList = BuiltList<ContactInformationValue>();
     instagrams.value.forEach((element) {
       _instagramsList = _instagramsList.rebuild((b) => b
-        ..add(ContactInformationValue((b) => b
-          ..label = element.label.value
-          ..value = element.value.value)));
+        ..add(
+          ContactInformationValue((b) => b
+            ..label = element.label.value
+            ..value = element.value.value),
+        ));
     });
     _twittersList = BuiltList<ContactInformationValue>();
     twitters.value.forEach((element) {
       _twittersList = _twittersList.rebuild((b) => b
-        ..add(ContactInformationValue((b) => b
-          ..label = element.label.value
-          ..value = element.value.value)));
+        ..add(
+          ContactInformationValue((b) => b
+            ..label = element.label.value
+            ..value = element.value.value),
+        ));
     });
     _githubsList = BuiltList<ContactInformationValue>();
     githubs.value.forEach((element) {
       _githubsList = _githubsList.rebuild((b) => b
-        ..add(ContactInformationValue((b) => b
-          ..label = element.label.value
-          ..value = element.value.value)));
+        ..add(
+          ContactInformationValue((b) => b
+            ..label = element.label.value
+            ..value = element.value.value),
+        ));
     });
     _linkedinsList = BuiltList<ContactInformationValue>();
     linkedins.value.forEach((element) {
       _linkedinsList = _linkedinsList.rebuild((b) => b
-        ..add(ContactInformationValue((b) => b
-          ..label = element.label.value
-          ..value = element.value.value)));
+        ..add(
+          ContactInformationValue((b) => b
+            ..label = element.label.value
+            ..value = element.value.value),
+        ));
     });
 
-    _contactInformation = ContactInformation((b) => b
-      ..addresses.replace(_addressList)
-      ..phones.replace(_phonesList)
-      ..mails.replace(_mailsList)
-      ..facebook.replace(_facebooksList)
-      ..instagram.replace(_instagramsList)
-      ..twitter.replace(_twittersList)
-      ..github.replace(_githubsList)
-      ..linkedin.replace(_linkedinsList));
+    _contactInformation = ContactInformation(
+      (b) => b
+        ..addresses.replace(_addressList)
+        ..phones.replace(_phonesList)
+        ..mails.replace(_mailsList)
+        ..facebook.replace(_facebooksList)
+        ..instagram.replace(_instagramsList)
+        ..twitter.replace(_twittersList)
+        ..github.replace(_githubsList)
+        ..linkedin.replace(_linkedinsList),
+    );
 
     return _contactInformation;
   }
@@ -294,7 +313,9 @@ class ContactFormBloc extends FormBloc<String, String> {
     );
   }
 
-  void addAddress() => address.addFieldBloc(_getAddressFildBloc());
+  void addAddress() => address.addFieldBloc(
+        _getAddressFildBloc(),
+      );
 
   void removeAddress(int index) => address.removeFieldBlocAt(index);
 
@@ -315,7 +336,9 @@ class ContactFormBloc extends FormBloc<String, String> {
     );
   }
 
-  void addPhone() => phones.addFieldBloc(_getPhoneFildBloc());
+  void addPhone() => phones.addFieldBloc(
+        _getPhoneFildBloc(),
+      );
 
   void removePhone(int index) => phones.removeFieldBlocAt(index);
 
@@ -336,7 +359,9 @@ class ContactFormBloc extends FormBloc<String, String> {
     );
   }
 
-  void addMail() => mails.addFieldBloc(_getMailFildBloc());
+  void addMail() => mails.addFieldBloc(
+        _getMailFildBloc(),
+      );
 
   void removeMail(int index) => mails.removeFieldBlocAt(index);
 
@@ -357,7 +382,9 @@ class ContactFormBloc extends FormBloc<String, String> {
     );
   }
 
-  void addFacebook() => facebooks.addFieldBloc(_getFacebookFildBloc());
+  void addFacebook() => facebooks.addFieldBloc(
+        _getFacebookFildBloc(),
+      );
 
   void removeFacebook(int index) => facebooks.removeFieldBlocAt(index);
 
@@ -378,7 +405,9 @@ class ContactFormBloc extends FormBloc<String, String> {
     );
   }
 
-  void addTwitter() => twitters.addFieldBloc(_getTwitterFildBloc());
+  void addTwitter() => twitters.addFieldBloc(
+        _getTwitterFildBloc(),
+      );
 
   void removeTwitter(int index) => twitters.removeFieldBlocAt(index);
 
@@ -399,7 +428,9 @@ class ContactFormBloc extends FormBloc<String, String> {
     );
   }
 
-  void addInstagram() => instagrams.addFieldBloc(_getInstagramFildBloc());
+  void addInstagram() => instagrams.addFieldBloc(
+        _getInstagramFildBloc(),
+      );
 
   void removeInstagram(int index) => instagrams.removeFieldBlocAt(index);
 
@@ -420,7 +451,9 @@ class ContactFormBloc extends FormBloc<String, String> {
     );
   }
 
-  void addGithub() => githubs.addFieldBloc(_getGithubFildBloc());
+  void addGithub() => githubs.addFieldBloc(
+        _getGithubFildBloc(),
+      );
 
   void removeGithub(int index) => githubs.removeFieldBlocAt(index);
 
@@ -441,7 +474,9 @@ class ContactFormBloc extends FormBloc<String, String> {
     );
   }
 
-  void addLinkedin() => linkedins.addFieldBloc(_getLinkedinFildBloc());
+  void addLinkedin() => linkedins.addFieldBloc(
+        _getLinkedinFildBloc(),
+      );
 
   void removeLinkedin(int index) => linkedins.removeFieldBlocAt(index);
 

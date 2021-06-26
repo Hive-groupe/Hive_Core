@@ -10,45 +10,46 @@ class TwitterFormCard extends StatelessWidget {
   final VoidCallback onRemoveTwitter;
 
   const TwitterFormCard({
-    Key key,
-    @required this.twitterIndex,
-    @required this.twitterFieldBloc,
-    @required this.onRemoveTwitter,
+    Key? key,
+    required this.twitterIndex,
+    required this.twitterFieldBloc,
+    required this.onRemoveTwitter,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: Colors.transparent,
-        margin: const EdgeInsets.only(
-          left: 20,
-        ),
-        child: ListTile(
-          //leading: _iconHolder(),
-          title: Container(
-            child: Column(
-              children: <Widget>[
-                // _title(),
-                TextFieldBlocBuilder(
-                  textFieldBloc: twitterFieldBloc.label,
-                  decoration: InputDecoration(
-                    labelText: 'Etiqueta', isDense: true, // Added this
-                    contentPadding: EdgeInsets.all(8),
-                  ),
+      color: Colors.transparent,
+      margin: const EdgeInsets.only(
+        left: 20,
+      ),
+      child: ListTile(
+        //leading: _iconHolder(),
+        title: Container(
+          child: Column(
+            children: <Widget>[
+              // _title(),
+              TextFieldBlocBuilder(
+                textFieldBloc: twitterFieldBloc.label,
+                decoration: InputDecoration(
+                  labelText: 'Etiqueta', isDense: true, // Added this
+                  contentPadding: EdgeInsets.all(8),
                 ),
-                TextFieldBlocBuilder(
-                  textFieldBloc: twitterFieldBloc.value,
-                  decoration: InputDecoration(
-                    labelText: 'Correo electronico',
-                    isDense: true, // Added this
-                    contentPadding: EdgeInsets.all(8),
-                  ),
+              ),
+              TextFieldBlocBuilder(
+                textFieldBloc: twitterFieldBloc.value,
+                decoration: InputDecoration(
+                  labelText: 'Correo electronico',
+                  isDense: true, // Added this
+                  contentPadding: EdgeInsets.all(8),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          trailing: _trailing(),
-        ));
+        ),
+        trailing: _trailing(),
+      ),
+    );
   }
 
   Widget _trailing() {

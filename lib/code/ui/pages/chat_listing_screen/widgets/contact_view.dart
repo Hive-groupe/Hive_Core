@@ -18,17 +18,17 @@ class ContactView extends StatelessWidget {
   final UserRepository _userRepository = UserRepositoryFirebaseImpl('users');
 
   ContactView({
-    this.contact,
-    this.senderId,
+    required this.contact,
+    required this.senderId,
   });
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<User>(
+    return FutureBuilder<dynamic>(
       future: _userRepository.getUserById(contact.uid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          User user = snapshot.data;
+          User user = snapshot.data!;
 
           return ViewLayout(
             contact: user,
@@ -50,8 +50,8 @@ class ViewLayout extends StatelessWidget {
       ChatMessageRepositoryFirebaseImpl(MESSAGES_COLLECTION);
 
   ViewLayout({
-    @required this.contact,
-    @required this.senderId,
+    required this.contact,
+    required this.senderId,
   });
 
   _goChatSrceen(BuildContext context, User user) => () => Navigator.push(
@@ -71,15 +71,15 @@ class ViewLayout extends StatelessWidget {
       mini: false,
       onTap: _goChatSrceen(context, contact),
       title: Text(
-        (contact != null ? contact.profile.name : null) != null
-            ? contact.profile.name
+        (contact != null ? contact.profile!.name : null) != null
+            ? contact.profile!.name
             : "..",
         style: TextStyle(fontFamily: "Arial", fontSize: 19),
       ),
       subtitle: LastMessageContainer(
         stream: _chatMethods.fetchLastMessageBetween(
           senderId: senderId,
-          receiverId: contact.id,
+          receiverId: contact.id ?? '',
         ),
       ),
       leading: Container(
@@ -87,12 +87,12 @@ class ViewLayout extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             CachedImage(
-              contact.profile.avatar,
+              contact.profile!.avatar ?? '',
               radius: 80,
               isRound: true,
             ),
             OnlineDotIndicator(
-              uid: contact.id,
+              uid: contact.id ?? '',
             ),
           ],
         ),

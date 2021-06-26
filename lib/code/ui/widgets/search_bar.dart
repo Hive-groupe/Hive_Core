@@ -7,18 +7,20 @@ import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class SearchBar extends StatefulWidget {
-  SearchBar({Key key}) : super(key: key);
+  SearchBar({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
-  AuthenticationBloc _authenticationBloc;
+  late AuthenticationBloc _authenticationBloc;
 
   @override
   void initState() {
-    _authenticationBloc = context.bloc<AuthenticationBloc>();
+    _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     super.initState();
   }
 
@@ -38,7 +40,7 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _authenticationBloc,
+        bloc: _authenticationBloc,
         listener: (context, state) {},
         builder: (context, state) {
           if (state is Authenticated) {
@@ -53,8 +55,18 @@ class _SearchBarState extends State<SearchBar> {
     return GestureDetector(
       onTap: _goAssistantScreen,
       child: Container(
-        margin: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
-        padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+        margin: EdgeInsets.only(
+          top: 5,
+          bottom: 5,
+          left: 10,
+          right: 10,
+        ),
+        padding: EdgeInsets.only(
+          top: 5,
+          bottom: 5,
+          left: 10,
+          right: 10,
+        ),
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           boxShadow: [
@@ -92,22 +104,23 @@ class _SearchBarState extends State<SearchBar> {
 
   Widget _text() {
     return Container(
-        child: Row(
-      children: [
-        Container(
-          child: Icon(Icons.search),
-        ),
-        SizedBox(
-          width: 15,
-        ),
-        Container(
-          child: Text(
-            'Buscar aqui',
-            style: TextStyle(color: Colors.grey),
+      child: Row(
+        children: [
+          Container(
+            child: Icon(Icons.search),
           ),
-        ),
-      ],
-    ));
+          SizedBox(
+            width: 15,
+          ),
+          Container(
+            child: Text(
+              'Buscar aqui',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _microphone() {
@@ -123,17 +136,19 @@ class _SearchBarState extends State<SearchBar> {
     return Hero(
         tag: 'avatar',
         child: GestureDetector(
-            onTap: _goSettings,
-            child: StreamBuilder<User>(
-                stream: userDataInfo.output,
-                builder: (context, snapshot) {
-                  return snapshot.hasData
-                      ? snapshot.data.profile.avatar == null ||
-                              snapshot.data.profile.avatar == ''
-                          ? _buildAvatarNoFile()
-                          : _buildAvatarNetwork(snapshot.data.profile.avatar)
-                      : _buildAvatarNoFile();
-                })));
+          onTap: _goSettings,
+          child: StreamBuilder<User?>(
+              stream: userDataInfo.output,
+              builder: (context, snapshot) {
+                return snapshot.hasData
+                    ? snapshot.data!.profile!.avatar == null ||
+                            snapshot.data!.profile!.avatar == ''
+                        ? _buildAvatarNoFile()
+                        : _buildAvatarNetwork(
+                            snapshot.data!.profile!.avatar ?? '')
+                    : _buildAvatarNoFile();
+              }),
+        ));
   }
 
   Widget _buildAvatarNoFile() {
@@ -147,18 +162,19 @@ class _SearchBarState extends State<SearchBar> {
 
   Widget _buildAvatarNetwork(String avatar) {
     return Container(
-        child: CircleAvatar(
-      radius: 20,
-      child: ClipOval(
-        child: CachedNetworkImage(
-          height: 50.0,
-          width: 50.0,
-          fit: BoxFit.cover,
-          imageUrl: avatar,
-          placeholder: (context, url) => CircularProgressIndicator(),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+      child: CircleAvatar(
+        radius: 20,
+        child: ClipOval(
+          child: CachedNetworkImage(
+            height: 50.0,
+            width: 50.0,
+            fit: BoxFit.cover,
+            imageUrl: avatar,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
         ),
       ),
-    ));
+    );
   }
 }

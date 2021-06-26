@@ -11,11 +11,11 @@ class SettingsNotificationsForm extends StatefulWidget {
 }
 
 class _SettingsNotificationsFormState extends State<SettingsNotificationsForm> {
-  PreferencesBloc _preferencesBloc;
+  late PreferencesBloc _preferencesBloc;
 
   @override
   void initState() {
-    _preferencesBloc = context.bloc<PreferencesBloc>();
+    _preferencesBloc = BlocProvider.of<PreferencesBloc>(context);
     super.initState();
   }
 
@@ -24,18 +24,23 @@ class _SettingsNotificationsFormState extends State<SettingsNotificationsForm> {
     super.dispose();
   }
 
-  _onChangeNotifications(PreferencesLoaded state) =>
-      _preferencesBloc.add(ChangeNotifications(!state.notifications));
+  _onChangeNotifications(PreferencesLoaded state) => _preferencesBloc.add(
+        ChangeNotifications(!state.notifications),
+      );
 
-  _onChangeSoundEffects(PreferencesLoaded state) =>
-      _preferencesBloc.add(ChangeSoundEffects(!state.soundEffects));
+  _onChangeSoundEffects(PreferencesLoaded state) => _preferencesBloc.add(
+        ChangeSoundEffects(!state.soundEffects),
+      );
 
-  _onChangeVibration(PreferencesLoaded state) =>
-      _preferencesBloc.add(ChangeVibration(!state.vibration));
+  _onChangeVibration(PreferencesLoaded state) => _preferencesBloc.add(
+        ChangeVibration(!state.vibration),
+      );
 
   _onResetNotificationsferences() {
     Navigator.pop(context);
-    _preferencesBloc.add(ResetNotificationsPreferences());
+    _preferencesBloc.add(
+      ResetNotificationsPreferences(),
+    );
   }
 
   Future<void> _onConfirmResetNotificationsPreferences() {
@@ -55,11 +60,11 @@ class _SettingsNotificationsFormState extends State<SettingsNotificationsForm> {
               ),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(HiveCoreString.of(context).cancel),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: _onResetNotificationsferences,
                 child: Text(HiveCoreString.of(context).yes),
               ),
@@ -71,7 +76,7 @@ class _SettingsNotificationsFormState extends State<SettingsNotificationsForm> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _preferencesBloc,
+        bloc: _preferencesBloc,
         listener: (context, state) {
           if (state is PreferencesLoaded) {}
         },

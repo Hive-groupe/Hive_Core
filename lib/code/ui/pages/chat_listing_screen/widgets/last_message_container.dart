@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_core/code/models/chat_message.dart';
@@ -6,7 +8,7 @@ class LastMessageContainer extends StatelessWidget {
   final stream;
 
   LastMessageContainer({
-    @required this.stream,
+    required this.stream,
   });
 
   @override
@@ -15,14 +17,18 @@ class LastMessageContainer extends StatelessWidget {
       stream: stream,
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData) {
-          var docList = snapshot.data.docs;
+          var docList = snapshot.data!.docs;
 
           if (docList.isNotEmpty) {
-            ChatMessage message = ChatMessage.fromJson(docList.last.data());
+            ChatMessage? message = ChatMessage.fromJson(
+              json.decode(
+                docList.last.data().toString(),
+              ),
+            );
             return SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
               child: Text(
-                message.message,
+                message!.message,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

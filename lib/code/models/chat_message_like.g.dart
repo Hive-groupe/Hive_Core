@@ -17,9 +17,9 @@ class _$ChatMessageLikeSerializer
   final String wireName = 'ChatMessageLike';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ChatMessageLike object,
+  Iterable<Object?> serialize(Serializers serializers, ChatMessageLike object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'ownerUid',
       serializers.serialize(object.ownerUid,
           specifiedType: const FullType(String)),
@@ -33,7 +33,7 @@ class _$ChatMessageLikeSerializer
 
   @override
   ChatMessageLike deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ChatMessageLikeBuilder();
 
@@ -41,7 +41,7 @@ class _$ChatMessageLikeSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'ownerUid':
           result.ownerUid = serializers.deserialize(value,
@@ -64,16 +64,15 @@ class _$ChatMessageLike extends ChatMessageLike {
   @override
   final DateTime timeStamp;
 
-  factory _$ChatMessageLike([void Function(ChatMessageLikeBuilder) updates]) =>
+  factory _$ChatMessageLike([void Function(ChatMessageLikeBuilder)? updates]) =>
       (new ChatMessageLikeBuilder()..update(updates)).build();
 
-  _$ChatMessageLike._({this.ownerUid, this.timeStamp}) : super._() {
-    if (ownerUid == null) {
-      throw new BuiltValueNullFieldError('ChatMessageLike', 'ownerUid');
-    }
-    if (timeStamp == null) {
-      throw new BuiltValueNullFieldError('ChatMessageLike', 'timeStamp');
-    }
+  _$ChatMessageLike._({required this.ownerUid, required this.timeStamp})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        ownerUid, 'ChatMessageLike', 'ownerUid');
+    BuiltValueNullFieldError.checkNotNull(
+        timeStamp, 'ChatMessageLike', 'timeStamp');
   }
 
   @override
@@ -108,22 +107,23 @@ class _$ChatMessageLike extends ChatMessageLike {
 
 class ChatMessageLikeBuilder
     implements Builder<ChatMessageLike, ChatMessageLikeBuilder> {
-  _$ChatMessageLike _$v;
+  _$ChatMessageLike? _$v;
 
-  String _ownerUid;
-  String get ownerUid => _$this._ownerUid;
-  set ownerUid(String ownerUid) => _$this._ownerUid = ownerUid;
+  String? _ownerUid;
+  String? get ownerUid => _$this._ownerUid;
+  set ownerUid(String? ownerUid) => _$this._ownerUid = ownerUid;
 
-  DateTime _timeStamp;
-  DateTime get timeStamp => _$this._timeStamp;
-  set timeStamp(DateTime timeStamp) => _$this._timeStamp = timeStamp;
+  DateTime? _timeStamp;
+  DateTime? get timeStamp => _$this._timeStamp;
+  set timeStamp(DateTime? timeStamp) => _$this._timeStamp = timeStamp;
 
   ChatMessageLikeBuilder();
 
   ChatMessageLikeBuilder get _$this {
-    if (_$v != null) {
-      _ownerUid = _$v.ownerUid;
-      _timeStamp = _$v.timeStamp;
+    final $v = _$v;
+    if ($v != null) {
+      _ownerUid = $v.ownerUid;
+      _timeStamp = $v.timeStamp;
       _$v = null;
     }
     return this;
@@ -131,21 +131,23 @@ class ChatMessageLikeBuilder
 
   @override
   void replace(ChatMessageLike other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ChatMessageLike;
   }
 
   @override
-  void update(void Function(ChatMessageLikeBuilder) updates) {
+  void update(void Function(ChatMessageLikeBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
   _$ChatMessageLike build() {
     final _$result = _$v ??
-        new _$ChatMessageLike._(ownerUid: ownerUid, timeStamp: timeStamp);
+        new _$ChatMessageLike._(
+            ownerUid: BuiltValueNullFieldError.checkNotNull(
+                ownerUid, 'ChatMessageLike', 'ownerUid'),
+            timeStamp: BuiltValueNullFieldError.checkNotNull(
+                timeStamp, 'ChatMessageLike', 'timeStamp'));
     replace(_$result);
     return _$result;
   }

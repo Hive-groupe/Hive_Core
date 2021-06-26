@@ -6,12 +6,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 class StorageMethods {
   static final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Reference _storageReference;
+  late Reference _storageReference;
 
   //user class
   //User user = User();
 
-  Future<String> uploadImageToStorage(File imageFile) async {
+  Future<String?> uploadImageToStorage(File imageFile) async {
     // mention try catch later on
 
     try {

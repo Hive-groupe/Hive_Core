@@ -10,45 +10,46 @@ class MailFormCard extends StatelessWidget {
   final VoidCallback onRemoveMail;
 
   const MailFormCard({
-    Key key,
-    @required this.mailIndex,
-    @required this.mailFieldBloc,
-    @required this.onRemoveMail,
+    Key? key,
+    required this.mailIndex,
+    required this.mailFieldBloc,
+    required this.onRemoveMail,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: Colors.transparent,
-        margin: const EdgeInsets.only(
-          left: 20,
-        ),
-        child: ListTile(
-          //leading: _iconHolder(),
-          title: Container(
-            child: Column(
-              children: <Widget>[
-                // _title(),
-                TextFieldBlocBuilder(
-                  textFieldBloc: mailFieldBloc.label,
-                  decoration: InputDecoration(
-                    labelText: 'Etiqueta', isDense: true, // Added this
-                    contentPadding: EdgeInsets.all(8),
-                  ),
+      color: Colors.transparent,
+      margin: const EdgeInsets.only(
+        left: 20,
+      ),
+      child: ListTile(
+        //leading: _iconHolder(),
+        title: Container(
+          child: Column(
+            children: <Widget>[
+              // _title(),
+              TextFieldBlocBuilder(
+                textFieldBloc: mailFieldBloc.label,
+                decoration: InputDecoration(
+                  labelText: 'Etiqueta', isDense: true, // Added this
+                  contentPadding: EdgeInsets.all(8),
                 ),
-                TextFieldBlocBuilder(
-                  textFieldBloc: mailFieldBloc.value,
-                  decoration: InputDecoration(
-                    labelText: 'Correo electronico',
-                    isDense: true, // Added this
-                    contentPadding: EdgeInsets.all(8),
-                  ),
+              ),
+              TextFieldBlocBuilder(
+                textFieldBloc: mailFieldBloc.value,
+                decoration: InputDecoration(
+                  labelText: 'Correo electronico',
+                  isDense: true, // Added this
+                  contentPadding: EdgeInsets.all(8),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          trailing: _trailing(),
-        ));
+        ),
+        trailing: _trailing(),
+      ),
+    );
   }
 
   Widget _trailing() {

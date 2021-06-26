@@ -6,7 +6,7 @@ abstract class ChatRoonInfoEvent {}
 class StartChatRoonInfo extends ChatRoonInfoEvent {
   final String receiverId;
 
-  StartChatRoonInfo({@required this.receiverId});
+  StartChatRoonInfo({required this.receiverId});
 
   @override
   String toString() => '''

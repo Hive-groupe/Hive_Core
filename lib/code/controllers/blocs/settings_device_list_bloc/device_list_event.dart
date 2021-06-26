@@ -16,7 +16,7 @@ class FindDevices extends DeviceListEvent {
 class DeleteDeviceItem extends DeviceListEvent {
   final String deviceId;
 
-  DeleteDeviceItem({this.deviceId});
+  DeleteDeviceItem({required this.deviceId});
 
   @override
   List<Object> get props => [deviceId];

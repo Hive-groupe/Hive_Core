@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
@@ -9,12 +11,19 @@ abstract class BasicStatistics
   int get length;
 
   double get minimumValue;
+
   double get averageValue;
+
   double get maximumValue;
+
   double get minimumDifference;
+
   double get averageDifference;
+
   double get maximumDifference;
+
   num get totalAmount;
+
   double get finalDiference;
 
   BasicStatistics._();
@@ -22,10 +31,14 @@ abstract class BasicStatistics
       _$BasicStatistics;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(BasicStatistics.serializer, this);
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(BasicStatistics.serializer, this),
+      ),
+    );
   }
 
-  static BasicStatistics fromJson(Map<String, dynamic> json) {
+  static BasicStatistics? fromJson(Map<String, dynamic> json) {
     return serializers.deserializeWith(BasicStatistics.serializer, json);
   }
 

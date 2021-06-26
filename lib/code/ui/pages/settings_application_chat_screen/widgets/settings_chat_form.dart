@@ -10,11 +10,11 @@ class SettingsChatForm extends StatefulWidget {
 }
 
 class _SettingsChatFormState extends State<SettingsChatForm> {
-  PreferencesBloc _preferencesBloc;
+  late PreferencesBloc _preferencesBloc;
 
   @override
   void initState() {
-    _preferencesBloc = context.bloc<PreferencesBloc>();
+    _preferencesBloc = BlocProvider.of<PreferencesBloc>(context);
     super.initState();
   }
 
@@ -23,12 +23,20 @@ class _SettingsChatFormState extends State<SettingsChatForm> {
     super.dispose();
   }
 
-  _onChangeEnterToSend(PreferencesLoaded state) => _preferencesBloc
-      .add(ChangeEnterToSend(!state.chatPreferences.enterToSend));
+  _onChangeEnterToSend(
+    PreferencesLoaded state,
+  ) =>
+      _preferencesBloc.add(
+        ChangeEnterToSend(
+          !state.chatPreferences.enterToSend!,
+        ),
+      );
 
   _onResetChatPreferences() {
     Navigator.pop(context);
-    _preferencesBloc.add(ResetChatPreferences());
+    _preferencesBloc.add(
+      ResetChatPreferences(),
+    );
   }
 
   Future<void> _onConfirmResetChatPreferences() {
@@ -48,11 +56,11 @@ class _SettingsChatFormState extends State<SettingsChatForm> {
               ),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(HiveCoreString.of(context).cancel),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: _onResetChatPreferences,
                 child: Text(HiveCoreString.of(context).yes),
               ),
@@ -64,7 +72,7 @@ class _SettingsChatFormState extends State<SettingsChatForm> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _preferencesBloc,
+        bloc: _preferencesBloc,
         listener: (context, state) {
           if (state is PreferencesLoaded) {}
         },
@@ -109,7 +117,7 @@ class _SettingsChatFormState extends State<SettingsChatForm> {
       trailing: Container(
         child: Switch(
           onChanged: (_) => _onChangeEnterToSend(state),
-          value: state.chatPreferences.enterToSend,
+          value: state.chatPreferences.enterToSend!,
         ),
       ),
     );

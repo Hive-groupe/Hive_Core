@@ -20,10 +20,10 @@ class _$NotificationsPreferencesSerializer
   final String wireName = 'NotificationsPreferences';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, NotificationsPreferences object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'notifications',
       serializers.serialize(object.notifications,
           specifiedType: const FullType(bool)),
@@ -40,7 +40,7 @@ class _$NotificationsPreferencesSerializer
 
   @override
   NotificationsPreferences deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new NotificationsPreferencesBuilder();
 
@@ -48,7 +48,7 @@ class _$NotificationsPreferencesSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'notifications':
           result.notifications = serializers.deserialize(value,
@@ -78,24 +78,20 @@ class _$NotificationsPreferences extends NotificationsPreferences {
   final bool vibration;
 
   factory _$NotificationsPreferences(
-          [void Function(NotificationsPreferencesBuilder) updates]) =>
+          [void Function(NotificationsPreferencesBuilder)? updates]) =>
       (new NotificationsPreferencesBuilder()..update(updates)).build();
 
   _$NotificationsPreferences._(
-      {this.notifications, this.soundEffects, this.vibration})
+      {required this.notifications,
+      required this.soundEffects,
+      required this.vibration})
       : super._() {
-    if (notifications == null) {
-      throw new BuiltValueNullFieldError(
-          'NotificationsPreferences', 'notifications');
-    }
-    if (soundEffects == null) {
-      throw new BuiltValueNullFieldError(
-          'NotificationsPreferences', 'soundEffects');
-    }
-    if (vibration == null) {
-      throw new BuiltValueNullFieldError(
-          'NotificationsPreferences', 'vibration');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        notifications, 'NotificationsPreferences', 'notifications');
+    BuiltValueNullFieldError.checkNotNull(
+        soundEffects, 'NotificationsPreferences', 'soundEffects');
+    BuiltValueNullFieldError.checkNotNull(
+        vibration, 'NotificationsPreferences', 'vibration');
   }
 
   @override
@@ -135,28 +131,29 @@ class _$NotificationsPreferences extends NotificationsPreferences {
 class NotificationsPreferencesBuilder
     implements
         Builder<NotificationsPreferences, NotificationsPreferencesBuilder> {
-  _$NotificationsPreferences _$v;
+  _$NotificationsPreferences? _$v;
 
-  bool _notifications;
-  bool get notifications => _$this._notifications;
-  set notifications(bool notifications) =>
+  bool? _notifications;
+  bool? get notifications => _$this._notifications;
+  set notifications(bool? notifications) =>
       _$this._notifications = notifications;
 
-  bool _soundEffects;
-  bool get soundEffects => _$this._soundEffects;
-  set soundEffects(bool soundEffects) => _$this._soundEffects = soundEffects;
+  bool? _soundEffects;
+  bool? get soundEffects => _$this._soundEffects;
+  set soundEffects(bool? soundEffects) => _$this._soundEffects = soundEffects;
 
-  bool _vibration;
-  bool get vibration => _$this._vibration;
-  set vibration(bool vibration) => _$this._vibration = vibration;
+  bool? _vibration;
+  bool? get vibration => _$this._vibration;
+  set vibration(bool? vibration) => _$this._vibration = vibration;
 
   NotificationsPreferencesBuilder();
 
   NotificationsPreferencesBuilder get _$this {
-    if (_$v != null) {
-      _notifications = _$v.notifications;
-      _soundEffects = _$v.soundEffects;
-      _vibration = _$v.vibration;
+    final $v = _$v;
+    if ($v != null) {
+      _notifications = $v.notifications;
+      _soundEffects = $v.soundEffects;
+      _vibration = $v.vibration;
       _$v = null;
     }
     return this;
@@ -164,14 +161,12 @@ class NotificationsPreferencesBuilder
 
   @override
   void replace(NotificationsPreferences other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$NotificationsPreferences;
   }
 
   @override
-  void update(void Function(NotificationsPreferencesBuilder) updates) {
+  void update(void Function(NotificationsPreferencesBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -179,9 +174,12 @@ class NotificationsPreferencesBuilder
   _$NotificationsPreferences build() {
     final _$result = _$v ??
         new _$NotificationsPreferences._(
-            notifications: notifications,
-            soundEffects: soundEffects,
-            vibration: vibration);
+            notifications: BuiltValueNullFieldError.checkNotNull(
+                notifications, 'NotificationsPreferences', 'notifications'),
+            soundEffects: BuiltValueNullFieldError.checkNotNull(
+                soundEffects, 'NotificationsPreferences', 'soundEffects'),
+            vibration: BuiltValueNullFieldError.checkNotNull(
+                vibration, 'NotificationsPreferences', 'vibration'));
     replace(_$result);
     return _$result;
   }

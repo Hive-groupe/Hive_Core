@@ -20,19 +20,20 @@ class RegistrationFormSrceen extends StatefulWidget {
 }
 
 class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
-  AuthenticationRepository _authenticationRepository;
-  UserRepository _userRepository;
+  late AuthenticationRepository _authenticationRepository;
+  late UserRepository _userRepository;
   // ProfileRepository _profileRepository;
 
-  RegistrationFormBloc _registrationFormBloc;
+  late RegistrationFormBloc _registrationFormBloc;
 
   var _type = StepperType.vertical;
-  File avatarFile;
+  late File avatarFile;
 
   @override
   void initState() {
-    _authenticationRepository = context.repository<AuthenticationRepository>();
-    _userRepository = context.repository<UserRepository>();
+    _authenticationRepository =
+        RepositoryProvider.of<AuthenticationRepository>(context);
+    _userRepository = RepositoryProvider.of<UserRepository>(context);
 
     _registrationFormBloc = RegistrationFormBloc(
       authenticationRepository: _authenticationRepository,
@@ -43,7 +44,10 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
 
   _goFailInfoScreen() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => FailInfoScreen()));
+        context,
+        MaterialPageRoute(
+          builder: (context) => FailInfoScreen(),
+        ));
   }
 
   void _goBack() => Navigator.pop(context);
@@ -58,18 +62,24 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
     });
   }
 
-  Future _getImage(bool isCamera) async {
-    File image;
+  Future _getImage(
+    bool isCamera,
+  ) async {
+    final picker = ImagePicker();
+    PickedFile? pickedFile;
+    File _image;
     Navigator.pop(context);
 
-    isCamera
-        ? image = await ImagePicker.pickImage(source: ImageSource.camera)
-        : image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    pickedFile = isCamera
+        ? await picker.getImage(source: ImageSource.camera)
+        : await picker.getImage(source: ImageSource.gallery);
+
+    _image = File(pickedFile!.path);
 
     // _profileValidatorFormBloc.onAvatarChanged(image.path);
 
     setState(() {
-      return avatarFile = image;
+      avatarFile = _image;
     });
   }
 
@@ -107,65 +117,70 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
 
   void _onShowError(context) => Scaffold.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-      backgroundColor: Colors.red,
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text('Ocurrio un error in esperado'),
-          Icon(Icons.error)
-        ],
+    ..showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('Ocurrio un error in esperado'),
+            Icon(Icons.error)
+          ],
+        ),
       ),
-    ));
+    );
 
   void _onShowLoading(context) => Scaffold.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[Text('Loading'), CircularProgressIndicator()],
+    ..showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[Text('Loading'), CircularProgressIndicator()],
+        ),
       ),
-    ));
+    );
 
   @override
   Widget build(BuildContext context) {
     return BannerSize(
-        body: BlocProvider(
-      create: (context) => _registrationFormBloc,
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            resizeToAvoidBottomInset: true,
-            appBar: _appBar(),
-            body: SafeArea(
-              child: FormBlocListener<RegistrationFormBloc, String, String>(
-                onSubmitting: (context, state) => _onShowLoading(context),
-                onSuccess: (context, state) {
-                  _onShowLoading(context);
-                  if (state.stepCompleted == state.lastStep) {
-                    _goFailInfoScreen();
-                  }
-                },
-                onFailure: (context, state) {
-                  _onShowError(context);
-                },
-                child: StepperFormBlocBuilder<RegistrationFormBloc>(
-                  type: _type,
-                  physics: ClampingScrollPhysics(),
-                  stepsBuilder: (formBloc) {
-                    return [
-                      _user(formBloc),
-                      _currentStatus(formBloc),
-                      _datos(formBloc),
-                    ];
+      body: BlocProvider(
+        create: (context) => _registrationFormBloc,
+        child: Builder(
+          builder: (context) {
+            return Scaffold(
+              resizeToAvoidBottomInset: true,
+              appBar: _appBar(),
+              body: SafeArea(
+                child: FormBlocListener<RegistrationFormBloc, String, String>(
+                  onSubmitting: (context, state) => _onShowLoading(context),
+                  onSuccess: (context, state) {
+                    _onShowLoading(context);
+                    if (state.stepCompleted == state.lastStep) {
+                      _goFailInfoScreen();
+                    }
                   },
+                  onFailure: (context, state) {
+                    _onShowError(context);
+                  },
+                  child: StepperFormBlocBuilder<RegistrationFormBloc>(
+                    type: _type,
+                    physics: ClampingScrollPhysics(),
+                    stepsBuilder: (formBloc) {
+                      return [
+                        _user(formBloc!),
+                        _currentStatus(formBloc),
+                        _datos(formBloc),
+                      ];
+                    },
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
-    ));
+    );
   }
 
   CustomAppBar _appBar() {
@@ -175,7 +190,7 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
         HiveCoreString.of(context).login_form_register_button,
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       leading: IconButton(
@@ -339,9 +354,11 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
             :
             //Si cargamos la imagen desde internet
             snapshot.hasData &&
-                    snapshot.data != null &&
-                    snapshot.data.toString() != ''
-                ? _buildAvatarNetwork(snapshot.data.toString())
+                    snapshot.data! != null &&
+                    snapshot.data!.toString() != ''
+                ? _buildAvatarNetwork(
+                    snapshot.data!.toString(),
+                  )
                 : _buildAvatarNoFile(),
       ) // Si estamos cargando la imagen desde el dispositivo
           ;
@@ -355,7 +372,7 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
         child: Image(
           height: 150.0,
           width: 150.0,
-          image: AssetImage(avatarFile.path), //snapshot.data),
+          image: AssetImage(avatarFile.path), //snapshot.data!),
           fit: BoxFit.cover,
         ),
       ),
@@ -369,7 +386,7 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
         child: Image(
           height: 150.0,
           width: 150.0,
-          image: NetworkImage(snapshot), //snapshot.data),
+          image: NetworkImage(snapshot), //snapshot.data!),
           fit: BoxFit.cover,
         ),
       ),

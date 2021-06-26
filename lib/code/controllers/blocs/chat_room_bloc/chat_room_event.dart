@@ -5,10 +5,10 @@ abstract class ChatRoomEvent {}
 
 class LoadChat extends ChatRoomEvent {
   final String receiverId;
-  LoadChat({@required this.receiverId});
+  LoadChat({required this.receiverId});
 }
 
-/**
+/*
  * =============================================================================
  * 
  *                          Send message envet
@@ -19,7 +19,7 @@ class SendTextMessage extends ChatRoomEvent {
   final String receiverId;
   final String message;
 
-  SendTextMessage({this.receiverId, this.message});
+  SendTextMessage({required this.receiverId, required this.message});
 
   @override
   String toString() => '''
@@ -34,8 +34,8 @@ class SendAudioMessage extends ChatRoomEvent {
   final String message;
 
   SendAudioMessage({
-    this.receiverId,
-    this.message,
+    required this.receiverId,
+    required this.message,
   });
 
   @override
@@ -51,7 +51,11 @@ class SendImageMessage extends ChatRoomEvent {
   final String message;
   final File photo;
 
-  SendImageMessage({this.receiverId, this.message, this.photo});
+  SendImageMessage({
+    required this.receiverId,
+    required this.message,
+    required this.photo,
+  });
 
   @override
   String toString() => '''
@@ -66,7 +70,11 @@ class SendStickerMessage extends ChatRoomEvent {
   final String message;
   final File sticker;
 
-  SendStickerMessage({this.receiverId, this.message, this.sticker});
+  SendStickerMessage({
+    required this.receiverId,
+    required this.message,
+    required this.sticker,
+  });
 
   @override
   String toString() => '''
@@ -82,7 +90,7 @@ class RecordAudio extends ChatRoomEvent {
   $runtimeType  {}''';
 }
 
-/**
+/*
  * =============================================================================
  * 
  *                          Scroll Controls Event
@@ -95,7 +103,7 @@ class MoveScrollToDown extends ChatRoomEvent {
   $runtimeType  {}''';
 }
 
-/**
+/*
  * =============================================================================
  * 
  *                       Keyboard Controls Event 
@@ -106,7 +114,7 @@ class MoveScrollToDown extends ChatRoomEvent {
 class OnTextEditChanged extends ChatRoomEvent {
   final bool writing;
 
-  OnTextEditChanged({this.writing});
+  OnTextEditChanged({required this.writing});
 
   @override
   String toString() => '''
@@ -125,7 +133,7 @@ class OnTextEditChanged extends ChatRoomEvent {
   $runtimeType  {}''';
 }*/
 
-/**
+/*
  * =============================================================================
  * 
  *                       Emoji Controls Event 
@@ -150,14 +158,14 @@ class OnTapBtnEmojis extends ChatRoomEvent {
 class AddEmoji extends ChatRoomEvent {
   final Emoji emoji;
 
-  AddEmoji({this.emoji});
+  AddEmoji({required this.emoji});
 
   @override
   String toString() => '''
   $runtimeType  {}''';
 }
 
-/**
+/*
  * =============================================================================
  * 
  *                           message event
@@ -168,7 +176,7 @@ class AddEmoji extends ChatRoomEvent {
 class SelectMessage extends ChatRoomEvent {
   final ChatMessage messageId;
 
-  SelectMessage({this.messageId});
+  SelectMessage({required this.messageId});
 
   @override
   String toString() => '''
@@ -184,7 +192,7 @@ class UnselectMessage extends ChatRoomEvent {
 }
 
 class DeleteMessage extends ChatRoomEvent {
-  final String messageId;
+  final String? messageId;
 
   DeleteMessage({this.messageId});
 
@@ -196,14 +204,14 @@ class DeleteMessage extends ChatRoomEvent {
 class LikedMessage extends ChatRoomEvent {
   final ChatMessage chatMessage;
 
-  LikedMessage({this.chatMessage});
+  LikedMessage({required this.chatMessage});
 
   @override
   String toString() => '''
   $runtimeType  {}''';
 }
 
-/**
+/*
  * =============================================================================
  * 
  *                           Search message event
@@ -231,7 +239,7 @@ class ResetChatSearch extends ChatRoomEvent {
 class SearchingChats extends ChatRoomEvent {
   final String value;
 
-  SearchingChats({this.value});
+  SearchingChats({required this.value});
 
   @override
   String toString() => '''
@@ -243,7 +251,7 @@ class SearchingChats extends ChatRoomEvent {
 class EmptyChatRoon extends ChatRoomEvent {
   final String receiverId;
 
-  EmptyChatRoon({this.receiverId});
+  EmptyChatRoon({required this.receiverId});
 
   @override
   String toString() => '''

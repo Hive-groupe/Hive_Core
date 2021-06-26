@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
@@ -15,10 +17,14 @@ abstract class MetadataEvent
       _$MetadataEvent;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(MetadataEvent.serializer, this);
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(MetadataEvent.serializer, this),
+      ),
+    );
   }
 
-  static MetadataEvent fromJson(Map<String, dynamic> json) {
+  static MetadataEvent? fromJson(Map<String, dynamic> json) {
     return serializers.deserializeWith(MetadataEvent.serializer, json);
   }
 

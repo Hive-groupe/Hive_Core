@@ -7,12 +7,12 @@ import 'package:hive_core/code/ui/pages/chat_roon_screen/chat_roon_screen.dart';
 //https://www.youtube.com/watch?v=h-igXZCCrrc
 //https://github.com/MarcusNg/flutter_chat_ui
 class FavoriteContactItem extends StatelessWidget {
-  final int index;
-  ChatListingBloc _chatListingBloc;
+  late final int index;
+  late ChatListingBloc _chatListingBloc;
 
   FavoriteContactItem({
-    Key key,
-    this.index,
+    Key? key,
+    required this.index,
   }) : super(key: key);
 
   _goChatSrceen(BuildContext context) => () => Navigator.push(
@@ -27,7 +27,7 @@ class FavoriteContactItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _chatListingBloc,
+        bloc: _chatListingBloc,
         listener: (context, state) {},
         builder: (context, state) {
           return _build(context);

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -17,12 +19,16 @@ class ChatMessageType extends EnumClass {
   static BuiltSet<ChatMessageType> get values => _$chatMessageTypeValues;
   static ChatMessageType valueOf(String name) => _$chatMessageTypeValueOf(name);
 
-  String serialize() {
-    return serializers.serializeWith(ChatMessageType.serializer, this);
+  Map<String, dynamic> serialize() {
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(ChatMessageType.serializer, this),
+      ),
+    );
   }
 
-  static ChatMessageType deserialize(String string) {
-    return serializers.deserializeWith(ChatMessageType.serializer, string);
+  static ChatMessageType? deserialize(Map<String, dynamic> json) {
+    return serializers.deserializeWith(ChatMessageType.serializer, json);
   }
 
   static Serializer<ChatMessageType> get serializer =>

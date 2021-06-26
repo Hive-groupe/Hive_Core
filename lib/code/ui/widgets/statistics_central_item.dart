@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class StatisticCentralItem extends StatefulWidget {
   final String title, data, unity;
-  final Color dataColor, titleColor, unityColor;
+  final Color? dataColor, titleColor, unityColor;
 
-  StatisticCentralItem(
-      {String title,
-      String data,
-      String unity,
-      this.dataColor,
-      this.titleColor,
-      this.unityColor})
-      : title = title ?? 'TITLE',
+  StatisticCentralItem({
+    String? title,
+    String? data,
+    String? unity,
+    this.dataColor,
+    this.titleColor,
+    this.unityColor,
+  })  : title = title ?? 'TITLE',
         data = data ?? '0',
         unity = unity ?? '';
 
@@ -79,10 +79,12 @@ class _statisticCentralItemState extends State<StatisticCentralItem> {
     return widget.unity != null
         ? Container(
             padding: EdgeInsets.only(left: 5),
-            child: Text(widget.unity,
-                style: TextStyle(
-                  color: widget.unityColor ?? Colors.grey,
-                )),
+            child: Text(
+              widget.unity,
+              style: TextStyle(
+                color: widget.unityColor ?? Colors.grey,
+              ),
+            ),
           )
         : Container();
   }

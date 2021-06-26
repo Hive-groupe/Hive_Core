@@ -6,11 +6,17 @@ import 'package:rxdart/rxdart.dart';
 part 'call_repository_firebase_impl.dart';
 
 abstract class CallRepository<model> {
-  BehaviorSubject<BuiltList<model>> callListController;
+  late BehaviorSubject<BuiltList<model>> callListController;
 
-  Stream<DocumentSnapshot> callStream({String uid});
+  Stream<DocumentSnapshot> callStream({
+    required String uid,
+  });
 
-  Future<bool> makeCall({model call});
+  Future<bool> makeCall({
+    required model call,
+  });
 
-  Future<bool> endCall({model call});
+  Future<bool> endCall({
+    required model call,
+  });
 }

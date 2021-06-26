@@ -17,9 +17,9 @@ class _$BasicStatisticsSerializer
   final String wireName = 'BasicStatistics';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, BasicStatistics object,
+  Iterable<Object?> serialize(Serializers serializers, BasicStatistics object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'length',
       serializers.serialize(object.length, specifiedType: const FullType(int)),
       'minimumValue',
@@ -53,7 +53,7 @@ class _$BasicStatisticsSerializer
 
   @override
   BasicStatistics deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new BasicStatisticsBuilder();
 
@@ -61,7 +61,7 @@ class _$BasicStatisticsSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'length':
           result.length = serializers.deserialize(value,
@@ -126,50 +126,37 @@ class _$BasicStatistics extends BasicStatistics {
   @override
   final double finalDiference;
 
-  factory _$BasicStatistics([void Function(BasicStatisticsBuilder) updates]) =>
+  factory _$BasicStatistics([void Function(BasicStatisticsBuilder)? updates]) =>
       (new BasicStatisticsBuilder()..update(updates)).build();
 
   _$BasicStatistics._(
-      {this.length,
-      this.minimumValue,
-      this.averageValue,
-      this.maximumValue,
-      this.minimumDifference,
-      this.averageDifference,
-      this.maximumDifference,
-      this.totalAmount,
-      this.finalDiference})
+      {required this.length,
+      required this.minimumValue,
+      required this.averageValue,
+      required this.maximumValue,
+      required this.minimumDifference,
+      required this.averageDifference,
+      required this.maximumDifference,
+      required this.totalAmount,
+      required this.finalDiference})
       : super._() {
-    if (length == null) {
-      throw new BuiltValueNullFieldError('BasicStatistics', 'length');
-    }
-    if (minimumValue == null) {
-      throw new BuiltValueNullFieldError('BasicStatistics', 'minimumValue');
-    }
-    if (averageValue == null) {
-      throw new BuiltValueNullFieldError('BasicStatistics', 'averageValue');
-    }
-    if (maximumValue == null) {
-      throw new BuiltValueNullFieldError('BasicStatistics', 'maximumValue');
-    }
-    if (minimumDifference == null) {
-      throw new BuiltValueNullFieldError(
-          'BasicStatistics', 'minimumDifference');
-    }
-    if (averageDifference == null) {
-      throw new BuiltValueNullFieldError(
-          'BasicStatistics', 'averageDifference');
-    }
-    if (maximumDifference == null) {
-      throw new BuiltValueNullFieldError(
-          'BasicStatistics', 'maximumDifference');
-    }
-    if (totalAmount == null) {
-      throw new BuiltValueNullFieldError('BasicStatistics', 'totalAmount');
-    }
-    if (finalDiference == null) {
-      throw new BuiltValueNullFieldError('BasicStatistics', 'finalDiference');
-    }
+    BuiltValueNullFieldError.checkNotNull(length, 'BasicStatistics', 'length');
+    BuiltValueNullFieldError.checkNotNull(
+        minimumValue, 'BasicStatistics', 'minimumValue');
+    BuiltValueNullFieldError.checkNotNull(
+        averageValue, 'BasicStatistics', 'averageValue');
+    BuiltValueNullFieldError.checkNotNull(
+        maximumValue, 'BasicStatistics', 'maximumValue');
+    BuiltValueNullFieldError.checkNotNull(
+        minimumDifference, 'BasicStatistics', 'minimumDifference');
+    BuiltValueNullFieldError.checkNotNull(
+        averageDifference, 'BasicStatistics', 'averageDifference');
+    BuiltValueNullFieldError.checkNotNull(
+        maximumDifference, 'BasicStatistics', 'maximumDifference');
+    BuiltValueNullFieldError.checkNotNull(
+        totalAmount, 'BasicStatistics', 'totalAmount');
+    BuiltValueNullFieldError.checkNotNull(
+        finalDiference, 'BasicStatistics', 'finalDiference');
   }
 
   @override
@@ -233,61 +220,62 @@ class _$BasicStatistics extends BasicStatistics {
 
 class BasicStatisticsBuilder
     implements Builder<BasicStatistics, BasicStatisticsBuilder> {
-  _$BasicStatistics _$v;
+  _$BasicStatistics? _$v;
 
-  int _length;
-  int get length => _$this._length;
-  set length(int length) => _$this._length = length;
+  int? _length;
+  int? get length => _$this._length;
+  set length(int? length) => _$this._length = length;
 
-  double _minimumValue;
-  double get minimumValue => _$this._minimumValue;
-  set minimumValue(double minimumValue) => _$this._minimumValue = minimumValue;
+  double? _minimumValue;
+  double? get minimumValue => _$this._minimumValue;
+  set minimumValue(double? minimumValue) => _$this._minimumValue = minimumValue;
 
-  double _averageValue;
-  double get averageValue => _$this._averageValue;
-  set averageValue(double averageValue) => _$this._averageValue = averageValue;
+  double? _averageValue;
+  double? get averageValue => _$this._averageValue;
+  set averageValue(double? averageValue) => _$this._averageValue = averageValue;
 
-  double _maximumValue;
-  double get maximumValue => _$this._maximumValue;
-  set maximumValue(double maximumValue) => _$this._maximumValue = maximumValue;
+  double? _maximumValue;
+  double? get maximumValue => _$this._maximumValue;
+  set maximumValue(double? maximumValue) => _$this._maximumValue = maximumValue;
 
-  double _minimumDifference;
-  double get minimumDifference => _$this._minimumDifference;
-  set minimumDifference(double minimumDifference) =>
+  double? _minimumDifference;
+  double? get minimumDifference => _$this._minimumDifference;
+  set minimumDifference(double? minimumDifference) =>
       _$this._minimumDifference = minimumDifference;
 
-  double _averageDifference;
-  double get averageDifference => _$this._averageDifference;
-  set averageDifference(double averageDifference) =>
+  double? _averageDifference;
+  double? get averageDifference => _$this._averageDifference;
+  set averageDifference(double? averageDifference) =>
       _$this._averageDifference = averageDifference;
 
-  double _maximumDifference;
-  double get maximumDifference => _$this._maximumDifference;
-  set maximumDifference(double maximumDifference) =>
+  double? _maximumDifference;
+  double? get maximumDifference => _$this._maximumDifference;
+  set maximumDifference(double? maximumDifference) =>
       _$this._maximumDifference = maximumDifference;
 
-  num _totalAmount;
-  num get totalAmount => _$this._totalAmount;
-  set totalAmount(num totalAmount) => _$this._totalAmount = totalAmount;
+  num? _totalAmount;
+  num? get totalAmount => _$this._totalAmount;
+  set totalAmount(num? totalAmount) => _$this._totalAmount = totalAmount;
 
-  double _finalDiference;
-  double get finalDiference => _$this._finalDiference;
-  set finalDiference(double finalDiference) =>
+  double? _finalDiference;
+  double? get finalDiference => _$this._finalDiference;
+  set finalDiference(double? finalDiference) =>
       _$this._finalDiference = finalDiference;
 
   BasicStatisticsBuilder();
 
   BasicStatisticsBuilder get _$this {
-    if (_$v != null) {
-      _length = _$v.length;
-      _minimumValue = _$v.minimumValue;
-      _averageValue = _$v.averageValue;
-      _maximumValue = _$v.maximumValue;
-      _minimumDifference = _$v.minimumDifference;
-      _averageDifference = _$v.averageDifference;
-      _maximumDifference = _$v.maximumDifference;
-      _totalAmount = _$v.totalAmount;
-      _finalDiference = _$v.finalDiference;
+    final $v = _$v;
+    if ($v != null) {
+      _length = $v.length;
+      _minimumValue = $v.minimumValue;
+      _averageValue = $v.averageValue;
+      _maximumValue = $v.maximumValue;
+      _minimumDifference = $v.minimumDifference;
+      _averageDifference = $v.averageDifference;
+      _maximumDifference = $v.maximumDifference;
+      _totalAmount = $v.totalAmount;
+      _finalDiference = $v.finalDiference;
       _$v = null;
     }
     return this;
@@ -295,14 +283,12 @@ class BasicStatisticsBuilder
 
   @override
   void replace(BasicStatistics other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$BasicStatistics;
   }
 
   @override
-  void update(void Function(BasicStatisticsBuilder) updates) {
+  void update(void Function(BasicStatisticsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -310,15 +296,24 @@ class BasicStatisticsBuilder
   _$BasicStatistics build() {
     final _$result = _$v ??
         new _$BasicStatistics._(
-            length: length,
-            minimumValue: minimumValue,
-            averageValue: averageValue,
-            maximumValue: maximumValue,
-            minimumDifference: minimumDifference,
-            averageDifference: averageDifference,
-            maximumDifference: maximumDifference,
-            totalAmount: totalAmount,
-            finalDiference: finalDiference);
+            length: BuiltValueNullFieldError.checkNotNull(
+                length, 'BasicStatistics', 'length'),
+            minimumValue: BuiltValueNullFieldError.checkNotNull(
+                minimumValue, 'BasicStatistics', 'minimumValue'),
+            averageValue: BuiltValueNullFieldError.checkNotNull(
+                averageValue, 'BasicStatistics', 'averageValue'),
+            maximumValue: BuiltValueNullFieldError.checkNotNull(
+                maximumValue, 'BasicStatistics', 'maximumValue'),
+            minimumDifference: BuiltValueNullFieldError.checkNotNull(
+                minimumDifference, 'BasicStatistics', 'minimumDifference'),
+            averageDifference: BuiltValueNullFieldError.checkNotNull(
+                averageDifference, 'BasicStatistics', 'averageDifference'),
+            maximumDifference: BuiltValueNullFieldError.checkNotNull(
+                maximumDifference, 'BasicStatistics', 'maximumDifference'),
+            totalAmount: BuiltValueNullFieldError.checkNotNull(
+                totalAmount, 'BasicStatistics', 'totalAmount'),
+            finalDiference:
+                BuiltValueNullFieldError.checkNotNull(finalDiference, 'BasicStatistics', 'finalDiference'));
     replace(_$result);
     return _$result;
   }

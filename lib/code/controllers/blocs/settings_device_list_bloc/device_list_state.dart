@@ -42,7 +42,7 @@ class DeviceListLoaded extends DeviceListState {
   final Stream<BuiltList<Device>> deviceList;
 
   DeviceListLoaded({
-    @required this.deviceList,
+    required this.deviceList,
   });
 
   @override

@@ -6,10 +6,13 @@ abstract class ChatRoonInfoState {}
 class ChatRoonInfoInitial extends ChatRoonInfoState {}
 
 class ChatLoaded extends ChatRoonInfoInitial {
-  final BehaviorSubject<User> reciver;
-  final BehaviorSubject<BuiltList<ChatMessage>> chatImageMessageList;
+  final Stream<User> reciver;
+  final Stream<BuiltList<ChatMessage>> chatImageMessageList;
 
-  ChatLoaded({@required this.reciver, @required this.chatImageMessageList});
+  ChatLoaded({
+    required this.reciver,
+    required this.chatImageMessageList,
+  });
 
   @override
   String toString() => '''

@@ -12,9 +12,9 @@ class ChatListAppsBar extends StatefulWidget implements PreferredSizeWidget {
   final TextEditingController searchController;
 
   ChatListAppsBar(
-      {@required this.tabController,
-      @required this.tabs,
-      @required this.searchController});
+      {required this.tabController,
+      required this.tabs,
+      required this.searchController});
 
   @override
   _ChatListAppsBarState createState() => _ChatListAppsBarState();
@@ -25,11 +25,11 @@ class ChatListAppsBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _ChatListAppsBarState extends State<ChatListAppsBar> {
   // Blocs
-  ChatListingBloc _chatListingBloc;
+  late ChatListingBloc _chatListingBloc;
 
   @override
   void initState() {
-    _chatListingBloc = context.bloc<ChatListingBloc>();
+    _chatListingBloc = BlocProvider.of<ChatListingBloc>(context);
     super.initState();
   }
 
@@ -40,26 +40,33 @@ class _ChatListAppsBarState extends State<ChatListAppsBar> {
 
   void _startSearching() {
     widget.searchController.text = '';
-    _chatListingBloc.add(StartChatSearching());
+    _chatListingBloc.add(
+      StartChatSearching(),
+    );
   }
 
-  void _searching(String value) =>
-      _chatListingBloc.add(SearchingChats(value: value));
+  void _searching(String value) => _chatListingBloc.add(
+        SearchingChats(value: value),
+      );
 
   void _cancelSearch() {
-    _chatListingBloc.add(CancelChatSearch());
+    _chatListingBloc.add(
+      CancelChatSearch(),
+    );
     widget.searchController.text = '';
   }
 
   void _resetSearch() {
     widget.searchController.text = '';
-    _chatListingBloc.add(ResetChatSearch());
+    _chatListingBloc.add(
+      ResetChatSearch(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-      cubit: _chatListingBloc,
+      bloc: _chatListingBloc,
       listener: (context, state) {},
       builder: (context, state) {
         if (state is ChatListingError) {
@@ -111,7 +118,7 @@ class _ChatListAppsBarState extends State<ChatListAppsBar> {
         'Chats', // HiveCoreString.of(context).bill_list_title,
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       leading: IconButton(
@@ -134,7 +141,7 @@ class _ChatListAppsBarState extends State<ChatListAppsBar> {
         controller: widget.tabController,
         tabs: widget.tabs,
         indicatorPadding: EdgeInsets.only(left: 25, right: 25),
-        labelColor: Theme.of(context).textTheme.bodyText1.color,
+        labelColor: Theme.of(context).textTheme.bodyText1!.color,
         unselectedLabelColor: Colors.grey,
       ),
     );
@@ -153,8 +160,8 @@ class _ChatListAppsBarState extends State<ChatListAppsBar> {
         child: TextField(
           controller: widget.searchController,
           onChanged: (String value) => _searching(value),
-          style: TextStyle(color: Theme.of(context).textTheme.bodyText1.color),
-          cursorColor: Theme.of(context).textTheme.bodyText1.color,
+          style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
+          cursorColor: Theme.of(context).textTheme.bodyText1!.color,
           autofocus: true,
           decoration: InputDecoration(
             hintText: "Buscar...",
@@ -164,9 +171,11 @@ class _ChatListAppsBarState extends State<ChatListAppsBar> {
             border: InputBorder.none,
             focusColor: Colors.white,
             focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
             enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
           ),
         ),
       ),

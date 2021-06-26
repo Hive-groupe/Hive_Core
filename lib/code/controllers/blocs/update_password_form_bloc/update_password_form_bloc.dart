@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 
@@ -23,7 +22,9 @@ class UpdatePasswordFormBloc extends FormBloc<String, String> {
   Validator<String> _confirmPassword(
     TextFieldBloc passwordTextFieldBloc,
   ) {
-    return (String confirmPassword) {
+    return (
+      String? confirmPassword,
+    ) {
       if (confirmPassword == passwordTextFieldBloc.value) {
         return null;
       }
@@ -31,10 +32,9 @@ class UpdatePasswordFormBloc extends FormBloc<String, String> {
     };
   }
 
-  UpdatePasswordFormBloc(
-      {@required AuthenticationRepository authenticationRepository})
-      : assert(authenticationRepository != null),
-        _authenticationRepository = authenticationRepository {
+  UpdatePasswordFormBloc({
+    required AuthenticationRepository authenticationRepository,
+  }) : _authenticationRepository = authenticationRepository {
     addFieldBlocs(fieldBlocs: [
       currentPassword,
       newPassword,
@@ -58,7 +58,8 @@ class UpdatePasswordFormBloc extends FormBloc<String, String> {
       emitLoaded();
       if (newPassword.value == confirmNewPassword.value) {
         await _authenticationRepository.updatePassword(
-                password: newPassword.value)
+          password: newPassword.value ?? '',
+        )
             ? emitSuccess(canSubmitAgain: true)
             : emitFailure();
       }

@@ -8,7 +8,6 @@ import 'package:hive_core/code/models/enum/userStateus.dart';
 import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
-import 'package:meta/meta.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -18,19 +17,18 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>
   final AuthenticationRepository _authenticationRepository;
   final UserRepository _userRepository;
 
-  bool _isSignedIn;
-  String _userId;
+  late bool? _isSignedIn;
+  late String? _userId;
 
-  AuthenticationBloc(
-      {@required AuthenticationRepository authenticationRepository,
-      @required UserRepository userRepository})
-      : assert(authenticationRepository != null),
-        assert(userRepository != null),
-        _authenticationRepository =
-            authenticationRepository ?? AuthenticationRepositoryFirebaseImpl(),
+  AuthenticationBloc({
+    required AuthenticationRepository authenticationRepository,
+    required UserRepository userRepository,
+  })  : _authenticationRepository = authenticationRepository,
         _userRepository = userRepository,
-        super(Uninitialized()) {
-    WidgetsBinding.instance.addObserver(this);
+        super(
+          Uninitialized(),
+        ) {
+    WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
@@ -48,10 +46,12 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>
     }
   }
 
-  Stream<AuthenticationState> _mapAppStartedToState(AppStarted event) async* {
+  Stream<AuthenticationState> _mapAppStartedToState(
+    AppStarted event,
+  ) async* {
     try {
       _isSignedIn = _isSignedIn ?? await _authenticationRepository.isSignedIn();
-      if (_isSignedIn) {
+      if (_isSignedIn == true) {
         _syncUserProfileData();
         yield Authenticated();
       } else {
@@ -62,7 +62,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>
     }
   }
 
-  Stream<AuthenticationState> _mapLoggedInToState(LoggedIn event) async* {
+  Stream<AuthenticationState> _mapLoggedInToState(
+    LoggedIn event,
+  ) async* {
     try {
       _syncUserProfileData();
       yield Authenticated();
@@ -71,7 +73,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>
     }
   }
 
-  Stream<AuthenticationState> _mapLogedOutToState(LogedOut event) async* {
+  Stream<AuthenticationState> _mapLogedOutToState(
+    LogedOut event,
+  ) async* {
     try {
       yield Uninitialized();
       userDataInfo.input.add(null);
@@ -94,22 +98,24 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>
   void _syncUserProfileData() async {
     _userId = _userId ?? await _authenticationRepository.getCurrentUserId();
 
-    _userRepository
-        .getStreamUserById(_userId)
-        .listen((event) => userDataInfo.input.add(event));
+    _userRepository.getStreamUserById(_userId ?? '').listen(
+          (event) => userDataInfo.input.add(event),
+        );
 
     await _setUserState(UserStatus.online);
   }
 
-  Future<bool> _setUserState(UserStatus userStatus) async {
+  Future<bool> _setUserState(
+    UserStatus userStatus,
+  ) async {
     try {
       User _user;
 
       _userId = _userId ?? await _authenticationRepository.getCurrentUserId();
-      _user = await _userRepository.getUserById(_userId);
+      _user = await _userRepository.getUserById(_userId ?? '');
       _user = _user.rebuild((b) => b..userStatus = userStatus);
 
-      _userRepository.updateUser(_user.toJson(), _userId);
+      _userRepository.updateUser(_user.toJson(), _userId ?? '');
 
       return true;
     } catch (_) {
@@ -118,25 +124,31 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
+  void didChangeAppLifecycleState(
+    AppLifecycleState state,
+  ) async {
     _isSignedIn = _isSignedIn ?? await _authenticationRepository.isSignedIn();
 
     super.didChangeAppLifecycleState(state);
 
     switch (state) {
       case AppLifecycleState.resumed:
-        _isSignedIn ? _setUserState(UserStatus.online) : print("resume state");
+        _isSignedIn == true
+            ? _setUserState(UserStatus.online)
+            : print("resume state");
         break;
       case AppLifecycleState.inactive:
-        _isSignedIn
+        _isSignedIn == true
             ? _setUserState(UserStatus.offline)
             : print("inactive state");
         break;
       case AppLifecycleState.paused:
-        _isSignedIn ? _setUserState(UserStatus.waiting) : print("paused state");
+        _isSignedIn == true
+            ? _setUserState(UserStatus.waiting)
+            : print("paused state");
         break;
       case AppLifecycleState.detached:
-        _isSignedIn
+        _isSignedIn == true
             ? _setUserState(UserStatus.offline)
             : print("detached state");
         break;

@@ -6,10 +6,10 @@ class CachedImage extends StatelessWidget {
   final String imageUrl;
   final bool isRound;
   final double radius;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
 
-  final BoxFit fit;
+  final BoxFit? fit;
 
   CachedImage(
     this.imageUrl, {
@@ -27,32 +27,40 @@ class CachedImage extends StatelessWidget {
         height: isRound ? radius : height,
         width: isRound ? radius : width,
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(isRound ? 50 : radius),
-            child: CachedNetworkImage(
-              imageUrl: imageUrl,
-              fit: fit,
-              placeholder: (context, url) =>
-                  Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => Image.network(
-                noImageAvailable,
-                height: 50,
-                width: 50,
-                fit: BoxFit.cover,
-              ),
-            )),
+          borderRadius: BorderRadius.circular(
+            isRound ? 50 : radius,
+          ),
+          child: CachedNetworkImage(
+            imageUrl: imageUrl,
+            fit: fit,
+            placeholder: (context, url) => Center(
+              child: CircularProgressIndicator(),
+            ),
+            errorWidget: (context, url, error) => Image.network(
+              noImageAvailable,
+              height: 50,
+              width: 50,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
       );
     } catch (e) {
       return SizedBox(
-          height: isRound ? radius : height,
-          width: isRound ? radius : width,
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(isRound ? 50 : radius),
-              child: Image.network(
-                noImageAvailable,
-                height: 25,
-                width: 25,
-                fit: BoxFit.cover,
-              )));
+        height: isRound ? radius : height,
+        width: isRound ? radius : width,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(
+            isRound ? 50 : radius,
+          ),
+          child: Image.network(
+            noImageAvailable,
+            height: 25,
+            width: 25,
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
     }
   }
 }

@@ -14,10 +14,10 @@ class RecentChats extends StatefulWidget {
   final bool showStatus;
 
   const RecentChats({
-    Key key,
-    @required this.chatRoomsList,
-    @required this.senderId,
-    bool showStatus,
+    Key? key,
+    required this.chatRoomsList,
+    required this.senderId,
+    bool? showStatus,
   })  : showStatus = true,
         super(key: key);
 
@@ -36,9 +36,9 @@ class _RecentChatsState extends State<RecentChats> {
     return StreamBuilder<BuiltList<ChatContact>>(
         stream: widget.chatRoomsList,
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data.length > 0) {
-            return _buildListLoaded(snapshot.data);
-          } else if (snapshot.hasData && snapshot.data.length <= 0) {
+          if (snapshot.hasData && snapshot.data!.length > 0) {
+            return _buildListLoaded(snapshot.data!);
+          } else if (snapshot.hasData && snapshot.data!.length <= 0) {
             return widget.showStatus ? _buildListEmpty() : Container();
           } else if (snapshot.hasError) {
             return widget.showStatus ? _buildListError() : Container();
@@ -77,14 +77,19 @@ class _RecentChatsState extends State<RecentChats> {
 
   Widget _buildListLoaded(BuiltList<ChatContact> list) {
     return Container(
-      margin: EdgeInsets.only(bottom: 50, left: 10, right: 10),
+      margin: EdgeInsets.only(
+        bottom: 50,
+        left: 10,
+        right: 10,
+      ),
       child: Column(
         children: List.generate(
-            list.length,
-            (index) => ContactView(
-                  contact: list[index],
-                  senderId: widget.senderId,
-                )).toList(),
+          list.length,
+          (index) => ContactView(
+            contact: list[index],
+            senderId: widget.senderId,
+          ),
+        ).toList(),
       ),
     );
   }

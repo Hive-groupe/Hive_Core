@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -14,12 +16,16 @@ class ListViewType extends EnumClass {
   static BuiltSet<ListViewType> get values => _$listViewTypeValues;
   static ListViewType valueOf(String name) => _$listViewTypeValueOf(name);
 
-  String serialize() {
-    return serializers.serializeWith(ListViewType.serializer, this);
+  Map<String, dynamic> serialize() {
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(ListViewType.serializer, this),
+      ),
+    );
   }
 
-  static ListViewType deserialize(String string) {
-    return serializers.deserializeWith(ListViewType.serializer, string);
+  static ListViewType? deserialize(Map<String, dynamic> json) {
+    return serializers.deserializeWith(ListViewType.serializer, json);
   }
 
   static Serializer<ListViewType> get serializer => _$listViewTypeSerializer;

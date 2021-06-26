@@ -15,11 +15,11 @@ class NotificationsAppsBar extends StatefulWidget
 
 class _NotificationsAppsBarState extends State<NotificationsAppsBar> {
   // Blocs
-  NotificationsBloc _notificationsBloc;
+  late NotificationsBloc _notificationsBloc;
 
   @override
   void initState() {
-    _notificationsBloc = context.bloc<NotificationsBloc>();
+    _notificationsBloc = BlocProvider.of<NotificationsBloc>(context);
     super.initState();
   }
 
@@ -31,7 +31,7 @@ class _NotificationsAppsBarState extends State<NotificationsAppsBar> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _notificationsBloc,
+        bloc: _notificationsBloc,
         listener: (BuildContext context, NotificationsState state) {},
         builder: (BuildContext context, NotificationsState state) {
           return _cupertinaoAppBar();

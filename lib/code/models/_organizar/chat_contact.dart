@@ -1,23 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatContact {
-  String uid;
-  Timestamp addedOn;
+  late String uid;
+  late Timestamp addedOn;
 
   ChatContact({
-    this.uid,
-    this.addedOn,
+    required this.uid,
+    required this.addedOn,
   });
 
-  Map toMap(ChatContact contact) {
+  ChatContact.fromJson(
+    Map<String, dynamic> mapData,
+  ) {
+    this.uid = mapData['contact_id'];
+    this.addedOn = mapData["added_on"];
+  }
+
+  Map toMap(
+    ChatContact contact,
+  ) {
     var data = Map<String, dynamic>();
     data['contact_id'] = contact.uid;
     data['added_on'] = contact.addedOn;
     return data;
-  }
-
-  ChatContact.fromJson(Map<String, dynamic> mapData) {
-    this.uid = mapData['contact_id'];
-    this.addedOn = mapData["added_on"];
   }
 }

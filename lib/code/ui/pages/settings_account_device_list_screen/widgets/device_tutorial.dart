@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/utils/othes/animation_controller.dart';
+import 'package:hive_core/generated/l10n.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DeviceTutorial extends StatefulWidget {
   final HiveAnimationController hiveAnimationController;
 
-  const DeviceTutorial({Key key, @required this.hiveAnimationController, l})
+  const DeviceTutorial({Key? key, required this.hiveAnimationController, l})
       : super(key: key);
 
   @override
@@ -19,15 +19,15 @@ class _DeviceTutorialState extends State<DeviceTutorial> {
   // DeviceListBloc _deviceListBloc;
 
   // Controllers
-  PageController _pageController;
+  late PageController _pageController;
   int _currentPage = 0;
 
-  Size media;
+  late Size media;
 
   @override
   void initState() {
     // Blocs
-    //  _deviceListBloc = context.bloc<DeviceListBloc>();
+    //  _deviceListBloc = BlocProvider.of<DeviceListBloc>();
 
     // Controllers
     _pageController = PageController(
@@ -43,8 +43,10 @@ class _DeviceTutorialState extends State<DeviceTutorial> {
   }
 
   List<Widget> getPageList() {
-    List<Widget> list = new List<Widget>();
-    list.add(_devicePage());
+    List<Widget> list = [];
+    list.add(
+      _devicePage(),
+    );
     return list;
   }
 
@@ -53,19 +55,20 @@ class _DeviceTutorialState extends State<DeviceTutorial> {
     setState(() {});
   }
 
-  _finishTutorial() => null; //_deviceListBloc.add(FinishTutorialDevice());
+  _finishTutorial() => null; //_deviceListBloc.add(FinishTutorialDevice(),);
 
   @override
   Widget build(BuildContext context) {
     media = MediaQuery.of(context).size;
 
     return CupertinoFullscreenDialogTransition(
-        primaryRouteAnimation:
-            widget.hiveAnimationController.animationPrimaryTutorial,
-        secondaryRouteAnimation:
-            widget.hiveAnimationController.animationSecondaryTutorial,
-        linearTransition: false,
-        child: _build());
+      primaryRouteAnimation:
+          widget.hiveAnimationController.animationPrimaryTutorial,
+      secondaryRouteAnimation:
+          widget.hiveAnimationController.animationSecondaryTutorial,
+      linearTransition: false,
+      child: _build(),
+    );
   }
 
   Widget _build() {
@@ -89,7 +92,9 @@ class _DeviceTutorialState extends State<DeviceTutorial> {
                 height: 5,
               ),
               Align(
-                  alignment: Alignment.bottomCenter, child: _btnSkipTutorial()),
+                alignment: Alignment.bottomCenter,
+                child: _btnSkipTutorial(),
+              ),
             ],
           ),
         ),
@@ -112,14 +117,16 @@ class _DeviceTutorialState extends State<DeviceTutorial> {
 
   Widget _devicePage() {
     return Container(
-        child: Container(
-      margin: EdgeInsets.all(25),
-      child: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _deviceTutorial(),
-        ]),
+      child: Container(
+        margin: EdgeInsets.all(25),
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            _deviceTutorial(),
+          ]),
+        ),
       ),
-    ));
+    );
   }
 
   Widget _deviceTutorial() {
@@ -169,17 +176,23 @@ class _DeviceTutorialState extends State<DeviceTutorial> {
 
   Widget _btnSkipTutorial() {
     return Container(
-      child: OutlineButton(
-          onPressed: _finishTutorial,
-          child: Text(
-            HiveCoreString.of(context).skip_tutorial,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+      child: OutlinedButton(
+        onPressed: _finishTutorial,
+        child: Text(
+          HiveCoreString.of(context).skip_tutorial,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0),
             ),
           ),
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0))),
+        ),
+      ),
     );
   }
 }

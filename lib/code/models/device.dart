@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:hive_core/code/models/metadata.dart';
@@ -11,20 +13,25 @@ abstract class Device implements Built<Device, DeviceBuilder> {
   String get notificationsToken;
 
   String get platform;
-  @nullable
-  String get ipAddress;
-  @nullable
-  String get macAddress;
+
+  String? get ipAddress;
+
+  String? get macAddress;
 
   Device._();
   factory Device([void Function(DeviceBuilder) updates]) = _$Device;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(Device.serializer, this);
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(Device.serializer, this),
+      ),
+    );
   }
 
-  static Device fromJson(Map<String, dynamic> json) {
-    return serializers.deserializeWith(Device.serializer, json);
+  static Device? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        Device.serializer, json.decode(jsonString));
   }
 
   static Serializer<Device> get serializer => _$deviceSerializer;

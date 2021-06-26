@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -11,27 +13,26 @@ part 'contactInformation.g.dart';
 
 abstract class ContactInformation
     implements Built<ContactInformation, ContactInformationBuilder> {
-  @nullable
-  String get id;
-  @nullable
-  Metadata get metadata;
-  @nullable
+  String? get id;
+
+  Metadata? get metadata;
+
   BuiltList<ContactInformationValue> get phones;
-  @nullable
+
   BuiltList<ContactInformationValue> get mails;
-  @nullable
+
   BuiltList<Address> get addresses;
-  @nullable
+
   BuiltList<ContactInformationValue> get webs;
-  @nullable
+
   BuiltList<ContactInformationValue> get linkedin;
-  @nullable
+
   BuiltList<ContactInformationValue> get facebook;
-  @nullable
+
   BuiltList<ContactInformationValue> get instagram;
-  @nullable
+
   BuiltList<ContactInformationValue> get twitter;
-  @nullable
+
   BuiltList<ContactInformationValue> get github;
 
   ContactInformation._();
@@ -39,11 +40,15 @@ abstract class ContactInformation
           [void Function(ContactInformationBuilder) updates]) =
       _$ContactInformation;
 
-  List<ContactInformationValue> toJson() {
-    return serializers.serializeWith(ContactInformation.serializer, this);
+  Map<String, dynamic> toJson() {
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(ContactInformation.serializer, this),
+      ),
+    );
   }
 
-  static ContactInformation fromJson(Map<String, dynamic> json) {
+  static ContactInformation? fromJson(Map<String, dynamic> json) {
     return serializers.deserializeWith(ContactInformation.serializer, json);
   }
 

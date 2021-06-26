@@ -1,15 +1,18 @@
 part of 'device_repository.dart';
 
 class DeviceRepositoryFirebaseImpl implements DeviceRepository<Device> {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
-  final String userId;
-  final String path;
-  CollectionReference ref;
+  late final FirebaseFirestore _db = FirebaseFirestore.instance;
+  late final String userId;
+  late final String path;
+  late CollectionReference ref;
 
-  BehaviorSubject<BuiltList<Device>> _deviceListController;
-  BehaviorSubject<Device> _thisDeviceController;
+  late BehaviorSubject<BuiltList<Device>> _deviceListController;
+  late BehaviorSubject<Device> _thisDeviceController;
 
-  DeviceRepositoryFirebaseImpl({@required this.userId, @required this.path}) {
+  DeviceRepositoryFirebaseImpl({
+    required this.userId,
+    required this.path,
+  }) {
     ref = _db.collection(USERS_COLLECTION).doc(userId).collection(path);
     _deviceListController = BehaviorSubject<BuiltList<Device>>();
     _thisDeviceController = BehaviorSubject<Device>();
@@ -29,11 +32,13 @@ class DeviceRepositoryFirebaseImpl implements DeviceRepository<Device> {
   }
 
   @override
-  Future<Device> getDeviceById(String id) async {
+  Future<Device?> getDeviceById(String id) async {
     return await ref.doc(id).get().then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         print('Document data: ${documentSnapshot.data()}');
-        return Device.fromJson(documentSnapshot.data());
+        return Device.fromJson(
+          documentSnapshot.data().toString(),
+        );
       } else {
         print('Document does not exist on the database');
         return null;
@@ -42,8 +47,11 @@ class DeviceRepositoryFirebaseImpl implements DeviceRepository<Device> {
   }
 
   @override
-  Future updateDevice(Map device, String id) async {
-    return await ref.doc(id).update(device);
+  Future updateDevice(
+    Map device,
+    String id,
+  ) async {
+    return await ref.doc(id).update(json.decode(device.toString()));
   }
 
   @override
@@ -54,14 +62,18 @@ class DeviceRepositoryFirebaseImpl implements DeviceRepository<Device> {
         await ref /*.orderBy('lastRead', descending: true)*/ .get();
 
     _list = docs.docs
-        .map((doc) =>
-            Device.fromJson(doc.data()).rebuild((b) => b..metadata.id = doc.id))
+        .map(
+          (doc) => Device.fromJson(
+            doc.data().toString(),
+          )!
+              .rebuild((b) => b..metadata.id = doc.id),
+        )
         .toList();
     return _list;
   }
 
   @override
-  Future<Device> getThisDevice(String notificationsToken) async {
+  Future<Device?> getThisDevice(String notificationsToken) async {
     // Declaration of values
     List<Device> _devicesList;
 
@@ -82,10 +94,17 @@ class DeviceRepositoryFirebaseImpl implements DeviceRepository<Device> {
   @override
   Stream<BuiltList<Device>> findDeviceStream() {
     ref /*.orderBy('lastRead', descending: true)*/ .snapshots().listen(
-        (event) => _deviceListController.sink.add(BuiltList<Device>(event.docs
-            .map((doc) => Device.fromJson(doc.data())
-                .rebuild((b) => b..metadata.id = doc.id))
-            .toList())));
+          (event) => _deviceListController.sink.add(BuiltList<Device>(
+            event.docs
+                .map(
+                  (doc) => Device.fromJson(
+                    doc.data().toString(),
+                  )!
+                      .rebuild((b) => b..metadata.id = doc.id),
+                )
+                .toList(),
+          )),
+        );
 
     return _deviceListController.stream;
   }

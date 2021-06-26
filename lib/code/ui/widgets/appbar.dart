@@ -5,15 +5,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;
   final List<Widget> actions;
   final Widget leading;
-  final Widget bottom;
+  final PreferredSizeWidget? bottom;
   final bool centerTitle;
 
   const CustomAppBar({
-    Key key,
-    @required this.title,
-    @required this.actions,
-    @required this.leading,
-    @required this.centerTitle,
+    Key? key,
+    required this.title,
+    required this.actions,
+    required this.leading,
+    required this.centerTitle,
     this.bottom,
   }) : super(key: key);
 

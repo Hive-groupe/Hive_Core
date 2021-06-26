@@ -1,23 +1,25 @@
-import 'package:emoji_picker/emoji_picker.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
 import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 
 class EmojiPiker extends StatelessWidget {
-  ChatRoomBloc _chatRoomBloc;
+  late ChatRoomBloc _chatRoomBloc;
 
   initState(BuildContext context) {
-    _chatRoomBloc = context.bloc<ChatRoomBloc>();
+    _chatRoomBloc = BlocProvider.of<ChatRoomBloc>(context);
   }
 
-  _onAddEmoji(emoji, category) => _chatRoomBloc.add(AddEmoji(emoji: emoji));
+  _onAddEmoji(emoji, category) => _chatRoomBloc.add(
+        AddEmoji(emoji: emoji),
+      );
 
   @override
   Widget build(BuildContext context) {
     initState(context);
     return BlocConsumer<ChatRoomBloc, ChatRoomState>(
-      cubit: _chatRoomBloc,
+      bloc: _chatRoomBloc,
       listener: (context, state) {},
       builder: (context, state) {
         if (state is ChatLoaded) {
@@ -31,13 +33,20 @@ class EmojiPiker extends StatelessWidget {
 
   emojiContainer() {
     return EmojiPicker(
-      bgColor: HiveCoreConstColors.separatorColor,
-      indicatorColor: HiveCoreConstColors.bronzeColor,
-      rows: 3,
-      columns: 7,
-      onEmojiSelected: (emoji, category) => _onAddEmoji(emoji, category),
-      recommendKeywords: ["face", "happy", "party", "sad"],
-      numRecommended: 50,
+      onEmojiSelected: (Category category, Emoji emoji) =>
+          _onAddEmoji(emoji, category),
+      config: const Config(
+        columns: 7,
+        emojiSizeMax: 32.0,
+        verticalSpacing: 0,
+        horizontalSpacing: 0,
+        initCategory: Category.RECENT,
+        // bgColor: HiveCoreConstColors.separatorColor,
+        indicatorColor: HiveCoreConstColors.bronzeColor,
+        showRecentsTab: true,
+        recentsLimit: 28,
+        noRecentsText: 'No Recents',
+      ),
     );
   }
 }

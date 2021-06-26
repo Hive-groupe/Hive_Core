@@ -11,10 +11,10 @@ class CallSreenBloc extends Bloc<CallSreenEvent, CallSreenState> {
   // Repositorys
   // AuthenticationRepository _authenticationRepository;
 
-  CallSreenBloc(
-      {@required AuthenticationRepository authenticationRepository,
-      String currentUserId})
-      : assert(authenticationRepository != null),
+  CallSreenBloc({
+    required AuthenticationRepository authenticationRepository,
+    required String currentUserId,
+  }) :
         // _authenticationRepository = authenticationRepository,
         super(CallSreenInitial()..currentUserId = currentUserId);
 

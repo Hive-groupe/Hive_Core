@@ -12,7 +12,7 @@ import 'widgets/chat_message_images_list.dart';
 class ChatRoonInfoScreen extends StatefulWidget {
   final User receiver;
 
-  ChatRoonInfoScreen({@required this.receiver});
+  ChatRoonInfoScreen({required this.receiver});
 
   @override
   _ChatRoonInfoScreenState createState() => _ChatRoonInfoScreenState();
@@ -20,19 +20,21 @@ class ChatRoonInfoScreen extends StatefulWidget {
 
 class _ChatRoonInfoScreenState extends State<ChatRoonInfoScreen>
     with SingleTickerProviderStateMixin {
-  ChatRoonInfoBloc _chatRoonInfoBloc;
+  late ChatRoonInfoBloc _chatRoonInfoBloc;
 
-  ScrollController _scrollController;
+  late ScrollController _scrollController;
 
-  TabController _tabController;
-  List<Tab> _tabs;
+  late TabController _tabController;
+  late List<Tab> _tabs;
 
   bool lastStatus = true;
 
   @override
   void initState() {
     _chatRoonInfoBloc = ChatRoonInfoBloc(context: context)
-      ..add(StartChatRoonInfo(receiverId: widget.receiver.id));
+      ..add(
+        StartChatRoonInfo(receiverId: widget.receiver.id ?? ''),
+      );
 
     _tabs = [
       new Tab(
@@ -59,7 +61,7 @@ class _ChatRoonInfoScreenState extends State<ChatRoonInfoScreen>
 
   @override
   void dispose() {
-    _tabController?.dispose();
+    _tabController.dispose();
     _scrollController.removeListener(_scrollListener);
     super.dispose();
   }
@@ -79,41 +81,42 @@ class _ChatRoonInfoScreenState extends State<ChatRoonInfoScreen>
 
   Widget _onShowOptions() {
     return PopupMenuButton(
-        itemBuilder: (_) => <PopupMenuItem<String>>[
-              new PopupMenuItem<String>(
-                  child: const ListTile(
-                    //leading: Icon(Icons.exit_to_app),
-                    title: Text('Ver contacto'),
-                  ),
-                  value: 'contact_view'),
-              new PopupMenuItem<String>(
-                  child: const ListTile(
-                    //leading: Icon(Icons.exit_to_app),
-                    title: Text('Archivos y imagenes'),
-                  ),
-                  value: 'files_and_images'),
-              new PopupMenuItem<String>(
-                  child: const ListTile(
-                    //leading: Icon(Icons.create),
-                    title: Text('Buscar'),
-                  ),
-                  value: 'search'),
-              new PopupMenuItem<String>(
-                  child: const ListTile(
-                    //leading: Icon(Icons.create),
-                    title: Text('Vaciar chat'),
-                  ),
-                  value: 'clean_chat'),
-            ],
-        onSelected: (String value) => _popupMenuButtonChoice(value),
-        child: IconButton(
-          // onPressed: () {},
-          icon: Icon(
-            Icons.more_vert,
-            size: 18,
-            color: isShrink ? HiveCoreConstColors.greyColor : Colors.white,
-          ),
-        ));
+      itemBuilder: (_) => <PopupMenuItem<String>>[
+        new PopupMenuItem<String>(
+            child: const ListTile(
+              //leading: Icon(Icons.exit_to_app),
+              title: Text('Ver contacto'),
+            ),
+            value: 'contact_view'),
+        new PopupMenuItem<String>(
+            child: const ListTile(
+              //leading: Icon(Icons.exit_to_app),
+              title: Text('Archivos y imagenes'),
+            ),
+            value: 'files_and_images'),
+        new PopupMenuItem<String>(
+            child: const ListTile(
+              //leading: Icon(Icons.create),
+              title: Text('Buscar'),
+            ),
+            value: 'search'),
+        new PopupMenuItem<String>(
+            child: const ListTile(
+              //leading: Icon(Icons.create),
+              title: Text('Vaciar chat'),
+            ),
+            value: 'clean_chat'),
+      ],
+      onSelected: (String value) => _popupMenuButtonChoice(value),
+      child: IconButton(
+        onPressed: () {},
+        icon: Icon(
+          Icons.more_vert,
+          size: 18,
+          color: isShrink ? HiveCoreConstColors.greyColor : Colors.white,
+        ),
+      ),
+    );
   }
 
   _popupMenuButtonChoice(String value) {
@@ -135,100 +138,105 @@ class _ChatRoonInfoScreenState extends State<ChatRoonInfoScreen>
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<ChatRoonInfoBloc>(
-            create: (BuildContext context) => _chatRoonInfoBloc,
-          ),
-        ],
-        child: BlocConsumer(
-          cubit: _chatRoonInfoBloc,
-          listener: (context, state) {},
-          builder: (context, state) {
-            if (state is ChatLoaded) {
-              return _build(state);
-            } else {
-              return Container();
-            }
-          },
-        ));
+      providers: [
+        BlocProvider<ChatRoonInfoBloc>(
+          create: (BuildContext context) => _chatRoonInfoBloc,
+        ),
+      ],
+      child: BlocConsumer(
+        bloc: _chatRoonInfoBloc,
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is ChatLoaded) {
+            return _build(state);
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
   }
 
   Widget _build(ChatLoaded state) {
     return Scaffold(
       body: NestedScrollView(
-          controller: _scrollController,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                expandedHeight: MediaQuery.of(context).size.width,
-                floating: false,
-                pinned: true,
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                elevation: 0,
-                leading: IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(
-                    CupertinoIcons.back,
-                    color:
-                        isShrink ? HiveCoreConstColors.greyColor : Colors.white,
-                    size: 18,
+        controller: _scrollController,
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: MediaQuery.of(context).size.width,
+              floating: false,
+              pinned: true,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              elevation: 0,
+              leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: Icon(
+                  CupertinoIcons.back,
+                  color:
+                      isShrink ? HiveCoreConstColors.greyColor : Colors.white,
+                  size: 18,
+                ),
+              ),
+              flexibleSpace: FlexibleSpaceBar(
+                // centerTitle: true,
+                title: Text(
+                  widget.receiver.username,
+                  style: TextStyle(
+                    color: isShrink
+                        ? Theme.of(context).textTheme.bodyText1!.color
+                        : Colors.white,
+                    fontSize: 16.0,
                   ),
                 ),
-                flexibleSpace: FlexibleSpaceBar(
-                  // centerTitle: true,
-                  title: Text(widget.receiver.username,
-                      style: TextStyle(
-                        color: isShrink
-                            ? Theme.of(context).textTheme.bodyText1.color
-                            : Colors.white,
-                        fontSize: 16.0,
-                      )),
-                  background: Hero(
-                    tag: 'avatar-${widget.receiver.id}',
-                    child: CachedNetworkImage(
-                      imageUrl: widget.receiver.profile.avatar ?? '',
-                      placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) => Image.network(
-                        noImageAvailable,
-                        height: 25,
-                        width: 25,
-                        fit: BoxFit.cover,
-                      ),
+                background: Hero(
+                  tag: 'avatar-${widget.receiver.id}',
+                  child: CachedNetworkImage(
+                    imageUrl: widget.receiver.profile!.avatar ?? '',
+                    placeholder: (context, url) => Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) => Image.network(
+                      noImageAvailable,
+                      height: 25,
+                      width: 25,
                       fit: BoxFit.cover,
                     ),
+                    fit: BoxFit.cover,
                   ),
                 ),
-                actions: [
-                  _onShowOptions(),
-                ],
               ),
-              SliverPersistentHeader(
-                delegate: _SliverAppBarDelegate(
-                  TabBar(
-                    controller: _tabController,
-                    tabs: _tabs,
-                    indicatorPadding: EdgeInsets.only(left: 25, right: 25),
-                    labelColor: Theme.of(context).textTheme.bodyText1.color,
-                    unselectedLabelColor: Colors.grey,
-                  ),
+              actions: [
+                _onShowOptions(),
+              ],
+            ),
+            SliverPersistentHeader(
+              delegate: _SliverAppBarDelegate(
+                TabBar(
+                  controller: _tabController,
+                  tabs: _tabs,
+                  indicatorPadding: EdgeInsets.only(left: 25, right: 25),
+                  labelColor: Theme.of(context).textTheme.bodyText1!.color,
+                  unselectedLabelColor: Colors.grey,
                 ),
-                pinned: true,
               ),
-            ];
-          },
-          body: TabBarView(controller: _tabController, children: <Widget>[
-            _body(),
-            ChatMessageImageList(
-              chatMessageList: state.chatImageMessageList,
+              pinned: true,
             ),
-            Center(
-              child: Text('Archivos'),
-            ),
-            Center(
-              child: Text('Enlaces'),
-            ),
-          ])),
+          ];
+        },
+        body: TabBarView(controller: _tabController, children: <Widget>[
+          _body(),
+          ChatMessageImageList(
+            chatMessageList: state.chatImageMessageList,
+          ),
+          Center(
+            child: Text('Archivos'),
+          ),
+          Center(
+            child: Text('Enlaces'),
+          ),
+        ]),
+      ),
     );
   }
 

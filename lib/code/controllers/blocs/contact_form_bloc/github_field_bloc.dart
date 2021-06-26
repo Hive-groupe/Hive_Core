@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 
 class GithubFieldBloc extends GroupFieldBloc {
@@ -6,9 +5,9 @@ class GithubFieldBloc extends GroupFieldBloc {
   final TextFieldBloc value;
 
   GithubFieldBloc({
-    @required this.label,
-    @required this.value,
-    String name,
+    required this.label,
+    required this.value,
+    required String name,
   }) : super([
           label,
           value,

@@ -14,8 +14,8 @@ abstract class PreferencesRepository {
   Future<void> saveTheme(String theme);
   Future<String> get theme;
 
-  Future<void> saveLocale(Locale locale);
-  Future<Locale> get locale;
+  Future<void> saveLocale(Locale? locale);
+  Future<Locale?> get locale;
 
   Future<void> saveNotifications(bool notifications);
   Future<bool> get notifications;

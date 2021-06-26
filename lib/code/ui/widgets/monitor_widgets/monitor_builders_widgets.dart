@@ -5,14 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 abstract class MonitorBuildersWidget {
   const MonitorBuildersWidget();
 
-  static Widget emptyMonitorBuilder(
-      {@required BuildContext context,
-      @required Function onTap,
-      @required String imageUrl,
-      @required String title,
-      @required String text}) {
+  static Widget emptyMonitorBuilder({
+    required BuildContext context,
+    Function? onTap,
+    String? imageUrl,
+    String? title,
+    String? text,
+  }) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => onTap,
       child: Container(
         child: Center(
           child: Column(
@@ -29,8 +30,9 @@ abstract class MonitorBuildersWidget {
                   height: 150,
                   width: 150,
                   placeholderBuilder: (BuildContext context) => Container(
-                      padding: const EdgeInsets.all(30.0),
-                      child: const CircularProgressIndicator()),
+                    padding: const EdgeInsets.all(30.0),
+                    child: const CircularProgressIndicator(),
+                  ),
                 ),
               ),
               SizedBox(
@@ -65,8 +67,8 @@ abstract class MonitorBuildersWidget {
   }
 
   static Widget errorMonitorBuilder({
-    @required BuildContext context,
-    String imageUrl,
+    required BuildContext context,
+    String? imageUrl,
   }) {
     return Container(
       child: Center(
@@ -88,9 +90,9 @@ abstract class MonitorBuildersWidget {
   }
 
   static Widget loadingMonitorBuilder({
-    @required BuildContext context,
-    String imageUrl,
-    String text,
+    required BuildContext context,
+    String? imageUrl,
+    String? text,
   }) {
     return Container(
       child: Center(
@@ -105,7 +107,9 @@ abstract class MonitorBuildersWidget {
             ),
             Text(
               text ?? '',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(
+                color: Colors.black,
+              ),
             )
           ],
         ),

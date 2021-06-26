@@ -36,12 +36,13 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
       ChatPreferences((b) => b..enterToSend = false);
 
   PreferencesBloc({
-    @required PreferencesRepository preferencesRepository,
-    Preferences preferences,
-  })  : assert(preferencesRepository != null),
-        _preferencesRepository = preferencesRepository,
+    required PreferencesRepository preferencesRepository,
+    required Preferences preferences,
+  })  : _preferencesRepository = preferencesRepository,
         _preferences = preferences ?? _defaultStatePreferences,
-        super(PreferencesNotLoaded());
+        super(
+          PreferencesNotLoaded(),
+        );
 
   @override
   Stream<PreferencesState> mapEventToState(
@@ -67,13 +68,14 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
       yield* _mapResetChatPreferencesToState(event);
     } else if (event is ChangeEnterToSend) {
       yield* _mapChangeEnterToSendToState(event);
-    } else if (event is clearCache) {
+    } else if (event is ClearCache) {
       yield* _mapclearCacheToState(event);
     }
   }
 
   Stream<PreferencesState> _mapLoadPreferencesToState(
-      LoadPreferences event) async* {
+    LoadPreferences event,
+  ) async* {
     try {
       _preferences = await _preferencesRepository.preferences;
       yield PreferencesLoaded(
@@ -87,7 +89,8 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
   }
 
   Stream<PreferencesState> _mapResetPreferencesToState(
-      ResetPreferences event) async* {
+    ResetPreferences event,
+  ) async* {
     try {
       _preferences = _defaultStatePreferences;
       await _preferencesRepository.savePreferences(_preferences);
@@ -101,13 +104,16 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
     } catch (_) {}
   }
 
-  Stream<PreferencesState> _mapChangeThemeToState(ChangeTheme event) async* {
+  Stream<PreferencesState> _mapChangeThemeToState(
+    ChangeTheme event,
+  ) async* {
     try {
-      _preferences.themeName =
-          event.theme ?? _defaultStatePreferences.themeName;
-      await _preferencesRepository.saveTheme(_preferences.themeName != null
-          ? _preferences.themeName
-          : themes['Light']);
+      _preferences.themeName = event.theme;
+
+      await _preferencesRepository.saveTheme(
+        _preferences.themeName,
+      );
+
       yield PreferencesLoaded(
           themeName: _preferences.themeName,
           locale: _preferences.locale,
@@ -118,9 +124,11 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
     } catch (_) {}
   }
 
-  Stream<PreferencesState> _mapChangeLocaleToState(ChangeLocale event) async* {
+  Stream<PreferencesState> _mapChangeLocaleToState(
+    ChangeLocale event,
+  ) async* {
     try {
-      _preferences.locale = event.locale ?? _defaultStatePreferences.locale;
+      _preferences.locale = event.locale;
       await _preferencesRepository.saveLocale(_preferences.locale);
       yield PreferencesLoaded(
           themeName: _preferences.themeName,
@@ -133,7 +141,8 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
   }
 
   Stream<PreferencesState> _mapResetNotificationsPreferencesToState(
-      ResetNotificationsPreferences event) async* {
+    ResetNotificationsPreferences event,
+  ) async* {
     try {
       // ======================================================================
       // ELIMINAR
@@ -156,10 +165,10 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
   }
 
   Stream<PreferencesState> _mapChangeNotificationsToState(
-      ChangeNotifications event) async* {
+    ChangeNotifications event,
+  ) async* {
     try {
-      _preferences.notifications =
-          event.notifications ?? _defaultStatePreferences.notifications;
+      _preferences.notifications = event.notifications;
       await _preferencesRepository
           .saveNotifications(_preferences.notifications);
       yield PreferencesLoaded(
@@ -173,10 +182,10 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
   }
 
   Stream<PreferencesState> _mapChangeSoundEffectsToState(
-      ChangeSoundEffects event) async* {
+    ChangeSoundEffects event,
+  ) async* {
     try {
-      _preferences.soundEffects =
-          event.soundEffects ?? _defaultStatePreferences.soundEffects;
+      _preferences.soundEffects = event.soundEffects;
       await _preferencesRepository.saveSoundEffects(_preferences.soundEffects);
       yield PreferencesLoaded(
           themeName: _preferences.themeName,
@@ -189,10 +198,10 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
   }
 
   Stream<PreferencesState> _mapChangeVibrationToState(
-      ChangeVibration event) async* {
+    ChangeVibration event,
+  ) async* {
     try {
-      _preferences.vibration =
-          event.vibration ?? _defaultStatePreferences.vibration;
+      _preferences.vibration = event.vibration;
       await _preferencesRepository.saveVibration(_preferences.vibration);
       yield PreferencesLoaded(
           themeName: _preferences.themeName,
@@ -205,7 +214,8 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
   }
 
   Stream<PreferencesState> _mapResetChatPreferencesToState(
-      ResetChatPreferences event) async* {
+    ResetChatPreferences event,
+  ) async* {
     try {
       _preferences.chatPreferences = _defaultChatPreferences;
       await _preferencesRepository.savePreferences(_preferences);
@@ -220,14 +230,14 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
   }
 
   Stream<PreferencesState> _mapChangeEnterToSendToState(
-      ChangeEnterToSend event) async* {
+    ChangeEnterToSend event,
+  ) async* {
     try {
-      _preferences.chatPreferences = _preferences.chatPreferences.rebuild((b) =>
-          b
-            ..enterToSend = event.enterToSend ??
-                _defaultStatePreferences.chatPreferences.enterToSend);
-      await _preferencesRepository
-          .saveSoundEffects(_preferences.chatPreferences.enterToSend);
+      _preferences.chatPreferences = _preferences.chatPreferences
+          .rebuild((b) => b..enterToSend = event.enterToSend);
+      await _preferencesRepository.saveSoundEffects(
+        _preferences.chatPreferences.enterToSend ?? false,
+      );
       yield PreferencesLoaded(
           themeName: _preferences.themeName,
           locale: _preferences.locale,
@@ -238,7 +248,9 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
     } catch (_) {}
   }
 
-  Stream<PreferencesState> _mapclearCacheToState(clearCache event) async* {
+  Stream<PreferencesState> _mapclearCacheToState(
+    ClearCache event,
+  ) async* {
     try {} catch (_) {}
   }
 }

@@ -7,9 +7,11 @@ class NotificationsList extends StatefulWidget {
   final bool showStatus;
   final Stream<BuiltList<Widget>> notificationsList;
 
-  NotificationsList(
-      {Key key, bool showStatus, @required this.notificationsList})
-      : this.showStatus = showStatus ?? true,
+  NotificationsList({
+    Key? key,
+    bool? showStatus,
+    required this.notificationsList,
+  })  : this.showStatus = showStatus ?? true,
         super(key: key);
 
   @override
@@ -32,9 +34,9 @@ class _NotificationsListState extends State<NotificationsList> {
     return StreamBuilder<BuiltList<Widget>>(
         stream: widget.notificationsList,
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data.length > 0) {
-            return _buildListLoaded(snapshot.data);
-          } else if (snapshot.hasData && snapshot.data.length <= 0) {
+          if (snapshot.hasData && snapshot.data!.length > 0) {
+            return _buildListLoaded(snapshot.data!);
+          } else if (snapshot.hasData && snapshot.data!.length <= 0) {
             return widget.showStatus ? _buildListEmpty() : Container();
           } else if (snapshot.hasError) {
             return widget.showStatus ? _buildListError() : Container();
@@ -47,9 +49,9 @@ class _NotificationsListState extends State<NotificationsList> {
   Widget _buildListEmpty() {
     return ListBuildersWidget.emptyListBuilder(
       context: context,
-      onTap: null,
+      onTap: () {},
       imageUrl: HiveCoreString.of(context).notifications_assets_images_empty,
-      title: null,
+      title: '',
       text: HiveCoreString.of(context).notifications_list_empty,
     );
   }
@@ -64,9 +66,9 @@ class _NotificationsListState extends State<NotificationsList> {
   Widget _buildListLoading() {
     return ListBuildersWidget.loadingListBuilder(
       context: context,
-      onTap: null,
+      onTap: () {},
       imageUrl: HiveCoreString.of(context).notifications_assets_images_loading,
-      title: null,
+      title: '',
       text: HiveCoreString.of(context).notifications_list_loading,
     );
   }

@@ -15,9 +15,9 @@ class _$ChatMessageSerializer implements StructuredSerializer<ChatMessage> {
   final String wireName = 'ChatMessage';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ChatMessage object,
+  Iterable<Object?> serialize(Serializers serializers, ChatMessage object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'receiver_id',
       serializers.serialize(object.receiverId,
           specifiedType: const FullType(String)),
@@ -34,23 +34,26 @@ class _$ChatMessageSerializer implements StructuredSerializer<ChatMessage> {
       serializers.serialize(object.type,
           specifiedType: const FullType(ChatMessageType)),
     ];
-    if (object.messageId != null) {
+    Object? value;
+    value = object.messageId;
+    if (value != null) {
       result
         ..add('message_id')
-        ..add(serializers.serialize(object.messageId,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.photoUrl != null) {
+    value = object.photoUrl;
+    if (value != null) {
       result
         ..add('photoUrl')
-        ..add(serializers.serialize(object.photoUrl,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     return result;
   }
 
   @override
-  ChatMessage deserialize(Serializers serializers, Iterable<Object> serialized,
+  ChatMessage deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ChatMessageBuilder();
 
@@ -58,11 +61,11 @@ class _$ChatMessageSerializer implements StructuredSerializer<ChatMessage> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'message_id':
           result.messageId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'receiver_id':
           result.receiverId = serializers.deserialize(value,
@@ -87,7 +90,7 @@ class _$ChatMessageSerializer implements StructuredSerializer<ChatMessage> {
           break;
         case 'photoUrl':
           result.photoUrl = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -98,7 +101,7 @@ class _$ChatMessageSerializer implements StructuredSerializer<ChatMessage> {
 
 class _$ChatMessage extends ChatMessage {
   @override
-  final String messageId;
+  final String? messageId;
   @override
   final String receiverId;
   @override
@@ -110,35 +113,27 @@ class _$ChatMessage extends ChatMessage {
   @override
   final ChatMessageType type;
   @override
-  final String photoUrl;
+  final String? photoUrl;
 
-  factory _$ChatMessage([void Function(ChatMessageBuilder) updates]) =>
+  factory _$ChatMessage([void Function(ChatMessageBuilder)? updates]) =>
       (new ChatMessageBuilder()..update(updates)).build();
 
   _$ChatMessage._(
       {this.messageId,
-      this.receiverId,
-      this.senderId,
-      this.message,
-      this.timestamp,
-      this.type,
+      required this.receiverId,
+      required this.senderId,
+      required this.message,
+      required this.timestamp,
+      required this.type,
       this.photoUrl})
       : super._() {
-    if (receiverId == null) {
-      throw new BuiltValueNullFieldError('ChatMessage', 'receiverId');
-    }
-    if (senderId == null) {
-      throw new BuiltValueNullFieldError('ChatMessage', 'senderId');
-    }
-    if (message == null) {
-      throw new BuiltValueNullFieldError('ChatMessage', 'message');
-    }
-    if (timestamp == null) {
-      throw new BuiltValueNullFieldError('ChatMessage', 'timestamp');
-    }
-    if (type == null) {
-      throw new BuiltValueNullFieldError('ChatMessage', 'type');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        receiverId, 'ChatMessage', 'receiverId');
+    BuiltValueNullFieldError.checkNotNull(senderId, 'ChatMessage', 'senderId');
+    BuiltValueNullFieldError.checkNotNull(message, 'ChatMessage', 'message');
+    BuiltValueNullFieldError.checkNotNull(
+        timestamp, 'ChatMessage', 'timestamp');
+    BuiltValueNullFieldError.checkNotNull(type, 'ChatMessage', 'type');
   }
 
   @override
@@ -190,47 +185,48 @@ class _$ChatMessage extends ChatMessage {
 }
 
 class ChatMessageBuilder implements Builder<ChatMessage, ChatMessageBuilder> {
-  _$ChatMessage _$v;
+  _$ChatMessage? _$v;
 
-  String _messageId;
-  String get messageId => _$this._messageId;
-  set messageId(String messageId) => _$this._messageId = messageId;
+  String? _messageId;
+  String? get messageId => _$this._messageId;
+  set messageId(String? messageId) => _$this._messageId = messageId;
 
-  String _receiverId;
-  String get receiverId => _$this._receiverId;
-  set receiverId(String receiverId) => _$this._receiverId = receiverId;
+  String? _receiverId;
+  String? get receiverId => _$this._receiverId;
+  set receiverId(String? receiverId) => _$this._receiverId = receiverId;
 
-  String _senderId;
-  String get senderId => _$this._senderId;
-  set senderId(String senderId) => _$this._senderId = senderId;
+  String? _senderId;
+  String? get senderId => _$this._senderId;
+  set senderId(String? senderId) => _$this._senderId = senderId;
 
-  String _message;
-  String get message => _$this._message;
-  set message(String message) => _$this._message = message;
+  String? _message;
+  String? get message => _$this._message;
+  set message(String? message) => _$this._message = message;
 
-  DateTime _timestamp;
-  DateTime get timestamp => _$this._timestamp;
-  set timestamp(DateTime timestamp) => _$this._timestamp = timestamp;
+  DateTime? _timestamp;
+  DateTime? get timestamp => _$this._timestamp;
+  set timestamp(DateTime? timestamp) => _$this._timestamp = timestamp;
 
-  ChatMessageType _type;
-  ChatMessageType get type => _$this._type;
-  set type(ChatMessageType type) => _$this._type = type;
+  ChatMessageType? _type;
+  ChatMessageType? get type => _$this._type;
+  set type(ChatMessageType? type) => _$this._type = type;
 
-  String _photoUrl;
-  String get photoUrl => _$this._photoUrl;
-  set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
+  String? _photoUrl;
+  String? get photoUrl => _$this._photoUrl;
+  set photoUrl(String? photoUrl) => _$this._photoUrl = photoUrl;
 
   ChatMessageBuilder();
 
   ChatMessageBuilder get _$this {
-    if (_$v != null) {
-      _messageId = _$v.messageId;
-      _receiverId = _$v.receiverId;
-      _senderId = _$v.senderId;
-      _message = _$v.message;
-      _timestamp = _$v.timestamp;
-      _type = _$v.type;
-      _photoUrl = _$v.photoUrl;
+    final $v = _$v;
+    if ($v != null) {
+      _messageId = $v.messageId;
+      _receiverId = $v.receiverId;
+      _senderId = $v.senderId;
+      _message = $v.message;
+      _timestamp = $v.timestamp;
+      _type = $v.type;
+      _photoUrl = $v.photoUrl;
       _$v = null;
     }
     return this;
@@ -238,14 +234,12 @@ class ChatMessageBuilder implements Builder<ChatMessage, ChatMessageBuilder> {
 
   @override
   void replace(ChatMessage other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ChatMessage;
   }
 
   @override
-  void update(void Function(ChatMessageBuilder) updates) {
+  void update(void Function(ChatMessageBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -254,11 +248,16 @@ class ChatMessageBuilder implements Builder<ChatMessage, ChatMessageBuilder> {
     final _$result = _$v ??
         new _$ChatMessage._(
             messageId: messageId,
-            receiverId: receiverId,
-            senderId: senderId,
-            message: message,
-            timestamp: timestamp,
-            type: type,
+            receiverId: BuiltValueNullFieldError.checkNotNull(
+                receiverId, 'ChatMessage', 'receiverId'),
+            senderId: BuiltValueNullFieldError.checkNotNull(
+                senderId, 'ChatMessage', 'senderId'),
+            message: BuiltValueNullFieldError.checkNotNull(
+                message, 'ChatMessage', 'message'),
+            timestamp: BuiltValueNullFieldError.checkNotNull(
+                timestamp, 'ChatMessage', 'timestamp'),
+            type: BuiltValueNullFieldError.checkNotNull(
+                type, 'ChatMessage', 'type'),
             photoUrl: photoUrl);
     replace(_$result);
     return _$result;

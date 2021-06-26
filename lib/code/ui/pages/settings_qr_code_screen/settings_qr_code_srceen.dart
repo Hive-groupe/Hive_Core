@@ -14,10 +14,10 @@ class SettingsQrCodeScreen extends StatefulWidget {
 
 class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
     with SingleTickerProviderStateMixin {
-  SettingsQrCodeBloc _settingsQrCodeBloc;
+  late SettingsQrCodeBloc _settingsQrCodeBloc;
 
-  TabController _tabController;
-  List<Tab> _tabs;
+  late TabController _tabController;
+  late List<Tab> _tabs;
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
 
   @override
   void dispose() {
-    _settingsQrCodeBloc?.close();
+    _settingsQrCodeBloc.close();
     super.dispose();
   }
 
@@ -87,7 +87,7 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
         ),
       ],
       child: BlocConsumer(
-        cubit: _settingsQrCodeBloc,
+        bloc: _settingsQrCodeBloc,
         listener: (context, state) {},
         builder: (context, state) {
           return _build();
@@ -108,7 +108,7 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
     );
   }
 
-  AppBar _appBar({@required String title}) {
+  AppBar _appBar({required String title}) {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -117,7 +117,7 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
         title,
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       leading: IconButton(
@@ -129,7 +129,7 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
         controller: _tabController,
         tabs: _tabs,
         indicatorPadding: EdgeInsets.only(left: 25, right: 25),
-        labelColor: Theme.of(context).textTheme.bodyText1.color,
+        labelColor: Theme.of(context).textTheme.bodyText1!.color,
         unselectedLabelColor: Colors.grey,
       ),
     );
@@ -137,22 +137,23 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
 
   Widget _myCodeBuild() {
     return SingleChildScrollView(
-        child: Container(
-      margin: EdgeInsets.only(top: 100, bottom: 75),
-      child: Column(
-        children: <Widget>[
-          MyQrCode(),
-          Container(
-            width: 300,
-            child: Text(
-              'Tus amigos pueden escanear este codigo para encontrar tu perfil',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey),
-            ),
-          )
-        ],
+      child: Container(
+        margin: EdgeInsets.only(top: 100, bottom: 75),
+        child: Column(
+          children: <Widget>[
+            MyQrCode(),
+            Container(
+              width: 300,
+              child: Text(
+                'Tus amigos pueden escanear este codigo para encontrar tu perfil',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey),
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   Widget _btnShare() {

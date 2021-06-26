@@ -10,8 +10,11 @@ class DeviceList extends StatefulWidget {
   final bool showStatus;
   final Stream<BuiltList<Device>> deviceList;
 
-  DeviceList({Key key, bool showStatus, @required this.deviceList})
-      : this.showStatus = showStatus ?? true,
+  DeviceList({
+    Key? key,
+    required bool showStatus,
+    required this.deviceList,
+  })  : this.showStatus = showStatus,
         super(key: key);
 
   @override
@@ -34,9 +37,9 @@ class _DeviceListState extends State<DeviceList> {
     return StreamBuilder<BuiltList<Device>>(
         stream: widget.deviceList,
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data.length > 0) {
-            return _buildListLoaded(snapshot.data);
-          } else if (snapshot.hasData && snapshot.data.length <= 0) {
+          if (snapshot.hasData && snapshot.data!.length > 0) {
+            return _buildListLoaded(snapshot.data!);
+          } else if (snapshot.hasData && snapshot.data!.length <= 0) {
             return widget.showStatus ? _buildListEmpty() : Container();
           } else if (snapshot.hasError) {
             return widget.showStatus ? _buildListError() : Container();
@@ -57,7 +60,7 @@ class _DeviceListState extends State<DeviceList> {
       context: context,
       onTap: () {},
       imageUrl: HiveCoreString.of(context).settings_devices_assets_images_empty,
-      title: null,
+      title: '',
       text: HiveCoreString.of(context).settings_devices_list_empty,
     );
   }
@@ -67,10 +70,11 @@ class _DeviceListState extends State<DeviceList> {
       margin: EdgeInsets.only(bottom: 50),
       child: Column(
         children: List.generate(
-            list.length,
-            (index) => DeviceItem(
-                  model: list[index],
-                )).toList(),
+          list.length,
+          (index) => DeviceItem(
+            model: list[index],
+          ),
+        ).toList(),
       ),
     );
   }

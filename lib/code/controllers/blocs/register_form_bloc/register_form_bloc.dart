@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/contact_form_bloc/contact_form_bloc.dart';
 import 'package:hive_core/code/models/enum/gender.dart';
@@ -61,7 +60,7 @@ class RegistrationFormBloc extends FormBloc<String, String> {
   Validator<String> _confirmPassword(
     TextFieldBloc passwordTextFieldBloc,
   ) {
-    return (String confirmPassword) {
+    return (String? confirmPassword) {
       if (confirmPassword == passwordTextFieldBloc.value) {
         return null;
       }
@@ -69,12 +68,10 @@ class RegistrationFormBloc extends FormBloc<String, String> {
     };
   }
 
-  RegistrationFormBloc(
-      {@required AuthenticationRepository authenticationRepository,
-      @required UserRepository userRepository})
-      : assert(authenticationRepository != null),
-        assert(userRepository != null),
-        _authenticationRepository = authenticationRepository,
+  RegistrationFormBloc({
+    required AuthenticationRepository authenticationRepository,
+    required UserRepository userRepository,
+  })  : _authenticationRepository = authenticationRepository,
         _userRepository = userRepository,
         // Blocs
         contactFormBloc = ContactFormBloc(
@@ -133,7 +130,7 @@ class RegistrationFormBloc extends FormBloc<String, String> {
 
       // Define values
       // String _username;
-      String _userId;
+      String? _userId;
       String _mail;
       String _password;
 
@@ -148,18 +145,20 @@ class RegistrationFormBloc extends FormBloc<String, String> {
       Profile _profile;
 
       // Init values
-      _mail = email.value;
-      _password = password.value;
+      _mail = email.value ?? '';
+      _password = password.value ?? '';
 
-      _avatar = avatar.value;
-      _gender = gender.value;
-      _name = name.value;
-      _firstname = firstname.value;
-      _secondname = secondname.value;
-      _nickname = nickname.value;
+      _avatar = avatar.value ?? '';
+      _gender = gender.value ?? Gender.OTHER;
+      _name = name.value ?? '';
+      _firstname = firstname.value ?? '';
+      _secondname = secondname.value ?? '';
+      _nickname = nickname.value ?? '';
 
       _profile = Profile((b) => b
-        ..contactInformation.replace(contactFormBloc.getContactInformation())
+        ..contactInformation.replace(
+          contactFormBloc.getContactInformation(),
+        )
         ..avatar = _avatar
         ..gender = _gender
         ..name = _name
@@ -168,11 +167,16 @@ class RegistrationFormBloc extends FormBloc<String, String> {
         ..nickname = _nickname);
 
       // Registration user
-      await _authenticationRepository.signUp(email: _mail, password: _password);
+      await _authenticationRepository.signUp(
+        email: _mail,
+        password: _password,
+      );
 
       // login user
       await _authenticationRepository.signInWithCredentials(
-          email: _mail, password: _password);
+        email: _mail,
+        password: _password,
+      );
 
       _userId = await _authenticationRepository.getCurrentUserId();
 
@@ -184,7 +188,9 @@ class RegistrationFormBloc extends FormBloc<String, String> {
         ..userStatus = UserStatus.online);
 
       // Save user data
-      await _userRepository.addUser(_user.toJson());
+      await _userRepository.addUser(
+        _user.toJson(),
+      );
 
       emitSuccess(canSubmitAgain: true);
     } catch (_) {

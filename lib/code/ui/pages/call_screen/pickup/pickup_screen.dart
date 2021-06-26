@@ -12,7 +12,7 @@ class PickupScreen extends StatefulWidget {
   final Call call;
 
   PickupScreen({
-    @required this.call,
+    required this.call,
   });
 
   @override
@@ -27,12 +27,12 @@ class _PickupScreenState extends State<PickupScreen> {
 
   bool isCallMissed = true;
 
-  addToLocalStorage({@required String callStatus}) {
+  addToLocalStorage({required String callStatus}) {
     Log log = Log(
       callerName: widget.call.callerName,
-      callerPic: widget.call.callerPic,
+      callerPic: widget.call.callerPic ?? '',
       receiverName: widget.call.receiverName,
-      receiverPic: widget.call.receiverPic,
+      receiverPic: widget.call.receiverPic ?? '',
       timestamp: DateTime.now().toString(),
       callStatus: callStatus,
     );
@@ -65,7 +65,7 @@ class _PickupScreenState extends State<PickupScreen> {
             ),
             SizedBox(height: 50),
             CachedImage(
-              widget.call.callerPic,
+              widget.call.callerPic ?? '',
               isRound: true,
               radius: 180,
             ),

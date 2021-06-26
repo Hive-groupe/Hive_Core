@@ -10,7 +10,7 @@ import 'package:hive_core/code/utils/tools/web_tools.dart';
 class ContactMonitor extends StatefulWidget {
   final ContactInformation model;
 
-  ContactMonitor({@required this.model}) : super();
+  ContactMonitor({required this.model}) : super();
 
   @override
   _ContactMonitorState createState() => _ContactMonitorState();
@@ -106,10 +106,11 @@ class _ContactMonitorState extends State<ContactMonitor> {
 
   Widget _divider() {
     return Container(
-        margin: EdgeInsets.only(left: 25, right: 25),
-        child: Divider(
-          color: Colors.grey,
-        ));
+      margin: EdgeInsets.only(left: 25, right: 25),
+      child: Divider(
+        color: Colors.grey,
+      ),
+    );
   }
 
   Widget _titleHolder() {
@@ -122,36 +123,45 @@ class _ContactMonitorState extends State<ContactMonitor> {
     );
   }
 
-  Widget _generalList(
-      {BuiltList list, IconData icon, Function onTap, bool showDivider}) {
+  Widget _generalList({
+    required BuiltList list,
+    required IconData icon,
+    required Function onTap,
+    bool? showDivider,
+  }) {
     bool _showDivider = showDivider != null
         ? showDivider
         : list.length > 0
             ? true
             : false;
     return Container(
-        child: list != null
-            ? Container(
-                child: Column(
-                  children: <Widget>[
-                    _showDivider ? _divider() : Container(),
-                    Column(
-                      children: List.generate(
-                          list.length,
-                          (index) => _generalItem(
-                                icon: index == 0 ? icon : null,
-                                model: list[index],
-                                onTap: onTap,
-                              )).toList(),
-                    )
-                  ],
-                ),
-              )
-            : Container());
+      child: list != null
+          ? Container(
+              child: Column(
+                children: <Widget>[
+                  _showDivider ? _divider() : Container(),
+                  Column(
+                    children: List.generate(
+                      list.length,
+                      (index) => _generalItem(
+                        icon: index == 0 ? icon : null,
+                        model: list[index],
+                        onTap: onTap,
+                      ),
+                    ).toList(),
+                  )
+                ],
+              ),
+            )
+          : Container(),
+    );
   }
 
-  Widget _generalItem(
-      {ContactInformationValue model, IconData icon, Function onTap}) {
+  Widget _generalItem({
+    required ContactInformationValue model,
+    IconData? icon,
+    required Function onTap,
+  }) {
     return GestureDetector(
       onTap: () => onTap(model.value),
       child: Container(
@@ -159,16 +169,17 @@ class _ContactMonitorState extends State<ContactMonitor> {
           leading: icon != null
               ? Container(
                   child: Icon(
-                  icon,
-                ))
+                    icon,
+                  ),
+                )
               : SizedBox(
                   width: 5,
                 ),
           title: Container(
-            child: Text(model.label ?? ''),
+            child: Text(model.label),
           ),
           subtitle: Container(
-            child: Text(model.value ?? ''),
+            child: Text(model.value),
           ),
           trailing: Container(
             child: Icon(Icons.navigate_next),
@@ -178,7 +189,9 @@ class _ContactMonitorState extends State<ContactMonitor> {
     );
   }
 
-  Widget _addressList({bool showDivider}) {
+  Widget _addressList({
+    bool? showDivider,
+  }) {
     BuiltList list = widget.model.addresses;
     bool _showDivider = showDivider != null
         ? showDivider
@@ -186,35 +199,42 @@ class _ContactMonitorState extends State<ContactMonitor> {
             ? true
             : false;
     return Container(
-        child: list != null
-            ? Container(
-                child: Column(
-                  children: <Widget>[
-                    _showDivider ? _divider() : Container(),
-                    Column(
-                      children: List.generate(
-                          list.length,
-                          (index) => _addressItem(
-                                icon:
-                                    index == 0 ? CupertinoIcons.location : null,
-                                model: list[index],
-                                onTap: _onTapOnAddressItem,
-                              )).toList(),
-                    )
-                  ],
-                ),
-              )
-            : Container());
+      child: list != null
+          ? Container(
+              child: Column(
+                children: <Widget>[
+                  _showDivider ? _divider() : Container(),
+                  Column(
+                    children: List.generate(
+                      list.length,
+                      (index) => _addressItem(
+                        icon: index == 0 ? CupertinoIcons.location : null,
+                        model: list[index],
+                        onTap: _onTapOnAddressItem,
+                      ),
+                    ).toList(),
+                  )
+                ],
+              ),
+            )
+          : Container(),
+    );
   }
 
-  Widget _addressItem({Address model, IconData icon, Function onTap}) {
+  Widget _addressItem({
+    required Address model,
+    IconData? icon,
+    required Function onTap,
+  }) {
     return GestureDetector(
       onTap: _onTapOnAddressItem,
       child: Container(
         margin: EdgeInsets.only(top: 10, bottom: 10),
         child: ListTile(
           leading: icon != null
-              ? Container(child: Icon(icon))
+              ? Container(
+                  child: Icon(icon),
+                )
               : SizedBox(
                   width: 5,
                 ),

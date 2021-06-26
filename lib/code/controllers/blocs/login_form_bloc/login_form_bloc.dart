@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
@@ -21,11 +20,9 @@ class LoginFormBloc extends FormBloc<String, String> {
   ]);
 
   LoginFormBloc(
-      {@required AuthenticationRepository authenticationRepository,
-      @required AuthenticationBloc authenticationBloc})
-      : assert(authenticationRepository != null),
-        assert(authenticationBloc != null),
-        _authenticationRepository = authenticationRepository
+      {required AuthenticationRepository authenticationRepository,
+      required AuthenticationBloc authenticationBloc})
+      : _authenticationRepository = authenticationRepository
   //, _authenticationBloc = authenticationBloc
   {
     addFieldBlocs(fieldBlocs: [
@@ -44,8 +41,8 @@ class LoginFormBloc extends FormBloc<String, String> {
     try {
       emitLoaded();
       await _authenticationRepository.signInWithCredentials(
-        email: email.value,
-        password: password.value,
+        email: email.value ?? '',
+        password: password.value ?? '',
       );
 
       _isSignedIn();
@@ -78,7 +75,7 @@ class LoginFormBloc extends FormBloc<String, String> {
 
   _isSignedIn() async {
     if (await _authenticationRepository.isSignedIn()) {
-      //   _authenticationBloc.add(LoggedIn());
+      //   _authenticationBloc.add(LoggedIn(),);
       emitSuccess(canSubmitAgain: true);
     } else {
       emitFailure();

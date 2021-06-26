@@ -15,42 +15,47 @@ class _$UserSerializer implements StructuredSerializer<User> {
   final String wireName = 'User';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, User object,
+  Iterable<Object?> serialize(Serializers serializers, User object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'username',
       serializers.serialize(object.username,
           specifiedType: const FullType(String)),
     ];
-    if (object.id != null) {
+    Object? value;
+    value = object.id;
+    if (value != null) {
       result
         ..add('id')
-        ..add(serializers.serialize(object.id,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.password != null) {
+    value = object.password;
+    if (value != null) {
       result
         ..add('password')
-        ..add(serializers.serialize(object.password,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.profile != null) {
+    value = object.profile;
+    if (value != null) {
       result
         ..add('profile')
-        ..add(serializers.serialize(object.profile,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(Profile)));
     }
-    if (object.userStatus != null) {
+    value = object.userStatus;
+    if (value != null) {
       result
         ..add('userStatus')
-        ..add(serializers.serialize(object.userStatus,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(UserStatus)));
     }
     return result;
   }
 
   @override
-  User deserialize(Serializers serializers, Iterable<Object> serialized,
+  User deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UserBuilder();
 
@@ -58,11 +63,11 @@ class _$UserSerializer implements StructuredSerializer<User> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'username':
           result.username = serializers.deserialize(value,
@@ -70,15 +75,15 @@ class _$UserSerializer implements StructuredSerializer<User> {
           break;
         case 'password':
           result.password = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'profile':
           result.profile.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Profile)) as Profile);
+              specifiedType: const FullType(Profile))! as Profile);
           break;
         case 'userStatus':
           result.userStatus = serializers.deserialize(value,
-              specifiedType: const FullType(UserStatus)) as UserStatus;
+              specifiedType: const FullType(UserStatus)) as UserStatus?;
           break;
       }
     }
@@ -89,25 +94,27 @@ class _$UserSerializer implements StructuredSerializer<User> {
 
 class _$User extends User {
   @override
-  final String id;
+  final String? id;
   @override
   final String username;
   @override
-  final String password;
+  final String? password;
   @override
-  final Profile profile;
+  final Profile? profile;
   @override
-  final UserStatus userStatus;
+  final UserStatus? userStatus;
 
-  factory _$User([void Function(UserBuilder) updates]) =>
+  factory _$User([void Function(UserBuilder)? updates]) =>
       (new UserBuilder()..update(updates)).build();
 
   _$User._(
-      {this.id, this.username, this.password, this.profile, this.userStatus})
+      {this.id,
+      required this.username,
+      this.password,
+      this.profile,
+      this.userStatus})
       : super._() {
-    if (username == null) {
-      throw new BuiltValueNullFieldError('User', 'username');
-    }
+    BuiltValueNullFieldError.checkNotNull(username, 'User', 'username');
   }
 
   @override
@@ -149,37 +156,38 @@ class _$User extends User {
 }
 
 class UserBuilder implements Builder<User, UserBuilder> {
-  _$User _$v;
+  _$User? _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
-  String _username;
-  String get username => _$this._username;
-  set username(String username) => _$this._username = username;
+  String? _username;
+  String? get username => _$this._username;
+  set username(String? username) => _$this._username = username;
 
-  String _password;
-  String get password => _$this._password;
-  set password(String password) => _$this._password = password;
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
 
-  ProfileBuilder _profile;
+  ProfileBuilder? _profile;
   ProfileBuilder get profile => _$this._profile ??= new ProfileBuilder();
-  set profile(ProfileBuilder profile) => _$this._profile = profile;
+  set profile(ProfileBuilder? profile) => _$this._profile = profile;
 
-  UserStatus _userStatus;
-  UserStatus get userStatus => _$this._userStatus;
-  set userStatus(UserStatus userStatus) => _$this._userStatus = userStatus;
+  UserStatus? _userStatus;
+  UserStatus? get userStatus => _$this._userStatus;
+  set userStatus(UserStatus? userStatus) => _$this._userStatus = userStatus;
 
   UserBuilder();
 
   UserBuilder get _$this {
-    if (_$v != null) {
-      _id = _$v.id;
-      _username = _$v.username;
-      _password = _$v.password;
-      _profile = _$v.profile?.toBuilder();
-      _userStatus = _$v.userStatus;
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _username = $v.username;
+      _password = $v.password;
+      _profile = $v.profile?.toBuilder();
+      _userStatus = $v.userStatus;
       _$v = null;
     }
     return this;
@@ -187,14 +195,12 @@ class UserBuilder implements Builder<User, UserBuilder> {
 
   @override
   void replace(User other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$User;
   }
 
   @override
-  void update(void Function(UserBuilder) updates) {
+  void update(void Function(UserBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -205,12 +211,13 @@ class UserBuilder implements Builder<User, UserBuilder> {
       _$result = _$v ??
           new _$User._(
               id: id,
-              username: username,
+              username: BuiltValueNullFieldError.checkNotNull(
+                  username, 'User', 'username'),
               password: password,
               profile: _profile?.build(),
               userStatus: userStatus);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'profile';
         _profile?.build();

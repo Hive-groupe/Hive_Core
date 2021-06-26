@@ -15,26 +15,30 @@ class _$ChatRoomSerializer implements StructuredSerializer<ChatRoom> {
   final String wireName = 'ChatRoom';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, ChatRoom object,
+  Iterable<Object?> serialize(Serializers serializers, ChatRoom object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    if (object.metadata != null) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.metadata;
+    if (value != null) {
       result
         ..add('metadata')
-        ..add(serializers.serialize(object.metadata,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(Metadata)));
     }
-    if (object.members != null) {
+    value = object.members;
+    if (value != null) {
       result
         ..add('members')
-        ..add(serializers.serialize(object.members,
+        ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
-    if (object.messages != null) {
+    value = object.messages;
+    if (value != null) {
       result
         ..add('messages')
-        ..add(serializers.serialize(object.messages,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(
                 BuiltList, const [const FullType(ChatMessage)])));
     }
@@ -42,7 +46,7 @@ class _$ChatRoomSerializer implements StructuredSerializer<ChatRoom> {
   }
 
   @override
-  ChatRoom deserialize(Serializers serializers, Iterable<Object> serialized,
+  ChatRoom deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ChatRoomBuilder();
 
@@ -50,23 +54,23 @@ class _$ChatRoomSerializer implements StructuredSerializer<ChatRoom> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'metadata':
           result.metadata.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Metadata)) as Metadata);
+              specifiedType: const FullType(Metadata))! as Metadata);
           break;
         case 'members':
           result.members.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<Object>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'messages':
           result.messages.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType(ChatMessage)]))
-              as BuiltList<Object>);
+                      BuiltList, const [const FullType(ChatMessage)]))!
+              as BuiltList<Object?>);
           break;
       }
     }
@@ -77,13 +81,13 @@ class _$ChatRoomSerializer implements StructuredSerializer<ChatRoom> {
 
 class _$ChatRoom extends ChatRoom {
   @override
-  final Metadata metadata;
+  final Metadata? metadata;
   @override
-  final BuiltList<String> members;
+  final BuiltList<String>? members;
   @override
-  final BuiltList<ChatMessage> messages;
+  final BuiltList<ChatMessage>? messages;
 
-  factory _$ChatRoom([void Function(ChatRoomBuilder) updates]) =>
+  factory _$ChatRoom([void Function(ChatRoomBuilder)? updates]) =>
       (new ChatRoomBuilder()..update(updates)).build();
 
   _$ChatRoom._({this.metadata, this.members, this.messages}) : super._();
@@ -121,30 +125,31 @@ class _$ChatRoom extends ChatRoom {
 }
 
 class ChatRoomBuilder implements Builder<ChatRoom, ChatRoomBuilder> {
-  _$ChatRoom _$v;
+  _$ChatRoom? _$v;
 
-  MetadataBuilder _metadata;
+  MetadataBuilder? _metadata;
   MetadataBuilder get metadata => _$this._metadata ??= new MetadataBuilder();
-  set metadata(MetadataBuilder metadata) => _$this._metadata = metadata;
+  set metadata(MetadataBuilder? metadata) => _$this._metadata = metadata;
 
-  ListBuilder<String> _members;
+  ListBuilder<String>? _members;
   ListBuilder<String> get members =>
       _$this._members ??= new ListBuilder<String>();
-  set members(ListBuilder<String> members) => _$this._members = members;
+  set members(ListBuilder<String>? members) => _$this._members = members;
 
-  ListBuilder<ChatMessage> _messages;
+  ListBuilder<ChatMessage>? _messages;
   ListBuilder<ChatMessage> get messages =>
       _$this._messages ??= new ListBuilder<ChatMessage>();
-  set messages(ListBuilder<ChatMessage> messages) =>
+  set messages(ListBuilder<ChatMessage>? messages) =>
       _$this._messages = messages;
 
   ChatRoomBuilder();
 
   ChatRoomBuilder get _$this {
-    if (_$v != null) {
-      _metadata = _$v.metadata?.toBuilder();
-      _members = _$v.members?.toBuilder();
-      _messages = _$v.messages?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _metadata = $v.metadata?.toBuilder();
+      _members = $v.members?.toBuilder();
+      _messages = $v.messages?.toBuilder();
       _$v = null;
     }
     return this;
@@ -152,14 +157,12 @@ class ChatRoomBuilder implements Builder<ChatRoom, ChatRoomBuilder> {
 
   @override
   void replace(ChatRoom other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ChatRoom;
   }
 
   @override
-  void update(void Function(ChatRoomBuilder) updates) {
+  void update(void Function(ChatRoomBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -173,7 +176,7 @@ class ChatRoomBuilder implements Builder<ChatRoom, ChatRoomBuilder> {
               members: _members?.build(),
               messages: _messages?.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'metadata';
         _metadata?.build();

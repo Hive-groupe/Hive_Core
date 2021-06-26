@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:hive_core/code/models/enum/chat_message_type.dart';
@@ -6,9 +8,8 @@ import 'package:hive_core/code/utils/othes/serializers.dart';
 part 'chat_message.g.dart';
 
 abstract class ChatMessage implements Built<ChatMessage, ChatMessageBuilder> {
-  @nullable
   @BuiltValueField(wireName: 'message_id')
-  String get messageId;
+  String? get messageId;
 
   @BuiltValueField(wireName: 'receiver_id')
   String get receiverId;
@@ -25,9 +26,8 @@ abstract class ChatMessage implements Built<ChatMessage, ChatMessageBuilder> {
   @BuiltValueField(wireName: 'type')
   ChatMessageType get type;
 
-  @nullable
   @BuiltValueField(wireName: 'photoUrl')
-  String get photoUrl;
+  String? get photoUrl;
   /*
   //bool isLiked, unread;
 
@@ -39,11 +39,16 @@ abstract class ChatMessage implements Built<ChatMessage, ChatMessageBuilder> {
       _$ChatMessage;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(ChatMessage.serializer, this);
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(ChatMessage.serializer, this),
+      ),
+    );
   }
 
-  static ChatMessage fromJson(Map<String, dynamic> json) {
-    return serializers.deserializeWith(ChatMessage.serializer, json);
+  static ChatMessage? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        ChatMessage.serializer, json.decode(jsonString));
   }
 
   static Serializer<ChatMessage> get serializer => _$chatMessageSerializer;

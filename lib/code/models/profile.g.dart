@@ -15,63 +15,71 @@ class _$ProfileSerializer implements StructuredSerializer<Profile> {
   final String wireName = 'Profile';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Profile object,
+  Iterable<Object?> serialize(Serializers serializers, Profile object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'firstname',
       serializers.serialize(object.firstname,
           specifiedType: const FullType(String)),
     ];
-    if (object.id != null) {
+    Object? value;
+    value = object.id;
+    if (value != null) {
       result
         ..add('id')
-        ..add(serializers.serialize(object.id,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.avatar != null) {
+    value = object.avatar;
+    if (value != null) {
       result
         ..add('avatar')
-        ..add(serializers.serialize(object.avatar,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.secondname != null) {
+    value = object.secondname;
+    if (value != null) {
       result
         ..add('secondname')
-        ..add(serializers.serialize(object.secondname,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.nickname != null) {
+    value = object.nickname;
+    if (value != null) {
       result
         ..add('nickname')
-        ..add(serializers.serialize(object.nickname,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.contactInformation != null) {
+    value = object.contactInformation;
+    if (value != null) {
       result
         ..add('contactInformation')
-        ..add(serializers.serialize(object.contactInformation,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(ContactInformation)));
     }
-    if (object.events != null) {
+    value = object.events;
+    if (value != null) {
       result
         ..add('events')
-        ..add(serializers.serialize(object.events,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(
                 Map, const [const FullType(String), const FullType(dynamic)])));
     }
-    if (object.gender != null) {
+    value = object.gender;
+    if (value != null) {
       result
         ..add('gender')
-        ..add(serializers.serialize(object.gender,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(Gender)));
     }
     return result;
   }
 
   @override
-  Profile deserialize(Serializers serializers, Iterable<Object> serialized,
+  Profile deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ProfileBuilder();
 
@@ -79,15 +87,15 @@ class _$ProfileSerializer implements StructuredSerializer<Profile> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'avatar':
           result.avatar = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'name':
           result.name = serializers.deserialize(value,
@@ -99,15 +107,15 @@ class _$ProfileSerializer implements StructuredSerializer<Profile> {
           break;
         case 'secondname':
           result.secondname = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'nickname':
           result.nickname = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'contactInformation':
           result.contactInformation.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(ContactInformation))
+                  specifiedType: const FullType(ContactInformation))!
               as ContactInformation);
           break;
         case 'events':
@@ -115,11 +123,11 @@ class _$ProfileSerializer implements StructuredSerializer<Profile> {
               specifiedType: const FullType(Map, const [
                 const FullType(String),
                 const FullType(dynamic)
-              ])) as Map<String, dynamic>;
+              ])) as Map<String, dynamic>?;
           break;
         case 'gender':
           result.gender = serializers.deserialize(value,
-              specifiedType: const FullType(Gender)) as Gender;
+              specifiedType: const FullType(Gender)) as Gender?;
           break;
       }
     }
@@ -130,44 +138,40 @@ class _$ProfileSerializer implements StructuredSerializer<Profile> {
 
 class _$Profile extends Profile {
   @override
-  final String id;
+  final String? id;
   @override
-  final String avatar;
+  final String? avatar;
   @override
   final String name;
   @override
   final String firstname;
   @override
-  final String secondname;
+  final String? secondname;
   @override
-  final String nickname;
+  final String? nickname;
   @override
-  final ContactInformation contactInformation;
+  final ContactInformation? contactInformation;
   @override
-  final Map<String, dynamic> events;
+  final Map<String, dynamic>? events;
   @override
-  final Gender gender;
+  final Gender? gender;
 
-  factory _$Profile([void Function(ProfileBuilder) updates]) =>
+  factory _$Profile([void Function(ProfileBuilder)? updates]) =>
       (new ProfileBuilder()..update(updates)).build();
 
   _$Profile._(
       {this.id,
       this.avatar,
-      this.name,
-      this.firstname,
+      required this.name,
+      required this.firstname,
       this.secondname,
       this.nickname,
       this.contactInformation,
       this.events,
       this.gender})
       : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('Profile', 'name');
-    }
-    if (firstname == null) {
-      throw new BuiltValueNullFieldError('Profile', 'firstname');
-    }
+    BuiltValueNullFieldError.checkNotNull(name, 'Profile', 'name');
+    BuiltValueNullFieldError.checkNotNull(firstname, 'Profile', 'firstname');
   }
 
   @override
@@ -227,59 +231,60 @@ class _$Profile extends Profile {
 }
 
 class ProfileBuilder implements Builder<Profile, ProfileBuilder> {
-  _$Profile _$v;
+  _$Profile? _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
-  String _avatar;
-  String get avatar => _$this._avatar;
-  set avatar(String avatar) => _$this._avatar = avatar;
+  String? _avatar;
+  String? get avatar => _$this._avatar;
+  set avatar(String? avatar) => _$this._avatar = avatar;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String _firstname;
-  String get firstname => _$this._firstname;
-  set firstname(String firstname) => _$this._firstname = firstname;
+  String? _firstname;
+  String? get firstname => _$this._firstname;
+  set firstname(String? firstname) => _$this._firstname = firstname;
 
-  String _secondname;
-  String get secondname => _$this._secondname;
-  set secondname(String secondname) => _$this._secondname = secondname;
+  String? _secondname;
+  String? get secondname => _$this._secondname;
+  set secondname(String? secondname) => _$this._secondname = secondname;
 
-  String _nickname;
-  String get nickname => _$this._nickname;
-  set nickname(String nickname) => _$this._nickname = nickname;
+  String? _nickname;
+  String? get nickname => _$this._nickname;
+  set nickname(String? nickname) => _$this._nickname = nickname;
 
-  ContactInformationBuilder _contactInformation;
+  ContactInformationBuilder? _contactInformation;
   ContactInformationBuilder get contactInformation =>
       _$this._contactInformation ??= new ContactInformationBuilder();
-  set contactInformation(ContactInformationBuilder contactInformation) =>
+  set contactInformation(ContactInformationBuilder? contactInformation) =>
       _$this._contactInformation = contactInformation;
 
-  Map<String, dynamic> _events;
-  Map<String, dynamic> get events => _$this._events;
-  set events(Map<String, dynamic> events) => _$this._events = events;
+  Map<String, dynamic>? _events;
+  Map<String, dynamic>? get events => _$this._events;
+  set events(Map<String, dynamic>? events) => _$this._events = events;
 
-  Gender _gender;
-  Gender get gender => _$this._gender;
-  set gender(Gender gender) => _$this._gender = gender;
+  Gender? _gender;
+  Gender? get gender => _$this._gender;
+  set gender(Gender? gender) => _$this._gender = gender;
 
   ProfileBuilder();
 
   ProfileBuilder get _$this {
-    if (_$v != null) {
-      _id = _$v.id;
-      _avatar = _$v.avatar;
-      _name = _$v.name;
-      _firstname = _$v.firstname;
-      _secondname = _$v.secondname;
-      _nickname = _$v.nickname;
-      _contactInformation = _$v.contactInformation?.toBuilder();
-      _events = _$v.events;
-      _gender = _$v.gender;
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _avatar = $v.avatar;
+      _name = $v.name;
+      _firstname = $v.firstname;
+      _secondname = $v.secondname;
+      _nickname = $v.nickname;
+      _contactInformation = $v.contactInformation?.toBuilder();
+      _events = $v.events;
+      _gender = $v.gender;
       _$v = null;
     }
     return this;
@@ -287,14 +292,12 @@ class ProfileBuilder implements Builder<Profile, ProfileBuilder> {
 
   @override
   void replace(Profile other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Profile;
   }
 
   @override
-  void update(void Function(ProfileBuilder) updates) {
+  void update(void Function(ProfileBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -306,15 +309,17 @@ class ProfileBuilder implements Builder<Profile, ProfileBuilder> {
           new _$Profile._(
               id: id,
               avatar: avatar,
-              name: name,
-              firstname: firstname,
+              name: BuiltValueNullFieldError.checkNotNull(
+                  name, 'Profile', 'name'),
+              firstname: BuiltValueNullFieldError.checkNotNull(
+                  firstname, 'Profile', 'firstname'),
               secondname: secondname,
               nickname: nickname,
               contactInformation: _contactInformation?.build(),
               events: events,
               gender: gender);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'contactInformation';
         _contactInformation?.build();

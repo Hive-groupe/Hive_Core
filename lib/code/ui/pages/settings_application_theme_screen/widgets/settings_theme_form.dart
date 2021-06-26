@@ -12,13 +12,13 @@ class SettingsThemeForm extends StatefulWidget {
 }
 
 class _SettingsThemeFormState extends State<SettingsThemeForm> {
-  PreferencesBloc _preferencesBloc;
+  late PreferencesBloc _preferencesBloc;
 
-  String _currentThemeItem;
+  late String _currentThemeItem;
 
   @override
   void initState() {
-    _preferencesBloc = context.bloc<PreferencesBloc>();
+    _preferencesBloc = BlocProvider.of<PreferencesBloc>(context);
     super.initState();
   }
 
@@ -29,7 +29,9 @@ class _SettingsThemeFormState extends State<SettingsThemeForm> {
 
   _onChangeTheme(String themeName) {
     _currentThemeItem = themeName;
-    _preferencesBloc.add(ChangeTheme(themeName));
+    _preferencesBloc.add(
+      ChangeTheme(themeName),
+    );
   }
 
   Future<void> _onConfirmResetNotificationsPreferences() {
@@ -49,11 +51,11 @@ class _SettingsThemeFormState extends State<SettingsThemeForm> {
               ),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(HiveCoreString.of(context).cancel),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {}, // _onResetNotificationsferences,
                 child: Text(HiveCoreString.of(context).yes),
               ),
@@ -65,7 +67,7 @@ class _SettingsThemeFormState extends State<SettingsThemeForm> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _preferencesBloc,
+        bloc: _preferencesBloc,
         listener: (context, state) {},
         builder: (context, state) {
           if (state is PreferencesLoaded) {
@@ -101,25 +103,26 @@ class _SettingsThemeFormState extends State<SettingsThemeForm> {
   Widget _themeSelectorHolder(PreferencesLoaded state) {
     _currentThemeItem = state.themeName;
     return ListTile(
-        /*title: Container(
+      /*title: Container(
           child: Text(HiveCoreString.of(context).settings_application_theme),
         ),*/
-        subtitle: Container(
-      child: DropdownButton<String>(
-        onChanged: (String value) => _onChangeTheme(value),
-        isExpanded: true,
-        value: _currentThemeItem,
-        items: themes.keys.map((String themeName) {
-          return DropdownMenuItem<String>(
-            value: themeName,
-            child: Text(
-              themeName,
-              style: TextStyle(color: HiveCoreConstColors.greyColor),
-            ),
-          );
-        }).toList(),
+      subtitle: Container(
+        child: DropdownButton<String>(
+          onChanged: (String? value) => _onChangeTheme(value ?? ''),
+          isExpanded: true,
+          value: _currentThemeItem,
+          items: themes.keys.map((String themeName) {
+            return DropdownMenuItem<String>(
+              value: themeName,
+              child: Text(
+                themeName,
+                style: TextStyle(color: HiveCoreConstColors.greyColor),
+              ),
+            );
+          }).toList(),
+        ),
       ),
-    ));
+    );
   }
 
   _textGroup(PreferencesLoaded state) {
@@ -141,47 +144,49 @@ class _SettingsThemeFormState extends State<SettingsThemeForm> {
   Widget _typographySelectorHolder(PreferencesLoaded state) {
     _currentThemeItem = state.themeName;
     return ListTile(
-        title: Container(
-          child: Text('Typography'),
+      title: Container(
+        child: Text('Typography'),
+      ),
+      subtitle: Container(
+        margin: EdgeInsets.only(left: 20),
+        child: DropdownButton<String>(
+          onChanged: (String? value) => null, // _onChangeTheme(value),
+          isExpanded: true,
+          value: _currentThemeItem,
+          items: themes.keys.map((String themeName) {
+            return DropdownMenuItem<String>(
+              value: themeName,
+              child: Text(
+                themeName,
+                style: TextStyle(color: HiveCoreConstColors.greyColor),
+              ),
+            );
+          }).toList(),
         ),
-        subtitle: Container(
-          margin: EdgeInsets.only(left: 20),
-          child: DropdownButton<String>(
-            onChanged: (String value) => null, // _onChangeTheme(value),
-            isExpanded: true,
-            value: _currentThemeItem,
-            items: themes.keys.map((String themeName) {
-              return DropdownMenuItem<String>(
-                value: themeName,
-                child: Text(
-                  themeName,
-                  style: TextStyle(color: HiveCoreConstColors.greyColor),
-                ),
-              );
-            }).toList(),
-          ),
-        ));
+      ),
+    );
   }
 
   double rating = 2;
   Widget _fontSizeHolder(PreferencesLoaded state) {
     return ListTile(
-        title: Container(
-          child: Text('Font size'),
+      title: Container(
+        child: Text('Font size'),
+      ),
+      subtitle: Container(
+        child: Slider(
+          onChanged: (value) {
+            // setState(() => rating = value);
+          },
+          value: rating,
+          label: '$rating',
+          divisions: 5,
+          min: 0,
+          max: 5,
+          activeColor: Theme.of(context).accentColor,
         ),
-        subtitle: Container(
-          child: Slider(
-            onChanged: (value) {
-              // setState(() => rating = value);
-            },
-            value: rating,
-            label: '$rating',
-            divisions: 5,
-            min: 0,
-            max: 5,
-            activeColor: Theme.of(context).accentColor,
-          ),
-        ));
+      ),
+    );
   }
 
   _resertGroup(PreferencesLoaded state) {

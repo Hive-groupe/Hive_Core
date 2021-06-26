@@ -38,7 +38,7 @@ class LogedOut extends AuthenticationEvent {
 class SetUserState extends AuthenticationEvent {
   final UserStatus userState;
 
-  SetUserState({this.userState});
+  SetUserState({required this.userState});
 
   @override
   List<Object> get props => [userState];

@@ -6,23 +6,24 @@ import 'package:hive_core/code/utils/constants/hivre_const_icons.dart';
 
 class MetadataField extends StatelessWidget {
   final MetadataFieldBloc commentsFormBloc;
-  final String labelName;
-  final String labelDescription;
+  final String? labelName;
+  final String? labelDescription;
 
   const MetadataField(
-      {Key key,
-      @required this.commentsFormBloc,
-      this.labelName,
-      this.labelDescription})
-      : assert(commentsFormBloc != null),
-        super(key: key);
+      {Key? key,
+      required this.commentsFormBloc,
+      required this.labelName,
+      required this.labelDescription})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return _buildFormHolder(context);
   }
 
-  Widget _buildFormHolder(BuildContext context) {
+  Widget _buildFormHolder(
+    BuildContext context,
+  ) {
     return Container(
       child: SettingsGroup(
         title: 'Motivo',

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
@@ -7,14 +9,11 @@ import "metadataEvent.dart";
 part 'metadata.g.dart';
 
 abstract class Metadata implements Built<Metadata, MetadataBuilder> {
-  @nullable
-  String get id;
+  String? get id;
 
-  @nullable
-  String get title;
+  String? get title;
 
-  @nullable
-  String get description;
+  String? get description;
 
   MetadataEvent get creation;
 
@@ -22,17 +21,20 @@ abstract class Metadata implements Built<Metadata, MetadataBuilder> {
 
   MetadataEvent get lastRead;
 
-  @nullable
-  MetadataEvent get deleted;
+  MetadataEvent? get deleted;
 
   Metadata._();
   factory Metadata([void Function(MetadataBuilder) updates]) = _$Metadata;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(Metadata.serializer, this);
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(Metadata.serializer, this),
+      ),
+    );
   }
 
-  static Metadata fromJson(Map<String, dynamic> json) {
+  static Metadata? fromJson(Map<String, dynamic> json) {
     return serializers.deserializeWith(Metadata.serializer, json);
   }
 

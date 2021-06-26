@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/controllers/blocs/assistant_bloc/assistant_bloc.dart';
+import 'package:hive_core/generated/l10n.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class AssistantTutorial extends StatefulWidget {
@@ -10,12 +10,12 @@ class AssistantTutorial extends StatefulWidget {
   final Animation<double> animationPrimaryTutorial;
   final Animation<double> animationSecondaryTutorial;
 
-  const AssistantTutorial(
-      {Key key,
-      @required this.animationControllerTutorial,
-      @required this.animationPrimaryTutorial,
-      @required this.animationSecondaryTutorial})
-      : super(key: key);
+  const AssistantTutorial({
+    Key? key,
+    required this.animationControllerTutorial,
+    required this.animationPrimaryTutorial,
+    required this.animationSecondaryTutorial,
+  }) : super(key: key);
 
   @override
   _AssistantTutorialState createState() => _AssistantTutorialState();
@@ -23,18 +23,18 @@ class AssistantTutorial extends StatefulWidget {
 
 class _AssistantTutorialState extends State<AssistantTutorial> {
   // Blocs
-  AssistantBloc _assistantBloc;
+  late AssistantBloc _assistantBloc;
 
   // Controllers
-  PageController _pageController;
+  late PageController _pageController;
   int _currentPage = 0;
 
-  Size media;
+  late Size media;
 
   @override
   void initState() {
     // Blocs
-    _assistantBloc = context.bloc<AssistantBloc>();
+    _assistantBloc = BlocProvider.of<AssistantBloc>(context);
 
     // Controllers
     _pageController = PageController(
@@ -50,8 +50,12 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
   }
 
   List<Widget> getPageList() {
-    List<Widget> list = new List<Widget>();
-    list.add(_projectPage());
+    List<Widget> list = [];
+
+    list.add(
+      _projectPage(),
+    );
+
     return list;
   }
 
@@ -60,18 +64,18 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
     setState(() {});
   }
 
-  _finishTutorial() => _assistantBloc.add(null // FinishTutorialProject()
-      );
+  _finishTutorial() => _assistantBloc.add(FinishTutorialAssistent());
 
   @override
   Widget build(BuildContext context) {
     media = MediaQuery.of(context).size;
 
     return CupertinoFullscreenDialogTransition(
-        primaryRouteAnimation: widget.animationPrimaryTutorial,
-        secondaryRouteAnimation: widget.animationSecondaryTutorial,
-        linearTransition: false,
-        child: _build());
+      primaryRouteAnimation: widget.animationPrimaryTutorial,
+      secondaryRouteAnimation: widget.animationSecondaryTutorial,
+      linearTransition: false,
+      child: _build(),
+    );
   }
 
   Widget _build() {
@@ -97,8 +101,9 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
                   height: 5,
                 ),
                 Align(
-                    alignment: Alignment.bottomCenter,
-                    child: _btnSkipTutorial()),
+                  alignment: Alignment.bottomCenter,
+                  child: _btnSkipTutorial(),
+                ),
               ],
             ),
           ),
@@ -122,14 +127,16 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
 
   Widget _projectPage() {
     return Container(
-        child: Container(
-      margin: EdgeInsets.all(25),
-      child: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _payrollTutorial(),
-        ]),
+      child: Container(
+        margin: EdgeInsets.all(25),
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            _payrollTutorial(),
+          ]),
+        ),
       ),
-    ));
+    );
   }
 
   Widget _payrollTutorial() {
@@ -179,17 +186,23 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
 
   Widget _btnSkipTutorial() {
     return Container(
-      child: OutlineButton(
-          onPressed: _finishTutorial,
-          child: Text(
-            HiveCoreString.of(context).skip_tutorial,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+      child: OutlinedButton(
+        onPressed: _finishTutorial,
+        child: Text(
+          HiveCoreString.of(context).skip_tutorial,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0),
             ),
           ),
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0))),
+        ),
+      ),
     );
   }
 }

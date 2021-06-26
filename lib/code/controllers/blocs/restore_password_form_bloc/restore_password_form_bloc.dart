@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
 
@@ -10,10 +9,9 @@ class RestorePasswordFormBloc extends FormBloc<String, String> {
     FieldBlocValidators.email,
   ]);
 
-  RestorePasswordFormBloc(
-      {@required AuthenticationRepository authenticationRepository})
-      : assert(authenticationRepository != null),
-        _authenticationRepository = authenticationRepository {
+  RestorePasswordFormBloc({
+    required AuthenticationRepository authenticationRepository,
+  }) : _authenticationRepository = authenticationRepository {
     addFieldBlocs(fieldBlocs: [
       email,
     ]);
@@ -28,7 +26,7 @@ class RestorePasswordFormBloc extends FormBloc<String, String> {
     try {
       emitLoaded();
       await _authenticationRepository.recoverPassword(
-              language: 'en', email: email.value)
+              language: 'en', email: email.value ?? '')
           ? emitSuccess(canSubmitAgain: true)
           : emitFailure();
     } catch (e) {

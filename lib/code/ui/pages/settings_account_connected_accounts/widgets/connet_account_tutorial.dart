@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/utils/othes/animation_controller.dart';
+import 'package:hive_core/generated/l10n.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ConnetAccountTutorial extends StatefulWidget {
   final HiveAnimationController hiveAnimationController;
 
-  const ConnetAccountTutorial(
-      {Key key, @required this.hiveAnimationController, l})
-      : super(key: key);
+  const ConnetAccountTutorial({
+    Key? key,
+    required this.hiveAnimationController,
+  }) : super(key: key);
 
   @override
   _ConnetAccountTutorialState createState() => _ConnetAccountTutorialState();
@@ -20,15 +21,15 @@ class _ConnetAccountTutorialState extends State<ConnetAccountTutorial> {
   // DeviceListBloc _connetAccountListBloc;
 
   // Controllers
-  PageController _pageController;
+  late PageController _pageController;
   int _currentPage = 0;
 
-  Size media;
+  late Size media;
 
   @override
   void initState() {
     // Blocs
-    //  _connetAccountListBloc = context.bloc<DeviceListBloc>();
+    //  _connetAccountListBloc = BlocProvider.of<DeviceListBloc>(context);
 
     // Controllers
     _pageController = PageController(
@@ -44,8 +45,10 @@ class _ConnetAccountTutorialState extends State<ConnetAccountTutorial> {
   }
 
   List<Widget> getPageList() {
-    List<Widget> list = new List<Widget>();
-    list.add(_connet_accountPage());
+    List<Widget> list = [];
+    list.add(
+      _connet_accountPage(),
+    );
     return list;
   }
 
@@ -55,19 +58,20 @@ class _ConnetAccountTutorialState extends State<ConnetAccountTutorial> {
   }
 
   _finishTutorial() =>
-      null; //_connetAccountListBloc.add(FinishTutorialDevice());
+      null; //_connetAccountListBloc.add(FinishTutorialDevice(),);
 
   @override
   Widget build(BuildContext context) {
     media = MediaQuery.of(context).size;
 
     return CupertinoFullscreenDialogTransition(
-        primaryRouteAnimation:
-            widget.hiveAnimationController.animationPrimaryTutorial,
-        secondaryRouteAnimation:
-            widget.hiveAnimationController.animationSecondaryTutorial,
-        linearTransition: false,
-        child: _build());
+      primaryRouteAnimation:
+          widget.hiveAnimationController.animationPrimaryTutorial,
+      secondaryRouteAnimation:
+          widget.hiveAnimationController.animationSecondaryTutorial,
+      linearTransition: false,
+      child: _build(),
+    );
   }
 
   Widget _build() {
@@ -91,7 +95,9 @@ class _ConnetAccountTutorialState extends State<ConnetAccountTutorial> {
                 height: 5,
               ),
               Align(
-                  alignment: Alignment.bottomCenter, child: _btnSkipTutorial()),
+                alignment: Alignment.bottomCenter,
+                child: _btnSkipTutorial(),
+              ),
             ],
           ),
         ),
@@ -114,14 +120,16 @@ class _ConnetAccountTutorialState extends State<ConnetAccountTutorial> {
 
   Widget _connet_accountPage() {
     return Container(
-        child: Container(
-      margin: EdgeInsets.all(25),
-      child: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _connet_accountTutorial(),
-        ]),
+      child: Container(
+        margin: EdgeInsets.all(25),
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            _connet_accountTutorial(),
+          ]),
+        ),
       ),
-    ));
+    );
   }
 
   Widget _connet_accountTutorial() {
@@ -181,7 +189,8 @@ class _ConnetAccountTutorialState extends State<ConnetAccountTutorial> {
             ),
           ),
           shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0))),
+            borderRadius: new BorderRadius.circular(30.0),
+          )),
     );
   }
 }

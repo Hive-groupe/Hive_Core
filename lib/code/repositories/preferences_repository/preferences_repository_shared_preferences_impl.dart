@@ -15,23 +15,26 @@ class PreferencesRepositorySharedPreferencesImp
   Future<Preferences> get preferences async {
     bool _enterToSend = await enterToSend;
     return Preferences(
-        themeName: await theme,
-        locale: await locale,
-        notifications: await notifications,
-        soundEffects: await soundEffects,
-        vibration: await vibration,
-        chatPreferences: ChatPreferences((b) => b..enterToSend = _enterToSend));
+      themeName: await theme,
+      locale: await locale ?? Locale('en'),
+      notifications: await notifications,
+      soundEffects: await soundEffects,
+      vibration: await vibration,
+      chatPreferences: ChatPreferences((b) => b..enterToSend = _enterToSend),
+    );
   }
 
   @override
-  Future<void> savePreferences(Preferences preferences) async {
+  Future<bool> savePreferences(
+    Preferences preferences,
+  ) async {
     try {
       saveTheme(preferences.themeName);
       saveLocale(preferences.locale);
       saveNotifications(preferences.notifications);
       saveSoundEffects(preferences.soundEffects);
       saveVibration(preferences.vibration);
-      saveEnterToSend(preferences.chatPreferences.enterToSend);
+      saveEnterToSend(preferences.chatPreferences.enterToSend ?? false);
       return true;
     } catch (e) {
       print(e);
@@ -40,10 +43,15 @@ class PreferencesRepositorySharedPreferencesImp
   }
 
   @override
-  Future<void> saveTheme(String theme) async {
+  Future<void> saveTheme(
+    String theme,
+  ) async {
     final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString(_themeCodeKey, theme?.toString());
+    await prefs.setString(
+      _themeCodeKey,
+      theme.toString(),
+    );
   }
 
   @override
@@ -59,16 +67,18 @@ class PreferencesRepositorySharedPreferencesImp
   }
 
   @override
-  Future<void> saveLocale(Locale locale) async {
+  Future<void> saveLocale(Locale? locale) async {
     final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString(_localeLanguageCodeKey, locale?.languageCode);
-    await prefs.setString(_localeScriptCodeKey, locale?.scriptCode);
-    await prefs.setString(_localeCountryCodeKey, locale?.countryCode);
+    if (locale != null) {
+      await prefs.setString(_localeLanguageCodeKey, locale.languageCode);
+      await prefs.setString(_localeScriptCodeKey, locale.scriptCode ?? '');
+      await prefs.setString(_localeCountryCodeKey, locale.countryCode ?? '');
+    }
   }
 
   @override
-  Future<Locale> get locale async {
+  Future<Locale?> get locale async {
     final prefs = await SharedPreferences.getInstance();
 
     final languageCode = prefs.getString(_localeLanguageCodeKey);
@@ -87,7 +97,9 @@ class PreferencesRepositorySharedPreferencesImp
   }
 
   @override
-  Future<void> saveNotifications(bool isNotificationsActive) async {
+  Future<void> saveNotifications(
+    bool isNotificationsActive,
+  ) async {
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setBool(_notificationsCodeKey, isNotificationsActive);
@@ -102,7 +114,9 @@ class PreferencesRepositorySharedPreferencesImp
   }
 
   @override
-  Future<void> saveSoundEffects(bool soundEffects) async {
+  Future<void> saveSoundEffects(
+    bool soundEffects,
+  ) async {
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setBool(_soundEffectsCodeKey, soundEffects);
@@ -117,7 +131,9 @@ class PreferencesRepositorySharedPreferencesImp
   }
 
   @override
-  Future<void> saveVibration(bool vibration) async {
+  Future<void> saveVibration(
+    bool vibration,
+  ) async {
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setBool(_vibrationCodeKey, vibration);
@@ -132,10 +148,15 @@ class PreferencesRepositorySharedPreferencesImp
   }
 
   @override
-  Future<void> saveEnterToSend(bool enterToSend) async {
+  Future<void> saveEnterToSend(
+    bool enterToSend,
+  ) async {
     final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setBool(_enterToSendCodeKey, enterToSend);
+    await prefs.setBool(
+      _enterToSendCodeKey,
+      enterToSend,
+    );
   }
 
   @override

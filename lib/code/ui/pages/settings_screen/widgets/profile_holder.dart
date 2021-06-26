@@ -7,7 +7,9 @@ import 'package:hive_core/code/models/user.dart';
 import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class PofileHolder extends StatefulWidget {
-  const PofileHolder({Key key}) : super(key: key);
+  const PofileHolder({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _PofileHolderState createState() => _PofileHolderState();
@@ -20,25 +22,31 @@ class _PofileHolderState extends State<PofileHolder> {
   }
 
   void _goEditProfile() => Navigator.pushNamed(
-      context, HiveCoreConstString.user_profile_form_srceen);
+        context,
+        HiveCoreConstString.user_profile_form_srceen,
+      );
 
   void _goQrScreen() => Navigator.pushNamed(
-      context, HiveCoreConstString.route_user_qr_code_settings_screen);
+        context,
+        HiveCoreConstString.route_user_qr_code_settings_screen,
+      );
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User>(
+    return StreamBuilder<User?>(
         stream: userDataInfo.output,
         builder: (context, snapshot) {
           return snapshot.hasData
-              ? _pofileHolder(snapshot.data)
+              ? _pofileHolder(snapshot.data!)
               : _pofileNoDataHolder();
         });
   }
 
   Widget _pofileNoDataHolder() {
     return Container(
-      margin: EdgeInsets.only(bottom: 5),
+      margin: EdgeInsets.only(
+        bottom: 5,
+      ),
       child: ListTile(
         onTap: _goEditProfile,
         leading: _buildAvatarHolder(null),
@@ -59,13 +67,17 @@ class _PofileHolderState extends State<PofileHolder> {
     );
   }
 
-  Widget _pofileHolder(User user) {
+  Widget _pofileHolder(
+    User user,
+  ) {
     return Container(
-      margin: EdgeInsets.only(bottom: 5),
+      margin: EdgeInsets.only(
+        bottom: 5,
+      ),
       child: ListTile(
         onTap: _goEditProfile,
-        leading: _buildAvatarHolder(user.profile.avatar),
-        title: _nameHolder(user.profile),
+        leading: _buildAvatarHolder(user.profile!.avatar ?? ''),
+        title: _nameHolder(user.profile!),
         subtitle: Container(
           child: Text('Sobre mi'),
         ),
@@ -83,16 +95,17 @@ class _PofileHolderState extends State<PofileHolder> {
   Widget _nameHolder(Profile profile) {
     return Container(
       child: Text(
-          '${profile.name} ${profile.firstname ?? ''} ${profile.secondname ?? ''}'),
+          '${profile.name} ${profile.firstname} ${profile.secondname ?? ''}'),
     );
   }
 
-  _buildAvatarHolder(String avatar) {
+  _buildAvatarHolder(String? avatar) {
     return Hero(
-        tag: 'avatar',
-        child: avatar == null || avatar == ''
-            ? _buildAvatarNoFile()
-            : _buildAvatarNetwork(avatar));
+      tag: 'avatar',
+      child: avatar == null || avatar == ''
+          ? _buildAvatarNoFile()
+          : _buildAvatarNetwork(avatar),
+    );
   }
 
   Widget _buildAvatarNoFile() {
@@ -106,18 +119,19 @@ class _PofileHolderState extends State<PofileHolder> {
 
   Widget _buildAvatarNetwork(String avatar) {
     return Container(
-        child: CircleAvatar(
-      radius: 25,
-      child: ClipOval(
-        child: CachedNetworkImage(
-          height: 50.0,
-          width: 50.0,
-          fit: BoxFit.cover,
-          imageUrl: avatar,
-          placeholder: (context, url) => CircularProgressIndicator(),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+      child: CircleAvatar(
+        radius: 25,
+        child: ClipOval(
+          child: CachedNetworkImage(
+            height: 50.0,
+            width: 50.0,
+            fit: BoxFit.cover,
+            imageUrl: avatar,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
         ),
       ),
-    ));
+    );
   }
 }

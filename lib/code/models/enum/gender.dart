@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -15,12 +17,16 @@ class Gender extends EnumClass {
   static BuiltSet<Gender> get values => _$genderValues;
   static Gender valueOf(String name) => _$genderValueOf(name);
 
-  String serialize() {
-    return serializers.serializeWith(Gender.serializer, this);
+  Map<String, dynamic> serialize() {
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(Gender.serializer, this),
+      ),
+    );
   }
 
-  static Gender deserialize(String string) {
-    return serializers.deserializeWith(Gender.serializer, string);
+  static Gender? deserialize(Map<String, dynamic> json) {
+    return serializers.deserializeWith(Gender.serializer, json);
   }
 
   static Serializer<Gender> get serializer => _$genderSerializer;

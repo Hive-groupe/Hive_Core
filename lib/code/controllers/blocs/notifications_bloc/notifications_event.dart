@@ -5,12 +5,14 @@ abstract class NotificationsEvent extends Equatable {
 }
 
 class InitNotifications extends NotificationsEvent {
-  final NotificationsPreferences notificationsPreferences;
+  final NotificationsPreferences? notificationsPreferences;
 
-  InitNotifications({this.notificationsPreferences});
+  InitNotifications({
+    this.notificationsPreferences,
+  });
 
   @override
-  List<Object> get props => [notificationsPreferences];
+  List<Object> get props => [];
 
   @override
   String toString() => '''
@@ -31,16 +33,23 @@ class SaveDevice extends NotificationsEvent {
 }
 
 class ChangeNotificationsPreferences extends NotificationsEvent {
-  final NotificationsPreferences notificationsPreferences;
+  final NotificationsPreferences? notificationsPreferences;
 
-  ChangeNotificationsPreferences({this.notificationsPreferences});
+  ChangeNotificationsPreferences({
+    this.notificationsPreferences,
+  });
 
   @override
-  List<Object> get props => [notificationsPreferences];
+  List<Object> get props => [];
 
   @override
   String toString() => '''
   $runtimeType  {
     - notificationsPreferences: ${notificationsPreferences.toString()}
   }''';
+}
+
+class FinishTutorialNotifications extends NotificationsEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }

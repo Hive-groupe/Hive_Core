@@ -16,12 +16,12 @@ class FavoriteContactsList extends StatefulWidget {
 }
 
 class _FavoriteContactsListState extends State<FavoriteContactsList> {
-  ChatListingBloc _chatListingBloc;
+  late ChatListingBloc _chatListingBloc;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        cubit: _chatListingBloc,
+        bloc: _chatListingBloc,
         listener: (context, state) {
           if (state is ChatListingLoaded) {
           } else {}
@@ -44,9 +44,9 @@ class _FavoriteContactsListState extends State<FavoriteContactsList> {
           StreamBuilder<BuiltList<ChatRoom>>(
               //       stream: state.chatRoomsList,
               builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data.length > 0) {
-              return _buildList(snapshot.data);
-            } else if (snapshot.hasData && snapshot.data.length <= 0) {
+            if (snapshot.hasData && snapshot.data!.length > 0) {
+              return _buildList(snapshot.data!);
+            } else if (snapshot.hasData && snapshot.data!.length <= 0) {
               return _buildListEmpty();
             } else if (snapshot.hasError) {
               return _buildListError();
@@ -91,12 +91,13 @@ class _FavoriteContactsListState extends State<FavoriteContactsList> {
     return Container(
       height: 100.0,
       child: ListView.builder(
-          padding: EdgeInsets.only(left: 10.0),
-          scrollDirection: Axis.horizontal,
-          itemCount: list.length,
-          itemBuilder: (BuildContext context, int index) => FavoriteContactItem(
-                index: index,
-              )),
+        padding: EdgeInsets.only(left: 10.0),
+        scrollDirection: Axis.horizontal,
+        itemCount: list.length,
+        itemBuilder: (BuildContext context, int index) => FavoriteContactItem(
+          index: index,
+        ),
+      ),
     );
   }
 

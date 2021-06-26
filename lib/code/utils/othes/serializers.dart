@@ -25,5 +25,8 @@ part 'serializers.g.dart';
   Metadata,
   NotificationsPreferences,
 ])
-final Serializers serializers =
-    (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
+final Serializers serializers = (_$serializers.toBuilder()
+      ..addPlugin(
+        StandardJsonPlugin(),
+      ))
+    .build();

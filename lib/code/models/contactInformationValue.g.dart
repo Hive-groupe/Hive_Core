@@ -20,10 +20,10 @@ class _$ContactInformationValueSerializer
   final String wireName = 'ContactInformationValue';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ContactInformationValue object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'value',
       serializers.serialize(object.value,
           specifiedType: const FullType(String)),
@@ -31,10 +31,12 @@ class _$ContactInformationValueSerializer
       serializers.serialize(object.label,
           specifiedType: const FullType(String)),
     ];
-    if (object.metadata != null) {
+    Object? value;
+    value = object.metadata;
+    if (value != null) {
       result
         ..add('metadata')
-        ..add(serializers.serialize(object.metadata,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(Metadata)));
     }
     return result;
@@ -42,7 +44,7 @@ class _$ContactInformationValueSerializer
 
   @override
   ContactInformationValue deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ContactInformationValueBuilder();
 
@@ -50,11 +52,11 @@ class _$ContactInformationValueSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'metadata':
           result.metadata.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Metadata)) as Metadata);
+              specifiedType: const FullType(Metadata))! as Metadata);
           break;
         case 'value':
           result.value = serializers.deserialize(value,
@@ -73,24 +75,23 @@ class _$ContactInformationValueSerializer
 
 class _$ContactInformationValue extends ContactInformationValue {
   @override
-  final Metadata metadata;
+  final Metadata? metadata;
   @override
   final String value;
   @override
   final String label;
 
   factory _$ContactInformationValue(
-          [void Function(ContactInformationValueBuilder) updates]) =>
+          [void Function(ContactInformationValueBuilder)? updates]) =>
       (new ContactInformationValueBuilder()..update(updates)).build();
 
-  _$ContactInformationValue._({this.metadata, this.value, this.label})
+  _$ContactInformationValue._(
+      {this.metadata, required this.value, required this.label})
       : super._() {
-    if (value == null) {
-      throw new BuiltValueNullFieldError('ContactInformationValue', 'value');
-    }
-    if (label == null) {
-      throw new BuiltValueNullFieldError('ContactInformationValue', 'label');
-    }
+    BuiltValueNullFieldError.checkNotNull(
+        value, 'ContactInformationValue', 'value');
+    BuiltValueNullFieldError.checkNotNull(
+        label, 'ContactInformationValue', 'label');
   }
 
   @override
@@ -130,27 +131,28 @@ class _$ContactInformationValue extends ContactInformationValue {
 class ContactInformationValueBuilder
     implements
         Builder<ContactInformationValue, ContactInformationValueBuilder> {
-  _$ContactInformationValue _$v;
+  _$ContactInformationValue? _$v;
 
-  MetadataBuilder _metadata;
+  MetadataBuilder? _metadata;
   MetadataBuilder get metadata => _$this._metadata ??= new MetadataBuilder();
-  set metadata(MetadataBuilder metadata) => _$this._metadata = metadata;
+  set metadata(MetadataBuilder? metadata) => _$this._metadata = metadata;
 
-  String _value;
-  String get value => _$this._value;
-  set value(String value) => _$this._value = value;
+  String? _value;
+  String? get value => _$this._value;
+  set value(String? value) => _$this._value = value;
 
-  String _label;
-  String get label => _$this._label;
-  set label(String label) => _$this._label = label;
+  String? _label;
+  String? get label => _$this._label;
+  set label(String? label) => _$this._label = label;
 
   ContactInformationValueBuilder();
 
   ContactInformationValueBuilder get _$this {
-    if (_$v != null) {
-      _metadata = _$v.metadata?.toBuilder();
-      _value = _$v.value;
-      _label = _$v.label;
+    final $v = _$v;
+    if ($v != null) {
+      _metadata = $v.metadata?.toBuilder();
+      _value = $v.value;
+      _label = $v.label;
       _$v = null;
     }
     return this;
@@ -158,14 +160,12 @@ class ContactInformationValueBuilder
 
   @override
   void replace(ContactInformationValue other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ContactInformationValue;
   }
 
   @override
-  void update(void Function(ContactInformationValueBuilder) updates) {
+  void update(void Function(ContactInformationValueBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -175,9 +175,13 @@ class ContactInformationValueBuilder
     try {
       _$result = _$v ??
           new _$ContactInformationValue._(
-              metadata: _metadata?.build(), value: value, label: label);
+              metadata: _metadata?.build(),
+              value: BuiltValueNullFieldError.checkNotNull(
+                  value, 'ContactInformationValue', 'value'),
+              label: BuiltValueNullFieldError.checkNotNull(
+                  label, 'ContactInformationValue', 'label'));
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'metadata';
         _metadata?.build();

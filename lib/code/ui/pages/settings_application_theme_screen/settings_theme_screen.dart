@@ -25,7 +25,7 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
         'Appearance', // HiveCoreString.of(context).settings_application_theme,
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       leading: IconButton(

@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqliteMethods implements LogInterface {
-  Database _db;
+  late Database _db;
 
   String databaseName = "";
 
@@ -54,7 +54,10 @@ class SqliteMethods implements LogInterface {
   addLogs(Log log) async {
     var dbClient = await db;
     print("the log has been added in sqlite db");
-    await dbClient.insert(tableName, log.toMap(log));
+    await dbClient.insert(
+      tableName,
+      log.toMap(log),
+    );
   }
 
   updateLogs(Log log) async {
@@ -69,7 +72,7 @@ class SqliteMethods implements LogInterface {
   }
 
   @override
-  Future<List<Log>> getLogs() async {
+  Future<List<Log>?> getLogs() async {
     try {
       var dbClient = await db;
 
@@ -91,7 +94,9 @@ class SqliteMethods implements LogInterface {
 
       if (maps.isNotEmpty) {
         for (Map map in maps) {
-          logList.add(Log.fromMap(map));
+          logList.add(
+            Log.fromMap(map),
+          );
         }
       }
 

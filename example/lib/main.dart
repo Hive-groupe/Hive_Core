@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:hive_core/hive_core.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatefulWidget {

@@ -12,7 +12,7 @@ class ChatControlsBar extends StatefulWidget {
   final User receiver;
 
   ChatControlsBar({
-    @required this.receiver,
+    required this.receiver,
   });
 
   @override
@@ -21,12 +21,12 @@ class ChatControlsBar extends StatefulWidget {
 
 class _ChatControlsBarState extends State<ChatControlsBar> {
   // Blocs
-  ChatRoomBloc _chatRoomBloc;
+  late ChatRoomBloc _chatRoomBloc;
 
   @override
   void initState() {
     // Blocs
-    _chatRoomBloc = context.bloc<ChatRoomBloc>();
+    _chatRoomBloc = BlocProvider.of<ChatRoomBloc>(context);
 
     super.initState();
   }
@@ -41,15 +41,19 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
 
     _mesagge = _chatRoomBloc.state.sendController.text;
 
-    _chatRoomBloc.add(SendTextMessage(
-      receiverId: widget.receiver.id,
-      message: _mesagge,
-    ));
+    _chatRoomBloc.add(
+      SendTextMessage(
+        receiverId: widget.receiver.id ?? '',
+        message: _mesagge,
+      ),
+    );
   }
 
-  _onRecordAudio() => _chatRoomBloc.add(RecordAudio());
+  _onRecordAudio() => _chatRoomBloc.add(
+        RecordAudio(),
+      );
 
-  void pickImage({@required ImageSource source}) async {
+  void pickImage({required ImageSource source}) async {
     String _mesagge;
     File selectedImage;
 
@@ -57,20 +61,27 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
     selectedImage = await FileTools.pickImage(source: source);
 
     if (selectedImage != null) {
-      _chatRoomBloc.add(SendImageMessage(
-        receiverId: widget.receiver.id,
-        message: _mesagge,
-        photo: selectedImage,
-      ));
+      _chatRoomBloc.add(
+        SendImageMessage(
+          receiverId: widget.receiver.id ?? '',
+          message: _mesagge,
+          photo: selectedImage,
+        ),
+      );
     }
   }
 
-  _onTextEditChanged(String value) => _chatRoomBloc.add(
-      OnTextEditChanged(writing: (value.length > 0 && value.trim() != "")));
+  _onTextEditChanged(String value) => _chatRoomBloc.add(OnTextEditChanged(
+        writing: (value.length > 0 && value.trim() != ""),
+      ));
 
-  _onBtnEmoji() => _chatRoomBloc.add(OnTapBtnEmojis());
+  _onBtnEmoji() => _chatRoomBloc.add(
+        OnTapBtnEmojis(),
+      );
 
-  hideEmojiContainer() => _chatRoomBloc.add(HideEmojiContainer());
+  hideEmojiContainer() => _chatRoomBloc.add(
+        HideEmojiContainer(),
+      );
 
   addMediaModal(context, String currentUserId) {
     showModalBottomSheet(
@@ -84,7 +95,7 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
                 padding: EdgeInsets.symmetric(vertical: 15),
                 child: Row(
                   children: <Widget>[
-                    FlatButton(
+                    TextButton(
                       child: Icon(
                         Icons.close,
                       ),
@@ -97,7 +108,7 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
                           "Content and tools",
                           style: TextStyle(
                               color:
-                                  Theme.of(context).textTheme.bodyText1.color,
+                                  Theme.of(context).textTheme.bodyText1!.color,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
@@ -155,21 +166,40 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_chatRoomBloc.state.isRecordingAudio &&
-        !_chatRoomBloc.state.isSearchingMessage) {
-      return chatControlsBuild(context, _chatRoomBloc.state);
-    } else if (_chatRoomBloc.state.isRecordingAudio &&
-        !_chatRoomBloc.state.isSearchingMessage) {
-      return _audioRecordingBuild(context, _chatRoomBloc.state);
-    } else if (!_chatRoomBloc.state.isRecordingAudio &&
-        _chatRoomBloc.state.isSearchingMessage) {
-      return Container();
-    } else {
-      return chatControlsBuild(context, _chatRoomBloc.state);
-    }
+    return BlocConsumer<ChatRoomBloc, ChatRoomState>(
+      bloc: _chatRoomBloc,
+      listener: (context, state) {},
+      builder: (context, state) {
+        if (state is ChatLoaded) {
+          if (!state.isRecordingAudio && !state.isSearchingMessage) {
+            return chatControlsBuild(
+              context,
+              state,
+            );
+          } else if (state.isRecordingAudio && !state.isSearchingMessage) {
+            return _audioRecordingBuild(
+              context,
+              state,
+            );
+          } else if (!state.isRecordingAudio && state.isSearchingMessage) {
+            return Container();
+          } else {
+            return chatControlsBuild(
+              context,
+              state,
+            );
+          }
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
-  Widget chatControlsBuild(BuildContext context, ChatLoaded state) {
+  Widget chatControlsBuild(
+    BuildContext context,
+    ChatLoaded state,
+  ) {
     return Container(
       padding: EdgeInsets.all(3.0),
       child: Row(
@@ -186,7 +216,10 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
     );
   }
 
-  Widget _audioRecordingBuild(BuildContext context, ChatLoaded state) {
+  Widget _audioRecordingBuild(
+    BuildContext context,
+    ChatLoaded state,
+  ) {
     return Container(
       padding: EdgeInsets.all(3.0),
       child: Row(
@@ -203,7 +236,10 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
     );
   }
 
-  Widget _audioRecordedBuild(BuildContext context, ChatLoaded state) {
+  Widget _audioRecordedBuild(
+    BuildContext context,
+    ChatLoaded state,
+  ) {
     return Container(
       padding: EdgeInsets.all(3.0),
       child: Row(
@@ -220,7 +256,9 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
     );
   }
 
-  Widget roundedContainer(ChatLoaded state) {
+  Widget roundedContainer(
+    ChatLoaded state,
+  ) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(25.0),
       child: Container(
@@ -257,7 +295,7 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
             IconButton(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
-              onPressed: () => addMediaModal(context, state.sender.id),
+              onPressed: () => addMediaModal(context, state.sender.id ?? ''),
               icon: Icon(Icons.attach_file,
                   size: 25.0, color: Theme.of(context).hintColor),
             ),
@@ -286,7 +324,7 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
         child: Row(
           children: <Widget>[
             IconButton(
-              // onPressed: _onBtnEmoji,
+              onPressed: () {}, //_onBtnEmoji,
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
               icon: Icon(Icons.mic, // sentiment_very_satisfied
@@ -294,7 +332,9 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
                   color: Colors.red),
             ),
             //SizedBox(width: 8.0),
-            Expanded(child: Text('0:00')),
+            Expanded(
+              child: Text('0:00'),
+            ),
             //SizedBox(width: 8.0),
             GestureDetector(
               child: Container(
@@ -318,29 +358,31 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
 
   Widget _btnSend() {
     return Container(
-        decoration: BoxDecoration(
-            color: Theme.of(context).accentColor, shape: BoxShape.circle),
-        child: IconButton(
-          onPressed: _onSendMenssage,
-          icon: Icon(
-            Icons.send,
-            size: 25,
-            color: Colors.white,
-          ),
-        ));
+      decoration: BoxDecoration(
+          color: Theme.of(context).accentColor, shape: BoxShape.circle),
+      child: IconButton(
+        onPressed: _onSendMenssage,
+        icon: Icon(
+          Icons.send,
+          size: 25,
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 
   Widget _btnAudio() {
     return Container(
-        decoration: BoxDecoration(
-            color: Theme.of(context).accentColor, shape: BoxShape.circle),
-        child: IconButton(
-          onPressed: _onRecordAudio,
-          icon: Icon(
-            Icons.mic,
-            size: 25,
-            color: Colors.white,
-          ),
-        ));
+      decoration: BoxDecoration(
+          color: Theme.of(context).accentColor, shape: BoxShape.circle),
+      child: IconButton(
+        onPressed: _onRecordAudio,
+        icon: Icon(
+          Icons.mic,
+          size: 25,
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 }

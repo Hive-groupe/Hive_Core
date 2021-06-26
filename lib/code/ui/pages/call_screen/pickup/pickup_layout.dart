@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,19 +13,19 @@ import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 import 'pickup_screen.dart';
 
 class PickupLayout extends StatelessWidget {
-  CallSreenBloc _callBloc;
+  late CallSreenBloc _callBloc;
 
   final Widget scaffold;
   final CallRepository _callRepository =
       CallRepositoryFirebaseImpl(CALL_COLLECTION);
 
   PickupLayout({
-    @required this.scaffold,
+    required this.scaffold,
   });
 
   @override
   Widget build(BuildContext context) {
-    _callBloc = context.bloc<CallSreenBloc>();
+    _callBloc = BlocProvider.of<CallSreenBloc>(context);
 
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {},
@@ -41,12 +43,16 @@ class PickupLayout extends StatelessWidget {
 
   Widget _authenticatedBuild() {
     return StreamBuilder<DocumentSnapshot>(
-      stream: _callRepository.callStream(uid: _callBloc.state.currentUserId),
+      stream: _callRepository.callStream(
+        uid: _callBloc.state.currentUserId,
+      ),
       builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data.data() != null) {
-          Call call = Call.fromJson(snapshot.data.data());
+        if (snapshot.hasData && snapshot.data!.data() != null) {
+          Call? call = Call.fromJson(
+            json.decode(snapshot.data!.data().toString()),
+          );
 
-          if (!call.hasDialled) {
+          if (!call!.hasDialled!) {
             return PickupScreen(call: call);
           }
         }

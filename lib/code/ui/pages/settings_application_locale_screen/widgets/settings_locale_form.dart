@@ -11,27 +11,29 @@ class SettingsLocaleForm extends StatefulWidget {
 }
 
 class _SettingsLocaleFormState extends State<SettingsLocaleForm> {
-  PreferencesBloc _preferencesBloc;
+  late PreferencesBloc _preferencesBloc;
 
-  String _localizeLocale(BuildContext context, Locale locale) {
+  String _localizeLocale(BuildContext context, Locale? locale) {
     if (locale == null) {
       return HiveCoreString.of(context).systemLanguage;
     } else {
-      final localeString = LocaleNames.of(context).nameOf(locale.toString());
+      final String localeString = LocaleNames.of(context)!.nameOf(
+        locale.toString(),
+      )!;
       return localeString[0].toUpperCase() + localeString.substring(1);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    _preferencesBloc = context.bloc<PreferencesBloc>();
+    _preferencesBloc = BlocProvider.of<PreferencesBloc>(context);
 
     return BlocConsumer(
-      cubit: _preferencesBloc,
+      bloc: _preferencesBloc,
       listener: (context, state) {},
       builder: (context, state) {
         if (state is PreferencesLoaded) {
-          return _LenguageHolder(state);
+          return _lenguageHolder(state);
         } else {
           return Container();
         }
@@ -39,19 +41,24 @@ class _SettingsLocaleFormState extends State<SettingsLocaleForm> {
     );
   }
 
-  Widget _LenguageHolder(PreferencesLoaded state) {
+  Widget _lenguageHolder(PreferencesLoaded state) {
     return ExpansionListCard<Locale>(
       title: HiveCoreString.of(context).language,
-      subTitle: _localizeLocale(context, state.locale),
-      leading: Icon(Icons.language, size: 48),
+      subTitle: _localizeLocale(context, state.locale!),
+      leading: Icon(
+        Icons.language,
+        size: 48,
+      ),
       items: [
-        null,
+        //null,
         ...HiveCoreString.delegate.supportedLocales,
       ],
       itemBuilder: (locale) {
         return ExpansionCardItem(
           text: _localizeLocale(context, locale),
-          onTap: () => _preferencesBloc.add(ChangeLocale(locale)),
+          onTap: () => _preferencesBloc.add(
+            ChangeLocale(locale),
+          ),
         );
       },
     );

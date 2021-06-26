@@ -12,12 +12,14 @@ class SettingsScreenBloc
     extends Bloc<SettingsScreenEvent, SettingsScreenState> {
   final BuildContext context;
 
-  String userId;
-  Profile profile;
+  late String userId;
+  late Profile profile;
 
-  SettingsScreenBloc({@required this.context})
-      : assert(context != null),
-        super(SettingsScreenInitial());
+  SettingsScreenBloc({
+    required this.context,
+  }) : super(
+          SettingsScreenInitial(),
+        );
 
   @override
   Stream<SettingsScreenState> mapEventToState(

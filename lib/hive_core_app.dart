@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:provider/provider.dart';
 
@@ -52,39 +51,39 @@ class HiveCoreApp extends StatelessWidget {
   final String admob_application_id;
 
   HiveCoreApp(
-      {Key key,
-      this.title,
-      this.debugShowCheckedModeBanner,
-      this.theme,
-      this.supportedLocales,
-      this.appLocalizationDelegate,
-      this.locale,
-      this.initialRoute,
-      this.home,
-      this.routes,
-      this.providers,
-      this.repositorys,
-      this.blocs,
-      this.admob_application_id,
+      {Key? key,
+      required this.title,
+      required this.debugShowCheckedModeBanner,
+      required this.theme,
+      required this.supportedLocales,
+      required this.appLocalizationDelegate,
+      required this.locale,
+      required this.initialRoute,
+      required this.home,
+      required this.routes,
+      required this.providers,
+      required this.repositorys,
+      required this.blocs,
+      required this.admob_application_id,
 
       // Providers
-      // this.imageUploadProvider,
+      // required this.imageUploadProvider,
 
       // Repositorys
-      this.authenticationRepository,
-      this.preferencesRepository,
-      this.userRepository,
-      this.deviceRepository,
-      this.chatMessageRepository,
-      this.tutorialRepository,
-      this.storageRepository,
+      required this.authenticationRepository,
+      required this.preferencesRepository,
+      required this.userRepository,
+      required this.deviceRepository,
+      required this.chatMessageRepository,
+      required this.tutorialRepository,
+      required this.storageRepository,
 
       // Blocs
-      this.authenticationBloc,
-      this.preferencesBloc,
-      this.notificationsBloc,
-      this.advertisingBloc,
-      this.callBloc});
+      required this.authenticationBloc,
+      required this.preferencesBloc,
+      required this.notificationsBloc,
+      required this.advertisingBloc,
+      required this.callBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -92,29 +91,37 @@ class HiveCoreApp extends StatelessWidget {
         providers: _getProviderList(),
         child:*/
         MultiRepositoryProvider(
-            providers: _getRepositoryList(),
-            child: MultiBlocProvider(
-                providers: _getBlocsList(),
-                child: BlocConsumer(
-                    cubit: authenticationBloc,
-                    listener: (context, blocAuthenticationState) {
-                      if (blocAuthenticationState is Uninitialized) {
-                      } else if (blocAuthenticationState is Authenticated) {
-                        _initAuthenticatedStatus();
-                      } else if (blocAuthenticationState is Unauthenticated) {
-                        preferencesBloc.add(ResetPreferences());
-                      }
-                    },
-                    builder: (context, blocAuthenticationState) {
-                      return BlocConsumer(
-                          cubit: preferencesBloc,
-                          listener: (context, blocPreferencesState) {},
-                          builder: (context, blocPreferencesState) {
-                            // initStatus(blocAuthenticationState);
-                            return _buildApp(
-                                blocAuthenticationState, blocPreferencesState);
-                          });
-                    })))
+      providers: _getRepositoryList(),
+      child: MultiBlocProvider(
+        providers: _getBlocsList(),
+        child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
+          bloc: authenticationBloc,
+          listener: (context, blocAuthenticationState) {
+            if (blocAuthenticationState is Uninitialized) {
+            } else if (blocAuthenticationState is Authenticated) {
+              _initAuthenticatedStatus();
+            } else if (blocAuthenticationState is Unauthenticated) {
+              preferencesBloc.add(
+                ResetPreferences(),
+              );
+            }
+          },
+          builder: (context, blocAuthenticationState) {
+            return BlocConsumer<PreferencesBloc, PreferencesState>(
+              bloc: preferencesBloc,
+              listener: (context, blocPreferencesState) {},
+              builder: (context, blocPreferencesState) {
+                // initStatus(blocAuthenticationState);
+                return _buildApp(
+                  blocAuthenticationState: blocAuthenticationState,
+                  blocPreferencesState: blocPreferencesState,
+                );
+              },
+            );
+          },
+        ),
+      ),
+    )
         // )
         ;
   }
@@ -139,14 +146,23 @@ class HiveCoreApp extends StatelessWidget {
   final CallSreenBloc callBloc;
 
   initStatus(blocAuthenticationState) {
-    notificationsBloc..add(InitNotifications());
-    advertisingBloc..add(InitAdvertising());
+    notificationsBloc
+      ..add(
+        InitNotifications(),
+      );
+    advertisingBloc
+      ..add(
+        InitAdvertising(),
+      );
     _initAuthenticatedStatus();
   }
 
   void _initAuthenticatedStatus() async {
     if (authenticationBloc.state is Authenticated) {
-      notificationsBloc..add(SaveDevice());
+      notificationsBloc
+        ..add(
+          SaveDevice(),
+        );
     }
   }
 
@@ -232,29 +248,30 @@ class HiveCoreApp extends StatelessWidget {
       hiveProviderList()..addAll(providers ?? []);*/
 
   List<RepositoryProvider> _getRepositoryList() =>
-      hiveRepositoryProviderList()..addAll(repositorys ?? []);
+      hiveRepositoryProviderList()..addAll(repositorys);
 
-  List<BlocProvider> _getBlocsList() =>
-      hiveBlocProviderList()..addAll(blocs ?? []);
+  List<BlocProvider> _getBlocsList() => hiveBlocProviderList()..addAll(blocs);
 
   // Routes
-  Map<String, WidgetBuilder> _getRoutes() => hiveRoutes..addAll(routes ?? {});
+  Map<String, WidgetBuilder> _getRoutes() => hiveRoutes..addAll(routes);
 
-  ThemeData _getTheme(PreferencesState blocPreferencesState) =>
+  ThemeData? _getTheme(PreferencesState? blocPreferencesState) =>
       blocPreferencesState is PreferencesLoaded
           ? themes[blocPreferencesState.themeName]
           : themes['Light'];
 
-  Widget _buildApp(AuthenticationState blocAuthenticationState,
-      PreferencesState blocPreferencesState) {
+  Widget _buildApp({
+    required AuthenticationState blocAuthenticationState,
+    required PreferencesState blocPreferencesState,
+  }) {
     return MaterialApp(
       title: title,
       debugShowCheckedModeBanner: debugShowCheckedModeBanner,
       theme: _getTheme(blocPreferencesState),
       localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+        // GlobalMaterialLocalizations.delegate,
+        // GlobalWidgetsLocalizations.delegate,
+        // GlobalCupertinoLocalizations.delegate,
         HiveCoreString.delegate,
         LocaleNamesLocalizationsDelegate(),
       ]..addAll(appLocalizationDelegate),

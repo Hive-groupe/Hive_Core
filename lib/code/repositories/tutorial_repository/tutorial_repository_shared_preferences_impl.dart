@@ -44,7 +44,7 @@ class TutorialRepositorySharedPreferencesImp implements TutorialRepository {
     final prefs = await SharedPreferences.getInstance();
 
     List<String> _currentFinishedTutoriaList =
-        prefs.getStringList(_finishedTutoriaKey) ?? List<String>();
+        prefs.getStringList(_finishedTutoriaKey) ?? [];
 
     return _currentFinishedTutoriaList;
   }

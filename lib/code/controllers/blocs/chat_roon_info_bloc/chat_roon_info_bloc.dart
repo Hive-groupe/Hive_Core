@@ -17,32 +17,36 @@ part 'chat_roon_info_event.dart';
 part 'chat_roon_info_state.dart';
 
 class ChatRoonInfoBloc extends Bloc<ChatRoonInfoEvent, ChatRoonInfoState> {
-  final BuildContext context;
-  AuthenticationRepository _authenticationRepository; // eliminar
-  UserRepository _userRepository;
-  ChatMessageRepository _chatMessageRepository;
+  late final BuildContext context;
+  late AuthenticationRepository _authenticationRepository; // eliminar
+  late UserRepository _userRepository;
+  late ChatMessageRepository _chatMessageRepository;
 
-  String currentUserId;
+  late String? currentUserId;
 
   final reciver = BehaviorSubject<User>();
   final _chatImageMessageList = BehaviorSubject<BuiltList<ChatMessage>>();
 
   ChatRoonInfoBloc({
-    @required this.context,
-  }) : super(ChatRoonInfoInitial()) {
-    InitState();
+    required this.context,
+  }) : super(
+          ChatRoonInfoInitial(),
+        ) {
+    initState();
   }
 
-  InitState() {
-    _authenticationRepository = context.repository<AuthenticationRepository>();
-    _userRepository = context.repository<UserRepository>();
-    _chatMessageRepository = context.repository<ChatMessageRepository>();
+  initState() {
+    _authenticationRepository =
+        RepositoryProvider.of<AuthenticationRepository>(context);
+    _userRepository = RepositoryProvider.of<UserRepository>(context);
+    _chatMessageRepository =
+        RepositoryProvider.of<ChatMessageRepository>(context);
   }
 
   @override
   Future<void> close() {
-    reciver?.close();
-    _chatImageMessageList?.close();
+    reciver.close();
+    _chatImageMessageList.close();
 
     return super.close();
   }
@@ -64,22 +68,29 @@ class ChatRoonInfoBloc extends Bloc<ChatRoonInfoEvent, ChatRoonInfoState> {
       _reciverId = event.receiverId;
       currentUserId =
           currentUserId ?? await _authenticationRepository.getCurrentUserId();
-      _userRepository
-          .getStreamUserById(_reciverId)
-          .listen((event) => reciver.sink.add(event));
+      _userRepository.getStreamUserById(_reciverId).listen(
+            (event) => reciver.sink.add(event),
+          );
 
       _chatMessageRepository
           .fetchChatMessagesAsStream(
-              senderId: currentUserId, receiverId: _reciverId)
-          .listen((event) => _chatImageMessageList.sink.add(
-              BuiltList<ChatMessage>().rebuild((b) => b
+            senderId: currentUserId ?? '',
+            receiverId: _reciverId,
+          )
+          .listen(
+            (event) =>
+                _chatImageMessageList.sink.add(BuiltList<ChatMessage>().rebuild(
+              (b) => b
                 ..replace(event)
                 ..where((ChatMessage doc) =>
-                    doc.type == ChatMessageType.MESSAGE_TYPE_IMAGE))));
+                    doc.type == ChatMessageType.MESSAGE_TYPE_IMAGE),
+            )),
+          );
 
       yield ChatLoaded(
-          reciver: reciver.stream,
-          chatImageMessageList: _chatImageMessageList.stream);
+        reciver: reciver.stream,
+        chatImageMessageList: _chatImageMessageList.stream,
+      );
     } catch (e) {
       print(e);
     }

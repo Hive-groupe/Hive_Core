@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/models/metadata.dart';
 import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
@@ -7,40 +6,32 @@ class MetadataFieldBloc extends FormBloc<String, String> {
   // Repositorys
   final AuthenticationRepository _authenticationRepository;
 
-  String userId;
-  Metadata _metadata;
+  late String? userId;
+  late Metadata _metadata;
 
-  final concept = TextFieldBloc(validators: [
-    FieldBlocValidators.required,
-  ]);
+  final concept = TextFieldBloc(
+    validators: [
+      FieldBlocValidators.required,
+    ],
+  );
 
   final observations = TextFieldBloc(validators: []);
 
   MetadataFieldBloc({
     // Repositorys
-    @required AuthenticationRepository authenticationRepository,
-  })  :
-        // Repositorys
-        assert(authenticationRepository != null),
-
-        // Repositorys
+    required AuthenticationRepository authenticationRepository,
+  }) : // Repositorys
         _authenticationRepository = authenticationRepository {
     initState();
   }
 
-  MetadataFieldBloc.formMetadata(
-      { // Repositorys
-      @required AuthenticationRepository authenticationRepository,
-
-      //
-      @required Metadata metadata})
-      : // Repositorys
-        assert(authenticationRepository != null),
-        assert(metadata != null),
-
-        // Repositorys
+  MetadataFieldBloc.formMetadata({
+    // Repositorys
+    required AuthenticationRepository authenticationRepository,
+    //
+    required Metadata metadata,
+  })  : // Repositorys
         _authenticationRepository = authenticationRepository,
-
         //
         _metadata = metadata {
     initState();
@@ -56,8 +47,8 @@ class MetadataFieldBloc extends FormBloc<String, String> {
 
   @override
   Future<void> close() {
-    concept?.close();
-    observations?.close();
+    concept.close();
+    observations.close();
 
     return super.close();
   }
@@ -70,8 +61,8 @@ class MetadataFieldBloc extends FormBloc<String, String> {
   _loadModel() async {
     userId = userId ?? await _authenticationRepository.getCurrentUserId();
 
-    concept.updateValue(_metadata.title);
-    observations.updateValue(_metadata.description);
+    concept.updateValue(_metadata.title ?? '');
+    observations.updateValue(_metadata.description ?? '');
   }
 
   @override

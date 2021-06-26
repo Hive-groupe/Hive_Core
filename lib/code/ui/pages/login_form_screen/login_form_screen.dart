@@ -15,19 +15,21 @@ class LoginFormSrceen extends StatefulWidget {
 }
 
 class _LoginFormSrceenState extends State<LoginFormSrceen> {
-  AuthenticationRepository _authenticationRepository;
-  AuthenticationBloc _authenticationBloc;
-  LoginFormBloc _loginFormBloc;
+  late AuthenticationRepository _authenticationRepository;
+  late AuthenticationBloc _authenticationBloc;
+  late LoginFormBloc _loginFormBloc;
 
-  TapGestureRecognizer _termsRecognizerTap, _privacyPolicyRecognizerTap;
+  late TapGestureRecognizer _termsRecognizerTap, _privacyPolicyRecognizerTap;
 
   @override
   void initState() {
-    _authenticationRepository = context.repository<AuthenticationRepository>();
-    _authenticationBloc = context.repository<AuthenticationBloc>();
+    _authenticationRepository =
+        RepositoryProvider.of<AuthenticationRepository>(context);
+    _authenticationBloc = RepositoryProvider.of<AuthenticationBloc>(context);
     _loginFormBloc = LoginFormBloc(
-        authenticationRepository: _authenticationRepository,
-        authenticationBloc: _authenticationBloc);
+      authenticationRepository: _authenticationRepository,
+      authenticationBloc: _authenticationBloc,
+    );
 
     _termsRecognizerTap = TapGestureRecognizer()..onTap = () => _onShowTerms();
     _privacyPolicyRecognizerTap = TapGestureRecognizer()
@@ -38,17 +40,24 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
 
   _goFailInfoScreen() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => FailInfoScreen()));
+        context,
+        MaterialPageRoute(
+          builder: (context) => FailInfoScreen(),
+        ));
   }
 
-  void _goRegisterScreen() => Navigator.of(context)
-      .pushNamed(HiveCoreConstString.route_user_registration_form_screen);
+  void _goRegisterScreen() => Navigator.of(context).pushNamed(
+        HiveCoreConstString.route_user_registration_form_screen,
+      );
 
-  void _goRecoverPassword() => Navigator.of(context)
-      .pushNamed(HiveCoreConstString.route_restore_password_form_screen);
+  void _goRecoverPassword() => Navigator.of(context).pushNamed(
+        HiveCoreConstString.route_restore_password_form_screen,
+      );
 
   void _onAuthenticationWithMail() {
-    FocusScope.of(context).requestFocus(new FocusNode());
+    FocusScope.of(context).requestFocus(
+      new FocusNode(),
+    );
     _loginFormBloc.submit();
   }
 
@@ -58,28 +67,32 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
 
   void _onShowLoginError(context) => Scaffold.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-      backgroundColor: Colors.red,
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(HiveCoreString.of(context).login_form_error),
-          Icon(Icons.error)
-        ],
+    ..showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(HiveCoreString.of(context).login_form_error),
+            Icon(Icons.error)
+          ],
+        ),
       ),
-    ));
+    );
 
   void _onShowOsSubmitting(context) => Scaffold.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(HiveCoreString.of(context).login_form_loading),
-          CircularProgressIndicator()
-        ],
+    ..showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(HiveCoreString.of(context).login_form_loading),
+            CircularProgressIndicator()
+          ],
+        ),
       ),
-    ));
+    );
 
   void _onShowTerms() => showDialog(
         context: context,
@@ -90,7 +103,7 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
             textAlign: TextAlign.justify,
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -109,7 +122,7 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
             textAlign: TextAlign.justify,
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -203,22 +216,24 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
 
   Widget _iconHolder() {
     return Container(
-        child: Image.asset(
-      HiveCoreConstString.image_icon_hive,
-      height: 300,
-      width: 300,
-    ));
+      child: Image.asset(
+        HiveCoreConstString.image_icon_hive,
+        height: 300,
+        width: 300,
+      ),
+    );
   }
 
   Widget _title() {
     return Container(
       child: SizedBox.fromSize(
-          size: Size.fromHeight(30),
-          child: new Text(
-            HiveCoreString.of(context).login_form_title,
-            style: TextStyle(fontSize: 25),
-            textAlign: TextAlign.left,
-          )),
+        size: Size.fromHeight(30),
+        child: new Text(
+          HiveCoreString.of(context).login_form_title,
+          style: TextStyle(fontSize: 25),
+          textAlign: TextAlign.left,
+        ),
+      ),
     );
   }
 
@@ -252,21 +267,21 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
 
   Widget _btnRecoverPassword() {
     return Container(
-      child: FlatButton(
+      child: TextButton(
         onPressed: _goRecoverPassword,
         child:
             Text(HiveCoreString.of(context).login_form_recover_password_button),
-        color: Colors.transparent,
+        // color: Colors.transparent,
       ),
     );
   }
 
   Widget _btnRegister() {
     return Container(
-      child: FlatButton(
+      child: TextButton(
         onPressed: _goRegisterScreen,
         child: Text(HiveCoreString.of(context).login_form_register_button),
-        color: Colors.transparent,
+        // color: Colors.transparent,
       ),
     );
   }
@@ -296,34 +311,36 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
 
   Widget _btnGoogle() {
     return Container(
-        margin: EdgeInsets.only(),
-        child: RawMaterialButton(
-          onPressed: _onAuthenticationWithGoogle,
-          child: Icon(
-            FontAwesomeIcons.google,
-            color: Colors.grey,
-          ),
-          shape: new CircleBorder(),
-          elevation: 8.0,
-          //fillColor: Colors.white,
-          padding: const EdgeInsets.all(15.0),
-        ));
+      margin: EdgeInsets.only(),
+      child: RawMaterialButton(
+        onPressed: _onAuthenticationWithGoogle,
+        child: Icon(
+          FontAwesomeIcons.google,
+          color: Colors.grey,
+        ),
+        shape: new CircleBorder(),
+        elevation: 8.0,
+        //fillColor: Colors.white,
+        padding: const EdgeInsets.all(15.0),
+      ),
+    );
   }
 
   Widget _btnFacebook() {
     return Container(
-        margin: EdgeInsets.only(),
-        child: RawMaterialButton(
-          onPressed: _onAuthenticationWithFaceboock,
-          child: Icon(
-            FontAwesomeIcons.facebookF,
-            color: Colors.grey,
-          ),
-          shape: new CircleBorder(),
-          elevation: 8.0,
-          //fillColor: Colors.white,
-          padding: const EdgeInsets.all(15.0),
-        ));
+      margin: EdgeInsets.only(),
+      child: RawMaterialButton(
+        onPressed: _onAuthenticationWithFaceboock,
+        child: Icon(
+          FontAwesomeIcons.facebookF,
+          color: Colors.grey,
+        ),
+        shape: new CircleBorder(),
+        elevation: 8.0,
+        //fillColor: Colors.white,
+        padding: const EdgeInsets.all(15.0),
+      ),
+    );
   }
 
   Widget _termsAndConditions() {
@@ -334,14 +351,16 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
         text: "Al usar esta aplicación estás aceptando nuestros ",
         children: [
           TextSpan(
-              recognizer: _termsRecognizerTap,
-              text: "Términos de servicio",
-              style: TextStyle(fontWeight: FontWeight.bold)),
+            recognizer: _termsRecognizerTap,
+            text: "Términos de servicio",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           TextSpan(text: " y "),
           TextSpan(
-              recognizer: _privacyPolicyRecognizerTap,
-              text: "Política de privacidad",
-              style: TextStyle(fontWeight: FontWeight.bold)),
+            recognizer: _privacyPolicyRecognizerTap,
+            text: "Política de privacidad",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:hive_core/code/models/_index.dart';
@@ -6,16 +8,18 @@ import 'package:hive_core/code/utils/othes/serializers.dart';
 part 'user.g.dart';
 
 abstract class User implements Built<User, UserBuilder> {
-  @nullable
-  String get id;
+  String? get id;
+
   String get username;
-  @nullable
-  String get password;
+
+  String? get password;
+
   //Preferences get preferences;
-  @nullable
-  Profile get profile;
-  @nullable
-  UserStatus get userStatus;
+
+  Profile? get profile;
+
+  UserStatus? get userStatus;
+
   // @nullable
   // BuiltList<String> get favoritesChatRoons;
 
@@ -23,11 +27,16 @@ abstract class User implements Built<User, UserBuilder> {
   factory User([void Function(UserBuilder) updates]) = _$User;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(User.serializer, this);
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(User.serializer, this),
+      ),
+    );
   }
 
-  static User fromJson(Map<String, dynamic> json) {
-    return serializers.deserializeWith(User.serializer, json);
+  static User? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        User.serializer, json.decode(jsonString));
   }
 
   static Serializer<User> get serializer => _$userSerializer;

@@ -5,7 +5,7 @@ class StatisticsTools {
       list.fold(10000000000000000000, (a, b) => a < b ? a : b);
 
   double getAverage(List<dynamic> list) =>
-      list.length != 0 ? list.fold(0.0, (a, b) => a + b) / list.length : 0;
+      list.length != 0 ? list.fold(0.0, (a, b) => double.parse(a.toString()) + double.parse(b.toString())) / list.length : 0;
 
   double getMaximum(List<dynamic> list) =>
       list.fold(0.0, (a, b) => a > b ? a : b);
@@ -24,29 +24,34 @@ class StatisticsTools {
       list.length > 1 ? list[0] - list[list.length - 1] : 0;
 
   List<dynamic> getDiferenceList(List<dynamic> list) {
-    List<dynamic> diferenceList = new List<dynamic>();
+    List<dynamic> diferenceList = [];
     for (var i = 0; i < list.length - 1; i++) {
       List l = [
         list[i],
         list[i + 1],
       ];
-      diferenceList.add(getFinalDiference(l));
+      diferenceList.add(
+        getFinalDiference(l),
+      );
     }
     return diferenceList;
   }
 
-  BasicStatistics getBasicStatistics(List<dynamic> list,
-      {List<dynamic> diferenceList}) {
-    diferenceList = diferenceList ?? getDiferenceList(list);
-    return BasicStatistics((b) => b
-      ..length = list.length
-      ..totalAmount = getTotalAmount(list)
-      ..finalDiference = getFinalDiference(list)
-      ..minimumValue = getMinimum(list)
-      ..averageValue = getAverage(list)
-      ..maximumValue = getMaximum(list)
-      ..minimumDifference = getMinimum(diferenceList)
-      ..averageDifference = getAverage(diferenceList)
-      ..maximumDifference = getMaximum(diferenceList));
+  BasicStatistics getBasicStatistics(
+    List<dynamic> list, {
+    required List<dynamic> diferenceList,
+  }) {
+    return BasicStatistics(
+      (b) => b
+        ..length = list.length
+        ..totalAmount = getTotalAmount(list)
+        ..finalDiference = getFinalDiference(list)
+        ..minimumValue = getMinimum(list)
+        ..averageValue = getAverage(list)
+        ..maximumValue = getMaximum(list)
+        ..minimumDifference = getMinimum(diferenceList)
+        ..averageDifference = getAverage(diferenceList)
+        ..maximumDifference = getMaximum(diferenceList),
+    );
   }
 }

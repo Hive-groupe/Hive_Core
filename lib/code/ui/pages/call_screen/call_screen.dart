@@ -1,21 +1,11 @@
-import 'dart:async';
-
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/models/call.dart';
-import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
-import 'package:hive_core/code/repositories/call_repository/call_repository.dart';
-import 'package:hive_core/code/utils/configs/agora_configs.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class CallScreen extends StatefulWidget {
   final Call call;
 
   CallScreen({
-    @required this.call,
+    required this.call,
   });
 
   @override
@@ -23,11 +13,11 @@ class CallScreen extends StatefulWidget {
 }
 
 class _CallScreenState extends State<CallScreen> {
-  final CallRepository callMethods =
+  /* final CallRepository callMethods =
       CallRepositoryFirebaseImpl(CALL_COLLECTION);
 
-  AuthenticationRepository userProvider;
-  StreamSubscription callStreamSubscription;
+  late AuthenticationRepository userProvider;
+  late StreamSubscription callStreamSubscription;
 
   static final _users = <int>[];
   final _infoStrings = <String>[];
@@ -61,7 +51,7 @@ class _CallScreenState extends State<CallScreen> {
 
   addPostFrameCallback() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      userProvider = context.repository<AuthenticationRepository>();
+      userProvider = RepositoryProvider.of<AuthenticationRepository>(context);
 
       callStreamSubscription = callMethods
           .callStream(
@@ -90,7 +80,9 @@ class _CallScreenState extends State<CallScreen> {
 
   /// Add agora event handlers
   void _addAgoraEventHandlers() {
-    AgoraRtcEngine.onError = (dynamic code) {
+    AgoraRtcEngine.onError = (
+      dynamic code,
+    ) {
       setState(() {
         final info = 'onError: $code';
         _infoStrings.add(info);
@@ -108,7 +100,10 @@ class _CallScreenState extends State<CallScreen> {
       });
     };
 
-    AgoraRtcEngine.onUserJoined = (int uid, int elapsed) {
+    AgoraRtcEngine.onUserJoined = (
+      int uid,
+      int elapsed,
+    ) {
       setState(() {
         final info = 'onUserJoined: $uid';
         _infoStrings.add(info);
@@ -116,21 +111,31 @@ class _CallScreenState extends State<CallScreen> {
       });
     };
 
-    AgoraRtcEngine.onUpdatedUserInfo = (AgoraUserInfo userInfo, int i) {
+    AgoraRtcEngine.onUpdatedUserInfo = (
+      AgoraUserInfo userInfo,
+      int i,
+    ) {
       setState(() {
         final info = 'onUpdatedUserInfo: ${userInfo.toString()}';
         _infoStrings.add(info);
       });
     };
 
-    AgoraRtcEngine.onRejoinChannelSuccess = (String string, int a, int b) {
+    AgoraRtcEngine.onRejoinChannelSuccess = (
+      String string,
+      int a,
+      int b,
+    ) {
       setState(() {
         final info = 'onRejoinChannelSuccess: $string';
         _infoStrings.add(info);
       });
     };
 
-    AgoraRtcEngine.onUserOffline = (int a, int b) {
+    AgoraRtcEngine.onUserOffline = (
+      int a,
+      int b,
+    ) {
       callMethods.endCall(call: widget.call);
       setState(() {
         final info = 'onUserOffline: a: ${a.toString()}, b: ${b.toString()}';
@@ -138,7 +143,10 @@ class _CallScreenState extends State<CallScreen> {
       });
     };
 
-    AgoraRtcEngine.onRegisteredLocalUser = (String s, int i) {
+    AgoraRtcEngine.onRegisteredLocalUser = (
+      String s,
+      int i,
+    ) {
       setState(() {
         final info = 'onRegisteredLocalUser: string: s, i: ${i.toString()}';
         _infoStrings.add(info);
@@ -159,7 +167,10 @@ class _CallScreenState extends State<CallScreen> {
       });
     };
 
-    AgoraRtcEngine.onUserOffline = (int uid, int reason) {
+    AgoraRtcEngine.onUserOffline = (
+      int uid,
+      int reason,
+    ) {
       // if call was picked
 
       setState(() {
@@ -187,13 +198,17 @@ class _CallScreenState extends State<CallScreen> {
     final List<AgoraRenderWidget> list = [
       AgoraRenderWidget(0, local: true, preview: true),
     ];
-    _users.forEach((int uid) => list.add(AgoraRenderWidget(uid)));
+    _users.forEach((int uid) => list.add(
+          AgoraRenderWidget(uid),
+        ));
     return list;
   }
 
   /// Video view wrapper
   Widget _videoView(view) {
-    return Expanded(child: Container(child: view));
+    return Expanded(
+      child: Container(child: view),
+    );
   }
 
   /// Video view row wrapper
@@ -212,33 +227,45 @@ class _CallScreenState extends State<CallScreen> {
     switch (views.length) {
       case 1:
         return Container(
-            child: Column(
-          children: <Widget>[_videoView(views[0])],
-        ));
+          child: Column(
+            children: <Widget>[_videoView(views[0])],
+          ),
+        );
       case 2:
         return Container(
-            child: Column(
-          children: <Widget>[
-            _expandedVideoRow([views[0]]),
-            _expandedVideoRow([views[1]])
-          ],
-        ));
+          child: Column(
+            children: <Widget>[
+              _expandedVideoRow([views[0]]),
+              _expandedVideoRow([views[1]])
+            ],
+          ),
+        );
       case 3:
         return Container(
-            child: Column(
-          children: <Widget>[
-            _expandedVideoRow(views.sublist(0, 2)),
-            _expandedVideoRow(views.sublist(2, 3))
-          ],
-        ));
+          child: Column(
+            children: <Widget>[
+              _expandedVideoRow(
+                views.sublist(0, 2),
+              ),
+              _expandedVideoRow(
+                views.sublist(2, 3),
+              )
+            ],
+          ),
+        );
       case 4:
         return Container(
-            child: Column(
-          children: <Widget>[
-            _expandedVideoRow(views.sublist(0, 2)),
-            _expandedVideoRow(views.sublist(2, 4))
-          ],
-        ));
+          child: Column(
+            children: <Widget>[
+              _expandedVideoRow(
+                views.sublist(0, 2),
+              ),
+              _expandedVideoRow(
+                views.sublist(2, 4),
+              )
+            ],
+          ),
+        );
       default:
     }
     return Container();
@@ -258,7 +285,7 @@ class _CallScreenState extends State<CallScreen> {
             itemCount: _infoStrings.length,
             itemBuilder: (BuildContext context, int index) {
               if (_infoStrings.isEmpty) {
-                return null;
+                return Container();
               }
               return Padding(
                 padding: const EdgeInsets.symmetric(
@@ -381,5 +408,10 @@ class _CallScreenState extends State<CallScreen> {
         ),
       ),
     );
+  */
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }

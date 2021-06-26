@@ -17,10 +17,10 @@ class ChatMessageItem extends StatefulWidget {
   final ChatMessage message;
 
   ChatMessageItem(
-      {Key key,
-      @required this.currentUserId,
-      @required this.list,
-      @required this.index})
+      {Key? key,
+      required this.currentUserId,
+      required this.list,
+      required this.index})
       : message = list[index],
         super(key: key);
 
@@ -29,41 +29,46 @@ class ChatMessageItem extends StatefulWidget {
 }
 
 class _ChatMessageItemState extends State<ChatMessageItem> {
-  ChatRoomBloc _chatBloc;
+  late ChatRoomBloc _chatBloc;
 
   @override
   void initState() {
-    _chatBloc = context.bloc<ChatRoomBloc>();
+    _chatBloc = BlocProvider.of<ChatRoomBloc>(context);
     super.initState();
   }
 
-  _onSelectedMessage() =>
-      _chatBloc.add(SelectMessage(messageId: widget.message));
+  _onSelectedMessage() => _chatBloc.add(
+        SelectMessage(messageId: widget.message),
+      );
 
-  _onLikeMessage() => _chatBloc.add(LikedMessage(chatMessage: widget.message));
+  _onLikeMessage() => _chatBloc.add(
+        LikedMessage(chatMessage: widget.message),
+      );
 
   _goImageDetail() => Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ImageDetailScreen(
-            list: widget.list,
-            messageId: widget.list[widget.index].messageId,
-          )));
+        builder: (context) => ImageDetailScreen(
+          list: widget.list,
+          messageId: widget.list[widget.index].messageId ?? '',
+        ),
+      ));
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onLongPressStart: (details) => _onSelectedMessage(),
-        onDoubleTap: _onLikeMessage,
+      onLongPressStart: (details) => _onSelectedMessage(),
+      onDoubleTap: _onLikeMessage,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 1),
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 1),
-          child: Container(
-            alignment: widget.message.senderId == widget.currentUserId
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            child: widget.message.senderId == widget.currentUserId
-                ? senderLayout(widget.message)
-                : receiverLayout(widget.message),
-          ),
-        ));
+          alignment: widget.message.senderId == widget.currentUserId
+              ? Alignment.centerRight
+              : Alignment.centerLeft,
+          child: widget.message.senderId == widget.currentUserId
+              ? senderLayout(widget.message)
+              : receiverLayout(widget.message),
+        ),
+      ),
+    );
   }
 
   getMessage(ChatMessage message) {
@@ -79,7 +84,7 @@ class _ChatMessageItemState extends State<ChatMessageItem> {
             ? GestureDetector(
                 onTap: _goImageDetail,
                 child: CachedImage(
-                  message.photoUrl,
+                  message.photoUrl ?? '',
                   height: 250,
                   width: 250,
                   radius: 10,
@@ -90,19 +95,21 @@ class _ChatMessageItemState extends State<ChatMessageItem> {
 
   getDate(ChatMessage message) {
     return Container(
-        // margin: EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-        child: Text(
-      DateFormat('HH:mm').format(message.timestamp),
-      style: TextStyle(fontSize: 10, color: HiveCoreConstColors.greyColor),
-    ));
+      // margin: EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+      child: Text(
+        DateFormat('HH:mm').format(message.timestamp),
+        style: TextStyle(fontSize: 10, color: HiveCoreConstColors.greyColor),
+      ),
+    );
   }
 
   _getReaded(ChatMessage message) {
     return Container(
-        // margin: EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-        child: Icon(Icons.done_all, //done
-            size: 15,
-            color: HiveCoreConstColors.greyColor));
+      // margin: EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+      child: Icon(Icons.done_all, //done
+          size: 15,
+          color: HiveCoreConstColors.greyColor),
+    );
   }
 
   Widget senderLayout(ChatMessage message) {

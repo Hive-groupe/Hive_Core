@@ -22,17 +22,17 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  SettingsScreenBloc _settingsScreenBloc;
-  AuthenticationBloc _authenticationBloc;
-  PreferencesBloc _preferencesBloc;
+  late SettingsScreenBloc _settingsScreenBloc;
+  late AuthenticationBloc _authenticationBloc;
+  late PreferencesBloc _preferencesBloc;
 
-  TextEditingController _searchController;
+  late TextEditingController _searchController;
 
   @override
   void initState() {
     _settingsScreenBloc = SettingsScreenBloc(context: context);
-    _authenticationBloc = context.bloc<AuthenticationBloc>();
-    _preferencesBloc = context.bloc<PreferencesBloc>();
+    _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
+    _preferencesBloc = BlocProvider.of<PreferencesBloc>(context);
 
     _searchController = TextEditingController();
     super.initState();
@@ -40,48 +40,61 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   void dispose() {
-    _settingsScreenBloc?.close();
-    _searchController?.dispose();
+    _settingsScreenBloc.close();
+    _searchController.dispose();
     super.dispose();
   }
 
   void _startSearching() {
     _searchController.text = '';
-    _settingsScreenBloc.add(StartPreferencesSearching());
+    _settingsScreenBloc.add(
+      StartPreferencesSearching(),
+    );
   }
 
   void _cancelSearch() {
-    _settingsScreenBloc.add(CancelPreferencesSearch());
+    _settingsScreenBloc.add(
+      CancelPreferencesSearch(),
+    );
     _searchController.text = '';
   }
 
   void _resetSearch() {
     _searchController.text = '';
-    _settingsScreenBloc.add(ResetPreferencesSearch());
+    _settingsScreenBloc.add(
+      ResetPreferencesSearch(),
+    );
   }
 
-  void _searching(String value) =>
-      _settingsScreenBloc.add(SearchingPreferencess(value: value));
+  void _searching(String value) => _settingsScreenBloc.add(
+        SearchingPreferencess(value: value),
+      );
 
-  void _showAccountSettings() =>
-      _settingsScreenBloc.add(OnShowAccountSettings());
+  void _showAccountSettings() => _settingsScreenBloc.add(
+        OnShowAccountSettings(),
+      );
 
-  void _showApplicationSettings() =>
-      _settingsScreenBloc.add(OnShowApplicationSettings());
+  void _showApplicationSettings() => _settingsScreenBloc.add(
+        OnShowApplicationSettings(),
+      );
 
-  void _showHelpSettings() => _settingsScreenBloc.add(OnShowHelpSettings());
+  void _showHelpSettings() => _settingsScreenBloc.add(
+        OnShowHelpSettings(),
+      );
 
-  String _getTitleCategory(String category) {
+  String _getTitleCategory(
+    String category,
+  ) {
     switch (category) {
       case 'Account':
         return HiveCoreString.of(context).settings_account_title;
-        break;
+
       case 'Application':
         return HiveCoreString.of(context).settings_application_title;
-        break;
+
       case 'Help':
         return HiveCoreString.of(context).settings_help_title;
-        break;
+
       default:
         return HiveCoreString.of(context).user_settings_title;
     }
@@ -92,39 +105,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
     switch (category) {
       case 'Account':
         return _settingsAccountList();
-        break;
+
       case 'Application':
         return _settingsApplicationList(state);
-        break;
+
       case 'Help':
         return _settingsHelpList();
-        break;
+
       default:
         return settingsList(state);
     }
   }
 
-/*****************************************************
+/*
+ *****************************************************
  *                                                   *
  *                  Account actions                  *
  *                                                   *
- *****************************************************/
+ *****************************************************
+ */
 
-  void _goUpdatePasswordForm() => Navigator.pushNamed(context,
-      HiveCoreConstString.route_user_account_settings_update_password_screen);
+  void _goUpdatePasswordForm() => Navigator.pushNamed(
+        context,
+        HiveCoreConstString.route_user_account_settings_update_password_screen,
+      );
 
-  void _goConnetAccountScreen() => Navigator.pushNamed(context,
-      HiveCoreConstString.route_user_account_settings_account_connet_screen);
+  void _goConnetAccountScreen() => Navigator.pushNamed(
+        context,
+        HiveCoreConstString.route_user_account_settings_account_connet_screen,
+      );
 
   void _goDeviceListScreen() => Navigator.pushNamed(
-      context, HiveCoreConstString.route_user_account_settings_devices_screen);
+        context,
+        HiveCoreConstString.route_user_account_settings_devices_screen,
+      );
 
   void _onCloseSeasion() {
     Navigator.of(context).pop();
-    _preferencesBloc.add(ResetPreferences());
-    _authenticationBloc.add(LogedOut());
+    _preferencesBloc.add(
+      ResetPreferences(),
+    );
+    _authenticationBloc.add(
+      LogedOut(),
+    );
     Navigator.pushNamed(
-        context, HiveCoreConstString.route_user_login_form_screen);
+      context,
+      HiveCoreConstString.route_user_login_form_screen,
+    );
   }
 
   Future<void> _confirmDialogBox() {
@@ -143,11 +170,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(HiveCoreString.of(context).cancel),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: _onCloseSeasion,
                 child: Text(HiveCoreString.of(context).yes),
               ),
@@ -156,153 +183,180 @@ class _SettingsScreenState extends State<SettingsScreen> {
         });
   }
 
-  /*****************************************************
+  /*
+ *****************************************************
  *                                                   *
  *                Application actions                *
  *                                                   *
- *****************************************************/
+ ****************************************************
+ */
 
   _goThemeSettingsScreen() => Navigator.of(context).push(MaterialPageRoute(
-      builder: (BuildContext context) => SettingsThemeScreen()));
+        builder: (BuildContext context) => SettingsThemeScreen(),
+      ));
 
   _goLocateSettingsScreen() => Navigator.of(context).push(MaterialPageRoute(
-      builder: (BuildContext context) => SettingsLocateScreen()));
+        builder: (BuildContext context) => SettingsLocateScreen(),
+      ));
 
   _goNotificatiosSettingsScreen() =>
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => SettingsNotificationsScreen()));
+        builder: (BuildContext context) => SettingsNotificationsScreen(),
+      ));
 
   _goChatSettingsScreen() => Navigator.pushNamed(
-      context, HiveCoreConstString.route_user_aplication_settings_chat_screen);
+        context,
+        HiveCoreConstString.route_user_aplication_settings_chat_screen,
+      );
 
   String _localizeLocale(BuildContext context, Locale locale) {
     if (locale == null) {
       return HiveCoreString.of(context).systemLanguage;
     } else {
-      final localeString = LocaleNames.of(context).nameOf(locale.toString());
+      final String localeString = LocaleNames.of(context)!.nameOf(
+        locale.toString(),
+      )!;
       return localeString[0].toUpperCase() + localeString.substring(1);
     }
   }
 
-  /*****************************************************
+  /*
+ *****************************************************
  *                                                   *
  *                     Help actions                  *
  *                                                   *
- *****************************************************/
+ *****************************************************
+ */
   void _goInfoApp() => Navigator.pushNamed(
-      context, HiveCoreConstString.route_user_help_settings_info_screen);
+        context,
+        HiveCoreConstString.route_user_help_settings_info_screen,
+      );
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<SettingsScreenBloc>(
-            create: (BuildContext context) => _settingsScreenBloc,
-          ),
-        ],
-        child: BlocConsumer(
-          cubit: _preferencesBloc,
-          listener: (context, state) {},
-          builder: (context, preferencesState) {
-            if (preferencesState is PreferencesLoaded) {
-              return BlocConsumer(
-                cubit: _settingsScreenBloc,
-                listener: (context, state) {},
-                builder: (context, state) {
-                  if (state is SettingsScreenInitial) {
-                    return _initialBuild(state);
-                  } else if (state is SettingsScreenSearching) {
-                    return _searchinglBuild(state, preferencesState);
-                  } else if (state is SettingsScreenShowCategory) {
-                    return _showingCategoryBuild(state, preferencesState);
-                  } else {
-                    return _initialBuild(state);
-                  }
-                },
-              );
-            } else {
-              return Container();
-            }
-          },
-        ));
+      providers: [
+        BlocProvider<SettingsScreenBloc>(
+          create: (BuildContext context) => _settingsScreenBloc,
+        ),
+      ],
+      child: BlocConsumer(
+        bloc: _preferencesBloc,
+        listener: (context, state) {},
+        builder: (context, preferencesState) {
+          if (preferencesState is PreferencesLoaded) {
+            return BlocConsumer(
+              bloc: _settingsScreenBloc,
+              listener: (context, state) {},
+              builder: (context, state) {
+                if (state is SettingsScreenInitial) {
+                  return _initialBuild(state);
+                } else if (state is SettingsScreenSearching) {
+                  return _searchinglBuild(state, preferencesState);
+                } else if (state is SettingsScreenShowCategory) {
+                  return _showingCategoryBuild(state, preferencesState);
+                } else {
+                  return Container();
+                }
+              },
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
   }
 
-  Widget _initialBuild(SettingsScreenInitial state) {
+  Widget _initialBuild(
+    SettingsScreenInitial state,
+  ) {
     return CupertinoPageScaffold(
         child: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                _appBarNotSearching(),
-              ];
-            },
-            body: Scaffold(
-              body: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    PofileHolder(),
-                    _divider(),
-                    _accountHolder(),
-                    _applicationHolder(),
-                    _helpHolder(),
-                    _divider(),
-                    _appIconHolder(),
-                  ],
-                ),
+      headerSliverBuilder: (
+        BuildContext context,
+        bool innerBoxIsScrolled,
+      ) {
+        return <Widget>[
+          _appBarNotSearching(),
+        ];
+      },
+      body: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 15,
               ),
-            )));
+              PofileHolder(),
+              _divider(),
+              _accountHolder(),
+              _applicationHolder(),
+              _helpHolder(),
+              _divider(),
+              _appIconHolder(),
+            ],
+          ),
+        ),
+      ),
+    ));
   }
 
   Widget _searchinglBuild(
-      SettingsScreenSearching state, PreferencesLoaded preferencesState) {
+    SettingsScreenSearching state,
+    PreferencesLoaded preferencesState,
+  ) {
     var _list = settingsList(preferencesState);
 
     return Scaffold(
-        appBar: _appBarSearching(
-            _cancelSearch, _resetSearch, _searching, _searchController),
-        body: Container(
-          child: ListView.builder(
-            itemCount: _list.length,
-            itemBuilder: (BuildContext context, int index) {
-              return _itemHolder(
-                icon: _list[index].icon,
-                title: _list[index].title,
-                subTitle: _list[index].description,
-                onTap: _list[index].onTap,
-              );
-            },
-          ),
-        ));
+      appBar: _appBarSearching(
+          _cancelSearch, _resetSearch, _searching, _searchController),
+      body: Container(
+        child: ListView.builder(
+          itemCount: _list.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _itemHolder(
+              icon: _list[index].icon,
+              title: _list[index].title,
+              subTitle: _list[index].description ?? '',
+              onTap: _list[index].onTap,
+            );
+          },
+        ),
+      ),
+    );
   }
 
   Widget _showingCategoryBuild(
-      SettingsScreenShowCategory state, PreferencesLoaded preferencesState) {
+    SettingsScreenShowCategory state,
+    PreferencesLoaded preferencesState,
+  ) {
     String getTitleCategory = _getTitleCategory(state.category);
     var _list = _getCategoryListItems(state.category, preferencesState);
 
     return Scaffold(
-        appBar: _appBarShowingCategory(getTitleCategory),
-        body: Container(
-          child: ListView.builder(
-            itemCount: _list.length,
-            itemBuilder: (BuildContext context, int index) {
-              return _itemHolder(
-                icon: _list[index].icon,
-                title: _list[index].title,
-                subTitle: _list[index].description,
-                onTap: _list[index].onTap,
-              );
-            },
-          ),
-        ));
+      appBar: _appBarShowingCategory(getTitleCategory),
+      body: Container(
+        child: ListView.builder(
+          itemCount: _list.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _itemHolder(
+              icon: _list[index].icon,
+              title: _list[index].title,
+              subTitle: _list[index].description ?? '',
+              onTap: _list[index].onTap,
+            );
+          },
+        ),
+      ),
+    );
   }
 
   CupertinoSliverNavigationBar _appBarNotSearching() {
     return CupertinoSliverNavigationBar(
-      padding: EdgeInsetsDirectional.only(start: 0),
+      padding: EdgeInsetsDirectional.only(
+        start: 0,
+      ),
       leading: Material(
         color: Colors.transparent,
         child: IconButton(
@@ -327,8 +381,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  CustomAppBar _appBarSearching(Function cancelSearch, Function resetSearch,
-      Function searching, TextEditingController searchController) {
+  CustomAppBar _appBarSearching(
+    Function cancelSearch,
+    Function resetSearch,
+    Function searching,
+    TextEditingController searchController,
+  ) {
     return CustomAppBar(
       centerTitle: false,
       leading: IconButton(
@@ -344,9 +402,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: TextField(
           controller: searchController,
           onChanged: (String value) => searching(value),
-          style:
-              new TextStyle(color: Theme.of(context).textTheme.bodyText1.color),
-          cursorColor: Theme.of(context).textTheme.bodyText1.color,
+          style: new TextStyle(
+              color: Theme.of(context).textTheme.bodyText1!.color),
+          cursorColor: Theme.of(context).textTheme.bodyText1!.color,
           autofocus: true,
           decoration: InputDecoration(
             hintText: "Buscar...",
@@ -356,15 +414,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
             border: InputBorder.none,
             focusColor: Colors.white,
             focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
             enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
           ),
         ),
       ),
       actions: [
         IconButton(
-          onPressed: resetSearch,
+          onPressed: () => resetSearch(),
           icon: Icon(
             Icons.clear,
             color: Colors.grey,
@@ -375,7 +435,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  CustomAppBar _appBarShowingCategory(String title) {
+  CustomAppBar _appBarShowingCategory(
+    String title,
+  ) {
     return CustomAppBar(
       centerTitle: true,
       leading: IconButton(
@@ -390,7 +452,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title,
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       actions: <Widget>[
@@ -410,16 +472,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _divider() {
     return Container(
-        margin: EdgeInsets.only(left: 25, right: 25),
-        child: Divider(
-          color: Colors.grey,
-        ));
+      margin: EdgeInsets.only(left: 25, right: 25),
+      child: Divider(
+        color: Colors.grey,
+      ),
+    );
   }
 
-  Widget _itemHolder(
-      {String title, String subTitle, IconData icon, Function onTap}) {
+  Widget _itemHolder({
+    required String title,
+    required String subTitle,
+    required IconData icon,
+    required Function onTap,
+  }) {
     return ListTile(
-      onTap: onTap,
+      onTap: () => onTap(),
       leading: Container(
         child: Icon(icon),
       ),
@@ -479,51 +546,72 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _appIconHolder() {
     return Center(
-        child: Container(
-      margin: EdgeInsets.only(top: 25),
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: Text(
-              'from',
-              style: TextStyle(color: Colors.grey, fontSize: 15),
+      child: Container(
+        margin: EdgeInsets.only(top: 25),
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Text(
+                'from',
+                style: TextStyle(color: Colors.grey, fontSize: 15),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Container(
-            child: Text(
-              'HIVE',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
+            SizedBox(
+              height: 5,
             ),
-          ),
-        ],
+            Container(
+              child: Text(
+                'HIVE',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
-  List<SettingsItem> settingsList(PreferencesLoaded state) => List()
-    ..addAll(_settingsAccountList())
-    ..addAll(_settingsApplicationList(state))
-    ..addAll(_settingsHelpList());
+  List<SettingsItem> settingsList(PreferencesLoaded state) => []
+    ..addAll(
+      _settingsAccountList(),
+    )
+    ..addAll(
+      _settingsApplicationList(state),
+    )
+    ..addAll(
+      _settingsHelpList(),
+    );
 
-  /*****************************************************
+  /*
+ *****************************************************
  *                                                   *
  *                   Account items                   *
  *                                                   *
- *****************************************************/
+ *****************************************************
+ */
 
-  List<SettingsItem> _settingsAccountList() => List()
-    ..add(_changePassword())
-    ..add(_connectedAccounts())
-    ..add(_devices())
-    ..add(_paymentMethods())
-    ..add(_signOfft())
-    ..add(_deleteAccount());
+  List<SettingsItem> _settingsAccountList() => []
+    ..add(
+      _changePassword(),
+    )
+    ..add(
+      _connectedAccounts(),
+    )
+    ..add(
+      _devices(),
+    )
+    ..add(
+      _paymentMethods(),
+    )
+    ..add(
+      _signOfft(),
+    )
+    ..add(
+      _deleteAccount(),
+    );
 
   SettingsItem _changePassword() => SettingsItem(
         icon: Icons.lock_outline,
@@ -561,31 +649,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap: () {},
       );
 
-  /*****************************************************
+  /*
+   *****************************************************
    *                                                   *
    *                  Application items                *
    *                                                   *
-   *****************************************************/
+   *****************************************************
+   */
 
-  List<SettingsItem> _settingsApplicationList(PreferencesLoaded state) => List()
-    ..add(_theme(state))
-    ..add(_locale(state))
-    ..add(_notification())
-    ..add(_chats())
-    ..add(_downloads())
-    ..add(_reproduction());
+  List<SettingsItem> _settingsApplicationList(PreferencesLoaded state) => []
+    ..add(
+      _theme(state),
+    )
+    ..add(
+      _locale(state),
+    )
+    ..add(
+      _notification(),
+    )
+    ..add(
+      _chats(),
+    )
+    ..add(
+      _downloads(),
+    )
+    ..add(
+      _reproduction(),
+    );
 
-  SettingsItem _theme(PreferencesLoaded state) => SettingsItem(
+  SettingsItem _theme(
+    PreferencesLoaded state,
+  ) =>
+      SettingsItem(
         icon: Icons.format_paint,
         title: HiveCoreString.of(context).settings_application_theme,
         description: state.themeName,
         onTap: _goThemeSettingsScreen,
       );
 
-  SettingsItem _locale(PreferencesLoaded state) => SettingsItem(
+  SettingsItem _locale(
+    PreferencesLoaded state,
+  ) =>
+      SettingsItem(
         icon: Icons.language,
         title: HiveCoreString.of(context).settings_application_locale,
-        description: _localizeLocale(context, state.locale),
+        description: _localizeLocale(context, state.locale!),
         onTap: _goLocateSettingsScreen,
       );
 
@@ -616,17 +724,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap: () {},
       );
 
-  /*****************************************************
+  /*
+   *****************************************************
    *                                                   *
    *                     Help items                    *
    *                                                   *
-   *****************************************************/
+   *****************************************************
+   */
 
-  List<SettingsItem> _settingsHelpList() => List()
-    ..add(_frequentQuestions())
-    ..add(_contactUs())
-    ..add(_onditionsAndPrivacy())
-    ..add(_info());
+  List<SettingsItem> _settingsHelpList() => []
+    ..add(
+      _frequentQuestions(),
+    )
+    ..add(
+      _contactUs(),
+    )
+    ..add(
+      _onditionsAndPrivacy(),
+    )
+    ..add(
+      _info(),
+    );
 
   SettingsItem _frequentQuestions() => SettingsItem(
         icon: Icons.help_outline,

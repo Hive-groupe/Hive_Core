@@ -7,12 +7,14 @@ import 'package:hive_core/code/ui/widgets/list_widgets/list_builders_widgets.dar
 import 'connet_account_item.dart';
 
 class ConnetAccountList extends StatefulWidget {
-  final bool showStatus;
-  final Stream<BuiltList<Device>> connetAccountList;
+  late final bool showStatus;
+  late final Stream<BuiltList<Device>> connetAccountList;
 
-  ConnetAccountList(
-      {Key key, bool showStatus, @required this.connetAccountList})
-      : this.showStatus = showStatus ?? true,
+  ConnetAccountList({
+    Key? key,
+    required bool showStatus,
+    required this.connetAccountList,
+  })  : this.showStatus = showStatus,
         super(key: key);
 
   @override
@@ -35,9 +37,9 @@ class _ConnetAccountListState extends State<ConnetAccountList> {
     return StreamBuilder<BuiltList<Device>>(
         stream: widget.connetAccountList,
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data.length > 0) {
-            return _buildListLoaded(snapshot.data);
-          } else if (snapshot.hasData && snapshot.data.length <= 0) {
+          if (snapshot.hasData && snapshot.data!.length > 0) {
+            return _buildListLoaded(snapshot.data!);
+          } else if (snapshot.hasData && snapshot.data!.length <= 0) {
             return widget.showStatus ? _buildListEmpty() : Container();
           } else if (snapshot.hasError) {
             return widget.showStatus ? _buildListError() : Container();
@@ -58,7 +60,7 @@ class _ConnetAccountListState extends State<ConnetAccountList> {
       context: context,
       onTap: () {},
       imageUrl: HiveCoreString.of(context).km_assets_images_list_empty,
-      title: null,
+      title: '',
       text:
           'No se encontraron cuentas conectadas', // HiveCoreString.of(context).bill_list_empty,
     );
@@ -69,10 +71,11 @@ class _ConnetAccountListState extends State<ConnetAccountList> {
       margin: EdgeInsets.only(bottom: 50),
       child: Column(
         children: List.generate(
-            list.length,
-            (index) => ConnetAccountItem(
-                  model: list[index],
-                )).toList(),
+          list.length,
+          (index) => ConnetAccountItem(
+            model: list[index],
+          ),
+        ).toList(),
       ),
     );
   }

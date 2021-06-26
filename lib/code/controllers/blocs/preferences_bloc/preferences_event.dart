@@ -138,8 +138,8 @@ class ChangeEnterToSend extends PreferencesEvent {
   }''';
 }
 
-class clearCache extends PreferencesEvent {
-  clearCache();
+class ClearCache extends PreferencesEvent {
+  ClearCache();
 
   @override
   List<Object> get props => [];

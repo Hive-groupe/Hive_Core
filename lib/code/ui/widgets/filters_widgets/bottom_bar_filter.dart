@@ -8,23 +8,29 @@ class BottomBarFilter extends StatelessWidget {
   final String btnSubmitText;
 
   const BottomBarFilter({
-    Key key,
-    @required this.onSubmit,
-    this.btnSubmitText,
+    Key? key,
+    required this.onSubmit,
+    required this.btnSubmitText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 80,
-      padding: EdgeInsets.only(top: 10, bottom: 20, left: 15, right: 15),
+      padding: EdgeInsets.only(
+        top: 10,
+        bottom: 20,
+        left: 15,
+        right: 15,
+      ),
       decoration: BoxDecoration(
-          border: Border(
-        top: BorderSide(
-          color: Colors.grey,
-          width: 0.1,
+        border: Border(
+          top: BorderSide(
+            color: Colors.grey,
+            width: 0.1,
+          ),
         ),
-      )),
+      ),
       child: _btnSubmitHolder(context),
     );
   }
@@ -33,9 +39,11 @@ class BottomBarFilter extends StatelessWidget {
     return Hero(
       tag: 'FloatingButton',
       child: CupertinoButton(
-        onPressed: onSubmit,
+        onPressed: () => onSubmit,
         color: Theme.of(context).accentColor,
-        child: Text(btnSubmitText ?? HiveCoreString.of(context).filter),
+        child: Text(
+          btnSubmitText ?? HiveCoreString.of(context).filter,
+        ),
       ),
     );
   }

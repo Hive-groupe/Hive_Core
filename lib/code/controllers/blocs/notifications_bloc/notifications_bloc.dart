@@ -17,30 +17,38 @@ part 'notifications_event.dart';
 part 'notifications_state.dart';
 
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
-  final AuthenticationRepository _authenticationRepository;
-  final DeviceRepository _deviceRepository;
+  late final AuthenticationRepository _authenticationRepository;
+  late final DeviceRepository _deviceRepository;
 
-  FirebaseMessaging _firebaseMessaging;
-  NotificationsPreferences _notificationsPreferences;
-  static NotificationsPreferences _defaultStatePreferences =
+  late FirebaseMessaging _firebaseMessaging;
+  late NotificationsPreferences _notificationsPreferences;
+
+  static late NotificationsPreferences _defaultStatePreferences =
       NotificationsPreferences((b) => b
         ..notifications = true
         ..soundEffects = true
         ..vibration = true);
 
-  String _notificationsToken; // StreamSubscription iosSubscription;
+  late String _notificationsToken; // StreamSubscription iosSubscription;
 
   // Controllers
-  final _notificationsList = BehaviorSubject<BuiltList<Widget>>();
+  late final _notificationsList = BehaviorSubject<BuiltList<Widget>>();
 
   NotificationsBloc({
-    @required AuthenticationRepository authenticationRepository,
-    @required DeviceRepository deviceRepository,
-  })  : assert(authenticationRepository != null),
-        assert(deviceRepository != null),
-        _authenticationRepository = authenticationRepository,
+    required AuthenticationRepository authenticationRepository,
+    required DeviceRepository deviceRepository,
+  })  : _authenticationRepository = authenticationRepository,
         _deviceRepository = deviceRepository,
-        super(NotificationsInitial());
+        super(
+          NotificationsInitial(),
+        );
+
+  @override
+  Future<void> close() {
+    _notificationsList.close();
+
+    return super.close();
+  }
 
   @override
   Stream<NotificationsState> mapEventToState(
@@ -52,6 +60,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       yield* _mapSaveDeviceToState(event);
     } else if (event is ChangeNotificationsPreferences) {
       yield* _mapChangeNotificationsPreferencesToState(event);
+    } else if (event is FinishTutorialNotifications) {
+      yield* _mapFinishTutorialNotificationsToState(event);
     }
   }
 
@@ -87,7 +97,9 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
 
  */
-      _notificationsList.sink.add(BuiltList());
+      _notificationsList.sink.add(
+        BuiltList(),
+      );
       yield NotificationsLoaded(notificationsList: _notificationsList.stream);
     } catch (_) {}
   }
@@ -110,12 +122,15 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   }
 
   Future initNotifications() async {
+    // TODO: CON EL NULLSAFETI SE A DESABILITADO LAS NOTIFICACIONES
+    // TODO: HAY QUE REAHCER
+    /*
     // Ejemplos:
     //  - https://www.youtube.com/watch?v=R71lcy6p9nM&list=PLCKuOXG0bPi375T5P1UAK1QjYaF6jUKBP&index=6
     //  - https://fireship.io/lessons/flutter-push-notifications-fcm-guide/
 
     // Init Firebase Messaging
-    _firebaseMessaging = FirebaseMessaging();
+    _firebaseMessaging = FirebaseMessaging.instance;
 
     if (Platform.isIOS) {
       /*
@@ -125,13 +140,14 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       });*/
 
       // request permissions if we´re on android
-      _firebaseMessaging
-          .requestNotificationPermissions(IosNotificationSettings());
+      _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(),
+      );
     }
 
     _firebaseMessaging.getToken().then((token) {
       // print('Notifications toke: ${token}');
-      _notificationsToken = token;
+      _notificationsToken = token ?? '';
     });
 
     _firebaseMessaging.configure(
@@ -146,7 +162,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
               subtitle: Text(message['notification']['body']),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text('Ok'),
                 onPressed: () => Navigator.of(context).pop(),
               ),
@@ -165,6 +181,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         print("onResume: $message");
       },
     );
+    */
   }
 
   void _createDevice() async {
@@ -183,7 +200,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       ..platform = Platform.operatingSystem);
 
     // Save device
-   _deviceRepository.addDevice(_device.toJson());
+   _deviceRepository.addDevice(_device.toJson(),);
    */
   }
 
@@ -193,12 +210,21 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     Metadata _metadata;
 
     // values initialization
-    _userId = await _authenticationRepository.getCurrentUserId();
-    _device = await _deviceRepository.getThisDevice(_notificationsToken);
+    _userId = await _authenticationRepository.getCurrentUserId() ?? '';
+    _device =
+        await _deviceRepository.getThisDevice(_notificationsToken) ?? Device();
     _metadata = MetadataTools().readMetadata(_userId, _device.metadata);
-    _device = _device.rebuild((b) => b..metadata.replace(_metadata));
+    _device = _device.rebuild(
+      (b) => b..metadata.replace(_metadata),
+    );
 
     // Save device
-    _deviceRepository.updateDevice(_device.toJson(), _device.metadata.id);
+    _deviceRepository.updateDevice(_device.toJson(), _device.metadata.id ?? '');
+  }
+
+  Stream<NotificationsState> _mapFinishTutorialNotificationsToState(
+    FinishTutorialNotifications event,
+  ) async* {
+    try {} catch (e) {}
   }
 }

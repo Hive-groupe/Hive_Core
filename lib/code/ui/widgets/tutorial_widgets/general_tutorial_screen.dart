@@ -17,20 +17,21 @@ class _GeneralTutorialScreenState extends State<GeneralTutorialScreen> {
   Widget _build(BuildContext context) {
     return Container(
       child: SingleChildScrollView(
-          child: Container(
-        margin: EdgeInsets.all(25),
-        child: Column(children: [
-          _monitorTutorial(),
-          SizedBox(
-            height: 25,
-          ),
-          _recordTutorial(),
-          SizedBox(
-            height: 25,
-          ),
-          _filterTutorial(),
-        ]),
-      )),
+        child: Container(
+          margin: EdgeInsets.all(25),
+          child: Column(children: [
+            _monitorTutorial(),
+            SizedBox(
+              height: 25,
+            ),
+            _recordTutorial(),
+            SizedBox(
+              height: 25,
+            ),
+            _filterTutorial(),
+          ]),
+        ),
+      ),
     );
   }
 

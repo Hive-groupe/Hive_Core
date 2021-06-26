@@ -4,7 +4,8 @@ class SettingsGroup extends StatelessWidget {
   final String title;
   final List<Widget> elements;
 
-  const SettingsGroup({Key key, this.title, this.elements}) : super(key: key);
+  const SettingsGroup({Key? key, required this.title, required this.elements})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

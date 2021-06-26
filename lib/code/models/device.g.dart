@@ -15,9 +15,9 @@ class _$DeviceSerializer implements StructuredSerializer<Device> {
   final String wireName = 'Device';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Device object,
+  Iterable<Object?> serialize(Serializers serializers, Device object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'metadata',
       serializers.serialize(object.metadata,
           specifiedType: const FullType(Metadata)),
@@ -28,23 +28,26 @@ class _$DeviceSerializer implements StructuredSerializer<Device> {
       serializers.serialize(object.platform,
           specifiedType: const FullType(String)),
     ];
-    if (object.ipAddress != null) {
+    Object? value;
+    value = object.ipAddress;
+    if (value != null) {
       result
         ..add('ipAddress')
-        ..add(serializers.serialize(object.ipAddress,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.macAddress != null) {
+    value = object.macAddress;
+    if (value != null) {
       result
         ..add('macAddress')
-        ..add(serializers.serialize(object.macAddress,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     return result;
   }
 
   @override
-  Device deserialize(Serializers serializers, Iterable<Object> serialized,
+  Device deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new DeviceBuilder();
 
@@ -52,11 +55,11 @@ class _$DeviceSerializer implements StructuredSerializer<Device> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'metadata':
           result.metadata.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Metadata)) as Metadata);
+              specifiedType: const FullType(Metadata))! as Metadata);
           break;
         case 'notificationsToken':
           result.notificationsToken = serializers.deserialize(value,
@@ -68,11 +71,11 @@ class _$DeviceSerializer implements StructuredSerializer<Device> {
           break;
         case 'ipAddress':
           result.ipAddress = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'macAddress':
           result.macAddress = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -89,29 +92,24 @@ class _$Device extends Device {
   @override
   final String platform;
   @override
-  final String ipAddress;
+  final String? ipAddress;
   @override
-  final String macAddress;
+  final String? macAddress;
 
-  factory _$Device([void Function(DeviceBuilder) updates]) =>
+  factory _$Device([void Function(DeviceBuilder)? updates]) =>
       (new DeviceBuilder()..update(updates)).build();
 
   _$Device._(
-      {this.metadata,
-      this.notificationsToken,
-      this.platform,
+      {required this.metadata,
+      required this.notificationsToken,
+      required this.platform,
       this.ipAddress,
       this.macAddress})
       : super._() {
-    if (metadata == null) {
-      throw new BuiltValueNullFieldError('Device', 'metadata');
-    }
-    if (notificationsToken == null) {
-      throw new BuiltValueNullFieldError('Device', 'notificationsToken');
-    }
-    if (platform == null) {
-      throw new BuiltValueNullFieldError('Device', 'platform');
-    }
+    BuiltValueNullFieldError.checkNotNull(metadata, 'Device', 'metadata');
+    BuiltValueNullFieldError.checkNotNull(
+        notificationsToken, 'Device', 'notificationsToken');
+    BuiltValueNullFieldError.checkNotNull(platform, 'Device', 'platform');
   }
 
   @override
@@ -155,38 +153,39 @@ class _$Device extends Device {
 }
 
 class DeviceBuilder implements Builder<Device, DeviceBuilder> {
-  _$Device _$v;
+  _$Device? _$v;
 
-  MetadataBuilder _metadata;
+  MetadataBuilder? _metadata;
   MetadataBuilder get metadata => _$this._metadata ??= new MetadataBuilder();
-  set metadata(MetadataBuilder metadata) => _$this._metadata = metadata;
+  set metadata(MetadataBuilder? metadata) => _$this._metadata = metadata;
 
-  String _notificationsToken;
-  String get notificationsToken => _$this._notificationsToken;
-  set notificationsToken(String notificationsToken) =>
+  String? _notificationsToken;
+  String? get notificationsToken => _$this._notificationsToken;
+  set notificationsToken(String? notificationsToken) =>
       _$this._notificationsToken = notificationsToken;
 
-  String _platform;
-  String get platform => _$this._platform;
-  set platform(String platform) => _$this._platform = platform;
+  String? _platform;
+  String? get platform => _$this._platform;
+  set platform(String? platform) => _$this._platform = platform;
 
-  String _ipAddress;
-  String get ipAddress => _$this._ipAddress;
-  set ipAddress(String ipAddress) => _$this._ipAddress = ipAddress;
+  String? _ipAddress;
+  String? get ipAddress => _$this._ipAddress;
+  set ipAddress(String? ipAddress) => _$this._ipAddress = ipAddress;
 
-  String _macAddress;
-  String get macAddress => _$this._macAddress;
-  set macAddress(String macAddress) => _$this._macAddress = macAddress;
+  String? _macAddress;
+  String? get macAddress => _$this._macAddress;
+  set macAddress(String? macAddress) => _$this._macAddress = macAddress;
 
   DeviceBuilder();
 
   DeviceBuilder get _$this {
-    if (_$v != null) {
-      _metadata = _$v.metadata?.toBuilder();
-      _notificationsToken = _$v.notificationsToken;
-      _platform = _$v.platform;
-      _ipAddress = _$v.ipAddress;
-      _macAddress = _$v.macAddress;
+    final $v = _$v;
+    if ($v != null) {
+      _metadata = $v.metadata.toBuilder();
+      _notificationsToken = $v.notificationsToken;
+      _platform = $v.platform;
+      _ipAddress = $v.ipAddress;
+      _macAddress = $v.macAddress;
       _$v = null;
     }
     return this;
@@ -194,14 +193,12 @@ class DeviceBuilder implements Builder<Device, DeviceBuilder> {
 
   @override
   void replace(Device other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Device;
   }
 
   @override
-  void update(void Function(DeviceBuilder) updates) {
+  void update(void Function(DeviceBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -212,12 +209,14 @@ class DeviceBuilder implements Builder<Device, DeviceBuilder> {
       _$result = _$v ??
           new _$Device._(
               metadata: metadata.build(),
-              notificationsToken: notificationsToken,
-              platform: platform,
+              notificationsToken: BuiltValueNullFieldError.checkNotNull(
+                  notificationsToken, 'Device', 'notificationsToken'),
+              platform: BuiltValueNullFieldError.checkNotNull(
+                  platform, 'Device', 'platform'),
               ipAddress: ipAddress,
               macAddress: macAddress);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'metadata';
         metadata.build();

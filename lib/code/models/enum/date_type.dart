@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -19,12 +21,16 @@ class DateType extends EnumClass {
   static BuiltSet<DateType> get values => _$dateTypeValues;
   static DateType valueOf(String name) => _$dateTypeValueOf(name);
 
-  String serialize() {
-    return serializers.serializeWith(DateType.serializer, this);
+  Map<String, dynamic> serialize() {
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(DateType.serializer, this),
+      ),
+    );
   }
 
-  static DateType deserialize(String string) {
-    return serializers.deserializeWith(DateType.serializer, string);
+  static DateType? deserialize(Map<String, dynamic> json) {
+    return serializers.deserializeWith(DateType.serializer, json);
   }
 
   static Serializer<DateType> get serializer => _$dateTypeSerializer;

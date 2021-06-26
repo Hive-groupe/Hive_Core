@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class ExpansionListCard<T> extends StatelessWidget {
   const ExpansionListCard({
-    Key key,
-    @required this.title,
-    @required this.subTitle,
-    @required this.leading,
-    @required this.items,
-    @required this.itemBuilder,
+    Key? key,
+    required this.title,
+    required this.subTitle,
+    required this.leading,
+    required this.items,
+    required this.itemBuilder,
   }) : super(key: key);
 
   final String title;
@@ -47,7 +47,7 @@ class ExpansionListCard<T> extends StatelessWidget {
                     title: Text(item.text),
                     onTap: () {
                       toggleExpansion();
-                      item.onTap?.call();
+                      item.onTap.call();
                     },
                   );
                 },
@@ -63,24 +63,26 @@ class ExpansionListCard<T> extends StatelessWidget {
 class ExpansionCardItem {
   const ExpansionCardItem({
     this.key,
-    @required this.text,
-    @required this.onTap,
+    required this.text,
+    required this.onTap,
   });
-  final Key key;
+  final Key? key;
   final String text;
   final VoidCallback onTap;
 }
 
 class _ExpansionCardBase extends StatefulWidget {
   const _ExpansionCardBase({
-    Key key,
-    this.leading,
-    @required this.title,
-    this.subtitle,
+    Key? key,
+    required this.leading,
+    required this.title,
+    required this.subtitle,
     this.onExpansionChanged,
-    this.builder,
+    required this.builder,
     this.trailing,
-    this.borderRadius = const BorderRadius.all(Radius.circular(8.0)),
+    this.borderRadius = const BorderRadius.all(
+      Radius.circular(8.0),
+    ),
     this.elevation = 2.0,
     this.initiallyExpanded = false,
     this.initialPadding = EdgeInsets.zero,
@@ -94,8 +96,7 @@ class _ExpansionCardBase extends StatefulWidget {
     this.turnsCurve = Curves.easeIn,
     this.colorCurve = Curves.easeIn,
     this.paddingCurve = Curves.easeIn,
-  })  : assert(initiallyExpanded != null),
-        super(key: key);
+  }) : super(key: key);
 
   /// A widget to display before the title.
   ///
@@ -117,7 +118,7 @@ class _ExpansionCardBase extends StatefulWidget {
   /// When the tile starts expanding, this function is called with the value
   /// true. When the tile starts collapsing, this function is called with
   /// the value false.
-  final ValueChanged<bool> onExpansionChanged;
+  final ValueChanged<bool>? onExpansionChanged;
 
   /// The widgets that are displayed when the tile expands.
   ///
@@ -125,7 +126,7 @@ class _ExpansionCardBase extends StatefulWidget {
   final Widget Function(VoidCallback toggleExpansion) builder;
 
   /// A widget to display instead of a rotating arrow icon.
-  final Widget trailing;
+  final Widget? trailing;
 
   /// The radius used for the Material widgets border. Only visible once expanded.
   ///
@@ -143,27 +144,27 @@ class _ExpansionCardBase extends StatefulWidget {
   /// The padding around the outside of the ExpansionTileCard while collapsed.
   ///
   /// Defaults to EdgeInsets.zero.
-  final EdgeInsetsGeometry initialPadding;
+  final EdgeInsets initialPadding;
 
   /// The padding around the outside of the ExpansionTileCard while collapsed.
   ///
   /// Defaults to 6.0 vertical padding.
-  final EdgeInsetsGeometry finalPadding;
+  final EdgeInsets finalPadding;
 
   /// The inner `contentPadding` of the ListTile widget.
   ///
   /// If null, ListTile defaults to 16.0 horizontal padding.
-  final EdgeInsetsGeometry contentPadding;
+  final EdgeInsets? contentPadding;
 
   /// The background color of the unexpanded tile.
   ///
   /// If null, defaults to Theme.of(context).canvasColor.
-  final Color baseColor;
+  final Color? baseColor;
 
   /// The background color of the expanded card.
   ///
   /// If null, defaults to Theme.of(context).cardColor.
-  final Color expandedColor;
+  final Color? expandedColor;
 
   /// The duration of the expand and collapse animations.
   ///
@@ -207,21 +208,21 @@ class _ExpansionCardBaseState extends State<_ExpansionCardBase>
   final ColorTween _headerColorTween = ColorTween();
   final ColorTween _iconColorTween = ColorTween();
   final ColorTween _materialColorTween = ColorTween();
-  EdgeInsetsTween _edgeInsetsTween;
-  Animatable<double> _elevationTween;
-  Animatable<double> _heightFactorTween;
-  Animatable<double> _turnsTween;
-  Animatable<double> _colorTween;
-  Animatable<double> _paddingTween;
+  late EdgeInsetsTween _edgeInsetsTween;
+  late Animatable<double> _elevationTween;
+  late Animatable<double> _heightFactorTween;
+  late Animatable<double> _turnsTween;
+  late Animatable<double> _colorTween;
+  late Animatable<double> _paddingTween;
 
-  AnimationController _controller;
-  Animation<double> _iconTurns;
-  Animation<double> _heightFactor;
-  Animation<double> _elevation;
-  Animation<Color> _headerColor;
-  Animation<Color> _iconColor;
-  Animation<Color> _materialColor;
-  Animation<EdgeInsets> _padding;
+  late AnimationController _controller;
+  late Animation<double> _iconTurns;
+  late Animation<double> _heightFactor;
+  late Animation<double> _elevation;
+  late Animation<Color?> _headerColor;
+  late Animation<Color?> _iconColor;
+  late Animation<Color?> _materialColor;
+  late Animation<EdgeInsets> _padding;
 
   bool _isExpanded = false;
 
@@ -240,14 +241,24 @@ class _ExpansionCardBaseState extends State<_ExpansionCardBase>
 
     _controller = AnimationController(duration: widget.duration, vsync: this);
     _heightFactor = _controller.drive(_heightFactorTween);
-    _iconTurns = _controller.drive(_halfTween.chain(_turnsTween));
-    _headerColor = _controller.drive(_headerColorTween.chain(_colorTween));
-    _materialColor = _controller.drive(_materialColorTween.chain(_colorTween));
-    _iconColor = _controller.drive(_iconColorTween.chain(_colorTween));
+    _iconTurns = _controller.drive(
+      _halfTween.chain(_turnsTween),
+    );
+    _headerColor = _controller.drive(
+      _headerColorTween.chain(_colorTween),
+    );
+    _materialColor = _controller.drive(
+      _materialColorTween.chain(_colorTween),
+    );
+    _iconColor = _controller.drive(
+      _iconColorTween.chain(_colorTween),
+    );
     _elevation = _controller.drive(
-        Tween<double>(begin: 0.0, end: widget.elevation)
-            .chain(_elevationTween));
-    _padding = _controller.drive(_edgeInsetsTween.chain(_paddingTween));
+      Tween<double>(begin: 0.0, end: widget.elevation).chain(_elevationTween),
+    );
+    _padding = _controller.drive(
+      _edgeInsetsTween.chain(_paddingTween),
+    );
     _isExpanded = PageStorage.of(context)?.readState(context) as bool ??
         widget.initiallyExpanded;
     if (_isExpanded) _controller.value = 1.0;
@@ -279,10 +290,13 @@ class _ExpansionCardBaseState extends State<_ExpansionCardBase>
       PageStorage.of(context)?.writeState(context, _isExpanded);
     });
     if (widget.onExpansionChanged != null)
-      widget.onExpansionChanged(_isExpanded);
+      widget.onExpansionChanged!(_isExpanded);
   }
 
-  Widget _buildChildren(BuildContext context, Widget child) {
+  Widget _buildChildren(
+    BuildContext context,
+    Widget? child,
+  ) {
     return Padding(
       padding: _padding.value,
       child: Material(
@@ -334,7 +348,7 @@ class _ExpansionCardBaseState extends State<_ExpansionCardBase>
   void didChangeDependencies() {
     final ThemeData theme = Theme.of(context);
     _headerColorTween
-      ..begin = theme.textTheme.bodyText1.color
+      ..begin = theme.textTheme.bodyText1!.color
       ..end = theme.accentColor;
     _iconColorTween
       ..begin = theme.unselectedWidgetColor

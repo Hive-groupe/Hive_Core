@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/contact_form_bloc/contact_form_bloc.dart';
 import 'package:hive_core/code/models/contactInformation.dart';
@@ -13,8 +12,8 @@ class ProfileFormBloc extends FormBloc<String, String> {
   final UserRepository _userRepository;
 
   bool _isEditing = false;
-  String userId;
-  User _user;
+  late String? userId;
+  late User? _user;
 
   ContactFormBloc contactFormBloc;
 
@@ -50,12 +49,9 @@ class ProfileFormBloc extends FormBloc<String, String> {
   // Constructor
   ProfileFormBloc(
       // Repositorys
-      {@required AuthenticationRepository authenticationRepository,
-      @required UserRepository userRepository})
+      {required AuthenticationRepository authenticationRepository,
+      required UserRepository userRepository})
       : // Repositorys
-        assert(authenticationRepository != null),
-        assert(userRepository != null),
-        // Repositorys
         _authenticationRepository = authenticationRepository,
         _userRepository = userRepository,
         // Blocs
@@ -68,14 +64,11 @@ class ProfileFormBloc extends FormBloc<String, String> {
 
   ProfileFormBloc.formUser({
     // Repositorys
-    @required AuthenticationRepository authenticationRepository,
-    @required UserRepository userRepository,
+    required AuthenticationRepository authenticationRepository,
+    required UserRepository userRepository,
     // Models
-    @required User user,
+    User? user,
   })  : // Repositorys
-        assert(authenticationRepository != null),
-        assert(userRepository != null),
-        // Repositorys
         _authenticationRepository = authenticationRepository,
         _userRepository = userRepository,
         // Blocs
@@ -121,20 +114,22 @@ class ProfileFormBloc extends FormBloc<String, String> {
 
   _loadModel() async {
     userId = await _authenticationRepository.getCurrentUserId();
-    _user = _user ?? await _userRepository.getUserById(userId);
+    _user = _user ?? await _userRepository.getUserById(userId ?? '');
 
-    avatar.updateValue(_user.profile.avatar);
-    nickname.updateValue(_user.profile.nickname);
-    gender.updateValue(_user.profile.gender);
-    name.updateValue(_user.profile.name);
-    firstname.updateValue(_user.profile.firstname);
-    secondname.updateValue(_user.profile.secondname);
+    avatar.updateValue(_user!.profile!.avatar ?? '');
+    nickname.updateValue(_user!.profile!.nickname ?? '');
+    gender.updateValue(_user!.profile!.gender);
+    name.updateValue(_user!.profile!.name);
+    firstname.updateValue(_user!.profile!.firstname);
+    secondname.updateValue(_user!.profile!.secondname ?? '');
 
     // Como tenemos que cargar el usuario previamente no nos vale solo con la
     // inicialización del constructor.
     contactFormBloc = ContactFormBloc.fromContactInformation(
-        authenticationRepository: _authenticationRepository,
-        contactInformation: _user.profile.contactInformation);
+      authenticationRepository: _authenticationRepository,
+      contactInformation:
+          _user!.profile!.contactInformation ?? ContactInformation(),
+    );
   }
 
   _saveData() async {
@@ -149,7 +144,9 @@ class ProfileFormBloc extends FormBloc<String, String> {
       userId = userId ?? await _authenticationRepository.getCurrentUserId();
 
       _profile = Profile((b) => b
-        ..contactInformation.replace(contactFormBloc.getContactInformation())
+        ..contactInformation.replace(
+          contactFormBloc.getContactInformation(),
+        )
         ..avatar = avatar.value
         ..gender = gender.value
         ..name = name.value
@@ -157,17 +154,23 @@ class ProfileFormBloc extends FormBloc<String, String> {
         ..secondname = secondname.value
         ..nickname = nickname.value);
 
-      _user = await _userRepository.getUserById(userId);
-      _user = _user.rebuild((b) => b
-        ..id = userId
-        ..profile.replace(_profile));
+      _user = await _userRepository.getUserById(userId ?? '');
+      _user = _user.rebuild(
+        (b) => b
+          ..id = userId
+          ..profile.replace(_profile),
+      );
 
-      print(_user.toString());
+      print(
+        _user.toString(),
+      );
 
       // Save dates
       _isEditing
-          ? _userRepository.updateUser(_user.toJson(), _user.id)
-          : _userRepository.addUser(_user.toJson());
+          ? _userRepository.updateUser(_user.toJson(), _user.id ?? '')
+          : _userRepository.addUser(
+              _user.toJson(),
+            );
 
       emitSuccess(canSubmitAgain: true);
     } catch (_) {

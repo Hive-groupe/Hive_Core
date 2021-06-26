@@ -13,7 +13,7 @@ import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 class SearchChats extends StatefulWidget {
   final Stream<BuiltList<User>> userList;
 
-  SearchChats({@required this.userList}) : super();
+  SearchChats({required this.userList}) : super();
 
   @override
   _SearchChatsState createState() => _SearchChatsState();
@@ -37,29 +37,32 @@ class _SearchChatsState extends State<SearchChats> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-        ),
-        child: StreamBuilder<BuiltList<User>>(
-            stream: widget.userList,
-            builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data.length > 0) {
-                return _buildList(snapshot.data);
-              } else if (snapshot.hasData && snapshot.data.length <= 0) {
-                return _buildListEmpty();
-              } else if (snapshot.hasError) {
-                return _buildListError();
-              } else {
-                return _buildListError();
-              }
-            }));
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+      ),
+      child: StreamBuilder<BuiltList<User>>(
+          stream: widget.userList,
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data!.length > 0) {
+              return _buildList(snapshot.data!);
+            } else if (snapshot.hasData && snapshot.data!.length <= 0) {
+              return _buildListEmpty();
+            } else if (snapshot.hasError) {
+              return _buildListError();
+            } else {
+              return _buildListError();
+            }
+          }),
+    );
   }
 
   Widget _buildList(BuiltList<User> list) {
     return Container(
       child: Column(
-        children: List.generate(list.length, (index) => _userItem(list[index]))
-            .toList(),
+        children: List.generate(
+          list.length,
+          (index) => _userItem(list[index]),
+        ).toList(),
       ),
     );
   }
@@ -72,7 +75,7 @@ class _SearchChatsState extends State<SearchChats> {
         tag: 'avatar-${user.id}',
         child: Container(
           child: CachedImage(
-            user.profile.avatar,
+            user.profile!.avatar ?? '',
             radius: 50,
             isRound: true,
           ),
@@ -85,7 +88,7 @@ class _SearchChatsState extends State<SearchChats> {
       title: Text(
         user.username,
         style: TextStyle(
-          color: Theme.of(context).textTheme.bodyText1.color,
+          color: Theme.of(context).textTheme.bodyText1!.color,
           fontWeight: FontWeight.bold,
         ),
       ),

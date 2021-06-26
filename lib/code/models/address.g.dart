@@ -15,80 +15,90 @@ class _$AddressSerializer implements StructuredSerializer<Address> {
   final String wireName = 'Address';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Address object,
+  Iterable<Object?> serialize(Serializers serializers, Address object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    if (object.id != null) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.id;
+    if (value != null) {
       result
         ..add('id')
-        ..add(serializers.serialize(object.id,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.metadata != null) {
+    value = object.metadata;
+    if (value != null) {
       result
         ..add('metadata')
-        ..add(serializers.serialize(object.metadata,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(Metadata)));
     }
-    if (object.label != null) {
+    value = object.label;
+    if (value != null) {
       result
         ..add('label')
-        ..add(serializers.serialize(object.label,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.postalCode != null) {
+    value = object.postalCode;
+    if (value != null) {
       result
         ..add('postalCode')
-        ..add(serializers.serialize(object.postalCode,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.country != null) {
+    value = object.country;
+    if (value != null) {
       result
         ..add('country')
-        ..add(serializers.serialize(object.country,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.city != null) {
+    value = object.city;
+    if (value != null) {
       result
         ..add('city')
-        ..add(serializers.serialize(object.city,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.province != null) {
+    value = object.province;
+    if (value != null) {
       result
         ..add('province')
-        ..add(serializers.serialize(object.province,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.street != null) {
+    value = object.street;
+    if (value != null) {
       result
         ..add('street')
-        ..add(serializers.serialize(object.street,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.number != null) {
+    value = object.number;
+    if (value != null) {
       result
         ..add('number')
-        ..add(serializers.serialize(object.number,
-            specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    if (object.floor != null) {
+    value = object.floor;
+    if (value != null) {
       result
         ..add('floor')
-        ..add(serializers.serialize(object.floor,
-            specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    if (object.door != null) {
+    value = object.door;
+    if (value != null) {
       result
         ..add('door')
-        ..add(serializers.serialize(object.door,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     return result;
   }
 
   @override
-  Address deserialize(Serializers serializers, Iterable<Object> serialized,
+  Address deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AddressBuilder();
 
@@ -96,51 +106,51 @@ class _$AddressSerializer implements StructuredSerializer<Address> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'metadata':
           result.metadata.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Metadata)) as Metadata);
+              specifiedType: const FullType(Metadata))! as Metadata);
           break;
         case 'label':
           result.label = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'postalCode':
           result.postalCode = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'country':
           result.country = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'city':
           result.city = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'province':
           result.province = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'street':
           result.street = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'number':
           result.number = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'floor':
           result.floor = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'door':
           result.door = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -151,29 +161,29 @@ class _$AddressSerializer implements StructuredSerializer<Address> {
 
 class _$Address extends Address {
   @override
-  final String id;
+  final String? id;
   @override
-  final Metadata metadata;
+  final Metadata? metadata;
   @override
-  final String label;
+  final String? label;
   @override
-  final String postalCode;
+  final String? postalCode;
   @override
-  final String country;
+  final String? country;
   @override
-  final String city;
+  final String? city;
   @override
-  final String province;
+  final String? province;
   @override
-  final String street;
+  final String? street;
   @override
-  final int number;
+  final int? number;
   @override
-  final int floor;
+  final int? floor;
   @override
-  final String door;
+  final String? door;
 
-  factory _$Address([void Function(AddressBuilder) updates]) =>
+  factory _$Address([void Function(AddressBuilder)? updates]) =>
       (new AddressBuilder()..update(updates)).build();
 
   _$Address._(
@@ -257,67 +267,68 @@ class _$Address extends Address {
 }
 
 class AddressBuilder implements Builder<Address, AddressBuilder> {
-  _$Address _$v;
+  _$Address? _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
-  MetadataBuilder _metadata;
+  MetadataBuilder? _metadata;
   MetadataBuilder get metadata => _$this._metadata ??= new MetadataBuilder();
-  set metadata(MetadataBuilder metadata) => _$this._metadata = metadata;
+  set metadata(MetadataBuilder? metadata) => _$this._metadata = metadata;
 
-  String _label;
-  String get label => _$this._label;
-  set label(String label) => _$this._label = label;
+  String? _label;
+  String? get label => _$this._label;
+  set label(String? label) => _$this._label = label;
 
-  String _postalCode;
-  String get postalCode => _$this._postalCode;
-  set postalCode(String postalCode) => _$this._postalCode = postalCode;
+  String? _postalCode;
+  String? get postalCode => _$this._postalCode;
+  set postalCode(String? postalCode) => _$this._postalCode = postalCode;
 
-  String _country;
-  String get country => _$this._country;
-  set country(String country) => _$this._country = country;
+  String? _country;
+  String? get country => _$this._country;
+  set country(String? country) => _$this._country = country;
 
-  String _city;
-  String get city => _$this._city;
-  set city(String city) => _$this._city = city;
+  String? _city;
+  String? get city => _$this._city;
+  set city(String? city) => _$this._city = city;
 
-  String _province;
-  String get province => _$this._province;
-  set province(String province) => _$this._province = province;
+  String? _province;
+  String? get province => _$this._province;
+  set province(String? province) => _$this._province = province;
 
-  String _street;
-  String get street => _$this._street;
-  set street(String street) => _$this._street = street;
+  String? _street;
+  String? get street => _$this._street;
+  set street(String? street) => _$this._street = street;
 
-  int _number;
-  int get number => _$this._number;
-  set number(int number) => _$this._number = number;
+  int? _number;
+  int? get number => _$this._number;
+  set number(int? number) => _$this._number = number;
 
-  int _floor;
-  int get floor => _$this._floor;
-  set floor(int floor) => _$this._floor = floor;
+  int? _floor;
+  int? get floor => _$this._floor;
+  set floor(int? floor) => _$this._floor = floor;
 
-  String _door;
-  String get door => _$this._door;
-  set door(String door) => _$this._door = door;
+  String? _door;
+  String? get door => _$this._door;
+  set door(String? door) => _$this._door = door;
 
   AddressBuilder();
 
   AddressBuilder get _$this {
-    if (_$v != null) {
-      _id = _$v.id;
-      _metadata = _$v.metadata?.toBuilder();
-      _label = _$v.label;
-      _postalCode = _$v.postalCode;
-      _country = _$v.country;
-      _city = _$v.city;
-      _province = _$v.province;
-      _street = _$v.street;
-      _number = _$v.number;
-      _floor = _$v.floor;
-      _door = _$v.door;
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _metadata = $v.metadata?.toBuilder();
+      _label = $v.label;
+      _postalCode = $v.postalCode;
+      _country = $v.country;
+      _city = $v.city;
+      _province = $v.province;
+      _street = $v.street;
+      _number = $v.number;
+      _floor = $v.floor;
+      _door = $v.door;
       _$v = null;
     }
     return this;
@@ -325,14 +336,12 @@ class AddressBuilder implements Builder<Address, AddressBuilder> {
 
   @override
   void replace(Address other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Address;
   }
 
   @override
-  void update(void Function(AddressBuilder) updates) {
+  void update(void Function(AddressBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -354,7 +363,7 @@ class AddressBuilder implements Builder<Address, AddressBuilder> {
               floor: floor,
               door: door);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'metadata';
         _metadata?.build();

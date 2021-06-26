@@ -15,9 +15,9 @@ class _$MetadataSerializer implements StructuredSerializer<Metadata> {
   final String wireName = 'Metadata';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Metadata object,
+  Iterable<Object?> serialize(Serializers serializers, Metadata object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'creation',
       serializers.serialize(object.creation,
           specifiedType: const FullType(MetadataEvent)),
@@ -28,35 +28,40 @@ class _$MetadataSerializer implements StructuredSerializer<Metadata> {
       serializers.serialize(object.lastRead,
           specifiedType: const FullType(MetadataEvent)),
     ];
-    if (object.id != null) {
+    Object? value;
+    value = object.id;
+    if (value != null) {
       result
         ..add('id')
-        ..add(serializers.serialize(object.id,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.title != null) {
+    value = object.title;
+    if (value != null) {
       result
         ..add('title')
-        ..add(serializers.serialize(object.title,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.description != null) {
+    value = object.description;
+    if (value != null) {
       result
         ..add('description')
-        ..add(serializers.serialize(object.description,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.deleted != null) {
+    value = object.deleted;
+    if (value != null) {
       result
         ..add('deleted')
-        ..add(serializers.serialize(object.deleted,
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(MetadataEvent)));
     }
     return result;
   }
 
   @override
-  Metadata deserialize(Serializers serializers, Iterable<Object> serialized,
+  Metadata deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new MetadataBuilder();
 
@@ -64,35 +69,35 @@ class _$MetadataSerializer implements StructuredSerializer<Metadata> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'title':
           result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'description':
           result.description = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'creation':
           result.creation.replace(serializers.deserialize(value,
-              specifiedType: const FullType(MetadataEvent)) as MetadataEvent);
+              specifiedType: const FullType(MetadataEvent))! as MetadataEvent);
           break;
         case 'modification':
           result.modification.replace(serializers.deserialize(value,
-              specifiedType: const FullType(MetadataEvent)) as MetadataEvent);
+              specifiedType: const FullType(MetadataEvent))! as MetadataEvent);
           break;
         case 'lastRead':
           result.lastRead.replace(serializers.deserialize(value,
-              specifiedType: const FullType(MetadataEvent)) as MetadataEvent);
+              specifiedType: const FullType(MetadataEvent))! as MetadataEvent);
           break;
         case 'deleted':
           result.deleted.replace(serializers.deserialize(value,
-              specifiedType: const FullType(MetadataEvent)) as MetadataEvent);
+              specifiedType: const FullType(MetadataEvent))! as MetadataEvent);
           break;
       }
     }
@@ -103,11 +108,11 @@ class _$MetadataSerializer implements StructuredSerializer<Metadata> {
 
 class _$Metadata extends Metadata {
   @override
-  final String id;
+  final String? id;
   @override
-  final String title;
+  final String? title;
   @override
-  final String description;
+  final String? description;
   @override
   final MetadataEvent creation;
   @override
@@ -115,29 +120,24 @@ class _$Metadata extends Metadata {
   @override
   final MetadataEvent lastRead;
   @override
-  final MetadataEvent deleted;
+  final MetadataEvent? deleted;
 
-  factory _$Metadata([void Function(MetadataBuilder) updates]) =>
+  factory _$Metadata([void Function(MetadataBuilder)? updates]) =>
       (new MetadataBuilder()..update(updates)).build();
 
   _$Metadata._(
       {this.id,
       this.title,
       this.description,
-      this.creation,
-      this.modification,
-      this.lastRead,
+      required this.creation,
+      required this.modification,
+      required this.lastRead,
       this.deleted})
       : super._() {
-    if (creation == null) {
-      throw new BuiltValueNullFieldError('Metadata', 'creation');
-    }
-    if (modification == null) {
-      throw new BuiltValueNullFieldError('Metadata', 'modification');
-    }
-    if (lastRead == null) {
-      throw new BuiltValueNullFieldError('Metadata', 'lastRead');
-    }
+    BuiltValueNullFieldError.checkNotNull(creation, 'Metadata', 'creation');
+    BuiltValueNullFieldError.checkNotNull(
+        modification, 'Metadata', 'modification');
+    BuiltValueNullFieldError.checkNotNull(lastRead, 'Metadata', 'lastRead');
   }
 
   @override
@@ -189,52 +189,53 @@ class _$Metadata extends Metadata {
 }
 
 class MetadataBuilder implements Builder<Metadata, MetadataBuilder> {
-  _$Metadata _$v;
+  _$Metadata? _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
+  String? _title;
+  String? get title => _$this._title;
+  set title(String? title) => _$this._title = title;
 
-  String _description;
-  String get description => _$this._description;
-  set description(String description) => _$this._description = description;
+  String? _description;
+  String? get description => _$this._description;
+  set description(String? description) => _$this._description = description;
 
-  MetadataEventBuilder _creation;
+  MetadataEventBuilder? _creation;
   MetadataEventBuilder get creation =>
       _$this._creation ??= new MetadataEventBuilder();
-  set creation(MetadataEventBuilder creation) => _$this._creation = creation;
+  set creation(MetadataEventBuilder? creation) => _$this._creation = creation;
 
-  MetadataEventBuilder _modification;
+  MetadataEventBuilder? _modification;
   MetadataEventBuilder get modification =>
       _$this._modification ??= new MetadataEventBuilder();
-  set modification(MetadataEventBuilder modification) =>
+  set modification(MetadataEventBuilder? modification) =>
       _$this._modification = modification;
 
-  MetadataEventBuilder _lastRead;
+  MetadataEventBuilder? _lastRead;
   MetadataEventBuilder get lastRead =>
       _$this._lastRead ??= new MetadataEventBuilder();
-  set lastRead(MetadataEventBuilder lastRead) => _$this._lastRead = lastRead;
+  set lastRead(MetadataEventBuilder? lastRead) => _$this._lastRead = lastRead;
 
-  MetadataEventBuilder _deleted;
+  MetadataEventBuilder? _deleted;
   MetadataEventBuilder get deleted =>
       _$this._deleted ??= new MetadataEventBuilder();
-  set deleted(MetadataEventBuilder deleted) => _$this._deleted = deleted;
+  set deleted(MetadataEventBuilder? deleted) => _$this._deleted = deleted;
 
   MetadataBuilder();
 
   MetadataBuilder get _$this {
-    if (_$v != null) {
-      _id = _$v.id;
-      _title = _$v.title;
-      _description = _$v.description;
-      _creation = _$v.creation?.toBuilder();
-      _modification = _$v.modification?.toBuilder();
-      _lastRead = _$v.lastRead?.toBuilder();
-      _deleted = _$v.deleted?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _title = $v.title;
+      _description = $v.description;
+      _creation = $v.creation.toBuilder();
+      _modification = $v.modification.toBuilder();
+      _lastRead = $v.lastRead.toBuilder();
+      _deleted = $v.deleted?.toBuilder();
       _$v = null;
     }
     return this;
@@ -242,14 +243,12 @@ class MetadataBuilder implements Builder<Metadata, MetadataBuilder> {
 
   @override
   void replace(Metadata other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Metadata;
   }
 
   @override
-  void update(void Function(MetadataBuilder) updates) {
+  void update(void Function(MetadataBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -267,7 +266,7 @@ class MetadataBuilder implements Builder<Metadata, MetadataBuilder> {
               lastRead: lastRead.build(),
               deleted: _deleted?.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'creation';
         creation.build();

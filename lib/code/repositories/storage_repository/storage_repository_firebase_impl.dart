@@ -1,12 +1,15 @@
 part of 'storage_repository.dart';
 
 class StorageRepositoryFirebaseImpl extends StorageRepository {
-  final FirebaseStorage _db = FirebaseStorage.instance;
-  final String userId;
-  final String path;
-  Reference ref;
+  late final FirebaseStorage _db = FirebaseStorage.instance;
+  late final String userId;
+  late final String path;
+  late Reference ref;
 
-  StorageRepositoryFirebaseImpl({@required this.userId, @required this.path}) {
+  StorageRepositoryFirebaseImpl({
+    required this.userId,
+    required this.path,
+  }) {
     ref = _db.ref().child(path); // .child('$USERS_COLLECTION/$userId/$path');
   }
 
@@ -21,10 +24,9 @@ class StorageRepositoryFirebaseImpl extends StorageRepository {
   @override
   Future<bool> removeFile(String id) async {
     try {
-      ref
-          .child(id)
-          .delete()
-          .then((_) => print('Successfully deleted $path storage item'));
+      ref.child(id).delete().then(
+            (_) => print('Successfully deleted $path storage item'),
+          );
       return true;
     } catch (e) {
       print(e);
@@ -33,10 +35,10 @@ class StorageRepositoryFirebaseImpl extends StorageRepository {
   }
 
   @override
-  Future<String> updateFile(
-      {@required File file,
-      @required String path,
-      @required String fileName}) async {
+  Future<String?> updateFile(
+      {required File file,
+      required String path,
+      required String fileName}) async {
     try {
       //String fileName = basename(_file.path);
       UploadTask uploadTask = ref.child(fileName).putFile(file);
@@ -64,5 +66,7 @@ class StorageRepositoryFirebaseImpl extends StorageRepository {
    */
 
   @override
-  void removeFolder({String path}) {}
+  void removeFolder({
+    required String path,
+  }) {}
 }

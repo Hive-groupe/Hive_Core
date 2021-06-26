@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class StatisticsBarGraph extends StatefulWidget {
   final List<num> data;
 
-  const StatisticsBarGraph({Key key, this.data}) : super(key: key);
+  const StatisticsBarGraph({Key? key, required this.data}) : super(key: key);
 
   @override
   _StatisticsBarGraphState createState() => _StatisticsBarGraphState();
@@ -44,7 +44,8 @@ class _StatisticsBarGraphState extends State<StatisticsBarGraph> {
     List<Series<num, num>> series = [
       Series<num, int>(
         id: 'Gasto',
-        colorFn: (_, __) => MaterialPalette.deepOrange.shadeDefault, //MaterialPalette.purple.shadeDefault, //MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => MaterialPalette.deepOrange
+            .shadeDefault, //MaterialPalette.purple.shadeDefault, //MaterialPalette.blue.shadeDefault,
         domainFn: (value, index) => index,
         measureFn: (value, _) => value,
         data: widget.data,
@@ -52,7 +53,8 @@ class _StatisticsBarGraphState extends State<StatisticsBarGraph> {
       )
     ];
 
-    return LineChart(series,
+    return LineChart(
+      series,
       animate: true,
       selectionModels: [
         SelectionModelConfig(
@@ -61,17 +63,15 @@ class _StatisticsBarGraphState extends State<StatisticsBarGraph> {
         )
       ],
       domainAxis: NumericAxisSpec(
-          tickProviderSpec: StaticNumericTickProviderSpec(
-              [
-                TickSpec(0, label: '01'),
-                TickSpec(4, label: '05'),
-                TickSpec(9, label: '10'),
-                TickSpec(14, label: '15'),
-                TickSpec(19, label: '20'),
-                TickSpec(24, label: '25'),
-                TickSpec(29, label: '30'),
-              ]
-          )
+        tickProviderSpec: StaticNumericTickProviderSpec([
+          TickSpec(0, label: '01'),
+          TickSpec(4, label: '05'),
+          TickSpec(9, label: '10'),
+          TickSpec(14, label: '15'),
+          TickSpec(19, label: '20'),
+          TickSpec(24, label: '25'),
+          TickSpec(29, label: '30'),
+        ]),
       ),
       primaryMeasureAxis: NumericAxisSpec(
         tickProviderSpec: BasicNumericTickProviderSpec(

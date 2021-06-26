@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -16,12 +18,16 @@ class UserStatus extends EnumClass {
   static BuiltSet<UserStatus> get values => _$userStatusValues;
   static UserStatus valueOf(String name) => _$userStatusValueOf(name);
 
-  String serialize() {
-    return serializers.serializeWith(UserStatus.serializer, this);
+  Map<String, dynamic> serialize() {
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(UserStatus.serializer, this),
+      ),
+    );
   }
 
-  static UserStatus deserialize(String string) {
-    return serializers.deserializeWith(UserStatus.serializer, string);
+  static UserStatus? deserialize(Map<String, dynamic> json) {
+    return serializers.deserializeWith(UserStatus.serializer, json);
   }
 
   static Serializer<UserStatus> get serializer => _$userStatusSerializer;

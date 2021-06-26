@@ -7,14 +7,14 @@ import 'package:hive_core/code/repositories/user_repository/user_repository.dart
 
 class OnlineDotIndicator extends StatelessWidget {
   final String uid;
-  UserRepository _authMethods;
+  late UserRepository _authMethods;
 
   OnlineDotIndicator({
-    @required this.uid,
+    required this.uid,
   });
 
   initState(BuildContext context) {
-    _authMethods = context.repository<UserRepository>();
+    _authMethods = RepositoryProvider.of<UserRepository>(context);
   }
 
   getColor(UserStatus state) {
@@ -37,22 +37,25 @@ class OnlineDotIndicator extends StatelessWidget {
   Widget _build() {
     return Align(
       alignment: Alignment.bottomRight,
-      child: StreamBuilder<User>(
+      child: StreamBuilder<dynamic>(
         stream: _authMethods.getStreamUserById(
           uid,
         ),
         builder: (context, snapshot) {
-          User user;
-          if (snapshot.hasData && snapshot.data != null) {
-            user = snapshot.data;
+          User? user;
+          if (snapshot.hasData && snapshot.data! != null) {
+            user = snapshot.data!;
           }
           return Container(
             height: 10,
             width: 10,
-            margin: EdgeInsets.only(right: 5, top: 5),
+            margin: EdgeInsets.only(
+              right: 5,
+              top: 5,
+            ),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: getColor(user?.userStatus),
+              color: getColor(user?.userStatus ?? UserStatus.offline),
             ),
           );
         },

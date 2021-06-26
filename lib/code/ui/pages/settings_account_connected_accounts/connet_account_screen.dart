@@ -17,10 +17,10 @@ class ConnetAccountScreen extends StatefulWidget {
 class _ConnetAccountScreenState extends State<ConnetAccountScreen>
     with TickerProviderStateMixin {
   // Controllers
-  HiveAnimationController _hiveAnimationController;
+  late HiveAnimationController _hiveAnimationController;
 
   // Blocs
-  DeviceListBloc _deviceListBloc;
+  late DeviceListBloc _deviceListBloc;
 
   @override
   void initState() {
@@ -28,50 +28,54 @@ class _ConnetAccountScreenState extends State<ConnetAccountScreen>
     _hiveAnimationController = HiveAnimationController(tickerProvider: this);
 
     // Blocs
-    _deviceListBloc = DeviceListBloc(context: context)..add(FindDevices());
+    _deviceListBloc = DeviceListBloc(context: context)
+      ..add(
+        FindDevices(),
+      );
     super.initState();
   }
 
   @override
   void dispose() {
     //Controllers
-    _hiveAnimationController?.dispose();
+    _hiveAnimationController.dispose();
 
     // Blocs
-    _deviceListBloc?.close();
+    _deviceListBloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<DeviceListBloc>(
-            create: (BuildContext context) => _deviceListBloc,
-          ),
-        ],
-        child: BlocConsumer(
-            cubit: _deviceListBloc,
-            listener: (BuildContext context, DeviceListState state) {
-              if (state is DeviceListInitial) {
-              } else if (state is DeviceListError) {
-              } else if (state is DeviceListLoading) {
-              } else if (state is DeviceListLoaded) {
-              } else {}
-            },
-            builder: (BuildContext context, DeviceListState state) {
-              if (state is DeviceListInitial) {
-                return _buildLoading();
-              } else if (state is DeviceListError) {
-                return _buildError();
-              } else if (state is DeviceListLoading) {
-                return _buildLoading();
-              } else if (state is DeviceListLoaded) {
-                return _buildLoaded(state);
-              } else {
-                return _buildError();
-              }
-            }));
+      providers: [
+        BlocProvider<DeviceListBloc>(
+          create: (BuildContext context) => _deviceListBloc,
+        ),
+      ],
+      child: BlocConsumer(
+          bloc: _deviceListBloc,
+          listener: (BuildContext context, DeviceListState state) {
+            if (state is DeviceListInitial) {
+            } else if (state is DeviceListError) {
+            } else if (state is DeviceListLoading) {
+            } else if (state is DeviceListLoaded) {
+            } else {}
+          },
+          builder: (BuildContext context, DeviceListState state) {
+            if (state is DeviceListInitial) {
+              return _buildLoading();
+            } else if (state is DeviceListError) {
+              return _buildError();
+            } else if (state is DeviceListLoading) {
+              return _buildLoading();
+            } else if (state is DeviceListLoaded) {
+              return _buildLoaded(state);
+            } else {
+              return _buildError();
+            }
+          }),
+    );
   }
 
   Widget _buildError() {
@@ -90,33 +94,36 @@ class _ConnetAccountScreenState extends State<ConnetAccountScreen>
 
   Widget _buildLoaded(DeviceListLoaded state) {
     return Scaffold(
-        body: Stack(children: <Widget>[
-      _body(state),
-      /*  ConnetAccountFilterScreen(
+      body: Stack(children: <Widget>[
+        _body(state),
+        /*  ConnetAccountFilterScreen(
         hiveAnimationController: _hiveAnimationController
       ),*/
-      ConnetAccountTutorial(hiveAnimationController: _hiveAnimationController),
-    ]));
+        ConnetAccountTutorial(
+            hiveAnimationController: _hiveAnimationController),
+      ]),
+    );
   }
 
   Widget _body(DeviceListLoaded state) {
     return CupertinoPageScaffold(
         child: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                ConnetAccountAppsBar(),
-              ];
-            },
-            body: SingleChildScrollView(
-                child: Container(
-                    child: Column(
-              children: <Widget>[
-                ConnetAccountList(
-                  connetAccountList: state.deviceList,
-                  showStatus: true,
-                ),
-              ],
-            )))));
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          ConnetAccountAppsBar(),
+        ];
+      },
+      body: SingleChildScrollView(
+          child: Container(
+        child: Column(
+          children: <Widget>[
+            ConnetAccountList(
+              connetAccountList: state.deviceList,
+              showStatus: true,
+            ),
+          ],
+        ),
+      )),
+    ));
   }
 }

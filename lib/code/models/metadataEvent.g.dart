@@ -16,9 +16,9 @@ class _$MetadataEventSerializer implements StructuredSerializer<MetadataEvent> {
   final String wireName = 'MetadataEvent';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, MetadataEvent object,
+  Iterable<Object?> serialize(Serializers serializers, MetadataEvent object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'userId',
       serializers.serialize(object.userId,
           specifiedType: const FullType(String)),
@@ -31,7 +31,7 @@ class _$MetadataEventSerializer implements StructuredSerializer<MetadataEvent> {
 
   @override
   MetadataEvent deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new MetadataEventBuilder();
 
@@ -39,7 +39,7 @@ class _$MetadataEventSerializer implements StructuredSerializer<MetadataEvent> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'userId':
           result.userId = serializers.deserialize(value,
@@ -62,16 +62,12 @@ class _$MetadataEvent extends MetadataEvent {
   @override
   final String date;
 
-  factory _$MetadataEvent([void Function(MetadataEventBuilder) updates]) =>
+  factory _$MetadataEvent([void Function(MetadataEventBuilder)? updates]) =>
       (new MetadataEventBuilder()..update(updates)).build();
 
-  _$MetadataEvent._({this.userId, this.date}) : super._() {
-    if (userId == null) {
-      throw new BuiltValueNullFieldError('MetadataEvent', 'userId');
-    }
-    if (date == null) {
-      throw new BuiltValueNullFieldError('MetadataEvent', 'date');
-    }
+  _$MetadataEvent._({required this.userId, required this.date}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(userId, 'MetadataEvent', 'userId');
+    BuiltValueNullFieldError.checkNotNull(date, 'MetadataEvent', 'date');
   }
 
   @override
@@ -105,22 +101,23 @@ class _$MetadataEvent extends MetadataEvent {
 
 class MetadataEventBuilder
     implements Builder<MetadataEvent, MetadataEventBuilder> {
-  _$MetadataEvent _$v;
+  _$MetadataEvent? _$v;
 
-  String _userId;
-  String get userId => _$this._userId;
-  set userId(String userId) => _$this._userId = userId;
+  String? _userId;
+  String? get userId => _$this._userId;
+  set userId(String? userId) => _$this._userId = userId;
 
-  String _date;
-  String get date => _$this._date;
-  set date(String date) => _$this._date = date;
+  String? _date;
+  String? get date => _$this._date;
+  set date(String? date) => _$this._date = date;
 
   MetadataEventBuilder();
 
   MetadataEventBuilder get _$this {
-    if (_$v != null) {
-      _userId = _$v.userId;
-      _date = _$v.date;
+    final $v = _$v;
+    if ($v != null) {
+      _userId = $v.userId;
+      _date = $v.date;
       _$v = null;
     }
     return this;
@@ -128,20 +125,23 @@ class MetadataEventBuilder
 
   @override
   void replace(MetadataEvent other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$MetadataEvent;
   }
 
   @override
-  void update(void Function(MetadataEventBuilder) updates) {
+  void update(void Function(MetadataEventBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
   _$MetadataEvent build() {
-    final _$result = _$v ?? new _$MetadataEvent._(userId: userId, date: date);
+    final _$result = _$v ??
+        new _$MetadataEvent._(
+            userId: BuiltValueNullFieldError.checkNotNull(
+                userId, 'MetadataEvent', 'userId'),
+            date: BuiltValueNullFieldError.checkNotNull(
+                date, 'MetadataEvent', 'date'));
     replace(_$result);
     return _$result;
   }

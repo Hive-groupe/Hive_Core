@@ -15,13 +15,13 @@ class AppBarFiltersWidget extends StatefulWidget
   final String btnClearText;
 
   const AppBarFiltersWidget({
-    Key key,
-    @required this.title,
-    @required this.tabController,
-    @required this.tabs,
-    @required this.onHideFilters,
-    @required this.onClear,
-    this.btnClearText,
+    Key? key,
+    required this.title,
+    required this.tabController,
+    required this.tabs,
+    required this.onHideFilters,
+    required this.onClear,
+    required this.btnClearText,
   }) : super(key: key);
 
   @override
@@ -45,11 +45,11 @@ class _AppBarFiltersWidgetState extends State<AppBarFiltersWidget> {
         widget.title ?? 'Filters',
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       leading: IconButton(
-        onPressed: widget.onHideFilters,
+        onPressed: () => widget.onHideFilters(),
         icon: Icon(
           Icons.clear,
           color: Colors.grey,
@@ -61,16 +61,18 @@ class _AppBarFiltersWidgetState extends State<AppBarFiltersWidget> {
         controller: widget.tabController,
         tabs: widget.tabs,
         indicatorPadding: EdgeInsets.only(left: 25, right: 25),
-        labelColor: Theme.of(context).textTheme.bodyText1.color,
+        labelColor: Theme.of(context).textTheme.bodyText1!.color,
         unselectedLabelColor: Colors.grey,
       ),
     );
   }
 
   Widget _btnClearHolder() {
-    return FlatButton(
-      onPressed: widget.onClear,
-      textColor: Theme.of(context).accentColor,
+    return TextButton(
+      onPressed: () => widget.onClear(),
+      style: TextButton.styleFrom(
+        primary: Theme.of(context).accentColor,
+      ),
       child: Text(
         widget.btnClearText ?? HiveCoreString.of(context).delete,
         style: TextStyle(),

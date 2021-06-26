@@ -7,32 +7,36 @@ import 'package:hive_core/code/ui/widgets/appbar.dart';
 import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class UpdatePasswordFormScreen extends StatelessWidget {
-  UpdatePasswordFormBloc formBloc;
+  late UpdatePasswordFormBloc formBloc;
 
   void _onShowError(context) => Scaffold.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-      backgroundColor: Colors.red,
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text('Ocurrio un error in esperado'),
-          Icon(Icons.error)
-        ],
+    ..showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('Ocurrio un error in esperado'),
+            Icon(Icons.error)
+          ],
+        ),
       ),
-    ));
+    );
 
   void _onShowLoading(context) => Scaffold.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text('cambiando contraseña'),
-          CircularProgressIndicator()
-        ],
+    ..showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('cambiando contraseña'),
+            CircularProgressIndicator()
+          ],
+        ),
       ),
-    ));
+    );
 
   void _goBack(BuildContext context) => Navigator.pop(context);
 
@@ -43,8 +47,9 @@ class UpdatePasswordFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UpdatePasswordFormBloc(
-          authenticationRepository:
-              context.repository<AuthenticationRepository>()),
+        authenticationRepository:
+            RepositoryProvider.of<AuthenticationRepository>(context),
+      ),
       child: Builder(
         builder: (context) {
           formBloc = BlocProvider.of<UpdatePasswordFormBloc>(context);
@@ -73,7 +78,7 @@ class UpdatePasswordFormScreen extends StatelessWidget {
         'Cambiar contraseña',
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       leading: IconButton(
@@ -102,7 +107,7 @@ class UpdatePasswordFormScreen extends StatelessWidget {
       onFailure: (context, state) {
         _onShowError(context); // LoadingDialog.hide(context);
 
-        // Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.failureResponse)));
+        // Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.failureResponse),));
       },
       child: _buildFrom(context),
     );

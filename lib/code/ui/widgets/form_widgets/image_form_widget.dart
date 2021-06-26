@@ -9,18 +9,18 @@ import 'package:image_picker/image_picker.dart';
 class ImageFormWidget extends StatefulWidget {
   final String heroId;
   File billPhotoFile;
-  final TextFieldBloc photoUrl;
+  final Stream<TextFieldBloc> photoUrl;
   final IconData iconData;
   final Function onPressed;
 
-  ImageFormWidget(
-      {Key key,
-      @required this.heroId,
-      @required this.billPhotoFile,
-      @required this.photoUrl,
-      @required this.iconData,
-      @required this.onPressed})
-      : super(key: key);
+  ImageFormWidget({
+    Key? key,
+    required this.heroId,
+    required this.billPhotoFile,
+    required this.photoUrl,
+    required this.iconData,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   _ImageFormWidgetState createState() => _ImageFormWidgetState();
@@ -29,44 +29,47 @@ class ImageFormWidget extends StatefulWidget {
 class _ImageFormWidgetState extends State<ImageFormWidget> {
   Future<void> _optionsDialogBox() {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: new SingleChildScrollView(
-              child: new ListBody(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => pickImage(source: ImageSource.camera),
-                    child: ListTile(
-                      leading: Icon(Icons.photo_camera),
-                      title: Text('Toma una foto'),
-                    ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: new SingleChildScrollView(
+            child: new ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () => pickImage(source: ImageSource.camera),
+                  child: ListTile(
+                    leading: Icon(Icons.photo_camera),
+                    title: Text('Toma una foto'),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                ),
+                GestureDetector(
+                  onTap: () => pickImage(source: ImageSource.gallery),
+                  child: ListTile(
+                    leading: Icon(Icons.photo),
+                    title: Text('Seleccionar de la galería'),
                   ),
-                  GestureDetector(
-                    onTap: () => pickImage(source: ImageSource.gallery),
-                    child: ListTile(
-                      leading: Icon(Icons.photo),
-                      title: Text('Seleccionar de la galería'),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
-  void pickImage({@required ImageSource source}) async {
+  void pickImage({
+    required ImageSource source,
+  }) async {
     Navigator.pop(context);
     File selectedImage = await FileTools.pickImage(source: source);
 
     widget.onPressed(selectedImage);
 
     setState(() {
-      return widget.billPhotoFile = selectedImage;
+      widget.billPhotoFile = selectedImage;
     });
   }
 
@@ -76,21 +79,23 @@ class _ImageFormWidgetState extends State<ImageFormWidget> {
   }
 
   Widget _billHolderImage() {
-    return StreamBuilder(
+    return StreamBuilder<TextFieldBloc>(
       stream: widget.photoUrl,
       builder: (context, snapshot) {
         return GestureDetector(
-            onTap: _optionsDialogBox,
-            child: Hero(
-                tag: widget.heroId,
-                child: widget.billPhotoFile != null
-                    // Si estamos cargando la imagen desde el dispositivo
-                    ? _buildImageLocalFile()
-                    : snapshot.data.value == null || snapshot.data.value == ''
-                        ? //Si no hay imagen
-                        _buildImageNoFile()
-                        : //Si cargamos la imagen desde internet
-                        _buildImageNetwork(snapshot.data.value)));
+          onTap: _optionsDialogBox,
+          child: Hero(
+            tag: widget.heroId,
+            child: widget.billPhotoFile != null
+                // Si estamos cargando la imagen desde el dispositivo
+                ? _buildImageLocalFile()
+                : snapshot.data!.value == null || snapshot.data!.value == ''
+                    ? //Si no hay imagen
+                    _buildImageNoFile()
+                    : //Si cargamos la imagen desde internet
+                    _buildImageNetwork(snapshot.data!.value ?? ''),
+          ),
+        );
       },
     );
   }

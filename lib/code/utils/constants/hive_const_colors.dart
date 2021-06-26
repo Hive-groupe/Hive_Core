@@ -6,6 +6,11 @@ class HiveCoreConstColors {
   // - RGB:               120, 59, 249
   static const MaterialColor badooColor =
       MaterialColor(0xFF783bf9, badooColorCodes);
+  static const MaterialColor goldColor =
+      MaterialColor(0xFFEFB810, goldColorCodes);
+  static const MaterialColor bronzeColor =
+      MaterialColor(0xFFCD7F32, bronzeColorCodes);
+
   static const Map<int, Color> badooColorCodes = {
     50: Color.fromRGBO(120, 59, 249, .1),
     100: Color.fromRGBO(120, 59, 249, .2),
@@ -49,9 +54,6 @@ class HiveCoreConstColors {
 
   static const Color greyColor = Colors.grey;
   // static const Color icons2 = Colors.deepPurple;
-
-  static const Color goldColor = MaterialColor(0xFFEFB810, goldColorCodes);
-  static const Color bronzeColor = MaterialColor(0xFFCD7F32, bronzeColorCodes);
 
   static final Color separatorColor = Color(0xff272c35);
 

@@ -56,11 +56,13 @@ class _CallLogListState extends State<CallLogList> {
       future: LogRepository.getLogs(),
       builder: (BuildContext context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
 
         if (snapshot.hasData) {
-          List<dynamic> logList = snapshot.data;
+          List<dynamic> logList = snapshot.data!;
 
           if (logList.isNotEmpty) {
             return Container(
@@ -71,7 +73,10 @@ class _CallLogListState extends State<CallLogList> {
                   bool hasDialled = _log.callStatus == CALL_STATUS_DIALLED;
 
                   return CustomTile(
-                    margin: EdgeInsets.only(left: 25, right: 25),
+                    margin: EdgeInsets.only(
+                      left: 25,
+                      right: 25,
+                    ),
                     leading: CachedImage(
                       hasDialled ? _log.receiverPic : _log.callerPic,
                       isRound: true,
@@ -85,7 +90,7 @@ class _CallLogListState extends State<CallLogList> {
                         content:
                             Text("Are you sure you wish to delete this log?"),
                         actions: [
-                          FlatButton(
+                          TextButton(
                             child: Text("YES"),
                             onPressed: () async {
                               Navigator.maybePop(context);
@@ -95,7 +100,7 @@ class _CallLogListState extends State<CallLogList> {
                               }
                             },
                           ),
-                          FlatButton(
+                          TextButton(
                             child: Text("NO"),
                             onPressed: () => Navigator.maybePop(context),
                           ),

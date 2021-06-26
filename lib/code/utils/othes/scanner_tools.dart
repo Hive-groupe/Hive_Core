@@ -14,14 +14,14 @@ class ScannerTools {
   }
 /*
   static Future<dynamic> detect({
-    @required CameraImage image,
-    @required Future<dynamic> Function(FirebaseVisionImage image) detectInImage,
-    @required int imageRotation,
+    required CameraImage image,
+    required Future<dynamic> Function(FirebaseVisionImage image) detectInImage,
+    required int imageRotation,
   }) async {
     return detectInImage(
       FirebaseVisionImage.fromBytes(
         _concatenatePlanes(image.planes),
-        _buildMetaData(image, _rotationIntToImageRotation(imageRotation)),
+        _buildMetaData(image, _rotationIntToImageRotation(imageRotation),),
       ),
     );
   }
@@ -40,7 +40,7 @@ class ScannerTools {
   ) {
     return FirebaseVisionImageMetadata(
       rawFormat: image.format.raw,
-      size: Size(image.width.toDouble(), image.height.toDouble()),
+      size: Size(image.width.toDouble(), image.height.toDouble(),),
       rotation: rotation,
       planeData: image.planes.map(
         (Plane plane) {

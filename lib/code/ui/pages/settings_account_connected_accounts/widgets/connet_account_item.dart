@@ -9,18 +9,20 @@ import 'package:hive_core/code/utils/tools/time_tools/time_tools.dart';
 class ConnetAccountItem extends StatefulWidget {
   final Device model;
 
-  ConnetAccountItem({@required this.model});
+  ConnetAccountItem({
+    required this.model,
+  });
 
   @override
   _ConnetAccountItemState createState() => _ConnetAccountItemState();
 }
 
 class _ConnetAccountItemState extends State<ConnetAccountItem> {
-  DeviceListBloc _deviceListBloc;
+  late DeviceListBloc _deviceListBloc;
 
   @override
   void initState() {
-    _deviceListBloc = context.bloc<DeviceListBloc>();
+    _deviceListBloc = BlocProvider.of<DeviceListBloc>(context);
     super.initState();
   }
 
@@ -31,7 +33,10 @@ class _ConnetAccountItemState extends State<ConnetAccountItem> {
 
   void _onDeleteData() {
     Navigator.pop(context);
-    _deviceListBloc..add(DeleteDeviceItem(deviceId: widget.model.metadata.id));
+    _deviceListBloc
+      ..add(
+        DeleteDeviceItem(deviceId: widget.model.metadata.id ?? ''),
+      );
   }
 
   Future<void> _confirmDialogBox() {
@@ -51,11 +56,11 @@ class _ConnetAccountItemState extends State<ConnetAccountItem> {
               ),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(HiveCoreString.of(context).cancel),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: _onDeleteData,
                 child: Text(HiveCoreString.of(context).yes),
               ),
@@ -65,18 +70,24 @@ class _ConnetAccountItemState extends State<ConnetAccountItem> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Container(
       child: ListTile(
         leading: Container(
-            child: Icon(
-          Icons.devices,
-        )),
+          child: Icon(
+            Icons.devices,
+          ),
+        ),
         title: Text(
             '${widget.model.metadata.title.toString()} (${widget.model.platform})'),
         subtitle: Text(
           // true?
-          'ultimo uso:   ${widget.model.metadata.lastRead.date != null ? DateFormat("dd - MMMM - yyyy").format(stringToDateTime(widget.model.metadata.lastRead.date)) : ''}'
+          'ultimo uso:   ${stringToDateTime(widget.model.metadata.lastRead.date) != null ? DateFormat("dd - MMMM - yyyy").format(
+              stringToDateTime(widget.model.metadata.lastRead.date) ??
+                  DateTime.now(),
+            ) : ''}'
           // : 'Este dispositivo'
           ,
           style: TextStyle(color: Colors.grey),

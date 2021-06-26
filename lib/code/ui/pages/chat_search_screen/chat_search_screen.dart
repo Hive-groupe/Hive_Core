@@ -9,7 +9,9 @@ import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
 import 'widgets/search_list.dart';
 
 class ChatSearchScreen extends StatefulWidget {
-  const ChatSearchScreen({Key key}) : super(key: key);
+  const ChatSearchScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _ChatSearchScreenState createState() => _ChatSearchScreenState();
@@ -17,9 +19,9 @@ class ChatSearchScreen extends StatefulWidget {
 
 class _ChatSearchScreenState extends State<ChatSearchScreen>
     with SingleTickerProviderStateMixin {
-  ChatSearchBloc _chatSearchBloc;
+  late ChatSearchBloc _chatSearchBloc;
 
-  TextEditingController _searchController;
+  late TextEditingController _searchController;
 
   @override
   void initState() {
@@ -32,8 +34,8 @@ class _ChatSearchScreenState extends State<ChatSearchScreen>
 
   @override
   void dispose() {
-    _chatSearchBloc?.close();
-    _searchController?.dispose();
+    _chatSearchBloc.close();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -43,11 +45,14 @@ class _ChatSearchScreenState extends State<ChatSearchScreen>
 
   void _resetSearch() {
     _searchController.text = '';
-    _chatSearchBloc.add(ResetChatSearch());
+    _chatSearchBloc.add(
+      ResetChatSearch(),
+    );
   }
 
-  void _searching(String value) =>
-      _chatSearchBloc.add(SearchingChats(value: value));
+  void _searching(String value) => _chatSearchBloc.add(
+        SearchingChats(value: value),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,7 @@ class _ChatSearchScreenState extends State<ChatSearchScreen>
         ),
       ],
       child: BlocConsumer(
-        cubit: _chatSearchBloc,
+        bloc: _chatSearchBloc,
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ChatSearchInitial) {
@@ -97,23 +102,24 @@ class _ChatSearchScreenState extends State<ChatSearchScreen>
 
   Widget _buildError() {
     return Scaffold(
-        body: Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 200,
-            ),
-            Text(
-              HiveCoreString.of(context).default_error,
-            ),
-            Text(
-              HiveCoreString.of(context).unknown_error,
-            ),
-          ],
+      body: Container(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 200,
+              ),
+              Text(
+                HiveCoreString.of(context).default_error,
+              ),
+              Text(
+                HiveCoreString.of(context).unknown_error,
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 
   Widget _buildLoading() {
@@ -177,13 +183,16 @@ class _ChatSearchScreenState extends State<ChatSearchScreen>
         ),
       ),
       title: Padding(
-        padding: const EdgeInsets.only(bottom: 10, right: 10),
+        padding: const EdgeInsets.only(
+          bottom: 10,
+          right: 10,
+        ),
         child: TextField(
           controller: searchController,
           onChanged: (String value) => searching(value),
-          style:
-              new TextStyle(color: Theme.of(context).textTheme.bodyText1.color),
-          cursorColor: Theme.of(context).textTheme.bodyText1.color,
+          style: new TextStyle(
+              color: Theme.of(context).textTheme.bodyText1!.color),
+          cursorColor: Theme.of(context).textTheme.bodyText1!.color,
           autofocus: true,
           decoration: InputDecoration(
             hintText: "Buscar...",
@@ -193,15 +202,17 @@ class _ChatSearchScreenState extends State<ChatSearchScreen>
             border: InputBorder.none,
             focusColor: Colors.white,
             focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
             enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).accentColor)),
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
           ),
         ),
       ),
       actions: [
         IconButton(
-          onPressed: resetSearch,
+          onPressed: () => resetSearch(),
           icon: Icon(
             Icons.clear,
             color: Colors.grey,

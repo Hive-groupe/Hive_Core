@@ -9,7 +9,9 @@ abstract class WebTools {
     }
   }
 
-  static launchPhone({String value}) async {
+  static launchPhone({
+    String? value,
+  }) async {
     String _value = 'tel: $value';
     if (await canLaunch(_value)) {
       await launch(_value);
@@ -18,7 +20,7 @@ abstract class WebTools {
     }
   }
 
-  static launchMail({String value}) async {
+  static launchMail({String? value}) async {
     String _value = 'mailto: $value';
     if (await canLaunch(_value)) {
       await launch(_value);
@@ -27,7 +29,9 @@ abstract class WebTools {
     }
   }
 
-  static launchSms({String value}) async {
+  static launchSms({
+    String? value,
+  }) async {
     String _value = 'sms: $value';
     if (await canLaunch(_value)) {
       await launch(_value);
@@ -36,11 +40,13 @@ abstract class WebTools {
     }
   }
 
-  static launchLocalPath({String value}) async {
+  static launchLocalPath({
+    String? value,
+  }) async {
     /*
     Directory directory = await getExternalStorageDirectory();
     print(directory.path);
-    await directory.list().toList().then((filesList) => print(filesList));
+    await directory.list().toList().then((filesList) => print(filesList),);
     print(directory.parent.path);
     */
   }

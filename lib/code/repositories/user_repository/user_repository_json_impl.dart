@@ -1,12 +1,13 @@
 part of 'user_repository.dart';
 
 class UserRepositoryJsonImpl implements UserRepository<User> {
-  final String path;
+  late final String path;
 
   @override
-  BehaviorSubject<User> _userController;
+  late BehaviorSubject<User> _userController;
+
   @override
-  BehaviorSubject<BuiltList<User>> _userListController;
+  late BehaviorSubject<BuiltList<User>> _userListController;
 
   UserRepositoryJsonImpl(this.path);
 
@@ -31,11 +32,14 @@ class UserRepositoryJsonImpl implements UserRepository<User> {
     var _rest;
     List<User> _list;
 
-    _data = jsonDecode(await loadJsonData());
+    _data = jsonDecode(
+      await loadJsonData(),
+    );
     _rest = _data as List;
     _list = _rest
-        .map((e) =>
-            User.fromJson(e)) // serializers.deserializeWith(User.serializer, e)
+        .map(
+          (e) => User.fromJson(e),
+        ) // serializers.deserializeWith(User.serializer, e)
         .toList();
 
     return _list.where((element) => element.id == id).toList()[0];
@@ -50,17 +54,17 @@ class UserRepositoryJsonImpl implements UserRepository<User> {
   Future updateUser(Map data, String id) async {}
 
   @override
-  Stream<BuiltList<User>> fetchAllUsers({@required String currentUserId}) {
+  Stream<BuiltList<User>> fetchAllUsers({required String currentUserId}) {
     /*var _data;
     var _rest;
     Future<List<User>> _list;
 
-    _data = jsonDecode(await loadJsonData());
+    _data = jsonDecode(await loadJsonData(),);
     _rest = _data as List;
     _list = Future.value(_rest
         .map((e) =>
-            User.fromJson(e)) // serializers.deserializeWith(Chat.serializer, e)
-        .toList());
+            User.fromJson(e),) // serializers.deserializeWith(Chat.serializer, e)
+        .toList(),);
 
     return _list;*/
     return _userListController.stream;

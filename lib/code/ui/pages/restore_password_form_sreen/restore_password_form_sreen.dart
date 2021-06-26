@@ -6,32 +6,36 @@ import 'package:hive_core/code/repositories/authentication_repository/authentica
 import 'package:hive_core/code/ui/widgets/appbar.dart';
 
 class RestorePasswordFormScreen extends StatelessWidget {
-  RestorePasswordFormBloc formBloc;
+  late RestorePasswordFormBloc formBloc;
 
   void _onShowLoginError(context) => Scaffold.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-      backgroundColor: Colors.red,
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text('No se pudo enviar el correo de restablecer contraseña'),
-          Icon(Icons.error)
-        ],
+    ..showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('No se pudo enviar el correo de restablecer contraseña'),
+            Icon(Icons.error)
+          ],
+        ),
       ),
-    ));
+    );
 
   void _onShowOsSubmitting(context) => Scaffold.of(context)
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text('Enviando correo de restablecer contraseña'),
-          CircularProgressIndicator()
-        ],
+    ..showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('Enviando correo de restablecer contraseña'),
+            CircularProgressIndicator()
+          ],
+        ),
       ),
-    ));
+    );
 
   void _goBack(BuildContext context) => Navigator.pop(context);
 
@@ -39,8 +43,9 @@ class RestorePasswordFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => RestorePasswordFormBloc(
-          authenticationRepository:
-              context.repository<AuthenticationRepository>()),
+        authenticationRepository:
+            RepositoryProvider.of<AuthenticationRepository>(context),
+      ),
       child: Builder(
         builder: (context) {
           formBloc = BlocProvider.of<RestorePasswordFormBloc>(context);
@@ -70,7 +75,7 @@ class RestorePasswordFormScreen extends StatelessWidget {
         'Restablecer contraseña',
         style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).textTheme.bodyText1.color,
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w600),
       ),
       leading: IconButton(
@@ -98,7 +103,7 @@ class RestorePasswordFormScreen extends StatelessWidget {
       onFailure: (context, state) {
         _onShowLoginError(context); // LoadingDialog.hide(context);
 
-        // Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.failureResponse)));
+        // Scaffold.of(context).showSnackBar(SnackBar(content: Text(state.failureResponse),));
       },
       child: _buildFrom(context),
     );

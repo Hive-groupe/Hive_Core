@@ -10,7 +10,7 @@ import 'widgets/assistant_tutorial.dart';
 
 class AssistantScreen extends StatefulWidget {
   const AssistantScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -20,11 +20,11 @@ class AssistantScreen extends StatefulWidget {
 class _AssistantScreenState extends State<AssistantScreen>
     with TickerProviderStateMixin {
   // Controllers
-  TextEditingController _searchController;
-  HiveAnimationController _hiveAnimationController;
+  late TextEditingController _searchController;
+  late HiveAnimationController _hiveAnimationController;
 
   // Blocs
-  AssistantBloc _assistantBloc;
+  late AssistantBloc _assistantBloc;
 
   @override
   void initState() {
@@ -41,11 +41,11 @@ class _AssistantScreenState extends State<AssistantScreen>
   @override
   void dispose() {
     //Controllers
-    _searchController?.dispose();
-    _hiveAnimationController?.dispose();
+    _searchController.dispose();
+    _hiveAnimationController.dispose();
 
     // Blocs
-    _assistantBloc?.close();
+    _assistantBloc.close();
     super.dispose();
   }
 
@@ -53,17 +53,18 @@ class _AssistantScreenState extends State<AssistantScreen>
   Widget build(BuildContext context) {
     return BannerSize(
         body: MultiBlocProvider(
-            providers: [
-          BlocProvider<AssistantBloc>(
-            create: (BuildContext context) => _assistantBloc,
-          ),
-        ],
-            child: BlocConsumer(
-                cubit: _assistantBloc,
-                listener: (BuildContext context, AssistantState state) {},
-                builder: (BuildContext context, AssistantState state) {
-                  return _buildLoaded();
-                })));
+      providers: [
+        BlocProvider<AssistantBloc>(
+          create: (BuildContext context) => _assistantBloc,
+        ),
+      ],
+      child: BlocConsumer(
+          bloc: _assistantBloc,
+          listener: (BuildContext context, AssistantState state) {},
+          builder: (BuildContext context, AssistantState state) {
+            return _buildLoaded();
+          }),
+    ));
   }
 
 /*
@@ -94,7 +95,7 @@ class _AssistantScreenState extends State<AssistantScreen>
                   ),
                 ),
               ),
-            )));
+            ),));
   }
 
   Widget _buildLoading() {
@@ -124,38 +125,40 @@ class _AssistantScreenState extends State<AssistantScreen>
                   ],
                 ),
               ),
-            )));
+            ),));
   }
 */
   Widget _buildLoaded() {
     return Scaffold(
-        body: Stack(children: <Widget>[
-      _body(),
-      AssistantTutorial(
-        animationControllerTutorial:
-            _hiveAnimationController.animationControllerPrimaryTutorial,
-        animationPrimaryTutorial:
-            _hiveAnimationController.animationPrimaryTutorial,
-        animationSecondaryTutorial:
-            _hiveAnimationController.animationSecondaryTutorial,
-      ),
-    ]));
+      body: Stack(children: <Widget>[
+        _body(),
+        AssistantTutorial(
+          animationControllerTutorial:
+              _hiveAnimationController.animationControllerPrimaryTutorial,
+          animationPrimaryTutorial:
+              _hiveAnimationController.animationPrimaryTutorial,
+          animationSecondaryTutorial:
+              _hiveAnimationController.animationSecondaryTutorial,
+        ),
+      ]),
+    );
   }
 
   Widget _body() {
     return Scaffold(
       //  floatingActionButton: _btnAdd(),
       body: CupertinoPageScaffold(
-          child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            AssistantAppsBar(),
-          ];
-        },
-        body: SingleChildScrollView(
-          child: Container(),
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              AssistantAppsBar(),
+            ];
+          },
+          body: SingleChildScrollView(
+            child: Container(),
+          ),
         ),
-      )),
+      ),
     );
   }
 }

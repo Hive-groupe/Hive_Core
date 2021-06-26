@@ -22,7 +22,7 @@ class PermissionsTools {
     if (permission != PermissionStatus.granted &&
         permission != PermissionStatus.denied) {
       PermissionStatus permissionStatus = await Permission.camera.request();
-      return permissionStatus ?? PermissionStatus.undetermined;
+      return permissionStatus;
     } else {
       return permission;
     }
@@ -33,7 +33,7 @@ class PermissionsTools {
     if (permission != PermissionStatus.granted &&
         permission != PermissionStatus.denied) {
       PermissionStatus permissionStatus = await Permission.microphone.request();
-      return permissionStatus ?? PermissionStatus.undetermined;
+      return permissionStatus;
     } else {
       return permission;
     }

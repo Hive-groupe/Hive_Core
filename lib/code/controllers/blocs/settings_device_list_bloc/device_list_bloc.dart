@@ -15,23 +15,25 @@ part 'device_list_state.dart';
 class DeviceListBloc extends Bloc<DeviceListEvent, DeviceListState> {
   final BuildContext context;
 
-  DeviceRepository _deviceRepository;
+  late DeviceRepository _deviceRepository;
 
   final _deviceListController = BehaviorSubject<BuiltList<Device>>();
 
-  DeviceListBloc({@required this.context})
-      : assert(context != null),
-        super(DeviceListInitial()) {
+  DeviceListBloc({
+    required this.context,
+  }) : super(
+          DeviceListInitial(),
+        ) {
     initState();
   }
 
   initState() {
-    _deviceRepository = context.repository<DeviceRepository>();
+    _deviceRepository = RepositoryProvider.of<DeviceRepository>(context);
   }
 
   @override
   Future<void> close() {
-    _deviceListController?.close();
+    _deviceListController.close();
     return super.close();
   }
 
@@ -50,9 +52,9 @@ class DeviceListBloc extends Bloc<DeviceListEvent, DeviceListState> {
     try {
       yield DeviceListLoading();
 
-      _deviceRepository
-          .findDeviceStream()
-          .listen((event) => _deviceListController.sink.add(event));
+      _deviceRepository.findDeviceStream().listen(
+            (event) => _deviceListController.sink.add(event),
+          );
 
       yield DeviceListLoaded(deviceList: _deviceListController.stream);
     } catch (_) {

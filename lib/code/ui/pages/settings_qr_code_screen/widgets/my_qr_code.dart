@@ -17,10 +17,10 @@ class _MyQrCodeState extends State<MyQrCode> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User>(
+    return StreamBuilder<User?>(
         stream: userDataInfo.output,
         builder: (context, snapshot) {
-          return snapshot.hasData ? _build(snapshot.data) : _buildNotData();
+          return snapshot.hasData ? _build(snapshot.data!) : _buildNotData();
         });
   }
 
@@ -38,7 +38,7 @@ class _MyQrCodeState extends State<MyQrCode> {
               //border: Border.all(color: Colors.grey[400]),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey[350],
+                  color: Colors.grey[350]!,
                   blurRadius: 0.5, // has the effect of softening the shadow
                   spreadRadius: 0.5, // has the effect of extending the shadow
                   offset: Offset(
@@ -67,7 +67,7 @@ class _MyQrCodeState extends State<MyQrCode> {
             ),
           ),
         ),
-        _buildAvatarHolder(user.profile.avatar),
+        _buildAvatarHolder(user.profile!.avatar),
       ],
     );
   }
@@ -86,7 +86,7 @@ class _MyQrCodeState extends State<MyQrCode> {
               //border: Border.all(color: Colors.grey[400]),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey[350],
+                  color: Colors.grey[350]!,
                   blurRadius: 0.5, // has the effect of softening the shadow
                   spreadRadius: 0.5, // has the effect of extending the shadow
                   offset: Offset(
@@ -120,13 +120,14 @@ class _MyQrCodeState extends State<MyQrCode> {
     );
   }
 
-  _buildAvatarHolder(String avatar) {
+  _buildAvatarHolder(String? avatar) {
     return Hero(
       tag: 'avatar',
       child: Center(
-          child: avatar == null || avatar == ''
-              ? _buildAvatarNoFile()
-              : _buildAvatarNetwork(avatar)),
+        child: avatar == null || avatar == ''
+            ? _buildAvatarNoFile()
+            : _buildAvatarNetwork(avatar),
+      ),
     );
   }
 
@@ -141,27 +142,28 @@ class _MyQrCodeState extends State<MyQrCode> {
 
   Widget _buildAvatarNetwork(String avatar) {
     return Container(
-        child: CircleAvatar(
-      radius: 25,
-      child: ClipOval(
-        child: CachedNetworkImage(
-          height: 50.0,
-          width: 50.0,
-          fit: BoxFit.cover,
-          imageUrl: avatar,
-          placeholder: (context, url) => CircularProgressIndicator(),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+      child: CircleAvatar(
+        radius: 25,
+        child: ClipOval(
+          child: CachedNetworkImage(
+            height: 50.0,
+            width: 50.0,
+            fit: BoxFit.cover,
+            imageUrl: avatar,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
         ),
       ),
-    ));
+    );
   }
 
-  Widget _name(Profile profile) {
+  Widget _name(Profile? profile) {
     return Container(
       child: Text(
         profile == null
             ? 'Name'
-            : '${profile.name} ${profile.firstname ?? ''} ${profile.secondname ?? ''}',
+            : '${profile.name} ${profile.firstname} ${profile.secondname ?? ''}',
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );

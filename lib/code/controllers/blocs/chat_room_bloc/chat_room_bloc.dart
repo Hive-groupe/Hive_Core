@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:built_collection/built_collection.dart';
-import 'package:emoji_picker/emoji_picker.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive_core/code/models/chat_message.dart';
 import 'package:hive_core/code/models/enum/chat_message_type.dart';
@@ -45,8 +45,8 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
   bool _isSearchingMessage = false;
   bool _isRecordingAudio = false;
 
-  String _senderId;
-  User _sender;
+  late String? _senderId;
+  late User? _sender;
   final _chatMessageList = BehaviorSubject<BuiltList<ChatMessage>>();
 
   ChatRoomBloc(
@@ -54,15 +54,11 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     this._searchController,
     this._textFieldFocus,
     this._listScrollController, {
-    @required AuthenticationRepository authenticationRepository,
-    @required UserRepository userRepository,
-    @required ChatMessageRepository chatMessageRepository,
-    // @required ImageUploadProvider imageUploadProvider
-  })  : assert(authenticationRepository != null),
-        assert(userRepository != null),
-        assert(chatMessageRepository != null),
-        // assert(imageUploadProvider != null),
-        _authenticationRepository = authenticationRepository,
+    required AuthenticationRepository authenticationRepository,
+    required UserRepository userRepository,
+    required ChatMessageRepository chatMessageRepository,
+    // required ImageUploadProvider imageUploadProvider
+  })  : _authenticationRepository = authenticationRepository,
         _userRepository = userRepository,
         _chatMessageRepository = chatMessageRepository,
         // _imageUploadProvider = imageUploadProvider,
@@ -81,7 +77,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
 
   @override
   Future<void> close() {
-    _chatMessageList?.close();
+    _chatMessageList.close();
 
     return super.close();
   }
@@ -128,6 +124,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     } else if (event is HideKeyboard) {
       yield* _mapHideKeyboardToState(event);
     }*/
+
 /**
  * =============================================================================
  * 
@@ -145,6 +142,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     } else if (event is AddEmoji) {
       yield* _mapAddEmojiToState(event);
     }
+
     /**
  * =============================================================================
  * 
@@ -161,6 +159,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     } else if (event is LikedMessage) {
       yield* _mapLikeMessageToState(event);
     }
+
 /**
  * =============================================================================
  * 
@@ -190,13 +189,15 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
 
       _senderId =
           _senderId ?? await _authenticationRepository.getCurrentUserId();
-      _sender = _sender ?? await _userRepository.getUserById(_senderId);
+      _sender = _sender ?? await _userRepository.getUserById(_senderId ?? '');
       _reciverId = event.receiverId;
 
       _chatMessageRepository
           .fetchChatMessagesAsStream(
-              senderId: _senderId, receiverId: _reciverId)
-          .listen((event) => _chatMessageList.sink.add(event));
+              senderId: _senderId ?? '', receiverId: _reciverId)
+          .listen(
+            (event) => _chatMessageList.sink.add(event),
+          );
 
       yield* _reloadStatus();
     } catch (e) {
@@ -274,7 +275,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
         uploadImage(
           image: _photo,
           receiverId: _reciverId,
-          senderId: _senderId,
+          senderId: _senderId ?? '',
         );
 
         _resetControls();
@@ -318,7 +319,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     } catch (_) {}
   }
 
-  /**
+  /*
  * =============================================================================
  * 
  *                           Scroll event
@@ -333,7 +334,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     } catch (_) {}
   }
 
-/**
+/*
  * =============================================================================
  * 
  *                           Keyboard event
@@ -367,7 +368,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     } catch (_) {}
   }*/
 
-  /**
+  /*
  * =============================================================================
  * 
  *                          Emojis event
@@ -418,7 +419,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     } catch (_) {}
   }
 
-  /**
+  /*
  * =============================================================================
  * 
  *                           message event
@@ -445,7 +446,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
 
   Stream<ChatRoomState> _mapDeleteMessageToState(DeleteMessage event) async* {
     try {
-      _chatMessageRepository.removeChatMessage(event.messageId);
+      _chatMessageRepository.removeChatMessage(event.messageId ?? '');
       _isMessageSelected = false;
       yield* _reloadStatus();
     } catch (_) {}
@@ -460,7 +461,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     } catch (_) {}
   }
 
-/**
+/*
  * =============================================================================
  * 
  *                           Search message event
@@ -514,11 +515,13 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
       _senderId ?? await _authenticationRepository.getCurrentUserId();
 
       _chatMessageRepository.emptyChat(
-          senderId: _senderId, receiverId: _reciverId);
+        senderId: _senderId ?? '',
+        receiverId: _reciverId,
+      );
     } catch (_) {}
   }
 
-/**
+/*
  * =============================================================================
  * 
  *                          Tools
@@ -544,13 +547,19 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
   }
 
   _moveScrollToDown() {
-    _listScrollController.animateTo(_listScrollController.initialScrollOffset,
-        curve: Curves.linear, duration: Duration(milliseconds: 300));
+    _listScrollController.animateTo(
+      _listScrollController.initialScrollOffset,
+      curve: Curves.linear,
+      duration: Duration(milliseconds: 300),
+    );
     _isScrollDown = true;
   }
 
   Stream<ChatRoomState> _reloadStatus() async* {
-    yield ChatLoaded(sender: _sender, chatMessageList: _chatMessageList.stream)
+    yield ChatLoaded(
+      sender: _sender!,
+      chatMessageList: _chatMessageList.stream,
+    )
       ..sendController = _sendController
       ..searchController = _searchController
       ..textFieldFocus = _textFieldFocus
@@ -564,9 +573,9 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
   }
 
   void uploadImage({
-    @required File image,
-    @required String receiverId,
-    @required String senderId,
+    required File image,
+    required String receiverId,
+    required String senderId,
   }) async {
 // -----------------------------
     final StorageMethods _storageMethods = StorageMethods();
@@ -576,7 +585,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     // _imageUploadProvider.setToLoading();
 
     // Get url from the image bucket
-    String url = await _storageMethods.uploadImageToStorage(image);
+    String url = await _storageMethods.uploadImageToStorage(image) ?? '';
 
     // Hide loading
     //  _imageUploadProvider.setToIdle();

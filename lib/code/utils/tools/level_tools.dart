@@ -8,34 +8,35 @@ class LevelTools {
         );
 
   LevelState calculate() {
-    _level.level = getLevel(_level.experience);
-    _level.experienceToNextLevel = getExperienceToNextLevel(_level.level);
+    _level.level = getLevel(_level.experience ?? 0);
+    _level.experienceToNextLevel = getExperienceToNextLevel(_level.level ?? 0);
 
     _level.levelProgress = getLevelProgress(
-        _level.experience,
-        getExperienceToPreviousLevel(_level.level),
-        getExperienceToNextLevel(_level.level));
+      _level.experience ?? 0,
+      getExperienceToPreviousLevel(_level.level ?? 0),
+      getExperienceToNextLevel(_level.level ?? 0),
+    );
 
     return _level;
   }
 
   static int getLevel(double experience) {
     int level = 1;
-    double XP = firstLevelExperience;
-    for (level; experience > XP; level++) {
-      XP = XP + XP * ratioDeProgresion;
+    double xp = firstLevelExperience;
+    for (level; experience > xp; level++) {
+      xp = xp + xp * ratioDeProgresion;
     }
 
     return level;
   }
 
   double getExperienceToNextLevel(int level) {
-    double XP = firstLevelExperience;
+    double xp = firstLevelExperience;
     for (int i = 1; i < level; i++) {
-      XP = XP + XP * ratioDeProgresion;
+      xp = xp + xp * ratioDeProgresion;
     }
 
-    return XP;
+    return xp;
   }
 
   double getLevelProgress(
@@ -52,12 +53,13 @@ class LevelTools {
 }
 
 class LevelState {
-  int level;
-  double experience, experienceToNextLevel, levelProgress;
+  int? level;
+  double? experience, experienceToNextLevel, levelProgress;
 
-  LevelState(
-      {this.level,
-      this.levelProgress,
-      this.experience,
-      this.experienceToNextLevel});
+  LevelState({
+    this.level,
+    this.levelProgress,
+    this.experience,
+    this.experienceToNextLevel,
+  });
 }

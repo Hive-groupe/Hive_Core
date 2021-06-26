@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_core/generated/l10n.dart';
 import 'package:hive_core/code/controllers/blocs/notifications_bloc/notifications_bloc.dart';
+import 'package:hive_core/generated/l10n.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class NotificationsTutorial extends StatefulWidget {
@@ -11,10 +11,10 @@ class NotificationsTutorial extends StatefulWidget {
   final Animation<double> animationSecondaryTutorial;
 
   const NotificationsTutorial(
-      {Key key,
-      @required this.animationControllerTutorial,
-      @required this.animationPrimaryTutorial,
-      @required this.animationSecondaryTutorial})
+      {Key? key,
+      required this.animationControllerTutorial,
+      required this.animationPrimaryTutorial,
+      required this.animationSecondaryTutorial})
       : super(key: key);
 
   @override
@@ -23,18 +23,18 @@ class NotificationsTutorial extends StatefulWidget {
 
 class _NotificationsTutorialState extends State<NotificationsTutorial> {
   // Blocs
-  NotificationsBloc _notificationsBloc;
+  late NotificationsBloc _notificationsBloc;
 
   // Controllers
-  PageController _pageController;
+  late PageController _pageController;
   int _currentPage = 0;
 
-  Size media;
+  late Size media;
 
   @override
   void initState() {
     // Blocs
-    _notificationsBloc = context.bloc<NotificationsBloc>();
+    _notificationsBloc = BlocProvider.of<NotificationsBloc>(context);
 
     // Controllers
     _pageController = PageController(
@@ -50,8 +50,10 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
   }
 
   List<Widget> getPageList() {
-    List<Widget> list = new List<Widget>();
-    list.add(_notificationsPage());
+    List<Widget> list = [];
+    list.add(
+      _notificationsPage(),
+    );
     return list;
   }
 
@@ -60,19 +62,18 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
     setState(() {});
   }
 
-  _finishTutorial() =>
-      _notificationsBloc.add(null // FinishTutorialNotifications()
-          );
+  _finishTutorial() => _notificationsBloc.add(FinishTutorialNotifications());
 
   @override
   Widget build(BuildContext context) {
     media = MediaQuery.of(context).size;
 
     return CupertinoFullscreenDialogTransition(
-        primaryRouteAnimation: widget.animationPrimaryTutorial,
-        secondaryRouteAnimation: widget.animationSecondaryTutorial,
-        linearTransition: false,
-        child: _build());
+      primaryRouteAnimation: widget.animationPrimaryTutorial,
+      secondaryRouteAnimation: widget.animationSecondaryTutorial,
+      linearTransition: false,
+      child: _build(),
+    );
   }
 
   Widget _build() {
@@ -98,8 +99,9 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
                   height: 5,
                 ),
                 Align(
-                    alignment: Alignment.bottomCenter,
-                    child: _btnSkipTutorial()),
+                  alignment: Alignment.bottomCenter,
+                  child: _btnSkipTutorial(),
+                ),
               ],
             ),
           ),
@@ -108,7 +110,9 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
     );
   }
 
-  Widget _pageView(List<Widget> pageList) {
+  Widget _pageView(
+    List<Widget> pageList,
+  ) {
     return Container(
       child: SizedBox.fromSize(
         size: Size.fromHeight(media.height * 0.75),
@@ -123,14 +127,18 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
 
   Widget _notificationsPage() {
     return Container(
-        child: Container(
-      margin: EdgeInsets.all(25),
-      child: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _payrollTutorial(),
-        ]),
+      child: Container(
+        margin: EdgeInsets.all(25),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _payrollTutorial(),
+            ],
+          ),
+        ),
       ),
-    ));
+    );
   }
 
   Widget _payrollTutorial() {
@@ -180,17 +188,23 @@ class _NotificationsTutorialState extends State<NotificationsTutorial> {
 
   Widget _btnSkipTutorial() {
     return Container(
-      child: OutlineButton(
-          onPressed: _finishTutorial,
-          child: Text(
-            HiveCoreString.of(context).skip_tutorial,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+      child: OutlinedButton(
+        onPressed: _finishTutorial,
+        child: Text(
+          HiveCoreString.of(context).skip_tutorial,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0),
             ),
           ),
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0))),
+        ),
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 part of 'call_sreen_bloc.dart';
 
 abstract class CallSreenState {
-  String currentUserId;
+  late String currentUserId;
 }
 
 class CallSreenInitial extends CallSreenState {}

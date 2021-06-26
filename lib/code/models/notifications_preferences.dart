@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:hive_core/code/utils/othes/serializers.dart';
@@ -8,7 +10,9 @@ abstract class NotificationsPreferences
     implements
         Built<NotificationsPreferences, NotificationsPreferencesBuilder> {
   bool get notifications;
+
   bool get soundEffects;
+
   bool get vibration;
 
   NotificationsPreferences._();
@@ -17,10 +21,14 @@ abstract class NotificationsPreferences
       _$NotificationsPreferences;
 
   Map<String, dynamic> toJson() {
-    return serializers.serializeWith(NotificationsPreferences.serializer, this);
+    return json.decode(
+      json.encode(
+        serializers.serializeWith(NotificationsPreferences.serializer, this),
+      ),
+    );
   }
 
-  static NotificationsPreferences fromJson(Map<String, dynamic> json) {
+  static NotificationsPreferences? fromJson(Map<String, dynamic> json) {
     return serializers.deserializeWith(
         NotificationsPreferences.serializer, json);
   }

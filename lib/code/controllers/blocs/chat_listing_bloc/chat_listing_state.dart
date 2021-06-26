@@ -22,15 +22,15 @@ class ChatListingLoading extends ChatListingState {
 }
 
 class ChatListingLoaded extends ChatListingState {
-  final BehaviorSubject<BuiltList<ChatContact>> chatRoomsList;
-  final BehaviorSubject<BuiltList<ChatRoom>> favoriteChatRoomsList;
+  final Stream<BuiltList<ChatContact>> chatRoomsList;
+  final Stream<BuiltList<ChatRoom>> favoriteChatRoomsList;
 
   final String senderId;
 
   ChatListingLoaded({
-    this.chatRoomsList,
-    this.favoriteChatRoomsList,
-    this.senderId,
+    required this.chatRoomsList,
+    required this.favoriteChatRoomsList,
+    required this.senderId,
   });
 
   @override
@@ -43,9 +43,9 @@ class ChatListingLoaded extends ChatListingState {
 }
 
 class ChatSearching extends ChatListingState {
-  final BehaviorSubject<BuiltList<User>> userList;
+  final Stream<BuiltList<User>> userList;
 
-  ChatSearching({this.userList});
+  ChatSearching({required this.userList});
 
   @override
   String toString() => '''

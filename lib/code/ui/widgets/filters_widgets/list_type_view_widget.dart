@@ -11,9 +11,9 @@ class ListTypeViewWidget extends StatefulWidget {
   final String title;
 
   const ListTypeViewWidget({
-    Key key,
-    @required this.listViewType,
-    this.title,
+    Key? key,
+    required this.listViewType,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -22,21 +22,26 @@ class ListTypeViewWidget extends StatefulWidget {
 
 class _ListTypeViewWidgetState extends State<ListTypeViewWidget> {
   @override
-  Widget build(BuildContext context) {
-    return SettingsGroup(title: widget.title ?? 'Modo', elements: [
-      RadioButtonGroupFieldBlocBuilder<ListViewType>(
-        selectFieldBloc: widget.listViewType,
-        itemBuilder: (context, value) {
-          switch (value) {
-            case ListViewType.LIST:
-              return 'Lista';
-            case ListViewType.TABLE:
-              return 'Tabla';
-            default:
-              return '';
-          }
-        },
-      ),
-    ]);
+  Widget build(
+    BuildContext context,
+  ) {
+    return SettingsGroup(
+      title: widget.title ?? 'Modo',
+      elements: [
+        RadioButtonGroupFieldBlocBuilder<dynamic>(
+          selectFieldBloc: widget.listViewType,
+          itemBuilder: (context, value) {
+            switch (value) {
+              case ListViewType.LIST:
+                return 'Lista';
+              case ListViewType.TABLE:
+                return 'Tabla';
+              default:
+                return '';
+            }
+          },
+        ),
+      ],
+    );
   }
 }

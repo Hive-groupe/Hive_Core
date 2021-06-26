@@ -20,7 +20,7 @@ class NotificationsLoading extends NotificationsState {
 class NotificationsLoaded extends NotificationsState {
   final Stream<BuiltList<Widget>> notificationsList;
 
-  NotificationsLoaded({@required this.notificationsList});
+  NotificationsLoaded({required this.notificationsList});
 
   @override
   List<Object> get props => [];

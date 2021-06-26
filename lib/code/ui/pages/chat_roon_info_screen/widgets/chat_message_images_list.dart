@@ -1,15 +1,14 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_core/code/models/chat_message.dart';
-import 'package:rxdart/rxdart.dart';
 
 import 'chat_message_image_item.dart';
 
 class ChatMessageImageList extends StatefulWidget {
-  final BehaviorSubject<BuiltList<ChatMessage>> chatMessageList;
+  final Stream<BuiltList<ChatMessage>> chatMessageList;
 
   ChatMessageImageList({
-    @required this.chatMessageList,
+    required this.chatMessageList,
   });
 
   @override
@@ -17,7 +16,7 @@ class ChatMessageImageList extends StatefulWidget {
 }
 
 class _ChatMessageImageListState extends State<ChatMessageImageList> {
-  BehaviorSubject<BuiltList<ChatMessage>> chatMessageList;
+  late Stream<BuiltList<ChatMessage>> chatMessageList;
 
   @override
   void initState() {
@@ -27,11 +26,11 @@ class _ChatMessageImageListState extends State<ChatMessageImageList> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<BuiltList<ChatMessage>>(
       stream: chatMessageList,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return _buildList(snapshot.data);
+          return _buildList(snapshot.data!);
         } else if (snapshot.hasError) {
           return _buildListError();
         } else {
@@ -44,8 +43,9 @@ class _ChatMessageImageListState extends State<ChatMessageImageList> {
   Widget _buildList(BuiltList<ChatMessage> list) {
     return GridView.builder(
       itemCount: list.length,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+      ),
       itemBuilder: (context, index) => ChatMessageImageItem(
         list: list,
         index: index,
@@ -58,6 +58,8 @@ class _ChatMessageImageListState extends State<ChatMessageImageList> {
   }
 
   Widget _buildListLoading() {
-    return Center(child: CircularProgressIndicator());
+    return Center(
+      child: CircularProgressIndicator(),
+    );
   }
 }

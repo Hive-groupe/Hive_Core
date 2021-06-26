@@ -10,45 +10,46 @@ class GithubFormCard extends StatelessWidget {
   final VoidCallback onRemoveGithub;
 
   const GithubFormCard({
-    Key key,
-    @required this.githubIndex,
-    @required this.githubFieldBloc,
-    @required this.onRemoveGithub,
+    Key? key,
+    required this.githubIndex,
+    required this.githubFieldBloc,
+    required this.onRemoveGithub,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: Colors.transparent,
-        margin: const EdgeInsets.only(
-          left: 20,
-        ),
-        child: ListTile(
-          //leading: _iconHolder(),
-          title: Container(
-            child: Column(
-              children: <Widget>[
-                // _title(),
-                TextFieldBlocBuilder(
-                  textFieldBloc: githubFieldBloc.label,
-                  decoration: InputDecoration(
-                    labelText: 'Etiqueta', isDense: true, // Added this
-                    contentPadding: EdgeInsets.all(8),
-                  ),
+      color: Colors.transparent,
+      margin: const EdgeInsets.only(
+        left: 20,
+      ),
+      child: ListTile(
+        //leading: _iconHolder(),
+        title: Container(
+          child: Column(
+            children: <Widget>[
+              // _title(),
+              TextFieldBlocBuilder(
+                textFieldBloc: githubFieldBloc.label,
+                decoration: InputDecoration(
+                  labelText: 'Etiqueta', isDense: true, // Added this
+                  contentPadding: EdgeInsets.all(8),
                 ),
-                TextFieldBlocBuilder(
-                  textFieldBloc: githubFieldBloc.value,
-                  decoration: InputDecoration(
-                    labelText: 'Correo electronico',
-                    isDense: true, // Added this
-                    contentPadding: EdgeInsets.all(8),
-                  ),
+              ),
+              TextFieldBlocBuilder(
+                textFieldBloc: githubFieldBloc.value,
+                decoration: InputDecoration(
+                  labelText: 'Correo electronico',
+                  isDense: true, // Added this
+                  contentPadding: EdgeInsets.all(8),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          trailing: _trailing(),
-        ));
+        ),
+        trailing: _trailing(),
+      ),
+    );
   }
 
   Widget _trailing() {
