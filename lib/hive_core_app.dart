@@ -38,11 +38,11 @@ import 'code/ui/pages/settings_screen/settings_screen.dart';
 class HiveCoreApp extends StatelessWidget {
   final String title;
   final bool debugShowCheckedModeBanner;
-  final ThemeData theme;
+  final ThemeData? theme;
   final List<LocalizationsDelegate> appLocalizationDelegate;
-  final List<Locale> supportedLocales;
-  final Locale locale;
-  final String initialRoute;
+  final List<Locale>? supportedLocales;
+  final Locale? locale;
+  final String? initialRoute;
   final Widget home;
   final Map<String, WidgetBuilder> routes;
   final List<ChangeNotifierProvider> providers;
@@ -50,40 +50,41 @@ class HiveCoreApp extends StatelessWidget {
   final List<BlocProvider> blocs;
   final String admob_application_id;
 
-  HiveCoreApp(
-      {Key? key,
-      required this.title,
-      required this.debugShowCheckedModeBanner,
-      required this.theme,
-      required this.supportedLocales,
-      required this.appLocalizationDelegate,
-      required this.locale,
-      required this.initialRoute,
-      required this.home,
-      required this.routes,
-      required this.providers,
-      required this.repositorys,
-      required this.blocs,
-      required this.admob_application_id,
+  HiveCoreApp({
+    Key? key,
+    required this.title,
+    required this.debugShowCheckedModeBanner,
+    this.theme,
+    this.supportedLocales,
+    required this.appLocalizationDelegate,
+    this.locale,
+    this.initialRoute,
+    required this.home,
+    required this.routes,
+    required this.providers,
+    required this.repositorys,
+    required this.blocs,
+    required this.admob_application_id,
 
-      // Providers
-      // required this.imageUploadProvider,
+    // Providers
+    // required this.imageUploadProvider,
 
-      // Repositorys
-      required this.authenticationRepository,
-      required this.preferencesRepository,
-      required this.userRepository,
-      required this.deviceRepository,
-      required this.chatMessageRepository,
-      required this.tutorialRepository,
-      required this.storageRepository,
+    // Repositorys
+    required this.authenticationRepository,
+    required this.preferencesRepository,
+    required this.userRepository,
+    required this.deviceRepository,
+    required this.chatMessageRepository,
+    required this.tutorialRepository,
+    required this.storageRepository,
 
-      // Blocs
-      required this.authenticationBloc,
-      required this.preferencesBloc,
-      required this.notificationsBloc,
-      required this.advertisingBloc,
-      required this.callBloc});
+    // Blocs
+    required this.authenticationBloc,
+    required this.preferencesBloc,
+    required this.notificationsBloc,
+    required this.advertisingBloc,
+    required this.callBloc,
+  });
 
   @override
   Widget build(BuildContext context) {

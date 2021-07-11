@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 class StatisticsBarGraph extends StatefulWidget {
   final List<num> data;
 
-  const StatisticsBarGraph({Key? key, required this.data}) : super(key: key);
+  const StatisticsBarGraph({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   _StatisticsBarGraphState createState() => _StatisticsBarGraphState();
@@ -25,7 +28,7 @@ class _StatisticsBarGraphState extends State<StatisticsBarGraph> {
     if (selectedDatum.isNotEmpty) {
       time = selectedDatum.first.datum;
       selectedDatum.forEach((SeriesDatum datumPair) {
-        measures[datumPair.series.displayName] = datumPair.datum;
+        measures[datumPair.series.displayName!] = datumPair.datum;
       });
     }
 
@@ -46,7 +49,7 @@ class _StatisticsBarGraphState extends State<StatisticsBarGraph> {
         id: 'Gasto',
         colorFn: (_, __) => MaterialPalette.deepOrange
             .shadeDefault, //MaterialPalette.purple.shadeDefault, //MaterialPalette.blue.shadeDefault,
-        domainFn: (value, index) => index,
+        domainFn: (value, index) => index!,
         measureFn: (value, _) => value,
         data: widget.data,
         strokeWidthPxFn: (_, __) => 2,

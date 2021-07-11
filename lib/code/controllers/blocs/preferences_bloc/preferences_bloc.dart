@@ -37,7 +37,7 @@ class PreferencesBloc extends Bloc<PreferencesEvent, PreferencesState> {
 
   PreferencesBloc({
     required PreferencesRepository preferencesRepository,
-    required Preferences preferences,
+    Preferences? preferences,
   })  : _preferencesRepository = preferencesRepository,
         _preferences = preferences ?? _defaultStatePreferences,
         super(

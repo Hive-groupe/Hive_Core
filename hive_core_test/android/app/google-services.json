@@ -1,0 +1,218 @@
+{
+  "project_info": {
+    "project_number": "412019048311",
+    "firebase_url": "https://hive-4143b.firebaseio.com",
+    "project_id": "hive-4143b",
+    "storage_bucket": "hive-4143b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412019048311:android:19c74ab14cdec0b6072b72",
+        "android_client_info": {
+          "package_name": "com.hive.hiveCoreTest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArYNrsEri00ZnZoPpiJNervQGKxJwopfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "412019048311-hchbh7n2bvb0n4h4p6b18dnded16ahcr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hive"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412019048311:android:daf6fb878f30935c072b72",
+        "android_client_info": {
+          "package_name": "com.hive.hive_core_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArYNrsEri00ZnZoPpiJNervQGKxJwopfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "412019048311-hchbh7n2bvb0n4h4p6b18dnded16ahcr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hive"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412019048311:android:93da8387ef471a31072b72",
+        "android_client_info": {
+          "package_name": "com.hive.hive_health"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412019048311-hsm6kb9cah0vaqbi7tlnqgcknkdstkqn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hive.hive_health",
+            "certificate_hash": "d240188cf24ea29b84b65bd96a290a1fe2fb3df5"
+          }
+        },
+        {
+          "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArYNrsEri00ZnZoPpiJNervQGKxJwopfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "412019048311-hchbh7n2bvb0n4h4p6b18dnded16ahcr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hive"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3714274271110810~1813563053"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412019048311:android:d9560929167cf7a2072b72",
+        "android_client_info": {
+          "package_name": "com.hive.hive_job_control"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412019048311-5tjsbs1o4hlu97ihh9upk8qcf5dshkc2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hive.hive_job_control",
+            "certificate_hash": "7120dab8e79bdfa2fb01d15f9341e5d4acf6c853"
+          }
+        },
+        {
+          "client_id": "412019048311-sis0vqq92dpf92oackbhl3f9moafl76s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hive.hive_job_control",
+            "certificate_hash": "34bb43fd57ad0dbe6478303f70c6d68bb678a470"
+          }
+        },
+        {
+          "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArYNrsEri00ZnZoPpiJNervQGKxJwopfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "412019048311-hchbh7n2bvb0n4h4p6b18dnded16ahcr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hive"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3714274271110810~8032607576"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412019048311:android:578ef32a9a3bdd20072b72",
+        "android_client_info": {
+          "package_name": "com.hive.hive_osiris"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArYNrsEri00ZnZoPpiJNervQGKxJwopfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412019048311-pfeot0qhh2qn2pt6rjsvdv1khcpbhm4t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "412019048311-hchbh7n2bvb0n4h4p6b18dnded16ahcr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hive"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3714274271110810~8668291570"
+    }
+  ],
+  "configuration_version": "1"
+}

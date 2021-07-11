@@ -18,21 +18,21 @@ dependencies:
   path_provider: ^2.0.2
   shared_preferences: ^2.0.6
   hive: ^2.0.4 # local storage
-  sqflite: ^2.0.0+3 # local storage
+  sqflite: ^2.0.0+3
 
   #
   # Firebase packages
   #
   firebase_core: ^1.3.0
-  firebase_auth: ^1.4.1
+  firebase_auth: ^2.0.0
   # firebase_auth_web: ^1.3.1
-  firebase_storage: ^8.1.3
-  firebase_messaging: ^10.0.2
+  firebase_storage: ^9.0.0
+  firebase_messaging: ^10.0.3
   firebase_admob: ^0.11.2
   # firebase_analyticss: ^6.2.0
   # firebase_crashlytics: ^0.2.3
   # firebase_ml_vision: ^0.9.8
-  cloud_firestore: ^2.2.2
+  cloud_firestore: ^2.3.0
 
   #
   # Login & App Store packages
@@ -44,7 +44,7 @@ dependencies:
   #
   # State managers
   #
-  flutter_form_bloc: ^0.20.5
+  flutter_form_bloc: ^0.20.6
 
   #
   # Code structure, connectivity & internal services
@@ -52,15 +52,15 @@ dependencies:
   flutter_localized_locales: ^2.0.2 #!!!!! ELIMINAR !!!!!!
   json_annotation: ^4.0.1 # Para la serializacion de objetos
   freezed_annotation: ^0.14.2
-  url_launcher: ^6.0.7
-  camera: ^0.8.1+3
-  image_picker: ^0.8.1+1
+  url_launcher: ^6.0.9
+  camera: ^0.8.1+4
+  image_picker: ^0.8.1+3
   # multi_image_picker: ^4.6.1
   # file_picker: ^1.6.3+2
   agora_rtc_engine: ^4.0.2
   package_info: ^2.0.2
   # device_info: ^0.4.2+4 # Para obtener información del dispositivo
-  permission_handler: ^8.1.1
+  permission_handler: ^8.1.2
   excel: ^2.0.0-null-safety-3
 
   #
@@ -74,8 +74,8 @@ dependencies:
   font_awesome_flutter: ^9.1.0
   flutter_svg: ^0.22.0
   cached_network_image: ^3.0.0
-  charts_flutter: ^0.10.0
-  table_calendar: ^3.0.0
+  charts_flutter: ^0.11.0
+  table_calendar: ^3.0.1
   smooth_page_indicator: ^0.2.3
   flutter_map: ^0.13.1
   flutter_colorpicker: ^0.5.0
@@ -90,8 +90,8 @@ dev_dependencies:
     sdk: flutter
 
   # Para la serializacion de objetos
-  build_runner: ^2.0.5
-  built_value_generator: ^8.1.0
+  build_runner: ^2.0.6
+  built_value_generator: ^8.1.1
   injectable_generator: ^1.4.1
   freezed: ^0.14.2
 
