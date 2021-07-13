@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_core/code/repositories/tutorial_repository/tutorial_repository.dart';
 
 import 'package:meta/meta.dart';
-import 'package:rxdart/rxdart.dart';
 
 part 'dialy_screen_event.dart';
 part 'dialy_screen_state.dart';

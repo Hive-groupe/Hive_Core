@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_core/code/controllers/blocs/advertising_bloc/advertising_bloc.dart';
 import 'package:hive_core/code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
@@ -21,7 +22,9 @@ import 'src/iu/pages/dialy_screen/dialy_screen.dart';
 import 'src/iu/routes/delivery_navigation.dart';
 
 void main() async {
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  // MobileAds.instance.initialize();
+  await Firebase.initializeApp();
 
   // Providers
   // ImageUploadProvider _imageUploadProvider;
@@ -60,7 +63,8 @@ void main() async {
     */
   _authenticationRepository = AuthenticationRepositoryFirebaseImpl();
   _userRepository = UserRepositoryFirebaseImpl(USERS_COLLECTION);
-  _userId = await _authenticationRepository.getCurrentUserId() ?? '';
+  _userId =
+      'Fsx2Xrik6XS5WxehJnWHplXOYTv1'; // await _authenticationRepository.getCurrentUserId() ?? '';
   //===========================================================
   _preferencesRepository = PreferencesRepositorySharedPreferencesImp();
   _deviceRepository = DeviceRepositoryFirebaseImpl(

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_admob/firebase_admob.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'advertising_event.dart';
 part 'advertising_state.dart';
@@ -10,7 +10,7 @@ part 'advertising_state.dart';
 class AdvertisingBloc extends Bloc<AdvertisingEvent, AdvertisingState> {
   bool _isPremiumAcount;
   String _admobApplicationId;
-  late BannerAd _bannerAd;
+  // late BannerAd _bannerAd;
 
   AdvertisingBloc({
     required bool isPremiumAcount,
@@ -22,7 +22,7 @@ class AdvertisingBloc extends Bloc<AdvertisingEvent, AdvertisingState> {
         );
 
   initState() {
-    FirebaseAdMob.instance.initialize(appId: _admobApplicationId);
+    //   FirebaseAdMob.instance.initialize(appId: _admobApplicationId);
   }
 
   @override
@@ -36,6 +36,7 @@ class AdvertisingBloc extends Bloc<AdvertisingEvent, AdvertisingState> {
 
   Stream<AdvertisingState> _mapIntiAdvertisingToState(
       InitAdvertising event) async* {
+    /*
     // Inicializacion de anuncios
     FirebaseAdMob.instance.initialize(appId: _admobApplicationId);
 
@@ -45,11 +46,11 @@ class AdvertisingBloc extends Bloc<AdvertisingEvent, AdvertisingState> {
       _bannerAd.show(); // Inicializacion de banner
     } else {
       _bannerAd.dispose();
-    }
+    }*/
   }
 
-  BannerAd createBannerAd() {
-    return BannerAd(
+  /*   BannerAd createBannerAd() {
+  return BannerAd(
       adUnitId: 'ca-app-pub-3714274271110810/1958153813',
       size: AdSize.banner,
       targetingInfo: targetingInfo,
@@ -57,15 +58,16 @@ class AdvertisingBloc extends Bloc<AdvertisingEvent, AdvertisingState> {
         print("BannerAd event $event");
       },
     );
-  }
+    
+  }*/
 
-  static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+  /* static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
     testDevices: testDevice != null ? <String>[testDevice] : null,
     keywords: <String>['job', 'business', 'car'],
     // contentUrl: 'http://foo.com/bar.html',
     childDirected: true,
     nonPersonalizedAds: true,
-  );
+  );*/
 }
 
 const String testDevice = 'YOUR_DEVICE_ID';

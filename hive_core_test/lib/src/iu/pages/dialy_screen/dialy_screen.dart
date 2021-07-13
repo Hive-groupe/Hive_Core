@@ -32,12 +32,11 @@ class _DialyScreenState extends State<DialyScreen> {
   @override
   void initState() {
     // Repositorys
-
     _tutorialRepository = RepositoryProvider.of<TutorialRepository>(context);
 
     _dialyScreenBloc = DialyScreenBloc(
-      context: context, tutorialRepository: _tutorialRepository,
-      // Repositorys
+      context: context,
+      tutorialRepository: _tutorialRepository,
     )..add(GetDailyData(selectedDate: DateTime.now()));
 
     _scrollViewController = ScrollController();
@@ -54,7 +53,9 @@ class _DialyScreenState extends State<DialyScreen> {
 
   void _goNotificationsScreen() {
     Navigator.pushNamed(
-        context, HiveCoreConstString.route_notifications_screen);
+      context,
+      HiveCoreConstString.route_notifications_screen,
+    );
   }
 
   void _goChatListScreen() => Navigator.pushNamed(
@@ -103,7 +104,7 @@ class _DialyScreenState extends State<DialyScreen> {
   Widget _buildError() {
     return Scaffold(
       body: Column(
-        children: <Widget>[
+        children: [
           const SizedBox(
             height: 15,
           ),
@@ -134,6 +135,7 @@ class _DialyScreenState extends State<DialyScreen> {
 
   Widget _buidLoadedVertical(DialyScreenLoaded state) {
     return Scaffold(
+      backgroundColor: Colors.red,
       /* bottomNavigationBar: MyBottomNavigationBar(
           context: context,
         ),*/

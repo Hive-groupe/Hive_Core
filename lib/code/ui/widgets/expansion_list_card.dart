@@ -259,8 +259,8 @@ class _ExpansionCardBaseState extends State<_ExpansionCardBase>
     _padding = _controller.drive(
       _edgeInsetsTween.chain(_paddingTween),
     );
-    _isExpanded = PageStorage.of(context)?.readState(context) as bool ??
-        widget.initiallyExpanded;
+    _isExpanded =
+        PageStorage.of(context)!.readState(context) ?? widget.initiallyExpanded;
     if (_isExpanded) _controller.value = 1.0;
   }
 
@@ -365,7 +365,7 @@ class _ExpansionCardBaseState extends State<_ExpansionCardBase>
     return AnimatedBuilder(
       animation: _controller.view,
       builder: _buildChildren,
-      child: closed ? null : widget.builder(_toggleExpansion) ?? SizedBox(),
+      child: closed ? null : widget.builder(_toggleExpansion),
     );
   }
 }
