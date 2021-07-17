@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/__deprecated__/ui/fail_info.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/register_form_bloc/register_form_bloc.dart';
-import 'package:hive_core/code/models/enum/gender.dart';
-import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
-import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
+import 'package:hive_core/code/domain/controllers/blocs/register_form_bloc/register_form_bloc.dart';
+import 'package:hive_core/code/data/models/enum/gender.dart';
+import 'package:hive_core/code/data/repositories/authentication_repository/authentication_repository.dart';
+import 'package:hive_core/code/data/repositories/user_repository/user_repository.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
 import 'package:hive_core/code/ui/widgets/banner_size.dart';
 import 'package:hive_core/code/ui/widgets/form_widgets/contact_form/contact_form.dart';
@@ -44,10 +44,11 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
 
   _goFailInfoScreen() {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => FailInfoScreen(),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => FailInfoScreen(),
+      ),
+    );
   }
 
   void _goBack() => Navigator.pop(context);
@@ -372,7 +373,9 @@ class _RegistrationFormSrceenState extends State<RegistrationFormSrceen> {
         child: Image(
           height: 150.0,
           width: 150.0,
-          image: AssetImage(avatarFile.path), //snapshot.data!),
+          image: AssetImage(
+            avatarFile.path,
+          ), //snapshot.data!),
           fit: BoxFit.cover,
         ),
       ),

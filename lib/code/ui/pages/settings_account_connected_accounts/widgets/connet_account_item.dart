@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/settings_device_list_bloc/device_list_bloc.dart';
-import 'package:hive_core/code/models/device.dart';
-import 'package:hive_core/code/utils/tools/time_tools/time_tools.dart';
+import 'package:hive_core/code/domain/controllers/blocs/settings_device_list_bloc/device_list_screen_bloc.dart';
+import 'package:hive_core/code/data/models/device.dart';
+import 'package:hive_core/code/domain/tools/time_tools/time_tools.dart';
 
 class ConnetAccountItem extends StatefulWidget {
   final Device model;
@@ -18,11 +18,12 @@ class ConnetAccountItem extends StatefulWidget {
 }
 
 class _ConnetAccountItemState extends State<ConnetAccountItem> {
-  late DeviceListBloc _deviceListBloc;
+  // Blocs
+  late DeviceListScreenBloc _deviceListScreenBloc;
 
   @override
   void initState() {
-    _deviceListBloc = BlocProvider.of<DeviceListBloc>(context);
+    _deviceListScreenBloc = BlocProvider.of<DeviceListScreenBloc>(context);
     super.initState();
   }
 
@@ -33,7 +34,7 @@ class _ConnetAccountItemState extends State<ConnetAccountItem> {
 
   void _onDeleteData() {
     Navigator.pop(context);
-    _deviceListBloc
+    _deviceListScreenBloc
       ..add(
         DeleteDeviceItem(deviceId: widget.model.metadata.id ?? ''),
       );

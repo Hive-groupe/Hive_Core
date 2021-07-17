@@ -1,12 +1,12 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
-import 'package:hive_core/code/models/chat_message.dart';
-import 'package:hive_core/code/models/enum/chat_message_type.dart';
+import 'package:hive_core/code/domain/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
+import 'package:hive_core/code/data/models/chat_message.dart';
+import 'package:hive_core/code/data/models/enum/chat_message_type.dart';
 import 'package:hive_core/code/ui/pages/chat_image_detail_screen/chat_image_detail_screen.dart';
-import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/cached_image.dart';
-import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
+import 'package:hive_core/code/ui/pages/chat_list_screen/widgets/_ordenar_/cached_image.dart';
+import 'package:hive_core/code/ui/constants/hive_const_colors.dart';
 
 class ChatMessageItem extends StatefulWidget {
   final String currentUserId;

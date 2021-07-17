@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/preferences_bloc/preferences_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/preferences_bloc/preferences_bloc.dart';
 import 'package:hive_core/code/ui/widgets/expansion_list_card.dart';
 
 class SettingsLocaleForm extends StatefulWidget {

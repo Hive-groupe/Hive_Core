@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
+import 'package:hive_core/code/ui/routes/delivery_navigation.dart';
 
 class UserAvatar extends StatefulWidget {
   @override
@@ -18,7 +18,9 @@ class _UserAvatarState extends State<UserAvatar> {
   }
 
   void _goEditProfile() => Navigator.pushNamed(
-      context, HiveCoreConstString.user_profile_form_srceen);
+        context,
+        HiveDeliveryRoutes.user_profile_form_srceen,
+      );
 
   @override
   Widget build(BuildContext context) {

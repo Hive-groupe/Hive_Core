@@ -7,6 +7,6 @@ abstract class DeliveryRoutes {
 
 abstract class DeliveryPages {
   static final pages = {
-    DeliveryRoutes.route_daily_screen: (context) => DialyScreen(),
+    DeliveryRoutes.route_daily_screen: (context) => const DialyScreen(),
   };
 }

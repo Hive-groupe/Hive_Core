@@ -2,17 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/chat_roon_info_bloc/chat_roon_info_bloc.dart';
-import 'package:hive_core/code/models/user.dart';
-import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
+import 'package:hive_core/code/domain/controllers/blocs/chat_roon_info_bloc/chat_roon_info_bloc.dart';
+import 'package:hive_core/code/data/models/user.dart';
+import 'package:hive_core/code/ui/constants/hive_const_colors.dart';
+import 'package:hive_core/code/ui/constants/hive_const_strings.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'widgets/chat_message_images_list.dart';
 
 class ChatRoonInfoScreen extends StatefulWidget {
   final User receiver;
 
-  ChatRoonInfoScreen({required this.receiver});
+  ChatRoonInfoScreen({
+    required this.receiver,
+  });
 
   @override
   _ChatRoonInfoScreenState createState() => _ChatRoonInfoScreenState();
@@ -143,21 +146,33 @@ class _ChatRoonInfoScreenState extends State<ChatRoonInfoScreen>
           create: (BuildContext context) => _chatRoonInfoBloc,
         ),
       ],
-      child: BlocConsumer(
+      child: BlocConsumer<ChatRoonInfoBloc, ChatRoonInfoState>(
         bloc: _chatRoonInfoBloc,
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is ChatLoaded) {
-            return _build(state);
-          } else {
-            return Container();
-          }
-        },
+        listener: (context, state) => state.maybeMap(
+          chatLoaded: (state) {},
+          chatRoonInfoInitial: (state) {},
+          orElse: () {},
+        ),
+        builder: (context, state) => state.maybeMap(
+          chatLoaded: (state) => ScreenTypeLayout(
+            desktop: _buildLoadedMovilView(state: state),
+            mobile: _buildLoadedMovilView(state: state),
+            tablet: _buildLoadedMovilView(state: state),
+          ),
+          chatRoonInfoInitial: (state) => ScreenTypeLayout(
+            desktop: Container(),
+            mobile: Container(),
+            tablet: Container(),
+          ),
+          orElse: () => Container(),
+        ),
       ),
     );
   }
 
-  Widget _build(ChatLoaded state) {
+  Widget _buildLoadedMovilView({
+    required ChatLoaded state,
+  }) {
     return Scaffold(
       body: NestedScrollView(
         controller: _scrollController,

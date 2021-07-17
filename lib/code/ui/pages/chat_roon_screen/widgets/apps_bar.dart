@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:hive_core/code/utils/_ordenar_calls/call_utilities.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
-import 'package:hive_core/code/models/user.dart';
-import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/cached_image.dart';
+import 'package:hive_core/code/domain/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
+import 'package:hive_core/code/data/models/user.dart';
+import 'package:hive_core/code/ui/pages/chat_list_screen/widgets/_ordenar_/cached_image.dart';
 import 'package:hive_core/code/ui/pages/chat_roon_info_screen/chat_roon_info_screen.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
-import 'package:hive_core/code/utils/_ordenar_calls/call_utilities.dart';
-import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
-import 'package:hive_core/code/utils/othes/permissions_tools.dart';
+import 'package:hive_core/code/ui/constants/hive_const_colors.dart';
+import 'package:hive_core/code/device/permissions_tools.dart';
 
 class ChatAppsBar extends StatelessWidget implements PreferredSizeWidget {
   final ChatRoomBloc chatRoomBloc;
@@ -171,7 +171,7 @@ class ChatAppsBar extends StatelessWidget implements PreferredSizeWidget {
       );
 
   _onDeleteMessage() => chatRoomBloc.add(
-        DeleteMessage(),
+        DeleteMessage(messageId: ''),
       );
 
   @override

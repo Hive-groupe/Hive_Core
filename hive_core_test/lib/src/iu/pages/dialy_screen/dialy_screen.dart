@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/repositories/tutorial_repository/tutorial_repository.dart';
+import 'package:hive_core/code/data/repositories/tutorial_repository/tutorial_repository.dart';
+import 'package:hive_core/code/ui/routes/delivery_navigation.dart';
 import 'package:hive_core/code/ui/widgets/banner_size.dart';
 import 'package:hive_core/code/ui/widgets/search_bar.dart';
-import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
+import 'package:hive_core/code/ui/constants/hive_const_colors.dart';
 
 import '../../../domain/controllers/blocs/daily_screen_bloc/dialy_screen_bloc.dart';
 
 class DialyScreen extends StatefulWidget {
   final String? otherUserId;
 
-  DialyScreen({
+  const DialyScreen({
     Key? key,
     this.otherUserId,
   }) : super(key: key);
@@ -54,13 +54,13 @@ class _DialyScreenState extends State<DialyScreen> {
   void _goNotificationsScreen() {
     Navigator.pushNamed(
       context,
-      HiveCoreConstString.route_notifications_screen,
+      HiveDeliveryRoutes.route_notifications_screen,
     );
   }
 
   void _goChatListScreen() => Navigator.pushNamed(
         context,
-        HiveCoreConstString.route_chat_list_screen,
+        HiveDeliveryRoutes.route_chat_list_screen,
       );
 
   @override
@@ -104,8 +104,8 @@ class _DialyScreenState extends State<DialyScreen> {
   Widget _buildError() {
     return Scaffold(
       body: Column(
-        children: [
-          const SizedBox(
+        children: const [
+          SizedBox(
             height: 15,
           ),
           Text(
@@ -124,7 +124,9 @@ class _DialyScreenState extends State<DialyScreen> {
     return Container();
   }
 
-  Widget _buidLoadedHorizontal(DialyScreenLoaded state) {
+  Widget _buidLoadedHorizontal(
+    DialyScreenLoaded state,
+  ) {
     return Scaffold(
       /* bottomNavigationBar: MyBottomNavigationBar(
           context: context,
@@ -182,18 +184,18 @@ class _DialyScreenState extends State<DialyScreen> {
 
   CupertinoSliverNavigationBar _cupertinaoAppBar() {
     return CupertinoSliverNavigationBar(
-      padding: EdgeInsetsDirectional.only(start: 0),
+      padding: const EdgeInsetsDirectional.only(start: 0),
       leading: Material(
         color: Colors.transparent,
         child: IconButton(
           onPressed: _goNotificationsScreen,
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.bell,
             color: HiveCoreConstColors.greyColor,
           ),
         ),
       ),
-      largeTitle: Text(
+      largeTitle: const Text(
         'Error', //   S.of(context).daily_title,
       ),
       trailing: Material(
@@ -201,7 +203,7 @@ class _DialyScreenState extends State<DialyScreen> {
         child: Container(
           child: IconButton(
             onPressed: _goChatListScreen,
-            icon: Icon(
+            icon: const Icon(
               CupertinoIcons.chat_bubble,
               color: HiveCoreConstColors.greyColor,
             ),
@@ -213,7 +215,7 @@ class _DialyScreenState extends State<DialyScreen> {
 
   Widget _searchBar() {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       child: SearchBar(),
     );
   }
@@ -233,8 +235,8 @@ class _DialyScreenState extends State<DialyScreen> {
         color: Theme.of(context).scaffoldBackgroundColor,
         child: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              const SizedBox(
+            children: const [
+              SizedBox(
                 height: 50,
               ),
             ],
@@ -247,7 +249,10 @@ class _DialyScreenState extends State<DialyScreen> {
   Widget _bodyHorizontal() {
     return NestedScrollView(
       controller: _scrollViewController,
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+      headerSliverBuilder: (
+        BuildContext context,
+        bool innerBoxIsScrolled,
+      ) {
         return <Widget>[
           _cupertinaoAppBar(),
           SliverToBoxAdapter(
@@ -259,8 +264,8 @@ class _DialyScreenState extends State<DialyScreen> {
         color: Theme.of(context).scaffoldBackgroundColor,
         child: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              const SizedBox(
+            children: const <Widget>[
+              SizedBox(
                 height: 50,
               ),
             ],

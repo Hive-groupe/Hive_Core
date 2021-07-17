@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/update_password_form_bloc/update_password_form_bloc.dart';
-import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
+import 'package:hive_core/code/data/repositories/authentication_repository/authentication_repository.dart';
+import 'package:hive_core/code/domain/controllers/blocs/update_password_form_bloc/update_password_form_bloc.dart';
+import 'package:hive_core/code/ui/routes/delivery_navigation.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
+import 'package:hive_core/generated/l10n.dart';
 
 class UpdatePasswordFormScreen extends StatelessWidget {
   late UpdatePasswordFormBloc formBloc;
@@ -41,7 +41,9 @@ class UpdatePasswordFormScreen extends StatelessWidget {
   void _goBack(BuildContext context) => Navigator.pop(context);
 
   void _goRestorePassword(BuildContext context) => Navigator.pushNamed(
-      context, HiveCoreConstString.route_restore_password_form_screen);
+        context,
+        HiveDeliveryRoutes.route_restore_password_form_screen,
+      );
 
   @override
   Widget build(BuildContext context) {

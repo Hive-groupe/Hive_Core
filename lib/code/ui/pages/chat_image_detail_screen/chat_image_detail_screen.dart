@@ -2,10 +2,10 @@ import 'package:built_collection/built_collection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/models/chat_message.dart';
-import 'package:hive_core/code/models/enum/chat_message_type.dart';
+import 'package:hive_core/code/data/models/chat_message.dart';
+import 'package:hive_core/code/data/models/enum/chat_message_type.dart';
 import 'package:hive_core/code/ui/widgets/banner_size.dart';
-import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
+import 'package:hive_core/code/ui/constants/hive_const_colors.dart';
 
 class ImageDetailScreen extends StatefulWidget {
   final BuiltList<ChatMessage> list;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/contact_form_bloc/facebook_field_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/contact_form_bloc/facebook_field_bloc.dart';
 
 class FacebookFormCard extends StatelessWidget {
   final int facebookIndex;

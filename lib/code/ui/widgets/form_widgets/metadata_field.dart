@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/_revisar/metadata_field_bloc/metadata_field_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/_revisar/metadata_field_bloc/metadata_field_bloc.dart';
 import 'package:hive_core/code/ui/widgets/settings_group.dart';
-import 'package:hive_core/code/utils/constants/hivre_const_icons.dart';
+import 'package:hive_core/code/ui/constants/hivre_const_icons.dart';
 
 class MetadataField extends StatelessWidget {
   final MetadataFieldBloc commentsFormBloc;

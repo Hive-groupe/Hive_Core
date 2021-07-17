@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/preferences_bloc/preferences_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/preferences_bloc/preferences_bloc.dart';
 import 'package:hive_core/code/ui/widgets/settings_group.dart';
-import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
-import 'package:hive_core/code/utils/constants/hive_const_theme.dart';
+import 'package:hive_core/code/ui/constants/hive_const_colors.dart';
+import 'package:hive_core/code/ui/constants/hive_const_theme.dart';
 
 class SettingsThemeForm extends StatefulWidget {
   @override

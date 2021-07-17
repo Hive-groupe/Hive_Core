@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/repositories/tutorial_repository/tutorial_repository.dart';
+import 'package:hive_core/code/data/repositories/tutorial_repository/tutorial_repository.dart';
 
 import 'package:meta/meta.dart';
 

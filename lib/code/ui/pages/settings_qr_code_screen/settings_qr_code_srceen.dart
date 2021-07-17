@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/settings_qr_code_bloc/settings_qr_code_bloc.dart';
-import 'package:hive_core/code/utils/constants/hivre_const_icons.dart';
+import 'package:hive_core/code/domain/controllers/blocs/settings_qr_code_bloc/settings_qr_code_bloc.dart';
+import 'package:hive_core/code/ui/constants/hivre_const_icons.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'widgets/my_qr_code.dart';
 import 'widgets/qr_recognition.dart';
@@ -86,12 +87,20 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
           create: (BuildContext context) => _settingsQrCodeBloc,
         ),
       ],
-      child: BlocConsumer(
+      child: BlocConsumer<SettingsQrCodeBloc, SettingsQrCodeState>(
         bloc: _settingsQrCodeBloc,
-        listener: (context, state) {},
-        builder: (context, state) {
-          return _build();
-        },
+        listener: (context, state) => state.maybeMap(
+          settingsQrCodeInitial: (state) {},
+          orElse: () {},
+        ),
+        builder: (context, state) => state.maybeMap(
+          settingsQrCodeInitial: (state) => ScreenTypeLayout(
+            desktop: _build(),
+            mobile: _build(),
+            tablet: _build(),
+          ),
+          orElse: () => Container(),
+        ),
       ),
     );
   }
@@ -101,14 +110,19 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
       appBar: _appBar(
           title: 'Código QR' //HiveCoreString.of(context).bill_list_title,
           ),
-      body: TabBarView(controller: _tabController, children: <Widget>[
-        _myCodeBuild(),
-        QrRecognition(),
-      ]),
+      body: TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          _myCodeBuild(),
+          QrRecognition(),
+        ],
+      ),
     );
   }
 
-  AppBar _appBar({required String title}) {
+  AppBar _appBar({
+    required String title,
+  }) {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -171,7 +185,9 @@ class _SettingsQrCodeScreenState extends State<SettingsQrCodeScreen>
   Widget _btnOptions() {
     return Container(
       child: IconButton(
-          onPressed: _onShowMenu, icon: HiveCoreConstIcons.btnSettings),
+        onPressed: _onShowMenu,
+        icon: HiveCoreConstIcons.btnSettings,
+      ),
     );
   }
 }

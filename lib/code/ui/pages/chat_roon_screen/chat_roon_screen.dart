@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
-import 'package:hive_core/code/models/user.dart';
-import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
-import 'package:hive_core/code/repositories/chat_message_repository/chat_message_repository.dart';
-import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
+import 'package:hive_core/code/domain/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
+import 'package:hive_core/code/data/models/user.dart';
+import 'package:hive_core/code/data/repositories/authentication_repository/authentication_repository.dart';
+import 'package:hive_core/code/data/repositories/chat_message_repository/chat_message_repository.dart';
+import 'package:hive_core/code/data/repositories/user_repository/user_repository.dart';
 import 'package:hive_core/code/ui/widgets/banner_size.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'widgets/apps_bar.dart';
 import 'widgets/control_bar.dart';
@@ -103,38 +104,47 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
   @override
   Widget build(BuildContext context) {
     return BannerSize(
-        body: MultiBlocProvider(
-      providers: [
-        BlocProvider<ChatRoomBloc>(
-          create: (BuildContext context) => _chatBloc,
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<ChatRoomBloc>(
+            create: (BuildContext context) => _chatBloc,
+          ),
+        ],
+        child: BlocConsumer<ChatRoomBloc, ChatRoomState>(
+          bloc: _chatBloc,
+          listener: (context, state) => state.maybeMap(
+            chatInitial: (state) {},
+            chatLoaded: (state) {},
+            orElse: () {},
+          ),
+          builder: (context, state) => state.maybeMap(
+            chatInitial: (state) => ScreenTypeLayout(
+              desktop: Container(),
+              mobile: Container(),
+              tablet: Container(),
+            ),
+            chatLoaded: (state) => ScreenTypeLayout(
+              desktop: _buildLoadedMovilView(state: state),
+              mobile: _buildLoadedMovilView(state: state),
+              tablet: _buildLoadedMovilView(state: state),
+            ),
+            orElse: () => Container(),
+          ),
         ),
-      ],
-      child: BlocConsumer(
-        bloc: _chatBloc,
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is ChatInitial) {
-            return Container();
-          } else if (state is ChatLoaded) {
-            return _build(state);
-          } else {
-            return Container();
-          }
-        },
       ),
-    ));
+    );
   }
 
-  Widget _build(ChatLoaded state) {
+  Widget _buildLoadedMovilView({
+    required ChatLoaded state,
+  }) {
     return Scaffold(
       //backgroundColor: Colors.grey[100], //Colors.deepOrange.shade300, //Theme.of(context).primaryColor,
-
       appBar: ChatAppsBar(
         chatRoomBloc: _chatBloc,
         context: context,
         receiver: widget.receiver!,
       ),
-
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Column(
@@ -154,7 +164,7 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
             ChatControlsBar(
               receiver: widget.receiver!,
             ),
-            _chatBloc.state.showEmojiPicker
+            state.showEmojiPicker
                 ? Container(
                     child: EmojiPiker(),
                   )
@@ -170,12 +180,17 @@ class _ChatRoonScreenState extends State<ChatRoonScreen> {
       alignment: Alignment.bottomRight,
       child: Container(
         width: 30,
-        margin: EdgeInsets.only(bottom: 12, right: 12),
+        margin: EdgeInsets.only(
+          bottom: 12,
+          right: 12,
+        ),
         child: FloatingActionButton(
           onPressed: _moveScrollToDown,
           backgroundColor: Colors.grey,
-          child: Icon(Icons.keyboard_arrow_down,
-              color: Theme.of(context).hintColor),
+          child: Icon(
+            Icons.keyboard_arrow_down,
+            color: Theme.of(context).hintColor,
+          ),
         ),
       ),
     );

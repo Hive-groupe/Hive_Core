@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/utils/othes/scanner_tools.dart';
-import 'package:hive_core/code/utils/tools/file_tools.dart';
+import 'package:hive_core/code/device/scanner_tools.dart';
+import 'package:hive_core/code/domain/tools/file_tools.dart';
 import 'package:image_picker/image_picker.dart';
 
 // Ejemplo de reconocimiento de texto con ML Firebase:

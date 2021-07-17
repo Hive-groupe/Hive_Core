@@ -1,20 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/controllers/blocs/advertising_bloc/advertising_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/call_screen_bloc/call_sreen_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/notifications_bloc/notifications_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/preferences_bloc/preferences_bloc.dart';
-import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
-import 'package:hive_core/code/repositories/call_log_repository/repository/log_repository.dart';
-import 'package:hive_core/code/repositories/chat_message_repository/chat_message_repository.dart';
-import 'package:hive_core/code/repositories/device_repository/device_repository.dart';
-import 'package:hive_core/code/repositories/preferences_repository/preferences_repository.dart';
-import 'package:hive_core/code/repositories/storage_repository/storage_repository.dart';
-import 'package:hive_core/code/repositories/tutorial_repository/tutorial_repository.dart';
-import 'package:hive_core/code/repositories/user_repository/user_repository.dart';
+import 'package:hive_core/code/data/repositories/authentication_repository/authentication_repository.dart';
+import 'package:hive_core/code/data/repositories/call_log_repository/repository/log_repository.dart';
+import 'package:hive_core/code/data/repositories/chat_message_repository/chat_message_repository.dart';
+import 'package:hive_core/code/data/repositories/device_repository/device_repository.dart';
+import 'package:hive_core/code/data/repositories/preferences_repository/preferences_repository.dart';
+import 'package:hive_core/code/data/repositories/storage_repository/storage_repository.dart';
+import 'package:hive_core/code/data/repositories/user_repository/user_repository.dart';
+import 'package:hive_core/code/domain/controllers/blocs/advertising_bloc/advertising_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/call_screen_bloc/call_sreen_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/notifications_bloc/notifications_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/preferences_bloc/preferences_bloc.dart';
 import 'package:hive_core/code/utils/configs/google_admob_configs.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
+import 'package:hive_core/code/ui/constants/hive_const_strings.dart';
 import 'package:hive_core/hive_core_app.dart';
 
 import 'src/iu/constants/const_strings.dart';
@@ -35,7 +34,6 @@ void main() async {
   UserRepository _userRepository;
   DeviceRepository _deviceRepository;
   ChatMessageRepository _chatMessageRepository;
-  TutorialRepository _tutorialRepository;
   StorageRepository _storageRepository;
 
   // Blocs
@@ -63,8 +61,7 @@ void main() async {
     */
   _authenticationRepository = AuthenticationRepositoryFirebaseImpl();
   _userRepository = UserRepositoryFirebaseImpl(USERS_COLLECTION);
-  _userId =
-      'Fsx2Xrik6XS5WxehJnWHplXOYTv1'; // await _authenticationRepository.getCurrentUserId() ?? '';
+  _userId = await _authenticationRepository.getCurrentUserId() ?? '';
   //===========================================================
   _preferencesRepository = PreferencesRepositorySharedPreferencesImp();
   _deviceRepository = DeviceRepositoryFirebaseImpl(
@@ -73,7 +70,6 @@ void main() async {
   );
   _chatMessageRepository =
       ChatMessageRepositoryFirebaseImpl(MESSAGES_COLLECTION);
-  _tutorialRepository = TutorialRepositorySharedPreferencesImp();
   _storageRepository = StorageRepositoryFirebaseImpl(
     userId: _userId,
     path: 'hive_core/hive_job_control',
@@ -166,29 +162,27 @@ void main() async {
    */
 
   HiveCoreApp _myApp = HiveCoreApp(
-    appLocalizationDelegate: [
+    appLocalizationDelegate: const [
       //  S.delegate,
     ],
     // supportedLocales: S.delegate.supportedLocales,
     title: ConstString.app_title,
     debugShowCheckedModeBanner: false,
     routes: DeliveryPages.pages,
-    home: DialyScreen(),
+    home: const DialyScreen(),
     admob_application_id: GOOGLE_ADMOB_API_ID,
-    repositorys: [],
-    providers: [],
-    blocs: [],
+    repositorys: const [],
+    providers: const [],
+    blocs: const [],
 
     //Providers
     // imageUploadProvider: _imageUploadProvider,
 
     // Repositorys
-    preferencesRepository: _preferencesRepository,
     authenticationRepository: _authenticationRepository,
     userRepository: _userRepository,
     deviceRepository: _deviceRepository,
     chatMessageRepository: _chatMessageRepository,
-    tutorialRepository: _tutorialRepository,
     storageRepository: _storageRepository,
 
     // Blocs

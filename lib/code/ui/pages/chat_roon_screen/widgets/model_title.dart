@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/custom_tile.dart';
-import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
+import 'package:hive_core/code/ui/pages/chat_list_screen/widgets/_ordenar_/custom_tile.dart';
+import 'package:hive_core/code/ui/constants/hive_const_colors.dart';
 
 class ModalTile extends StatelessWidget {
   final String title;

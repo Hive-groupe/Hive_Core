@@ -1,8 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/models/chat_message.dart';
+import 'package:hive_core/code/data/models/chat_message.dart';
 import 'package:hive_core/code/ui/pages/chat_image_detail_screen/chat_image_detail_screen.dart';
-import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/cached_image.dart';
+import 'package:hive_core/code/ui/pages/chat_list_screen/widgets/_ordenar_/cached_image.dart';
 
 class ChatMessageImageItem extends StatefulWidget {
   final BuiltList<ChatMessage> list;

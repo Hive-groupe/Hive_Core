@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/models/call.dart';
+import 'package:hive_core/code/data/models/call.dart';
 
 class CallScreen extends StatefulWidget {
   final Call call;

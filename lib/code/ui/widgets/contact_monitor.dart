@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/models/_index.dart';
-import 'package:hive_core/code/utils/constants/hive_const_text_style.dart';
-import 'package:hive_core/code/utils/tools/web_tools.dart';
+import 'package:hive_core/code/data/models/_index.dart';
+import 'package:hive_core/code/ui/constants/hive_const_text_style.dart';
+import 'package:hive_core/code/domain/tools/web_tools.dart';
 
 class ContactMonitor extends StatefulWidget {
   final ContactInformation model;

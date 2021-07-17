@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/models/_organizar/log.dart';
-import 'package:hive_core/code/models/call.dart';
-import 'package:hive_core/code/repositories/call_log_repository/repository/log_repository.dart';
-import 'package:hive_core/code/repositories/call_repository/call_repository.dart';
+import 'package:hive_core/code/data/models/_organizar/log.dart';
+import 'package:hive_core/code/data/models/call.dart';
+import 'package:hive_core/code/data/repositories/call_log_repository/repository/log_repository.dart';
+import 'package:hive_core/code/data/repositories/call_repository/call_repository.dart';
 import 'package:hive_core/code/ui/pages/call_screen/call_screen.dart';
-import 'package:hive_core/code/ui/pages/chat_listing_screen/widgets/_ordenar_/cached_image.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
-import 'package:hive_core/code/utils/othes/permissions_tools.dart';
+import 'package:hive_core/code/ui/pages/chat_list_screen/widgets/_ordenar_/cached_image.dart';
+import 'package:hive_core/code/ui/constants/hive_const_strings.dart';
+import 'package:hive_core/code/device/permissions_tools.dart';
 
 class PickupScreen extends StatefulWidget {
   final Call call;

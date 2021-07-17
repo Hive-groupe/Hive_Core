@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/assistant_bloc/assistant_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/assistant_bloc/assistant_bloc.dart';
 import 'package:hive_core/generated/l10n.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -177,9 +177,10 @@ class _AssistantTutorialState extends State<AssistantTutorial> {
         controller: _pageController,
         count: length,
         effect: WormEffect(
-            dotWidth: 5.0,
-            dotHeight: 5.0,
-            activeDotColor: Theme.of(context).accentColor),
+          dotWidth: 5.0,
+          dotHeight: 5.0,
+          activeDotColor: Theme.of(context).accentColor,
+        ),
       ),
     );
   }

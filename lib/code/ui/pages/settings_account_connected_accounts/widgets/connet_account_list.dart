@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/models/device.dart';
+import 'package:hive_core/code/data/models/device.dart';
 import 'package:hive_core/code/ui/widgets/list_widgets/list_builders_widgets.dart';
 
 import 'connet_account_item.dart';

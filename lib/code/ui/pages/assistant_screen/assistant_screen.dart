@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/assistant_bloc/assistant_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/assistant_bloc/assistant_bloc.dart';
 import 'package:hive_core/code/ui/widgets/banner_size.dart';
 import 'package:hive_core/code/utils/othes/animation_controller.dart';
 

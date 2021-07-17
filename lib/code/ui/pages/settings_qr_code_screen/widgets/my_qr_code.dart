@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/controllers/blocs/authentication_bloc/userDataInfo.dart';
-import 'package:hive_core/code/models/profile.dart';
-import 'package:hive_core/code/models/user.dart';
+import 'package:hive_core/code/domain/controllers/blocs/authentication_bloc/userDataInfo.dart';
+import 'package:hive_core/code/data/models/profile.dart';
+import 'package:hive_core/code/data/models/user.dart';
 
 class MyQrCode extends StatefulWidget {
   @override

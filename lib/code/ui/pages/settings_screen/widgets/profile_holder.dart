@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/controllers/blocs/authentication_bloc/userDataInfo.dart';
-import 'package:hive_core/code/models/profile.dart';
-import 'package:hive_core/code/models/user.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
+import 'package:hive_core/code/domain/controllers/blocs/authentication_bloc/userDataInfo.dart';
+import 'package:hive_core/code/data/models/profile.dart';
+import 'package:hive_core/code/data/models/user.dart';
+import 'package:hive_core/code/ui/routes/delivery_navigation.dart';
 
 class PofileHolder extends StatefulWidget {
   const PofileHolder({
@@ -23,12 +23,12 @@ class _PofileHolderState extends State<PofileHolder> {
 
   void _goEditProfile() => Navigator.pushNamed(
         context,
-        HiveCoreConstString.user_profile_form_srceen,
+        HiveDeliveryRoutes.user_profile_form_srceen,
       );
 
   void _goQrScreen() => Navigator.pushNamed(
         context,
-        HiveCoreConstString.route_user_qr_code_settings_screen,
+        HiveDeliveryRoutes.route_user_qr_code_settings_screen,
       );
 
   @override

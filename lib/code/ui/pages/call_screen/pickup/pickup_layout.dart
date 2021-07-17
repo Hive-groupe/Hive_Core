@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/call_screen_bloc/call_sreen_bloc.dart';
-import 'package:hive_core/code/models/call.dart';
-import 'package:hive_core/code/repositories/call_repository/call_repository.dart';
+import 'package:hive_core/code/domain/controllers/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/call_screen_bloc/call_sreen_bloc.dart';
+import 'package:hive_core/code/data/models/call.dart';
+import 'package:hive_core/code/data/repositories/call_repository/call_repository.dart';
 import 'package:hive_core/code/ui/pages/login_form_screen/login_form_screen.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
+import 'package:hive_core/code/ui/constants/hive_const_strings.dart';
 
 import 'pickup_screen.dart';
 

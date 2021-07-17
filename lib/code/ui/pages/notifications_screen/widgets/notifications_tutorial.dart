@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/notifications_bloc/notifications_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/notifications_bloc/notifications_bloc.dart';
 import 'package:hive_core/generated/l10n.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

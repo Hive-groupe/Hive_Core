@@ -7,8 +7,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class DeviceTutorial extends StatefulWidget {
   final HiveAnimationController hiveAnimationController;
 
-  const DeviceTutorial({Key? key, required this.hiveAnimationController, l})
-      : super(key: key);
+  const DeviceTutorial({
+    Key? key,
+    required this.hiveAnimationController,
+  }) : super(key: key);
 
   @override
   _DeviceTutorialState createState() => _DeviceTutorialState();

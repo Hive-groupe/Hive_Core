@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
-import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/preferences_bloc/preferences_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/settings_screen_bloc/settings_item.dart';
-import 'package:hive_core/code/controllers/blocs/settings_screen_bloc/settings_screen_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/preferences_bloc/preferences_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/settings_screen_bloc/settings_item.dart';
+import 'package:hive_core/code/domain/controllers/blocs/settings_screen_bloc/settings_screen_bloc.dart';
 import 'package:hive_core/code/ui/pages/settings_application_theme_screen/settings_theme_screen.dart';
+import 'package:hive_core/code/ui/routes/delivery_navigation.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
-import 'package:hive_core/code/utils/constants/hive_const_colors.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
+import 'package:hive_core/code/ui/constants/hive_const_colors.dart';
+import 'package:hive_core/generated/l10n.dart';
 
 import '../settings_application_locale_screen/settings_locale_screen.dart';
 import '../settings_application_notifications_screen/settings_notifications_screen.dart';
@@ -127,17 +127,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _goUpdatePasswordForm() => Navigator.pushNamed(
         context,
-        HiveCoreConstString.route_user_account_settings_update_password_screen,
+        HiveDeliveryRoutes.route_user_account_settings_update_password_screen,
       );
 
   void _goConnetAccountScreen() => Navigator.pushNamed(
         context,
-        HiveCoreConstString.route_user_account_settings_account_connet_screen,
+        HiveDeliveryRoutes.route_user_account_settings_account_connet_screen,
       );
 
   void _goDeviceListScreen() => Navigator.pushNamed(
         context,
-        HiveCoreConstString.route_user_account_settings_devices_screen,
+        HiveDeliveryRoutes.route_user_account_settings_devices_screen,
       );
 
   void _onCloseSeasion() {
@@ -150,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
     Navigator.pushNamed(
       context,
-      HiveCoreConstString.route_user_login_form_screen,
+      HiveDeliveryRoutes.route_user_login_form_screen,
     );
   }
 
@@ -164,8 +164,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             content: new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
-                  Text(HiveCoreString.of(context)
-                      .user_settings_close_confirmation_seasion),
+                  Text(
+                    HiveCoreString.of(context)
+                        .user_settings_close_confirmation_seasion,
+                  ),
                 ],
               ),
             ),
@@ -191,22 +193,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
  ****************************************************
  */
 
-  _goThemeSettingsScreen() => Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => SettingsThemeScreen(),
-      ));
+  _goThemeSettingsScreen() => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => SettingsThemeScreen(),
+        ),
+      );
 
-  _goLocateSettingsScreen() => Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => SettingsLocateScreen(),
-      ));
+  _goLocateSettingsScreen() => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => SettingsLocateScreen(),
+        ),
+      );
 
-  _goNotificatiosSettingsScreen() =>
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => SettingsNotificationsScreen(),
-      ));
+  _goNotificatiosSettingsScreen() => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => SettingsNotificationsScreen(),
+        ),
+      );
 
   _goChatSettingsScreen() => Navigator.pushNamed(
         context,
-        HiveCoreConstString.route_user_aplication_settings_chat_screen,
+        HiveDeliveryRoutes.route_user_aplication_settings_chat_screen,
       );
 
   String _localizeLocale(BuildContext context, Locale locale) {
@@ -229,7 +236,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
  */
   void _goInfoApp() => Navigator.pushNamed(
         context,
-        HiveCoreConstString.route_user_help_settings_info_screen,
+        HiveDeliveryRoutes.route_user_help_settings_info_screen,
       );
 
   @override

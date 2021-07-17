@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/notifications_bloc/notifications_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/notifications_bloc/notifications_bloc.dart';
 import 'package:hive_core/code/ui/widgets/banner_size.dart';
 import 'package:hive_core/code/utils/othes/animation_controller.dart';
 import 'package:hive_core/code/ui/widgets/screen_widgets/screen_builders_widgets.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'widgets/notifications_appbar.dart';
 import 'widgets/notifications_list.dart';
@@ -50,44 +51,66 @@ class _NotificationsScreenState extends State<NotificationsScreen>
   @override
   Widget build(BuildContext context) {
     return BannerSize(
-        body: MultiBlocProvider(
-      providers: [
-        BlocProvider<NotificationsBloc>(
-          create: (BuildContext context) => _notificationsBloc,
-        ),
-      ],
-      child: BlocConsumer(
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<NotificationsBloc>(
+            create: (BuildContext context) => _notificationsBloc,
+          ),
+        ],
+        child: BlocConsumer<NotificationsBloc, NotificationsState>(
           bloc: _notificationsBloc,
-          listener: (BuildContext context, NotificationsState state) {},
-          builder: (BuildContext context, NotificationsState state) {
-            if (state is NotificationsLoading) {
-              return _buildLoading();
-            } else if (state is NotificationsError) {
-              return _buildError();
-            } else if (state is NotificationsLoaded) {
-              return _buildLoaded(state);
-            } else {
-              return _buildError();
-            }
-          }),
-    ));
+          listener: (context, state) => state.maybeMap(
+            notificationsError: (state) {},
+            notificationsInitial: (state) {},
+            notificationsLoaded: (state) {},
+            notificationsLoading: (state) {},
+            orElse: () {},
+          ),
+          builder: (context, state) => state.maybeMap(
+            notificationsError: (state) => ScreenTypeLayout(
+              desktop: _buildErrorMovilView(),
+              mobile: _buildErrorMovilView(),
+              tablet: _buildErrorMovilView(),
+            ),
+            notificationsInitial: (state) => ScreenTypeLayout(
+              desktop: _buildLoadingMovilView(),
+              mobile: _buildLoadingMovilView(),
+              tablet: _buildLoadingMovilView(),
+            ),
+            notificationsLoaded: (state) => ScreenTypeLayout(
+              desktop: _buildLoadedMovilView(state: state),
+              mobile: _buildLoadedMovilView(state: state),
+              tablet: _buildLoadedMovilView(state: state),
+            ),
+            notificationsLoading: (state) => ScreenTypeLayout(
+              desktop: _buildLoadingMovilView(),
+              mobile: _buildLoadingMovilView(),
+              tablet: _buildLoadingMovilView(),
+            ),
+            orElse: () => _buildErrorMovilView(),
+          ),
+        ),
+      ),
+    );
   }
 
-  Widget _buildError() {
+  Widget _buildErrorMovilView() {
     return ScreenBuildersWidget.errorScreenBuilder(
       context: context,
       appBar: NotificationsAppsBar(),
     );
   }
 
-  Widget _buildLoading() {
+  Widget _buildLoadingMovilView() {
     return ScreenBuildersWidget.loadingScreenBuilder(
       appBar: NotificationsAppsBar(),
       text: null, // HiveCoreString.of(context).bill_list_loading,
     );
   }
 
-  Widget _buildLoaded(NotificationsLoaded state) {
+  Widget _buildLoadedMovilView({
+    required NotificationsLoaded state,
+  }) {
     return Scaffold(
       body: Stack(children: <Widget>[
         _body(state),
@@ -107,21 +130,27 @@ class _NotificationsScreenState extends State<NotificationsScreen>
     return Scaffold(
       body: CupertinoPageScaffold(
         child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder: (
+            BuildContext context,
+            bool innerBoxIsScrolled,
+          ) {
             return <Widget>[
               NotificationsAppsBar(),
             ];
           },
           body: SingleChildScrollView(
             child: SingleChildScrollView(
-                child: Container(
-              child: Column(children: [
-                NotificationsList(
-                  notificationsList: state.notificationsList,
-                  showStatus: true,
-                )
-              ]),
-            )),
+              child: Container(
+                child: Column(
+                  children: [
+                    NotificationsList(
+                      notificationsList: state.notificationsList,
+                      showStatus: true,
+                    )
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),

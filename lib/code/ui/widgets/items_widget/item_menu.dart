@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/utils/constants/hivre_const_icons.dart';
+import 'package:hive_core/code/ui/constants/hivre_const_icons.dart';
 import 'package:hive_core/generated/l10n.dart';
 
 class ItemMenu extends StatefulWidget {

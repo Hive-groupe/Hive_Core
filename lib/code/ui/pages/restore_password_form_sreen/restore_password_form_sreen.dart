@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/restore_password_form_bloc/restore_password_form_bloc.dart';
-import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
+import 'package:hive_core/code/domain/controllers/blocs/restore_password_form_bloc/restore_password_form_bloc.dart';
+import 'package:hive_core/code/data/repositories/authentication_repository/authentication_repository.dart';
 import 'package:hive_core/code/ui/widgets/appbar.dart';
 
 class RestorePasswordFormScreen extends StatelessWidget {

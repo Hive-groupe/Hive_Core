@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
-import 'package:hive_core/code/models/user.dart';
+import 'package:hive_core/code/domain/controllers/blocs/chat_room_bloc/chat_room_bloc.dart';
+import 'package:hive_core/code/data/models/user.dart';
 import 'package:hive_core/code/ui/pages/chat_roon_screen/widgets/model_title.dart';
-import 'package:hive_core/code/utils/tools/file_tools.dart';
+import 'package:hive_core/code/domain/tools/file_tools.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ChatControlsBar extends StatefulWidget {
@@ -210,7 +210,7 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
           SizedBox(
             width: 5.0,
           ),
-          _chatRoomBloc.state.isWriting ? _btnSend() : _btnAudio(),
+          state.isWriting ? _btnSend() : _btnAudio(),
         ],
       ),
     );
@@ -276,8 +276,8 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
             //SizedBox(width: 8.0),
             Expanded(
               child: TextField(
-                controller: _chatRoomBloc.state.sendController,
-                focusNode: _chatRoomBloc.state.textFieldFocus,
+                controller: state.sendController,
+                focusNode: state.textFieldFocus,
                 onTap: hideEmojiContainer,
                 style: TextStyle(
                   color: Colors.white,
@@ -300,7 +300,7 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
                   size: 25.0, color: Theme.of(context).hintColor),
             ),
             //SizedBox(width: 8.0),
-            _chatRoomBloc.state.isWriting
+            state.isWriting
                 ? Container()
                 : IconButton(
                     splashColor: Colors.transparent,
@@ -359,7 +359,9 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
   Widget _btnSend() {
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).accentColor, shape: BoxShape.circle),
+        color: Theme.of(context).accentColor,
+        shape: BoxShape.circle,
+      ),
       child: IconButton(
         onPressed: _onSendMenssage,
         icon: Icon(
@@ -374,7 +376,9 @@ class _ChatControlsBarState extends State<ChatControlsBar> {
   Widget _btnAudio() {
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).accentColor, shape: BoxShape.circle),
+        color: Theme.of(context).accentColor,
+        shape: BoxShape.circle,
+      ),
       child: IconButton(
         onPressed: _onRecordAudio,
         icon: Icon(

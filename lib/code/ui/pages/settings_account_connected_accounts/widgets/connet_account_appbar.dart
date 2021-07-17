@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/utils/constants/hivre_const_icons.dart';
+import 'package:hive_core/code/ui/constants/hivre_const_icons.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/settings_device_list_bloc/device_list_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/settings_device_list_bloc/device_list_screen_bloc.dart';
 
 class ConnetAccountAppsBar extends StatefulWidget
     implements PreferredSizeWidget {
@@ -18,11 +18,11 @@ class ConnetAccountAppsBar extends StatefulWidget
 
 class _ConnetAccountAppsBarState extends State<ConnetAccountAppsBar> {
   // Blocs
-  late DeviceListBloc _deviceListBloc;
+  late DeviceListScreenBloc _deviceListScreenBloc;
 
   @override
   void initState() {
-    _deviceListBloc = BlocProvider.of<DeviceListBloc>(context);
+    _deviceListScreenBloc = BlocProvider.of<DeviceListScreenBloc>(context);
     super.initState();
   }
 
@@ -66,15 +66,15 @@ class _ConnetAccountAppsBarState extends State<ConnetAccountAppsBar> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        bloc: _deviceListBloc,
-        listener: (BuildContext context, DeviceListState state) {
+        bloc: _deviceListScreenBloc,
+        listener: (BuildContext context, DeviceListScreenState state) {
           if (state is DeviceListInitial) {
           } else if (state is DeviceListError) {
           } else if (state is DeviceListLoading) {
           } else if (state is DeviceListLoaded) {
           } else {}
         },
-        builder: (BuildContext context, DeviceListState state) {
+        builder: (BuildContext context, DeviceListScreenState state) {
           if (state is DeviceListInitial) {
             return _cupertinaoAppBar();
           } else if (state is DeviceListError) {

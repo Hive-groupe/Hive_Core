@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/assistant_bloc/assistant_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/assistant_bloc/assistant_bloc.dart';
 
 class AssistantAppsBar extends StatefulWidget implements PreferredSizeWidget {
   @override

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_core/__deprecated__/ui/fail_info.dart';
+import 'package:hive_core/code/domain/controllers/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:hive_core/code/domain/controllers/blocs/login_form_bloc/login_form_bloc.dart';
+import 'package:hive_core/code/data/repositories/authentication_repository/authentication_repository.dart';
+import 'package:hive_core/code/ui/routes/delivery_navigation.dart';
+import 'package:hive_core/code/ui/constants/hive_const_strings.dart';
 import 'package:hive_core/generated/l10n.dart';
-import 'package:hive_core/code/controllers/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:hive_core/code/controllers/blocs/login_form_bloc/login_form_bloc.dart';
-import 'package:hive_core/code/repositories/authentication_repository/authentication_repository.dart';
-import 'package:hive_core/code/utils/constants/hive_const_strings.dart';
 
 class LoginFormSrceen extends StatefulWidget {
   @override
@@ -47,11 +48,11 @@ class _LoginFormSrceenState extends State<LoginFormSrceen> {
   }
 
   void _goRegisterScreen() => Navigator.of(context).pushNamed(
-        HiveCoreConstString.route_user_registration_form_screen,
+        HiveDeliveryRoutes.route_user_registration_form_screen,
       );
 
   void _goRecoverPassword() => Navigator.of(context).pushNamed(
-        HiveCoreConstString.route_restore_password_form_screen,
+        HiveDeliveryRoutes.route_restore_password_form_screen,
       );
 
   void _onAuthenticationWithMail() {

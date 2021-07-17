@@ -1,6 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_core/code/models/chat_message.dart';
+import 'package:hive_core/code/data/models/chat_message.dart';
 
 import 'message_item.dart';
 
@@ -9,10 +9,11 @@ class MessageList extends StatefulWidget {
   final Stream<BuiltList<ChatMessage>> chatMessageList;
   final ScrollController scrollController;
 
-  MessageList(
-      {required this.currentUserId,
-      required this.chatMessageList,
-      required this.scrollController});
+  MessageList({
+    required this.currentUserId,
+    required this.chatMessageList,
+    required this.scrollController,
+  });
 
   @override
   _MessageListState createState() => _MessageListState();
